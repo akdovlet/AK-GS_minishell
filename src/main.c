@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/06/19 11:59:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:50:48 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 int main()
 {
+	char *prompt = "";
+	t_tree 		**tree;
+	
+	tree = init_tree(prompt);
 	return (0);
 }

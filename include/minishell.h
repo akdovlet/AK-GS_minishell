@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/06/19 12:13:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:46:56 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,13 @@ add_history*/
 /* tgetent, tgetflag, tgetnum, getstr, tgoto, tputs */
 # include <curses.h>
 # include "libft.h"
+
+typedef struct s_tree
+{
+    char    *cmd;
+    int		op;
+    struct s_tree *left;
+    struct s_tree *right;
+} t_tree;
 
 #endif

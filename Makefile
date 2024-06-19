@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
+#    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/06/19 12:15:22 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/06/19 18:51:29 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME	:=	minishell
 LIBFT	:= 	libft/libft.a
 
-SRC		:=	main.c
+SRC		:=	main.c init_tree.c
 
 SRC_DIR	:=	src
 BUILD	:=	.build
