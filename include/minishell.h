@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/06/19 12:13:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:43:04 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,21 @@ add_history*/
 /* tgetent, tgetflag, tgetnum, getstr, tgoto, tputs */
 # include <curses.h>
 # include "libft.h"
+
+// typedef and struct used in conjunction to create an alias for s_tree
+
+
+# define PARENTHESIS_L	40
+# define PARENTHESIS_R	41
+# define AND		  	38
+# define OR				124
+
+typedef struct s_tree
+{
+	char			*value;
+	int				operator;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}	t_tree;
 
 #endif
