@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/06/19 12:15:22 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/06/27 14:11:12 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@
 NAME	:=	minishell
 LIBFT	:= 	libft/libft.a
 
-SRC		:=	main.c
+SRC		:=	main.c	\
+			env_cpy.c	\
+			env_lst_utils.c	\
+			env_utils.c
 
 SRC_DIR	:=	src
 BUILD	:=	.build
@@ -33,7 +36,7 @@ $(BUILD):
 	@if [ ! -d $(BUILD) ]; then mkdir $(BUILD); fi
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) -L/usr/local/lib -I/usr/local/include -lreadline $(OBJ) $(LIBFT) -o $(NAME)
 
 $(BUILD)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
