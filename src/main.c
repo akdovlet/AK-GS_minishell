@@ -6,25 +6,13 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/06/27 14:30:56 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:53:58 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
 
-t_tree	*new_node(char *str)
-{
-	t_tree	*node;
-
-	node = malloc(sizeof(t_tree));
-	if (!node)
-		return (NULL);
-	node->value = str;
-	node->left = NULL;
-	node->right = NULL;
-	return (node);
-}
 
 // Premiere fonction: retourner list chainee avec dans chaque noeud une string,
 // et un operateur. Attention aux parentheses a gerer comme un bloc. 
@@ -54,25 +42,45 @@ t_tree	*new_node(char *str)
 // 	}
 // }
 
-// int main(int	ac, char **av, char **env)
-// {
-// 	char	*line;
-// 	char	*prompt;
-// 	t_token	token;
-
-// 	while (1)
-// 	{
-// 		line = readline("minishell$");
-// 		if (!line)
-// 			break ;
-// 		free(line);
-// 	}
-// 	return (0);
-// }
-
-int	main(int ac, char **av, char **env)
+void	opperator_management(char *str, int *i, t_token **tk)
 {
+	
+}
+
+void	tokenize(char *line)
+{
+	int	i;
+	int	start;
+	int	end;
+	t_token	*tk;
+
+	i = 0;
+	while (line[i])
+	{
+		if (is_opperator(line[i]))
+			opperator_management(line, &i, &tk);
+		if (is_quotes(line[i]))
+			quotes_management(line, &i);
+		if (!ft_isspace(line[i]))
+			word_management(line, &i, &tk);
+		i++;
+	}
+}
+
+int main(int ac, char **av, char **env)
+{
+	(void)ac;
 	(void)av;
-	if (ac != 1)
-		return (1);
+	(void)env;
+	char	*line;
+
+	while (1)
+	{
+		line = readline("minishell$> ");
+		if (!line)
+			break ;
+		// tokenize(line);
+		free(line);
+	}
+	return (0);
 }
