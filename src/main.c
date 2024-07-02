@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/06/27 17:53:58 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:01:32 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 void	opperator_management(char *str, int *i, t_token **tk)
 {
-	
+
 }
 
 void	tokenize(char *line)
@@ -67,6 +67,22 @@ void	tokenize(char *line)
 	}
 }
 
+
+// IFS bash
+// bash-5.1$ export B='"   salut comment ca va   "'
+// bash-5.1$ echo $B
+// " salut comment ca va "
+// in env: 
+// B="   salut comment ca va   "
+/*
+bash-5.1$ export B=Yo comment ca va
+bash-5.1$ echo $B
+Yo
+bash-5.1$ export B=(Yo comment ca va)
+bash-5.1$ echo $B
+Yo
+
+*/
 int main(int ac, char **av, char **env)
 {
 	(void)ac;

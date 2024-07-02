@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/06/27 13:53:10 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:16:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,27 @@ typedef struct s_tree
 	struct s_tree	*right;
 }	t_tree;
 
+
 enum e_token
 {
 	WORD,
-	OPERATOR,
-	S_QUOTE = 39,
-	D_QUOTE = 34,
+	PIPE = '|',
+	AND = '&',
+	OR = 124,
 	PARENTHESIS_L = 40,
 	PARENTHESIS_R = 41,
-	AND = 38,
-	OR = 124
+	OUT,
+	IN,
+	APPEND,
+	HERE_DOC,
 };
 
 typedef	struct s_token
 {
 	enum e_token type;
 	char	*value;
+	bool	s_quote;
+	bool	d_quote;
 	struct	s_token	*next;
 }	t_token;
 
