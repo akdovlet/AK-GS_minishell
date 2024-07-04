@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/02 17:16:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/04 13:48:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,17 @@ enum e_token
 {
 	WORD,
 	PIPE = '|',
-	AND = '&',
-	OR = 124,
-	PARENTHESIS_L = 40,
-	PARENTHESIS_R = 41,
-	OUT,
-	IN,
-	APPEND,
-	HERE_DOC,
+	AND = '&' * 2,
+	OR = '|' * 2,
+	PARENTHESIS_L = '(',
+	PARENTHESIS_R = ')',
+	S_QUOTE = '\'',
+	D_QUOTE = '\"',
+	OUT = '>',
+	IN = '<',
+	APPEND = '>' * 2,
+	HERE_DOC = '<' * 2,
 };
-
-typedef	struct s_token
-{
-	enum e_token type;
-	char	*value;
-	bool	s_quote;
-	bool	d_quote;
-	struct	s_token	*next;
-}	t_token;
 
 
 #endif

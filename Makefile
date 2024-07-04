@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/06/27 14:11:12 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/07/04 13:45:21 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@
 NAME	:=	minishell
 LIBFT	:= 	libft/libft.a
 
-SRC		:=	main.c	\
-			env_cpy.c	\
+SRC		:=	main.c			\
+			env_cpy.c		\
 			env_lst_utils.c	\
-			env_utils.c
+			env_utils.c		\
+			tokenize.c		\
+			token_lst_utils.c
 
 SRC_DIR	:=	src
 BUILD	:=	.build

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/02 18:01:32 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/04 14:56:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,7 @@
 // 	}
 // }
 
-void	opperator_management(char *str, int *i, t_token **tk)
-{
 
-}
-
-void	tokenize(char *line)
-{
-	int	i;
-	int	start;
-	int	end;
-	t_token	*tk;
-
-	i = 0;
-	while (line[i])
-	{
-		if (is_opperator(line[i]))
-			opperator_management(line, &i, &tk);
-		if (is_quotes(line[i]))
-			quotes_management(line, &i);
-		if (!ft_isspace(line[i]))
-			word_management(line, &i, &tk);
-		i++;
-	}
-}
 
 
 // IFS bash
@@ -81,6 +58,12 @@ Yo
 bash-5.1$ export B=(Yo comment ca va)
 bash-5.1$ echo $B
 Yo
+%echo >outfile word
+%cat outfile
+%word
+
+bash-5.1$ "ls -la"
+bash: ls -la: command not found
 
 */
 int main(int ac, char **av, char **env)
@@ -95,7 +78,7 @@ int main(int ac, char **av, char **env)
 		line = readline("minishell$> ");
 		if (!line)
 			break ;
-		// tokenize(line);
+		tokenize(line);
 		free(line);
 	}
 	return (0);
