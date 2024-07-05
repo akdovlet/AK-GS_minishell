@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/04 14:16:05 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/05 16:59:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef	struct s_token
 }	t_token;
 
 t_token	*ft_tokennew(char *var);
-void	ft_add_back(t_token **lst, t_token *new);
+void	ft_token_add_back(t_token **lst, t_token *new);
 t_token	*ft_tokennew(char *var);
+void	tokenize(char *line);
 
 #endif

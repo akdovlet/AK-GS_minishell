@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:38:15 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/04 13:50:48 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/05 15:24:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_token	*ft_tokenlast(t_token *lst)
 	return (index);
 }
 
-void	ft_add_back(t_token **lst, t_token *new)
+void	ft_token_add_back(t_token **lst, t_token *new)
 {
 	if (!*(lst))
 		*lst = new;
