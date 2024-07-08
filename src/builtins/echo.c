@@ -1,37 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/06/20 12:32:38 by gschwand         ###   ########.fr       */
+/*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
+/*   Updated: 2024/07/03 11:03:56 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main()
+int echo(char **args)
 {
-	char *prompt = "";
-	t_tree 		**tree;
-	
-	tree = init_tree(prompt);
-	return (0);
+    int i;
+
+    i = 1;
+    while (args[i])
+    {
+        ft_putstr_fd(args[i], 1);
+        if (args[i + 1])
+            ft_putstr_fd(" ", 1);
+        i++;
+    }
+    ft_putstr_fd("\n", 1);
+    return (0);
 }
 
-
-int searchNode (node*tree, unsigned int key)
+int echo_n(char **args)
 {
-	while(tree)
-	{
-		if(key== tree->key)
-			return (1);
-		if(key> tree->key ) 
-			tree= tree->right;
-		else 
-			tree= tree->left;
-	}
-	return (0);
+    int i;
+
+    i = 1;
+    while (args[i])
+    {
+        ft_putstr_fd(args[i], 1);
+        if (args[i + 1])
+            ft_putstr_fd(" ", 1);
+        i++;
+    }
+    return (0);
 }
