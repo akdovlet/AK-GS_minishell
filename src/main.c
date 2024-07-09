@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/05 16:59:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/09 16:51:34 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ int main(int ac, char **av, char **env)
 		tokenize(line);
 		free(line);
 	}
+	rl_clear_history();
 	return (0);
 }

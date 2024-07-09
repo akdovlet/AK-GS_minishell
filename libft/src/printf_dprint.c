@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/05/18 21:29:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:22:53 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ int	string_tobuffer(char *str, t_print *data)
 	return (i);
 }
 
+int	char_tobuffer(int c, t_print *data)
+{
+	if (data->j >= MAX_BUFFER)
+		data->wrote += print_buffer(data->fd, data->buffer, &data->j);
+	data->buffer[data->j] = c;
+	data->j++;
+	return (1);
+}
+
 int	ft_ddraft(char flag, t_print *data, va_list *arg)
 {
 	int	wrote;
@@ -49,6 +58,8 @@ int	ft_ddraft(char flag, t_print *data, va_list *arg)
 	wrote = 0;
 	if (flag == 's')
 		wrote += string_tobuffer(va_arg(*arg, char *), data);
+	if (flag == 'c')
+		wrote += char_tobuffer(va_arg(*arg, int), data);
 	else
 		return (-1);
 	return (wrote);

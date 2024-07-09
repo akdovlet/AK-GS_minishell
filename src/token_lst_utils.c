@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:38:15 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/05 15:24:56 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:14:32 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,17 @@ t_token	*ft_tokennew(char *var)
 	*node = (t_token){};
 	node->value = var;
 	return (node);
+}
+
+void	ft_tkclear(t_token **tk)
+{
+	t_token	*tmp;
+
+	while (*tk)
+	{
+		tmp = (*tk)->next;
+		free((*tk)->value);
+		free((*tk));
+		*tk = tmp;
+	}
 }

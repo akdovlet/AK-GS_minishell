@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/05 17:34:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:17:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ bool	is_operator(int c)
 	return (false);
 }
 
+bool	is_quote(int c)
+{
+	if (c == S_QUOTE || c == D_QUOTE)
+		return (true);
+	return (false);
+}
 
 bool	is_redirect(int c)
 {
@@ -31,7 +37,7 @@ bool	is_redirect(int c)
 
 bool	is_word(int c)
 {
-	if (!is_operator(c) && !is_redirect(c) && !ft_isspace(c))
+	if (c != 0 && !is_operator(c) && !is_redirect(c) && !ft_isspace(c))
 		return (true);
 	return (false);
 }
@@ -72,18 +78,22 @@ char	*copy_value(char *str, int *i, bool (*f)(int))
 	return (dup);
 }
 
-void	opperator_management(char *str, int *i, t_token **tk)
+int	opperator_management(char *str, int *i, t_token **tk)
 {
 	t_token	*new;
 
 	new = ft_tokennew(NULL);
 	if (!new)
-		return ;
+		return (0);
 	if (str[*i] + str[*i + 1] == AND)
 	{
 		new->type = AND;
 		if (is_operator(str[*i + 2]))
-			return (bad_syntax(AND));
+		{
+			bad_syntax(AND);
+			ft_tkclear(tk);
+			return (0);
+		}
 	}
 	else if (str[*i] + str[*i + 1] == OR)
 		new->type = OR;
@@ -91,8 +101,9 @@ void	opperator_management(char *str, int *i, t_token **tk)
 		new->type = PIPE;
 	new->value = copy_value(str, i, is_operator);
 	if (!new->value)
-		return ;
+		return (0);
 	ft_token_add_back(tk, new);
+	return (1);
 }
 
 
@@ -117,48 +128,130 @@ void	redirect_management(char *str, int *i, t_token **tk)
 	ft_token_add_back(tk, new);
 }
 
+int	quote_len(char *str, int *i, int symbol)
+{
+	int	len;
+
+	len = 1;
+	(*i)++;
+	while (str[*i] && str[*i] != '\n' && str[*i] != symbol	)
+	{
+		len++;
+		(*i)++;
+	}
+	return (len);
+}
+
+int	word_len(char *str, int *i)
+{
+	int	len;
+	int	index;
+
+	len = 0;
+	index = *i;
+	while (str[index] && str[index] != '\n')
+	{
+		if (is_quote(str[index]))
+		{
+			len += quote_len(str, &index, str[index]);
+		}
+		if (!is_word(str[index]))
+			break ;
+		else
+		{
+			(index)++;
+			len++;
+		}
+	}
+	return (len);
+}
+
+int		quote_management(char *dup, int *j, char *str, int *i)
+{
+	char	symbol;
+
+	symbol = str[*i];
+	dup[(*j)++] = str[(*i)++];
+	while (str[*i] && str[*i] != '\n' && str[*i] != symbol)
+	{
+		dup[*j] = str[*i];
+		(*j)++;
+		(*i)++;
+	}
+	if (str[*i] != symbol)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: unexpected newline while looking for matching `%c'\n", symbol);
+	}
+		return (0);
+	dup[(*j)++] = str[(*i)++];
+	return (1);
+}
+
+bool	find_symbol(char *str, int symbol)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == symbol)
+			return (true);
+		i++;
+	}
+	return (false);
+}
 char	*copy_word(char *str, int *i)
 {
 	int		j;
 	char	*dup;
 
-	j = 0;
-	while (str[*i + j] && is_word(str[*i + j]))
-		j++;
+	j = word_len(str, i);
 	dup = malloc(sizeof(char) * j + 1);
 	if (!dup)
 		return (NULL);
 	j = 0;
-	while (str[*i] && is_word(str[*i]))
+	while (str[*i] && str[*i] != '\n' && is_word(str[*i]))
 	{
-		dup[j] = str[*i];
-		j++;
-		(*i)++;
+		if (is_quote(str[*i]))
+		{
+			if (!quote_management(dup, &j, str, i))
+				return (free(dup), NULL);			
+		}
+		else
+		{
+			dup[j] = str[*i];
+			j++;
+			(*i)++;			
+		}
 	}
 	dup[j] = '\0';
 	return (dup);
 }
 
-void	word_management(char *line, int *i, t_token **tk)
+int	word_management(char *line, int *i, t_token **tk)
 {
 	t_token *new;
 
 	new = ft_tokennew(NULL);
 	if (!new)
-		return ;
+		return (0);
 	new->type = WORD;
 	new->value = copy_word(line, i);
+	if (!new->value)
+		return (0);
 	ft_token_add_back(tk, new);
+	return (1);
 }
 
 void	print_token(t_token *tk)
 {
 	while (tk)
 	{
-		ft_printf("type is: %d\n", tk->type);
-		ft_printf("value is: %s\n", tk->value);
+		ft_printf("||type is: %d\t", tk->type);
+		ft_printf("value is: %s\t|->", tk->value);
 		tk = tk->next;
 	}
+	ft_printf("\n");
 }
 
 void	tokenize(char *line)
@@ -171,12 +264,19 @@ void	tokenize(char *line)
 	while (line[i] && line[i] != '\n')
 	{
 		if (is_operator(line[i]))
-			opperator_management(line, &i, &tk);
+		{
+			if (!opperator_management(line, &i, &tk))
+				return ;
+		}
 		else if (is_redirect(line[i]))
 			redirect_management(line, &i, &tk);
 		else if (!ft_isspace(line[i]))
-			word_management(line, &i, &tk);
-		i++;
+		{
+			if (!word_management(line, &i, &tk))
+				return (ft_tkclear(&tk));			
+		}
+		else
+			i++;
 	}
 	print_token(tk);
 }
