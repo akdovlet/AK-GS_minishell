@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/09 17:17:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:42:34 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	redirect_management(char *str, int *i, t_token **tk)
 		new->type = IN;
 	else if (str[*i] == OUT)
 		new->type = OUT;
-	new->value = copy_value(str, i, &is_redirect);
+	new->value = copy_value(str, i, is_redirect);
 	if (!new->value)
 		return ;
 	ft_token_add_back(tk, new);
@@ -279,4 +279,5 @@ void	tokenize(char *line)
 			i++;
 	}
 	print_token(tk);
+	ft_tkclear(&tk);
 }
