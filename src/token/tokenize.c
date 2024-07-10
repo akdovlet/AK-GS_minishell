@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 15:26:26 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:09:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	print_token(t_token *tk)
 	ft_printf("||NULL\n");
 }
 
+// can shorten with one dispatch function
 void	tokenize(char *line)
 {
 	int		i;
@@ -36,10 +37,13 @@ void	tokenize(char *line)
 		if (is_operator(line[i]))
 		{
 			if (!opperator_management(line, &i, &tk))
-				return ;
+				return (ft_tkclear(&tk));			
 		}
 		else if (is_redirect(line[i]))
-			redirect_management(line, &i, &tk);
+		{
+			if (!redirect_management(line, &i, &tk))
+				return (ft_tkclear(&tk));
+		}
 		else if (!ft_isspace(line[i]))
 		{
 			if (!word_management(line, &i, &tk))

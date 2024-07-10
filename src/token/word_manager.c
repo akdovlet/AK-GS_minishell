@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 15:15:10 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:52:55 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*copy_word(char *str, int *i)
 	j = word_len(str, i);
 	dup = malloc(sizeof(char) * j + 1);
 	if (!dup)
-		return (NULL);
+		return (perror("malloc"), NULL);
 	j = 0;
 	while (str[*i] && str[*i] != '\n' && is_word(str[*i]))
 	{
@@ -107,7 +107,7 @@ int	word_management(char *line, int *i, t_token **tk)
 
 	new = ft_tokennew(NULL);
 	if (!new)
-		return (0);
+		return (perror("malloc"), 0);
 	new->type = WORD;
 	new->value = copy_word(line, i);
 	if (!new->value)

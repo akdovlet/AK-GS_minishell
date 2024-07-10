@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_management.c                                  :+:      :+:    :+:   */
+/*   type_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 15:17:22 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:12:22 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,35 +41,27 @@ int	opperator_management(char *str, int *i, t_token **tk)
 
 	new = ft_tokennew(NULL);
 	if (!new)
-		return (0);
-	if (str[*i] + str[*i + 1] == AND)
-	{
-		new->type = AND;
-		if (is_operator(str[*i + 2]))
-		{
-			bad_syntax(AND);
-			ft_tkclear(tk);
-			return (0);
-		}
-	}
-	else if (str[*i] + str[*i + 1] == OR)
-		new->type = OR;
-	else if (str[*i] == PIPE)
-		new->type = PIPE;
+		return (perror("malloc"), 0);
+	if (str[*i] == '&')
+		new->type = and_check(str, *i);
+	else if (str[*i] == '|')
+		new->type = or_check(str, *i);
+	if (new->type <= 0)
+		return (bad_syntax(new->type * -1), 0);
 	new->value = copy_value(str, i, is_operator);
 	if (!new->value)
-		return (0);
+		return (perror("malloc"), 0);
 	ft_token_add_back(tk, new);
 	return (1);
 }
 
-void	redirect_management(char *str, int *i, t_token **tk)
+int	redirect_management(char *str, int *i, t_token **tk)
 {
 	t_token	*new;
 
 	new = ft_tokennew(NULL);
 	if (!new)
-		return ;
+		return (ft_tkclear(tk), 0);
 	if (str[*i] + str[*i + 1] == APPEND)
 		new->type = APPEND;
 	else if (str[*i] + str[*i + 1] == HERE_DOC)
@@ -80,7 +72,8 @@ void	redirect_management(char *str, int *i, t_token **tk)
 		new->type = OUT;
 	new->value = copy_value(str, i, is_redirect);
 	if (!new->value)
-		return ;
+		return (ft_tkclear(tk), 0);
 	ft_token_add_back(tk, new);
+	return (1);
 }
 
