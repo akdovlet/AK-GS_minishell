@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/04 13:48:18 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:15:31 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ add_history*/
 # include <curses.h>
 # include <stdbool.h>
 # include "libft.h"
+
+# define SYNTAX_ERR "minishell: syntax error near unexpected token `%s'\n"
+# define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
 
 // typedef and struct used in conjunction to create an alias for s_tree
 typedef struct s_tree
