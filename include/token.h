@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 15:24:54 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:13:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef	struct s_token
 {
-	enum e_token type;
+	int		type;
 	char	*value;
 	struct	s_token	*next;
 }	t_token;
@@ -27,8 +27,11 @@ typedef	struct s_token
 #                                  syntax.c                                     #
 ###############################################################################*/
 
+int	or_check(char *str, int i);
+int		and_check(char *str, int i);
 // returns correct error message in case of bad syntax
 void	bad_syntax(int c);
+void	exit_clear(t_token **tk, int status);
 
 
 /*###############################################################################
@@ -62,7 +65,7 @@ void	tokenize(char *line);
 
 char	*copy_value(char *str, int *i, bool (*f)(int));
 int		opperator_management(char *str, int *i, t_token **tk);
-void	redirect_management(char *str, int *i, t_token **tk);
+int		redirect_management(char *str, int *i, t_token **tk);
 
 /*###############################################################################
 #                                  word_manager.c                               #

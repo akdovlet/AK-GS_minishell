@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/06/27 14:10:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:37:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ void	ft_add_back(t_env **lst, t_env *new);
 bool	copy_env(t_env **cpy, char **env);
 
 void	env_clear(t_env **lst);
+
+void	print_env(t_env *lst);
 
 #endif

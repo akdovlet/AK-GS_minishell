@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/09 16:51:34 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:18:57 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,18 @@ bash: ls -la: command not found
 int main(int ac, char **av, char **env)
 {
 	(void)av;
-	(void)env;
+	// (void)env;
 	char	*line;
+	t_env	*my_env;
 
 	if (ac != 1)
 		return (1);
+	my_env = NULL;
+	copy_env(&my_env, env);
+	// print_env(my_env);
 	while (1)
 	{
-		line = readline("minishell$> ");
+		line = readline(CYAN "minishell$> " RESET);
 		if (!line)
 			break ;
 		tokenize(line);

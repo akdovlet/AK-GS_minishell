@@ -6,12 +6,12 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/06/27 14:12:41 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:44:44 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-# include "env.h"
+#include "env.h"
 
 t_env	*ft_last(t_env *lst)
 {
