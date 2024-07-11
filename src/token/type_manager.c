@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 18:12:22 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:45:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ int	opperator_management(char *str, int *i, t_token **tk)
 	ft_token_add_back(tk, new);
 	return (1);
 }
+
+//finish redir checks
+// int	redirect_check(char *str, int i)
+// {
+// 	if (str[i] + str[i + 1] == APPEND)
+		
+// }
 
 int	redirect_management(char *str, int *i, t_token **tk)
 {
