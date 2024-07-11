@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 18:09:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:26:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_token(t_token *tk)
 	while (tk)
 	{
 		ft_printf("||type is: %d\t", tk->type);
-		ft_printf("value is: %s|->\n", tk->value);
+		ft_printf("value is: %s |->\n", tk->value);
 		tk = tk->next;
 	}
 	ft_printf("||NULL\n");
