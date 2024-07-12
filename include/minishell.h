@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/11 13:22:29 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/12 12:42:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,18 @@ typedef struct s_tree
 
 enum e_token
 {
-	WORD,
 	PIPE = '|',
-	AND = '&' * 2,
-	OR = '|' * 2,
 	PARENTHESIS_L = '(',
 	PARENTHESIS_R = ')',
 	S_QUOTE = '\'',
 	D_QUOTE = '\"',
 	OUT = '>',
 	IN = '<',
-	APPEND = '>' * 2,
-	HERE_DOC = '<' * 2,
+	WORD = 1000,
+	AND = 1001,
+	OR = 1002,
+	APPEND = 1003,
+	HERE_DOC = 1004,
 };
 
 

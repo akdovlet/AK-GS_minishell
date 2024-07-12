@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax.c                                           :+:      :+:    :+:   */
+/*   syntax_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:59:28 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/11 15:34:14 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/12 12:34:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,32 @@ int	and_check(char *str, int i)
 	return (AND);
 }
 
+int	out_check(char *str, int i)
+{
+	if (str[i] == OUT && str[i + 1] == OUT)
+	{
+		if (is_redirect(str[i + 2]))
+			return (APPEND * -1);
+		return (APPEND);
+	}
+	if (str[i] == OUT && is_redirect(str[i + 1]))
+		return (OUT * -1);
+	return (OUT);
+}
+
+int	in_check(char *str, int i)
+{
+	if (str[i] == IN && str[i + 1] == IN)
+	{
+		if (is_redirect(str[i + 2]))
+			return (HERE_DOC * -1);
+		return (HERE_DOC);
+	}
+	if (str[i] == IN && is_redirect(str[i + 1]))
+		return (IN * -1);
+	return (IN);
+}
+
 void	bad_syntax(int c)
 {
 	char *token;
@@ -48,11 +74,13 @@ void	bad_syntax(int c)
 		token = "||";
 	else if (c == PIPE)
 		token = "|";
+	else if (c == HERE_DOC)
+		token = "<<";
+	else if (c == IN)
+		token = "<";
+	else if (c == APPEND)
+		token = ">>";
+	else if (c == OUT)
+		token = ">";
 	ft_dprintf(STDERR_FILENO, SYNTAX_ERR , token);
-}
-
-void	exit_clear(t_token **tk, int status)
-{
-	ft_tkclear(tk);
-	exit(status);
 }

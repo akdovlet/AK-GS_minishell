@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 18:13:06 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/12 12:06:10 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,21 @@ typedef	struct s_token
 
 
 /*###############################################################################
-#                                  syntax.c                                     #
+#                                  syntax_input.c                               #
 ###############################################################################*/
 
-int	or_check(char *str, int i);
+int		or_check(char *str, int i);
 int		and_check(char *str, int i);
+int		out_check(char *str, int i);
+int		in_check(char *str, int i);
 // returns correct error message in case of bad syntax
 void	bad_syntax(int c);
-void	exit_clear(t_token **tk, int status);
 
+/*###############################################################################
+#                                  syntax_order.c                               #
+###############################################################################*/
+
+int	syntax_order_check(t_token *tk);
 
 /*###############################################################################
 #                                  token_check.c                                #
@@ -50,14 +56,13 @@ bool	is_word(int c);
 t_token	*ft_tokennew(char *var);
 void	ft_token_add_back(t_token **lst, t_token *new);
 t_token	*ft_tokennew(char *var);
-void	tokenize(char *line);
 void	ft_tkclear(t_token **tk);
 
 /*###############################################################################
 #                                  tokenize.c                                   #
 ###############################################################################*/
 
-void	tokenize(char *line);
+int		tokenize(char *line, t_token **tk);
 
 /*###############################################################################
 #                                  type_manager.c                               #
