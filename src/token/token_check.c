@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 14:49:31 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/12 12:26:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:53:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,17 @@ bool	is_redirect(int c)
 	return (false);
 }
 
+bool	is_parenthesis(int c)
+{
+	if (c == PARENTHESIS_L || c == PARENTHESIS_R)
+		return (true);
+	return (false);
+}
+
 bool	is_word(int c)
 {
-	if (c != 0 && !is_operator(c) && !is_redirect(c) && !ft_isspace(c))
+	if (c != 0 && !is_operator(c) && !is_redirect(c) && !ft_isspace(c)\
+		&& !is_parenthesis(c))
 		return (true);
 	return (false);
 }

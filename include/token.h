@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/12 12:06:10 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:12:19 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ typedef	struct s_token
 
 
 /*###############################################################################
+#                                  parenthesis.c                               #
+###############################################################################*/
+
+int		find_parenthesis(char *str, int i);
+int		parenthesis_management(char *str, int *i, t_token **token);
+
+/*###############################################################################
+#                                  syntax_error.c                               #
+###############################################################################*/
+
+// returns correct error message in case of bad syntax
+void	bad_syntax(int c);
+
+/*###############################################################################
 #                                  syntax_input.c                               #
 ###############################################################################*/
 
@@ -31,8 +45,6 @@ int		or_check(char *str, int i);
 int		and_check(char *str, int i);
 int		out_check(char *str, int i);
 int		in_check(char *str, int i);
-// returns correct error message in case of bad syntax
-void	bad_syntax(int c);
 
 /*###############################################################################
 #                                  syntax_order.c                               #
@@ -48,6 +60,7 @@ bool	is_operator(int c);
 bool	is_quote(int c);
 bool	is_redirect(int c);
 bool	is_word(int c);
+bool	is_parenthesis(int c);
 
 /*###############################################################################
 #                                  token_lst_utils.c                            #
@@ -63,6 +76,7 @@ void	ft_tkclear(t_token **tk);
 ###############################################################################*/
 
 int		tokenize(char *line, t_token **tk);
+void	print_token(t_token *tk);
 
 /*###############################################################################
 #                                  type_manager.c                               #
