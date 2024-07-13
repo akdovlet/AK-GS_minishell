@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 16:05:42 by akdovlet          #+#    #+#              #
-#    Updated: 2024/05/18 22:56:46 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/07/13 11:32:53 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRC		:=	ak_countword.c			\
 			get_next_line_multi.c	\
 			printf_c_handler.c		\
 			printf_d_handler.c		\
+			printf_dprint_utils.c	\
 			printf_dprint.c			\
 			printf_ft_draft.c		\
 			printf_ft_int.c			\

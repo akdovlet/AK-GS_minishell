@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_check.c                                      :+:      :+:    :+:   */
+/*   definitions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 14:49:31 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/12 16:53:06 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/13 14:18:02 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	is_parenthesis(int c)
 
 bool	is_word(int c)
 {
-	if (c != 0 && !is_operator(c) && !is_redirect(c) && !ft_isspace(c)\
+	if (c != 0 && !is_metacharacter(c) \
 		&& !is_parenthesis(c))
 		return (true);
 	return (false);

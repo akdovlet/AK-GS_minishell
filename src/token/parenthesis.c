@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:53:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/12 18:04:37 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/13 14:21:51 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,24 @@ char	*copy_parenthesis(char *str, int *i)
 	return (dup);
 }
 
-int	find_parenthesis(char *str, int i)
+int	parenthesis_count(char *str, int i)
 {
-	
+	int	left;
+	int	right;
+
+	left = 0;
+	right = 0;
 	while (str[i] && str[i] != '\n')
 	{
-		if (str[i] == ')')
-			return (1);
+		if (str[i] == PARENTHESIS_L)
+			left++;
+		if (str[i] == PARENTHESIS_R)
+			right++;
 		i++;
 	}
-	return (0);
+	if (left != right)
+		return (0);
+	return (1);
 }
 
 int	parenthesis_management(char *str, int *i, t_token **tk)
@@ -57,8 +65,8 @@ int	parenthesis_management(char *str, int *i, t_token **tk)
 	t_token	*new;
 
 	if (str[*i] == '(')
-	{
-		if (!find_parenthesis(str, *i))
+	{	
+		if (!parenthesis_count(str, *i))
 		{
 			ft_dprintf(STDERR_FILENO, PARENTHESIS_ERR, ')');
 			return (0);
@@ -72,7 +80,7 @@ int	parenthesis_management(char *str, int *i, t_token **tk)
 		return (free(new), 0);
 	new->value = copy_parenthesis(str, i);
 	if (!new->value)
-		return (free(new), ft_tkclear(tk), 0);
+		return (free(new), 0);
 	ft_token_add_back(tk, new);
 	return (1);
 }

@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_dprint.c                                    :+:      :+:    :+:   */
+/*   definitions2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 15:18:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/13 11:31:01 by akdovlet         ###   ########.fr       */
+/*   Created: 2024/07/13 13:28:27 by akdovlet          #+#    #+#             */
+/*   Updated: 2024/07/13 14:16:29 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_dprintf.h"
+#include "minishell.h"
+#include "token.h"
 
-int	ft_dprintf(int fd, const char *str, ...)
+bool	is_metacharacter(int c)
 {
-	va_list	arg;
-	int		wrote;
-
-	va_start(arg, str);
-	wrote = ak_printf(fd, str, &arg);
-	va_end(arg);
-	return (wrote);
+	if (c == SPACE || c == TAB || c == NEWLINE \
+		|| is_operator(c) || is_redirect(c))
+		return (true);
+	return (false);
 }

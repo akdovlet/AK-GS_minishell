@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/12 15:58:05 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/07/13 13:58:49 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,12 @@ SRC		:=	main.c					\
 			env/env_cpy.c			\
 			env/env_lst_utils.c		\
 			env/env_utils.c			\
+			token/definitions.c		\
+			token/definitions2.c	\
 			token/parenthesis.c		\
 			token/syntax_error.c	\
 			token/syntax_input.c	\
 			token/syntax_order.c	\
-			token/token_check.c		\
 			token/token_lst_utils.c	\
 			token/tokenize.c		\
 			token/type_manager.c	\
