@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 14:49:31 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/13 14:18:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/15 10:52:46 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ bool	is_redirect(int c)
 bool	is_parenthesis(int c)
 {
 	if (c == PARENTHESIS_L || c == PARENTHESIS_R)
-		return (true);
-	return (false);
-}
-
-bool	is_word(int c)
-{
-	if (c != 0 && !is_metacharacter(c) \
-		&& !is_parenthesis(c))
 		return (true);
 	return (false);
 }

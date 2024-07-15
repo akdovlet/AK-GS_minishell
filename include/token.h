@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/13 14:01:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:37:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@ typedef	struct s_token
 }	t_token;
 
 /*###############################################################################
-#                                  definitions.c                                #
+#                                  debugging.c                                  #
+###############################################################################*/
+
+char	*etoa(int c);
+void	print_token(t_token *tk);
+
+/*###############################################################################
+#                                  definitions2.c                               #
 ###############################################################################*/
 
 bool	is_metacharacter(int c);
+bool	is_word(int c);
 
 /*###############################################################################
 #                                  definitions.c                                #
@@ -35,14 +43,13 @@ bool	is_metacharacter(int c);
 bool	is_operator(int c);
 bool	is_quote(int c);
 bool	is_redirect(int c);
-bool	is_word(int c);
 bool	is_parenthesis(int c);
 
 /*###############################################################################
 #                                  parenthesis.c                               #
 ###############################################################################*/
 
-int		find_parenthesis(char *str, int i);
+int	parenthesis_count(char *str, int i);
 int		parenthesis_management(char *str, int *i, t_token **token);
 
 /*###############################################################################

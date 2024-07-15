@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/13 14:14:27 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/15 12:46:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ int main(int ac, char **av, char **env)
 	my_env = NULL;
 	tk = NULL;
 	copy_env(&my_env, env);
-	// print_env(my_env);
+	if (!env[0])
+		printf("empty\n");
+	print_env(my_env);
 	while (1)
 	{
 		line = readline(CYAN "minishell$> " RESET);

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:53:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/13 14:21:51 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:35:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,16 @@ int	parenthesis_count(char *str, int i)
 			right++;
 		i++;
 	}
-	if (left != right)
-		return (0);
+	if (left > right)
+	{
+		ft_dprintf(STDERR_FILENO, PARENTHESIS_ERR, ')');
+		return (0);	
+	}
+	else if (left < right)
+	{
+		bad_syntax(PARENTHESIS_R);
+		return (0);	
+	}
 	return (1);
 }
 
@@ -64,14 +72,6 @@ int	parenthesis_management(char *str, int *i, t_token **tk)
 {
 	t_token	*new;
 
-	if (str[*i] == '(')
-	{	
-		if (!parenthesis_count(str, *i))
-		{
-			ft_dprintf(STDERR_FILENO, PARENTHESIS_ERR, ')');
-			return (0);
-		}		
-	}
 	new = ft_tokennew(NULL);
 	if (!new)
 		return (perror("malloc"), 0);

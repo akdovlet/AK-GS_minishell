@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:55:42 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/12 16:10:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:31:54 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	bad_syntax(int c)
 		token = ">>";
 	else if (c == OUT)
 		token = ">";
-	else
-		ft_dprintf(STDERR_FILENO, SYNTAX_ERR , token);
+	else if (c == PARENTHESIS_R)
+		token = ")";
+	ft_dprintf(STDERR_FILENO, SYNTAX_ERR , token);
 }
