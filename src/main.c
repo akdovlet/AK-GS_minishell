@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/16 14:11:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:08:18 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int main(int ac, char **av, char **env)
 		add_history(line);
 		tokenize(line, &tk);
 		free(line);
-		if (ft_is_builtins)
-		// print_token(tk);
+		// ft_exec(tk, my_env);
+		print_token(tk);
 		ft_tkclear(&tk);
 	}
 	env_clear(&my_env);

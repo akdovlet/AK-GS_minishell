@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/16 12:54:04 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:07:53 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ enum e_token
 	OR = 1002,
 	APPEND = 1003,
 	HERE_DOC = 1004,
+	BUILTIN = 1005,
 };
 
+// builtins/is_builtin.c
+int	is_builtins(char *str);
 
 #endif
