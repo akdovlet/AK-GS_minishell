@@ -1,0 +1,13 @@
+exit : Termine le processus courant.
+
+getcwd : Obtient le chemin du répertoire de travail courant.
+
+chdir : Change le répertoire de travail courant.
+
+stat, lstat, fstat : Obtient des informations sur un fichier. 
+lstat est similaire à stat, mais ne suit pas les liens symboliques. 
+fstat obtient des informations sur un fichier ouvert, identifié par un descripteur de fichier.
+
+opendir, readdir, closedir : Permettent de lire le contenu des répertoires.
+
+getenv : Récupère la valeur d'une variable d'environnement.
