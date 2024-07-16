@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/16 12:53:04 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:11:19 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int main(int ac, char **av, char **env)
 		add_history(line);
 		tokenize(line, &tk);
 		free(line);
-		print_token(tk);
+		if (ft_is_builtins)
+		// print_token(tk);
 		ft_tkclear(&tk);
 	}
 	env_clear(&my_env);
