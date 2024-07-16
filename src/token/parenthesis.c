@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:53:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/15 11:35:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:05:55 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	parenthesis_count(char *str, int i)
 
 	left = 0;
 	right = 0;
+	printf("Parenthesis count\n");
 	while (str[i] && str[i] != '\n')
 	{
 		if (str[i] == PARENTHESIS_L)
@@ -72,15 +73,17 @@ int	parenthesis_management(char *str, int *i, t_token **tk)
 {
 	t_token	*new;
 
+	printf("Parenthesis Management\n");
 	new = ft_tokennew(NULL);
 	if (!new)
 		return (perror("malloc"), 0);
 	new->type = parenthesis_check(str[*i], str, i);
 	if (!new->type)
-		return (free(new), 0);
+		return (free(new), printf("here\n"), 0);
 	new->value = copy_parenthesis(str, i);
 	if (!new->value)
-		return (free(new), 0);
+		return (free(new), perror("malloc"), 0);
 	ft_token_add_back(tk, new);
+	printf("here\n");
 	return (1);
 }
