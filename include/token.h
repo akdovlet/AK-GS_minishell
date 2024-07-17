@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/15 11:37:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:04:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	print_token(t_token *tk);
 #                                  definitions2.c                               #
 ###############################################################################*/
 
+bool	is_blank(int c);
 bool	is_metacharacter(int c);
 bool	is_word(int c);
 
@@ -56,6 +57,7 @@ int		parenthesis_management(char *str, int *i, t_token **token);
 #                                  syntax_error.c                               #
 ###############################################################################*/
 
+void	bad_syntax2(char *str);
 // returns correct error message in case of bad syntax
 void	bad_syntax(int c);
 

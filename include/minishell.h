@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/16 12:54:04 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:44:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ add_history*/
 // typedef and struct used in conjunction to create an alias for s_tree
 typedef struct s_tree
 {
-	char			*value;
-	int				operator;
+	int				value;
 	struct s_tree	*left;
 	struct s_tree	*right;
 }	t_tree;
-
 
 enum e_token
 {

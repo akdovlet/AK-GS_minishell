@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/16 15:37:41 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/07/17 20:22:37 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC		:=	main.c					\
 			env/env_cpy.c			\
 			env/env_lst_utils.c		\
 			env/env_utils.c			\
+			parsing/parsing.c		\
 			token/debugging.c		\
 			token/definitions.c		\
 			token/definitions2.c	\
@@ -28,7 +29,8 @@ SRC		:=	main.c					\
 			token/token_lst_utils.c	\
 			token/tokenize.c		\
 			token/type_manager.c	\
-			token/word_manager.c
+			token/word_manager.c	\
+			tree/tree_utils.c
 
 SRC_DIR	:=	src
 BUILD	:=	.build

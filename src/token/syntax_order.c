@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:46:28 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/16 15:11:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:35:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,17 @@ int	syntax_order_check(t_token *tk)
 			return (bad_syntax(tk->type), 0);
 		if (is_redirect(tk->type) && tk->next->type != WORD)
 			return (bad_syntax(tk->next->type), 0);
-		if (is_parenthesis(tk->type) && is_operator(tk->next->type))
+		if (tk->type == PARENTHESIS_L && is_operator(tk->next->type))
 			return (bad_syntax(tk->next->type), 0);
+		if (is_word(tk->type) && tk->next->type == PARENTHESIS_L)
+			return (bad_syntax2(tk->next->value), 0);
+		if (tk->type == PARENTHESIS_L && tk->next->type == PARENTHESIS_R)
+			return (bad_syntax2(")"), 0);
+		if (tk->type == PARENTHESIS_R && tk->next->type == PARENTHESIS_L)
+			return (bad_syntax2("("), 0);
 		tk = tk->next;
 	}
 	if (tk->next == NULL && (is_redirect(tk->type) || is_operator(tk->type)))
 		return (bad_syntax(tk->type), 0);
-	printf("Syntax order done\n");
 	return (1);
 }

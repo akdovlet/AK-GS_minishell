@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/12 18:09:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:52:37 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	word_management(char *line, int *i, t_token **tk)
 	new->type = WORD;
 	new->value = copy_word(line, i);
 	if (!new->value)
-		return (free(new), 0);
+		return (free(new), printf("here3\n"), 0);
 	ft_token_add_back(tk, new);
 	return (1);
 }
