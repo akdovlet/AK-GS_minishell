@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/18 15:26:47 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:08:05 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 # define TOKEN_H
 
 # include "minishell.h"
-
-typedef	struct s_token
-{
-	int		type;
-	char	*value;
-	struct	s_token	*next;
-}	t_token;
 
 /*###############################################################################
 #                                  debugging.c                                  #
