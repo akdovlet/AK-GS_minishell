@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/19 18:08:03 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:04:31 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct s_ast
 		};
 		struct
 		{
-			t_type value;
+			t_type			value;
 			struct s_ast	*left;
 			struct s_ast	*right;
 		};
