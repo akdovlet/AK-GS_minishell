@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
+#    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2024/07/17 20:22:37 by akdovlet         ###   ########.fr        #
-=======
-#    Updated: 2024/07/22 10:31:34 by gschwand         ###   ########.fr        #
->>>>>>> gs
+#    Updated: 2024/07/22 11:45:57 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +31,7 @@ SRC		:=	main.c					\
 			token/tokenize.c		\
 			token/type_manager.c	\
 			token/word_manager.c	\
-<<<<<<< HEAD
 			tree/tree_utils.c
-
-=======
 			exec/exec.c				\
 			builtins/cd.c			\
 			builtins/pwd.c			\
@@ -46,8 +39,8 @@ SRC		:=	main.c					\
 			# builtin/env.c			\
 			# builtin/export.c		\
 			# builtin/unset.c			\
-			# builtin/exit.c			
->>>>>>> gs
+			# builtin/exit.c
+
 SRC_DIR	:=	src
 BUILD	:=	.build
 SRC 	:=	$(addprefix $(SRC_DIR)/, $(SRC))
