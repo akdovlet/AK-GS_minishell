@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 10:35:09 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:05:16 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ manipulate the shell itself. The history, getopts, kill, or pwd builtins,
 among others, could be implemented in separate utilities, but they are more
 convenient to use as builtin commands. All of the shell builtins are described
 in subsequent sections. 
+
+//check les redirs avec plusieurs in: < in < in2 < in3
+pareil avc les out et le heredoc
+
+singaux avec sigactions
+
+si pipeline tout est dans l'enfant
+signaux ctrlc ne doit pas quitter le programme
+
 */
 
 int main(int ac, char **av, char **env)

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/15 11:37:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:08:05 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 # define TOKEN_H
 
 # include "minishell.h"
-
-typedef	struct s_token
-{
-	int		type;
-	char	*value;
-	struct	s_token	*next;
-}	t_token;
 
 /*###############################################################################
 #                                  debugging.c                                  #
@@ -33,6 +26,7 @@ void	print_token(t_token *tk);
 #                                  definitions2.c                               #
 ###############################################################################*/
 
+bool	is_blank(int c);
 bool	is_metacharacter(int c);
 bool	is_word(int c);
 
@@ -41,6 +35,7 @@ bool	is_word(int c);
 ###############################################################################*/
 
 bool	is_operator(int c);
+bool	is_logical_operator(int c);
 bool	is_quote(int c);
 bool	is_redirect(int c);
 bool	is_parenthesis(int c);
@@ -49,13 +44,14 @@ bool	is_parenthesis(int c);
 #                                  parenthesis.c                               #
 ###############################################################################*/
 
-int	parenthesis_count(char *str, int i);
+int		parenthesis_count(char *str, int i);
 int		parenthesis_management(char *str, int *i, t_token **token);
 
 /*###############################################################################
 #                                  syntax_error.c                               #
 ###############################################################################*/
 
+void	bad_syntax2(char *str);
 // returns correct error message in case of bad syntax
 void	bad_syntax(int c);
 
@@ -72,8 +68,7 @@ int		in_check(char *str, int i);
 #                                  syntax_order.c                               #
 ###############################################################################*/
 
-int	syntax_order_check(t_token *tk);
-
+int		syntax_order_check(t_token *tk);
 
 /*###############################################################################
 #                                  token_lst_utils.c                            #

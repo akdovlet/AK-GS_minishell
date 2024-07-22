@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 10:32:58 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:04:56 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,13 @@ add_history*/
 # define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
 # define PARENTHESIS_ERR "minishell: unexpected newline while looking for closing `%c'\n"
 
-// typedef and struct used in conjunction to create an alias for s_tree
-typedef struct s_tree
+typedef	enum	e_node
 {
-	char			*value;
-	int				operator;
-	struct s_tree	*left;
-	struct s_tree	*right;
-}	t_tree;
+	PIPELINE,
+	OPERATOR
+}	t_node;
 
-
-enum e_token
+typedef enum	e_token
 {
 	PIPE = '|',
 	PARENTHESIS_L = '(',
@@ -81,16 +77,56 @@ enum e_token
 	OR = 1002,
 	APPEND = 1003,
 	HERE_DOC = 1004,
-	BUILTIN = 1005,
+	BUILTIN = 1005
 };
 
-// builtins
-int	is_builtins(char *str);
-int ft_echo_n(char **args);
-int ft_echo(char **args);
-int cd(char *args);
-int ft_pwd(void);
-int ft_exec(t_token *tk, t_env *env);
+typedef	struct s_token
+{
+	int		type;
+	char	*value;
+	struct	s_token	*next;
+}	t_token;
 
+typedef struct s_in
+{
+	t_type		type;
+	char		*file;
+	struct s_in	*next;
+}	t_in;
+
+typedef struct s_out
+{
+	t_type			type;
+	char			*file;
+	struct s_out	*next;
+}	t_out;
+
+typedef	struct s_cmdlist
+{
+	char				**cmd;
+	int					exit_status;
+	t_in				*in;
+	t_out				*out;
+	struct s_cmdlist	*next;
+}	t_cmdlist;
+
+
+typedef struct s_ast
+{
+	t_node type;	
+	union
+	{
+		struct
+		{
+			t_cmdlist	*lst;
+		};
+		struct
+		{
+			t_type			value;
+			struct s_ast	*left;
+			struct s_ast	*right;
+		};
+	};
+}	t_ast;
 
 #endif

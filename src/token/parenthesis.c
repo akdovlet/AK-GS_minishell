@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:53:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/15 11:35:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:45:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	parenthesis_management(char *str, int *i, t_token **tk)
 		return (free(new), 0);
 	new->value = copy_parenthesis(str, i);
 	if (!new->value)
-		return (free(new), 0);
+		return (free(new), perror("malloc"), 0);
 	ft_token_add_back(tk, new);
 	return (1);
 }

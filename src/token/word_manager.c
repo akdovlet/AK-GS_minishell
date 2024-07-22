@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/16 15:51:58 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:07:14 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	word_management(char *line, int *i, t_token **tk)
 	new->type = WORD;
 	new->value = copy_word(line, i);
 	if (!new->value)
-		return (free(new), 0);
+		return (free(new), printf("here3\n"), 0);
 	if (is_builtins(new->value))
 		new->type = BUILTIN;
 	ft_token_add_back(tk, new);
