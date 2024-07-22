@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/22 10:58:30 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:34:58 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,15 @@
 
 
 // need a sort for empty string
-char *ft_strjoin_export(char *s1, char *s2)
-{
-    char *str;
-    int lens1;
-    int lens2;
 
-    lens1 = ft_strlen(s1);
-    lens2 = ft_strlen(s2);
-    str = malloc((lens1 + lens2 + 2) * sizeof(char));
-    if (str == NULL)
-        return (NULL);
-    ft_strlcpy(str, s1, lens1 + 1);
-    str[lens1] = '=';
-    ft_strlcat(str, s2, lens1 + lens2 + 2);
-    return (str);
-}
-
-int ft_export(char *name, char *value)
+int ft_export(char **args)
 {
-    if (name == NULL || value == NULL)
-        return (ft_putstr_fd("\n", 2));
+    int i;
     
+    i = 1;
+    while (args[i])
+    {
+        // Var doit etre alpha
+        // Args doit contenir =
+    }
 }

@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 15:03:00 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/22 14:14:26 by gschwand         ###   ########.fr       */
+/*   Created: 2024/07/22 14:18:24 by gschwand          #+#    #+#             */
+/*   Updated: 2024/07/22 14:21:35 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "env.h"
 
-int ft_pwd(void)
+void	ft_env(t_env *env)
 {
-    char *buf;
-    buf = getcwd(NULL, 0);
-    if (buf == NULL)
+    while (env)
     {
-        ft_putstr_fd("Error: getcwd failed\n", 2);
-        return (1);
+        ft_putstr_fd(env->both, 1);
+        ft_putstr_fd("\n", 1);
+        env = env->next;
     }
-    ft_putstr_fd(buf, 1);
-    ft_putstr_fd("\n", 1);
-    free(buf);
-    return (0);
 }

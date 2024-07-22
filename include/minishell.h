@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 12:29:23 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:25:09 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ int		cd(char **args);
 int		ft_pwd(void);
 // int		ft_export(char **args);
 // int		ft_unset(char **args);
-// int		ft_env(char **args);
 // int		ft_exit(char **args);
 
 

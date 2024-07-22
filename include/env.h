@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 12:41:02 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:25:25 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ typedef struct s_env
 	char	*both;
 	struct	s_env *next;
 }	t_env;
+
+# include "minishell.h"
+
+// builtins
+void		ft_env(t_env *env);
 
 /* env.c */
 
