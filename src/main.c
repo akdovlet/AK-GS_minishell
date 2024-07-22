@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/18 17:48:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:43:01 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int main(int ac, char **av, char **env)
 		tokenize(line, &tk);
 		free(line);
 		print_token(tk);
+		ft_exec(tk, my_env);
 		ft_tkclear(&tk);
 	}
 	env_clear(&my_env);

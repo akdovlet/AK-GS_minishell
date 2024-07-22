@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   is_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 15:03:00 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/22 10:20:54 by gschwand         ###   ########.fr       */
+/*   Created: 2024/07/16 13:50:55 by gschwand          #+#    #+#             */
+/*   Updated: 2024/07/16 16:07:17 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_pwd(void)
+int is_builtins(char *str)
 {
-    char *buf;
-    buf = getcwd(NULL, 0);
-    if (buf == NULL)
-    {
-        ft_putstr_fd("Error: getcwd failed\n", 2);
+    if (!ft_strcmp(str, "echo"))
         return (1);
-    }
-    ft_putstr_fd(buf, 1);
-    ft_putstr_fd("\n", 1);
-    free(buf);
+    if (!ft_strcmp(str, "cd"))
+        return (1);
+    if (!ft_strcmp(str, "pwd"))
+        return (1);
+    if (!ft_strcmp(str, "export"))
+        return (1);
+    if (!ft_strcmp(str, "unset"))
+        return (1);
+    if (!ft_strcmp(str, "env"))
+        return (1);
+    if (!ft_strcmp(str, "exit"))
+        return (1);
     return (0);
 }

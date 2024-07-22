@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debugging.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 11:06:17 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/15 11:19:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:11:12 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*etoa(int c)
 {
 	if (c == WORD)
 		return ("WORD");
+	if (c == BUILTIN)
+		return ("BUILTIN");
 	if (c == AND)
 		return ("AND");
 	if (c == OR)
