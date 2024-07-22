@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 13:53:55 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:51:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,5 @@ int	tokenize(char *line, t_token **tk)
 	}
 	if (!syntax_order_check(*tk) || !parenthesis_count(line, 0))
 		return (ft_tkclear(tk), 0);
-	// redundant_parenthesis(&tk);
 	return (1);
 }

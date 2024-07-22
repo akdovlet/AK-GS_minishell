@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 16:27:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:03:46 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_ast	*parse_operator(t_token **tk)
 t_ast	*parse_cmd(t_token **tk)
 {
 	t_ast	*new;
-	t_ast	*left;
 
 	new = NULL;
 	printf("parse_cmd\n");
@@ -90,12 +89,12 @@ t_ast	*parse_cmd(t_token **tk)
 	{
 		printf("parenthesis\n");
 		*tk = (*tk)->next;
-		left = parse(tk);
+		new = parse(tk);
 		if (*tk && (*tk)->type == PARENTHESIS_R)
+		{
+			printf("right parenthesis\n");
 			(*tk) = (*tk)->next;
-		new = parse_operator(tk);
-		new->left = left;
-		new->right = parse_cmd(tk);
+		}
 		return (new);
 	}
 	if (next_operator(*tk))
@@ -105,6 +104,7 @@ t_ast	*parse_cmd(t_token **tk)
 		printf("operator is: %s\n", etoa((tmp)->type));
 		new = parse_operator(&tmp);
 		new->left = ast_newcmd(tk);
+		printf("after new_cmd: %s\n", etoa((*tk)->type));
 		*tk = (*tk)->next;
 		new->right = parse_cmd(tk);
 	}
@@ -115,8 +115,8 @@ t_ast	*parse_cmd(t_token **tk)
 
 t_ast	*parse(t_token **tk)
 {
-	if (!(*tk))
+	if (!*tk)
 		return (NULL);
-	return (parse_operator(tk));
+	return (parse_cmd(tk));
 }
 
