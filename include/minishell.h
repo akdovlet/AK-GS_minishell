@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 11:41:01 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:22:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ add_history*/
 /* tgetent, tgetflag, tgetnum, getstr, tgoto, tputs */
 # include <curses.h>
 # include <stdbool.h>
-# include "token.h"
-# include "env.h"
 # include "libft.h"
 
 # define RED     "\x1b[31m"

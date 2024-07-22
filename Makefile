@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/22 11:47:10 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/07/22 15:24:28 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC		:=	main.c					\
 			builtins/echo.c			\
 			# builtin/env.c			\
 			# builtin/export.c		\
-			# builtin/unset.c			\
+			# builtin/unset.c		\
 			# builtin/exit.c
 
 SRC_DIR	:=	src

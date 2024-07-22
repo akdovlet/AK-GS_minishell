@@ -6,51 +6,34 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/20 22:27:29 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:27:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
 
-int	peek(t_token *tk, bool *f(int))
-{
-	while (tk)
-	{
-		if (f(tk->type))
-			return (tk->type);
-		tk = tk->next;
-	}
-	return (0);
-}
+// t_cmdlist	*build_cmdlist(t_token **tk)
+// {
+// 	t_cmdlist	*lst;
 
-void	build_cmdnode(t_cmdlist	**lst, t_token **tk)
-{
-	t_cmdlist *new;
-
-	new = new_cmdnode();
-	if (!new)
-		return (NULL);
-}
-
-t_cmdlist	*build_cmdlist(t_token **tk)
-{
-	t_cmdlist	*lst;
-
-	while (*tk && !is_logical_operator((*tk)->type) && !is_parenthesis((*tk)->type))
-		build_cmdnode(&lst, *tk);
-	return (lst);
-}
+// 	while (*tk && !is_logical_operator((*tk)->type) && !is_parenthesis((*tk)->type))
+// 		build_cmdnode(&lst, *tk);
+// 	return (lst);
+// }
 
 t_ast	*ast_newcmd(t_token **tk)
 {
 	t_ast	*new;
 
+	printf("ast_newcmd\n");
 	new = malloc(sizeof(t_ast));
 	if (!new)
 		return (NULL);
 	new->type = PIPELINE;
 	new->lst = NULL;
+	while (*tk && !is_logical_operator((*tk)->type))
+		*tk = (*tk)->next;
 	return (new);
 }
 
@@ -68,61 +51,62 @@ t_ast	*ast_newoperator(t_type type)
 	return (new);
 }
 
-t_ast	*parse_or(t_token **tk)
+t_token	*next_operator(t_token *tk)
 {
-	t_ast	*left;
-	t_ast	*right;
-	if (*tk)
-		retunr (NULL);
-	left = parse_and(tk);
-	while (*tk && (*tk)->type == OR)
+	while (tk)
 	{
-		*tk = (*tk)->next;
-		right = parse_and(tk);
-		left = ast_newoperator(OR);
+		if (is_logical_operator(tk->type))
+			return (tk);
+		tk = tk->next;
 	}
-	return left;
-}
-
-t_ast	*parse_cmd(t_token **tk)
-{
-	return (parse_or(tk));
-}
-
-t_token	*find_operator(t_token *tk)
-{
-	
+	return (NULL);
 }
 
 t_ast	*parse_operator(t_token **tk)
 {
 	t_ast	*new;
 
+	new = NULL;
+	if (!(*tk) || !tk)
+		return (NULL);
 	if (is_logical_operator((*tk)->type))
 	{
+		printf("parse_operator\n");
 		new = ast_newoperator((*tk)->type);
-		*tk = (*tk)->next;
-		new->left = 
 	}
+	return (new);
 }
 
 t_ast	*parse_cmd(t_token **tk)
 {
 	t_ast	*new;
+	t_ast	*left;
 
+	new = NULL;
+	printf("parse_cmd\n");
+	if (!(*tk))
+		return (NULL);
 	if ((*tk)->type == PARENTHESIS_L)
 	{
+		printf("parenthesis\n");
 		*tk = (*tk)->next;
-		new = parse(tk);
+		left = parse(tk);
 		if (*tk && (*tk)->type == PARENTHESIS_R)
 			(*tk) = (*tk)->next;
+		new = parse_operator(tk);
+		new->left = left;
+		new->right = parse_cmd(tk);
 		return (new);
 	}
-	if (find_operator(*tk))
+	if (next_operator(*tk))
 	{
+		printf("next_operator\n");
+		t_token *tmp = next_operator(*tk);
+		printf("operator is: %s\n", etoa((tmp)->type));
+		new = parse_operator(&tmp);
 		new->left = ast_newcmd(tk);
-		new = parse_operator(tk);
-		new->right = ast_newcmd(tk);
+		*tk = (*tk)->next;
+		new->right = parse_cmd(tk);
 	}
 	else
 		new = ast_newcmd(tk);
@@ -131,5 +115,8 @@ t_ast	*parse_cmd(t_token **tk)
 
 t_ast	*parse(t_token **tk)
 {
-	return (parse_cmd(tk));
+	if (!(*tk))
+		return (NULL);
+	return (parse_operator(tk));
 }
+
