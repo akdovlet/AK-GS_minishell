@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/16 15:23:46 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:32:19 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 //     return (*(unsigned char *)s1 - *(unsigned char *)s2);
 // }
 
-int echo_n(char **args)
+int ft_echo_n(char **args)
 {
     int i;
 
@@ -51,13 +51,13 @@ int echo_n(char **args)
     return (0);
 }
 
-int echo(char **args)
+int ft_echo(char **args)
 {
     int i;
 
     i = 1;
     if (args[1] && !ft_strcmp(args[1], "-n"))
-        return (echo_n(args));
+        return (ft_echo_n(args));
     while (args[i])
     {
         ft_putstr_fd(args[i], 1);

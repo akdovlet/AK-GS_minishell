@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/16 16:06:54 by gschwand         ###   ########.fr        #
+#    Updated: 2024/07/22 10:31:34 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,15 +30,14 @@ SRC		:=	main.c					\
 			token/tokenize.c		\
 			token/type_manager.c	\
 			token/word_manager.c	\
-			# exec/exec.c				\
-			# builtin/cd.c			\
-			# builtin/echo.c			\
+			exec/exec.c				\
+			builtins/cd.c			\
+			builtins/pwd.c			\
+			builtins/echo.c			\
 			# builtin/env.c			\
 			# builtin/export.c		\
-			# builtin/pwd.c			\
 			# builtin/unset.c			\
 			# builtin/exit.c			
-
 SRC_DIR	:=	src
 BUILD	:=	.build
 SRC 	:=	$(addprefix $(SRC_DIR)/, $(SRC))

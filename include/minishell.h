@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/16 16:07:53 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:32:58 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ add_history*/
 /* tgetent, tgetflag, tgetnum, getstr, tgoto, tputs */
 # include <curses.h>
 # include <stdbool.h>
+# include "token.h"
+# include "env.h"
 # include "libft.h"
 
 # define RED     "\x1b[31m"
@@ -82,7 +84,13 @@ enum e_token
 	BUILTIN = 1005,
 };
 
-// builtins/is_builtin.c
+// builtins
 int	is_builtins(char *str);
+int ft_echo_n(char **args);
+int ft_echo(char **args);
+int cd(char *args);
+int ft_pwd(void);
+int ft_exec(t_token *tk, t_env *env);
+
 
 #endif

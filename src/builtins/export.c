@@ -6,12 +6,14 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/08 07:59:22 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:58:30 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "minishell.h"
 
+
+// need a sort for empty string
 char *ft_strjoin_export(char *s1, char *s2)
 {
     char *str;

@@ -6,11 +6,11 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:03:00 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/08 07:03:13 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 10:20:54 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "minishell.h"
 
 int ft_pwd(void)
 {
