@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 17:37:08 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:41:02 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,9 @@ bool	copy_env(t_env **cpy, char **env);
 void	env_clear(t_env **lst);
 
 void	print_env(t_env *lst);
+
+// exec
+int		ft_exec(char *line, t_env *env);
+
 
 #endif

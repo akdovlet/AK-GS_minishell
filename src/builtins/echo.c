@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/22 10:32:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:48:17 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ int ft_echo(char **args)
     int i;
 
     i = 1;
+    if (!args[1])
+    {
+        ft_putstr_fd("\n", 1);
+        return (0);
+    }
     if (args[1] && !ft_strcmp(args[1], "-n"))
         return (ft_echo_n(args));
     while (args[i])
