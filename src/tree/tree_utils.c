@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/23 11:43:23 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/23 21:27:50 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	print_tree_recursive(t_ast *root, int level)
 	else
 		str = "OPERATOR";
 	ft_printf("value is: %s = %s\n", str, etoa(root->value));
+	if (!root->type)
+	{
+		print_indentation(level);
+		ft_printf("%s\n", root->cmd);
+	}
 	print_indentation(level);
 	ft_printf("left\n");
 	if (root->type)
