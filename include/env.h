@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 14:25:25 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/23 10:01:24 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_env
 
 // builtins
 void		ft_env(t_env *env);
+int 		ft_export(char **args, t_env *env);
+
 
 /* env.c */
 
