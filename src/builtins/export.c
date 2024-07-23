@@ -6,11 +6,20 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/23 09:54:45 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/23 10:36:35 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+
+static void print_env_lst(t_env *lst)
+{
+    while (lst)
+    {
+        printf("export %s\n", lst->both);
+        lst = lst->next;
+    }
+}
 
 static bool	copy_env_env(t_env **cpy, t_env *env)
 {
@@ -31,8 +40,7 @@ static void ft_sort_alpha(t_env **env)
 {
     t_env *tmp;
     t_env *tmp2;
-    char *tmp_key;
-    char *tmp_value;
+    char *tmp_both;
     
     tmp = *env;
     while (tmp)
@@ -40,14 +48,11 @@ static void ft_sort_alpha(t_env **env)
         tmp2 = tmp->next;
         while (tmp2)
         {
-            if (ft_strcmp(tmp->key, tmp2->key) > 0)
+            if (ft_strcmp(tmp->both, tmp2->both) > 0)
             {
-                tmp_key = tmp->key;
-                tmp_value = tmp->value;
-                tmp->key = tmp2->key;
-                tmp->value = tmp2->value;
-                tmp2->key = tmp_key;
-                tmp2->value = tmp_value;
+                tmp_both = tmp->both;
+                tmp->both = tmp2->both;
+                tmp2->both = tmp_both;
             }
             tmp2 = tmp2->next;
         }
@@ -57,13 +62,17 @@ static void ft_sort_alpha(t_env **env)
 
 static int ft_sort_alpha_env(t_env *env)
 {
-    t_env *cpy;
+    t_env **cpy;
     
-    if (copy_env_env(&cpy, env) == false)
+    cpy = malloc(sizeof(t_env *));
+    if (!cpy)
         return (1);
-    ft_sort_alpha(&cpy);
-    print_env(cpy);
-    env_clear(&cpy);
+    *cpy = NULL;
+    if (copy_env_env(cpy, env) == false)
+        return (1);
+    ft_sort_alpha(cpy);
+    print_env_lst(*cpy);
+    env_clear(cpy);
     return (0);
 }
 
@@ -85,7 +94,7 @@ int ft_export(char **args, t_env *env)
     while (args[i])
     {
         if (!ft_isalpha(args[i][0]))
-            printf("minishell: export: `%s': not a valid identifier\n", args[i]);
+            printf("minishell: export: %s: not a valid identifier\n", args[i]);
         else if (ft_strchr(args[i], '='))
         {
             node = ft_envnew(args[i]);
@@ -93,6 +102,7 @@ int ft_export(char **args, t_env *env)
                 return (1);
             ft_add_back(&env, node);
         }
+        i++;
     }
     return (0);
 }

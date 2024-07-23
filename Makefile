@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/23 09:58:35 by gschwand         ###   ########.fr        #
+#    Updated: 2024/07/23 10:06:13 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ $(BUILD):
 	@if [ ! -d $(BUILD) ]; then mkdir $(BUILD); fi
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) -L/usr/local/lib -I/usr/local/include -lreadline $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) -L/usr/local/lib -I/usr/local/include $(OBJ) $(LIBFT) -o $(NAME) -lreadline
 
 $(BUILD)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)

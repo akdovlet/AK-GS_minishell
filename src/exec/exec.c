@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/22 14:25:40 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/23 10:07:58 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int ft_exec(char *line, t_env *env)
             cd(tab);
         else if (!ft_strcmp(tab[0], "pwd"))
             ft_pwd();
-        // else if (!ft_strcmp(tk->value, "export"))
-        //     export(tk->next->value, env);
+        else if (!ft_strcmp(tab[0], "export"))
+            ft_export(tab, env);
         // else if (!ft_strcmp(tk->value, "unset"))
         //     unset(tk->next->value, env);
         else if (!ft_strcmp(tab[0], "env"))
