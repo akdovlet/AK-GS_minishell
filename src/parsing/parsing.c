@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 20:03:46 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:36:44 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_ast	*ast_newcmd(t_token **tk)
 		return (NULL);
 	new->type = PIPELINE;
 	new->lst = NULL;
-	while (*tk && !is_logical_operator((*tk)->type))
+	while (*tk && !is_logical_operator((*tk)->type) && !is_parenthesis((*tk)->type))
 		*tk = (*tk)->next;
 	return (new);
 }
@@ -62,25 +62,11 @@ t_token	*next_operator(t_token *tk)
 	return (NULL);
 }
 
-t_ast	*parse_operator(t_token **tk)
-{
-	t_ast	*new;
-
-	new = NULL;
-	if (!(*tk) || !tk)
-		return (NULL);
-	if (is_logical_operator((*tk)->type))
-	{
-		printf("parse_operator\n");
-		new = ast_newoperator((*tk)->type);
-	}
-	return (new);
-}
 
 t_ast	*parse_cmd(t_token **tk)
 {
 	t_ast	*new;
-
+	t_ast	*root;
 	new = NULL;
 	printf("parse_cmd\n");
 	if (!(*tk))
@@ -95,21 +81,37 @@ t_ast	*parse_cmd(t_token **tk)
 			printf("right parenthesis\n");
 			(*tk) = (*tk)->next;
 		}
-		return (new);
-	}
-	if (next_operator(*tk))
-	{
-		printf("next_operator\n");
-		t_token *tmp = next_operator(*tk);
-		printf("operator is: %s\n", etoa((tmp)->type));
-		new = parse_operator(&tmp);
-		new->left = ast_newcmd(tk);
-		printf("after new_cmd: %s\n", etoa((*tk)->type));
-		*tk = (*tk)->next;
-		new->right = parse_cmd(tk);
+		printf("type is: %s\n", etoa((*tk)->type));
+		root = parse_operator(tk);
+		if (!root)
+			return (new);	
+		root->left = new;
+		root->right = parse_cmd(tk);
+		return (root);
 	}
 	else
 		new = ast_newcmd(tk);
+	return (new);
+}
+
+
+t_ast	*parse_operator(t_token **tk)
+{
+	t_ast	*new;
+	t_ast	*root;
+
+	new = parse_cmd(tk);
+	if (!(*tk) || !tk)
+		return (NULL);
+	if (is_logical_operator((*tk)->type))
+	{
+		printf("parse_operator\n");
+		root = ast_newoperator((*tk)->type);
+		root->left = new;
+		*tk = (*tk)->next;
+		root->right = parse_operator(tk);
+		return (root);
+	}
 	return (new);
 }
 
@@ -117,6 +119,6 @@ t_ast	*parse(t_token **tk)
 {
 	if (!*tk)
 		return (NULL);
-	return (parse_cmd(tk));
+	return (parse_operator(tk));
 }
 

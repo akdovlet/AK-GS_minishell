@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   debugging.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 11:06:17 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/16 16:11:12 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:41:33 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
 
-char	*etoa(int c)
+char	*etoa(t_type c)
 {
 	if (c == WORD)
 		return ("WORD");

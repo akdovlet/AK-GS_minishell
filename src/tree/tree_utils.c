@@ -6,11 +6,12 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 15:35:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:43:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing.h"
 
 void	print_indentation(int level)
 {
@@ -39,7 +40,7 @@ void	print_tree_recursive(t_ast *root, int level)
 		str = "PIPELINE";
 	else
 		str = "OPERATOR";
-	ft_printf("value is: %s\n", str);
+	ft_printf("value is: %s = %s\n", str, etoa(root->value));
 	print_indentation(level);
 	ft_printf("left\n");
 	if (root->type)
