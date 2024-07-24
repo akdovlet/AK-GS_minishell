@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:33:23 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/24 08:48:15 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/24 08:57:51 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ void unset(char **tab, t_env *env)
 
     i = 1;
     tmp = env;
-    while (tab[i])
+    while (tab[i] && tmp)
     {
-        while (tmp)
+        if (!ft_strcmp(tab[i], tmp->key))
         {
-            if (!ft_strcmp(tab[i], tmp->key))
-                ft_lstdelone_env(&env, &tmp);
+            ft_lstdelone_env(&env, &tmp);
+            tmp = env;
+            i++;
+        }    
+        else
             tmp = tmp->next;
-        }
-        i++;
     }
 }
