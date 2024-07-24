@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_cpy.c                                          :+:      :+:    :+:   */
+/*   AST_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 13:12:54 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 13:50:35 by akdovlet         ###   ########.fr       */
+/*   Created: 2024/07/24 12:42:52 by akdovlet          #+#    #+#             */
+/*   Updated: 2024/07/24 12:51:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "env.h"
 
-bool	copy_env(t_env **cpy, char **env)
+void	next_token(t_token **tk)
 {
-	int		i;
-	t_env	*new;
-
-	i = 0;
-	while (env[i])
-	{
-		new = ft_envnew(env[i]);
-		if (!new)
-			return (false);
-		ft_add_back(cpy, new);
-		i++;
-	}
-	return (true);
+	if (!(*tk) || !tk)
+		return ;
+	*tk = (*tk)->next;
 }

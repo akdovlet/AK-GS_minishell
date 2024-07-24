@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/23 17:35:09 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:46:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
 #include "token.h"
-#include "parsing.h"
+#include "AST.h"
 
 // IFS bash
 // bash-5.1$ export B='"   salut comment ca va   "'
@@ -98,7 +98,7 @@ int main(int ac, char **av, char **env)
 		print_token(tk);
 		t_ast *ast = parse(&tk);
 		ft_printf("\n");
-		print_tree(ast);
+		ast_print(ast);
 		free(line);
 		ft_tkclear(&tk);
 	}
