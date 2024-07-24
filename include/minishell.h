@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/23 21:17:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:56:10 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ add_history*/
 # define CYAN    "\x1b[36;1m"
 # define RESET   "\x1b[0m"
 
+# define HARDPATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 # define SYNTAX_ERR "minishell: syntax error near unexpected token `%s'\n"
 # define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
 # define PARENTHESIS_ERR "minishell: unexpected newline while looking for closing `%c'\n"

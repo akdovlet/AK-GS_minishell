@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/24 12:49:49 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/07/24 16:39:49 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ SRC		:=	main.c					\
 			AST/AST.c				\
 			AST/AST_debugging.c		\
 			AST/AST_utils.c			\
-			builtins/is_builtins.c	\
 			env/env_cpy.c			\
 			env/env_lst_utils.c		\
+			env/env_setup.c			\
 			env/env_utils.c			\
 			token/debugging.c		\
 			token/definitions.c		\
@@ -32,11 +32,7 @@ SRC		:=	main.c					\
 			token/token_lst_utils.c	\
 			token/tokenize.c		\
 			token/type_manager.c	\
-			token/word_manager.c	\
-			exec/exec.c				\
-			builtins/cd.c			\
-			builtins/pwd.c			\
-			builtins/echo.c
+			token/word_manager.c
 
 SRC_DIR	:=	src
 BUILD	:=	.build

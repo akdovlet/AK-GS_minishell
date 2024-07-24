@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 18:08:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:48:15 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,20 @@ void	last_cmd(t_env **my_env, char *str)
 		free(runner->next->both);
 		tmp = runner->next->next;
 		free(runner->next);
-		runner->next = ft_envnew(str);
+		runner->next = env_new(str);
 		if (!runner->next)
 			return (env_clear(my_env), exit(EXIT_FAILURE));
 		runner->next->next = tmp;
 	}
 	else
 	{
-		runner->next = ft_envnew("_=");
+		runner->next = env_new("_=");
 		if (!runner->next)
 			return (env_clear(my_env), exit(EXIT_FAILURE));
 	}
 }
 
-void	print_env(t_env *lst)
+void	env_print(t_env *lst)
 {
 	while (lst)
 	{

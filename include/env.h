@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 17:37:08 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:15:53 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ typedef struct s_env
 
 /* env.c */
 
-t_env	*ft_envnew(char *var);
-void	ft_add_back(t_env **lst, t_env *new);
-
+t_env	*env_new(char *var);
+void	env_add_back(t_env **lst, t_env *new);
 //copy the entirety of env into a linked list;
-bool	copy_env(t_env **cpy, char **env);
-
+bool	env_copy(t_env **cpy, char **env);
 void	env_clear(t_env **lst);
-
-void	print_env(t_env *lst);
+void	env_print(t_env *lst);
+bool	env_setup(t_env **my_env, char **env);
 
 #endif

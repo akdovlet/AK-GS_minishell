@@ -6,12 +6,12 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:22:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/20 20:29:22 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:39:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parsing.h"
+#include "AST.h"
 
 t_cmdlist	*cmdlst_last(t_cmdlist *lst)
 {

@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:12:54 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 13:50:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:48:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
 
-bool	copy_env(t_env **cpy, char **env)
+bool	env_copy(t_env **cpy, char **env)
 {
 	int		i;
 	t_env	*new;
@@ -21,10 +21,10 @@ bool	copy_env(t_env **cpy, char **env)
 	i = 0;
 	while (env[i])
 	{
-		new = ft_envnew(env[i]);
+		new = env_new(env[i]);
 		if (!new)
 			return (false);
-		ft_add_back(cpy, new);
+		env_add_back(cpy, new);
 		i++;
 	}
 	return (true);

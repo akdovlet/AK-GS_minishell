@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 17:44:44 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:48:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_env	*ft_last(t_env *lst)
 	return (index);
 }
 
-void	ft_add_back(t_env **lst, t_env *new)
+void	env_add_back(t_env **lst, t_env *new)
 {
 	if (!*(lst))
 		*lst = new;
@@ -47,7 +47,7 @@ char	*copy_key(char *str)
 	return (key);	
 }
 
-t_env	*ft_envnew(char *var)
+t_env	*env_new(char *var)
 {
 	t_env	*node;
 
