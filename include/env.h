@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/23 14:44:24 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/24 09:12:15 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_env
 void		ft_env(t_env *env);
 int 		ft_export(char **args, t_env *env);
 void 		unset(char **tab, t_env *env);
+void 		ft_exit(char **tab, t_env *env);
 
 
 /* env.c */
