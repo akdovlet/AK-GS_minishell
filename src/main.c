@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 17:37:53 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 22:33:50 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int main(int ac, char **av, char **env)
 	if (!env_setup(&my_env, env))
 		printf("FALSE\n");
 	env_print(my_env);
-	printf("current dir is: %s\n", getcwd(NULL, 0));
 	while (1)
 	{
 		line = readline(CYAN "minishell$> " RESET);

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 18:56:10 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 22:52:42 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ typedef enum	e_token
 	AND = 1001,
 	OR = 1002,
 	APPEND = 1003,
-	HERE_DOC = 1004,
-	BUILTIN = 1005,
+	HERE_DOC = 1004
 } t_type;
 
 typedef	struct s_token
@@ -109,7 +108,6 @@ typedef	struct s_cmdlist
 	struct s_cmdlist	*next;
 }	t_cmdlist;
 
-
 typedef struct s_ast
 {
 	t_node type;	
@@ -118,6 +116,8 @@ typedef struct s_ast
 		struct
 		{
 			t_cmdlist	*lst;
+			bool		has_pipe;
+			bool		subshell;
 			char		*cmd;
 		};
 		struct
@@ -129,5 +129,20 @@ typedef struct s_ast
 	};
 }	t_ast;
 
+typedef struct	s_pidlst
+{
+	pid_t				pid;
+	struct s_pidlst		*next;
+}	t_pidlst;
+
+typedef struct	s_data
+{
+	t_ast			*root;
+	t_env			*env;
+	t_pidlst		*pidlst;
+	char			*hardpath;
+	int				*messenger;
+	unsigned char	exit_status;
+}	t_data;
 
 #endif
