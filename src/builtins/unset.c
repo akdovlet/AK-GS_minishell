@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:33:23 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/24 08:57:51 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/25 12:19:32 by gautier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // unset remov var from env
 
-void ft_lstdelone_env(t_env **env, t_env **delone)
+static void ft_lstdelone_env(t_env **env, t_env **delone)
 {
     t_env *prev;
 

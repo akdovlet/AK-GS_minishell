@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/24 09:09:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/25 12:43:19 by gautier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int ft_exec(char *line, t_env *env)
     char **tab;
     
     tab = ft_split(line, ' ');
-    free(line);
     if (is_builtins(tab[0]))
     {
         if (!ft_strcmp(tab[0], "echo"))
