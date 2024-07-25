@@ -6,11 +6,12 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/22 12:48:17 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:26:37 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "env.h"
+
 // #include <stdio.h>
 // #include <string.h>
 // #include <unistd.h>
@@ -36,7 +37,7 @@
 //     return (*(unsigned char *)s1 - *(unsigned char *)s2);
 // }
 
-int ft_echo_n(char **args)
+static int ft_echo_n(char **args)
 {
     int i;
 
@@ -51,8 +52,9 @@ int ft_echo_n(char **args)
     return (0);
 }
 
-int ft_echo(char **args)
+int ft_echo(char **args, t_env *env)
 {
+    (void)env;
     int i;
 
     i = 1;

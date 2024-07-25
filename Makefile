@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/24 09:12:30 by gschwand         ###   ########.fr        #
+#    Updated: 2024/07/25 18:35:37 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC		:=	main.c					\
 			builtins/pwd.c			\
 			builtins/echo.c			\
 			builtins/export.c		\
+			builtins/export2.c		\
 			builtins/unset.c		\
 			builtins/env.c			\
 			builtins/exit.c			

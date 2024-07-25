@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/25 14:30:26 by gautier          ###   ########.fr       */
+/*   Updated: 2024/07/25 18:35:12 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ static int ft_sort_alpha_env(t_env *env)
 // Var doit commencer par alpha
 // Args doit contenir "="
 // retour export seulememt pour premier caractere pas alpha ": not a valid identifier"
+// check if key already exist
 int ft_export(char **args, t_env *env)
 {
     int i;
-    t_env *node;
     
     i = 1;
     if (!args[i])
@@ -93,20 +93,8 @@ int ft_export(char **args, t_env *env)
     }
     while (args[i])
     {
-        if (!ft_isalpha(args[i][0]))
-            printf("minishell: export: %s: not a valid identifier\n", args[i]);
-        else if (ft_strchr(args[i], '='))
-        {
-            if (!ft_check_key(&env, args[i]))
-            {
-                    node = ft_envnew(args[i]);
-                if (!node)
-                    return (1);
-                ft_add_back(&env, node);
-            }
-            else
-                ft_change_value(&env, args[i]);
-        }
+        if (check_export(args[i], env))
+            return (1);
         i++;
     }
     return (0);
