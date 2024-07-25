@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 22:33:50 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:06:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ singaux avec sigactions
 si pipeline tout est dans l'enfant
 signaux ctrlc ne doit pas quitter le programme
 
+
+bash-5.1$ export TEST2="            $TEST            test                  "
+bash-5.1$ echo $TEST2
+10 test
 */
 
 int main(int ac, char **av, char **env)
