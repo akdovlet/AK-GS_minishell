@@ -6,7 +6,7 @@
 /*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/25 13:54:40 by gautier          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:59:01 by gautier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ int	cd(char **args)
 		{
 			perror("minishell");
 		}
+	}
+	else if (args[1] && args[2])
+	{
+		ft_printf("minishell: cd: too many arguments\n");
 	}
 	else
 	{
