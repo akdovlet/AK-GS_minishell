@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/24 08:42:15 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:30:26 by gautier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,15 @@ int ft_export(char **args, t_env *env)
             printf("minishell: export: %s: not a valid identifier\n", args[i]);
         else if (ft_strchr(args[i], '='))
         {
-            node = ft_envnew(args[i]);
-            if (!node)
-                return (1);
-            ft_add_back(&env, node);
+            if (!ft_check_key(&env, args[i]))
+            {
+                    node = ft_envnew(args[i]);
+                if (!node)
+                    return (1);
+                ft_add_back(&env, node);
+            }
+            else
+                ft_change_value(&env, args[i]);
         }
         i++;
     }

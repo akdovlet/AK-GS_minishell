@@ -6,13 +6,11 @@
 /*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:33:23 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/25 12:19:32 by gautier          ###   ########.fr       */
+/*   Updated: 2024/07/25 14:37:26 by gautier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-
-// unset remov var from env
 
 static void ft_lstdelone_env(t_env **env, t_env **delone)
 {
