@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:04:41 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/25 14:25:34 by gautier          ###   ########.fr       */
+/*   Updated: 2024/07/26 12:36:01 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "builtins.h"
 
 static int check_only_digit(char *str)
 {

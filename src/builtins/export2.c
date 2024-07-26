@@ -6,11 +6,11 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/25 18:36:23 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:36:17 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "builtins.h"
 
 static t_env *ft_check_key(t_env **env, char *key)
 {

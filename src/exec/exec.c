@@ -6,11 +6,11 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/25 18:22:06 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:37:01 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "builtins.h"
 
 // need correction for cd's call
 int ft_exec(char *line, t_env *env)

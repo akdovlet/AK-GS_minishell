@@ -6,36 +6,11 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/25 18:26:37 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:36:49 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-
-// #include <stdio.h>
-// #include <string.h>
-// #include <unistd.h>
-
-// void ft_putstr_fd(char *s, int fd)
-// {
-//     if (!s)
-//         return;
-//     while (*s)
-//     {
-//         write(fd, s, 1);
-//         s++;
-//     }
-// }
-
-// int ft_strcmp(const char *s1, const char *s2)
-// {
-//     while (*s1 && (*s1 == *s2))
-//     {
-//         s1++;
-//         s2++;
-//     }
-//     return (*(unsigned char *)s1 - *(unsigned char *)s2);
-// }
+#include "builtins.h"
 
 static int ft_echo_n(char **args)
 {

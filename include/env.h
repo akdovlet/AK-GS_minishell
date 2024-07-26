@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/25 18:33:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:34:59 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,6 @@ typedef struct s_env
 }	t_env;
 
 # include "minishell.h"
-
-// builtins
-int		is_builtins(char *cmd);
-int		ft_echo(char **args, t_env *env);
-int		check_export(char *arg, t_env *env);
-int		cd(char **args, t_env *env);
-int		ft_pwd(char **args, t_env *env);
-void		ft_env(char **args, t_env *env);
-int 		ft_export(char **args, t_env *env);
-void 		unset(char **tab, t_env *env);
-void 		ft_exit(char **tab, t_env *env);
-
 
 /* env.c */
 

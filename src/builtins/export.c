@@ -6,11 +6,11 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/25 18:35:12 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:36:07 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "builtins.h"
 
 static void print_env_lst(t_env *lst)
 {

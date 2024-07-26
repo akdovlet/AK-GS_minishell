@@ -6,11 +6,11 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:18:24 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/25 18:27:44 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:35:51 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "builtins.h"
 
 void	ft_env(char **argv, t_env *env)
 {
