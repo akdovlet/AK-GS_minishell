@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/23 21:17:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:06:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef enum	e_token
 	OR = 1002,
 	APPEND = 1003,
 	HERE_DOC = 1004,
-	BUILTIN = 1005,
 } t_type;
 
 typedef	struct s_token
@@ -127,6 +126,14 @@ typedef struct s_ast
 		};
 	};
 }	t_ast;
+
+// builtins
+int	is_builtins(char *str);
+int ft_echo_n(char **args);
+int ft_echo(char **args);
+int cd(char *args);
+int ft_pwd(void);
+int ft_exec(t_token *tk, t_env *env);
 
 
 #endif

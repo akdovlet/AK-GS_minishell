@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/24 12:49:49 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/07/26 15:06:50 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,13 @@ SRC		:=	main.c					\
 			exec/exec.c				\
 			builtins/cd.c			\
 			builtins/pwd.c			\
-			builtins/echo.c
+			builtins/echo.c			\
+			builtins/export.c		\
+			builtins/export2.c		\
+			builtins/unset.c		\
+			builtins/env.c			\
+			builtins/exit.c			
+			# parsing/parsing.c		\
 
 SRC_DIR	:=	src
 BUILD	:=	.build
@@ -55,7 +61,7 @@ $(BUILD):
 	@if [ ! -d $(BUILD) ]; then mkdir $(BUILD); fi
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) -L/usr/local/lib -I/usr/local/include -lreadline $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) -L/usr/local/lib -I/usr/local/include $(OBJ) $(LIBFT) -o $(NAME) -lreadline
 
 $(BUILD)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
