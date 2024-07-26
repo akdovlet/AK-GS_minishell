@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 12:22:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:48:45 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ add_history*/
 # include <curses.h>
 # include <stdbool.h>
 # include "libft.h"
+// lib for signals
+# include "signal_minishell.h"
 
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"
