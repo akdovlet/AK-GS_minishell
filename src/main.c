@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 14:27:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:52:21 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,10 @@ int main(int ac, char **av, char **env)
 	copy_env(&my_env, env);
 	if (!env[0])
 		printf("empty\n");
-	// print_env(my_env);
 	while (1)
 	{
+		signal(SIGINT, sigint_handler);
+		signal(SIGQUIT, sigint_handler);
 		line = readline(CYAN "minishell$> " RESET);
 		if (!line)
 			break ;
