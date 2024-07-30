@@ -135,14 +135,4 @@ typedef struct	s_pidlst
 	struct s_pidlst		*next;
 }	t_pidlst;
 
-typedef struct	s_data
-{
-	t_ast			*root;
-	t_env			*env;
-	t_pidlst		*pidlst;
-	char			*hardpath;
-	int				*messenger;
-	unsigned char	exit_status;
-}	t_data;
-
 #endif
