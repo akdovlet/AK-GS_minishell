@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 20:51:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:10:07 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,6 @@ int	find_operator(t_token *tk)
 	return (0);
 }
 
-// remove useless parenthesis
-// void	redundant_parenthesis(t_token **tk)
-// {
-// 	t_token	*cursor;
-// 	t_token	*prev;
-
-// 	cursor = *tk;
-// 	while (cursor)
-// 	{
-// 		prev = cursor;
-// 		if (is_parenthesis(cursor->type))
-// 		{
-// 			if (!find_operator(cursor->next))
-// 				delete_node(&cursor, &prev);
-// 			else
-// 				cursor = cursor->next;
-// 		}
-// 		else
-// 			cursor = cursor->next;
-// 	}
-// }
 
 int	tokenize(char *line, t_token **tk)
 {

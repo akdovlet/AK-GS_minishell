@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/25 14:06:18 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:18:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,32 @@ bash-5.1$ echo $TEST2
 int main(int ac, char **av, char **env)
 {
 	(void)av;
-	(void)ac;
 	char	*line;
 	t_env	*my_env;
+	t_token	*tk;
 
+	if (ac != 1)
+		return (1);
 	my_env = NULL;
-	if (!env_setup(&my_env, env))
-		printf("FALSE\n");
-	env_print(my_env);
+	tk = NULL;
+	copy_env(&my_env, env);
+	if (!env[0])
+		printf("empty\n");
+	// print_env(my_env);
 	while (1)
 	{
 		line = readline(CYAN "minishell$> " RESET);
 		if (!line)
 			break ;
 		add_history(line);
+		tokenize(line, &tk);
+		ft_exec(line, my_env);
+		print_token(tk);
+		t_ast *ast = parse(&tk);
+		ft_printf("\n");
+		ast_print(ast);
 		free(line);
+		ft_tkclear(&tk);
 	}
 	env_clear(&my_env);
 	rl_clear_history();

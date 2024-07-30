@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 11:06:17 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/23 11:41:33 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:14:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*etoa(t_type c)
 {
 	if (c == WORD)
 		return ("WORD");
-	if (c == BUILTIN)
-		return ("BUILTIN");
 	if (c == AND)
 		return ("AND");
 	if (c == OR)
