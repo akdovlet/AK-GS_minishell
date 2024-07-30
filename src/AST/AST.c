@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 13:47:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:53:02 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right)
 	t_ast	*new;
 
 	new = malloc(sizeof(t_ast));
-	new->type = OPERATOR;
 	if (!new)
 		return (NULL);
+	new->type = OPERATOR;
 	new->left = left;
 	new->value = type;
 	new->right = right;
@@ -59,6 +59,37 @@ t_ast	*parse_cmd(t_token **tk)
 		new = parse_operator(tk);
 		if ((*tk)->type == PARENTHESIS_R)
 			next_token(tk);
+	}
+	return (new);
+}
+
+t_ast	*ast_newredir(t_ast *left, t_token *tk)
+{
+	t_ast	*new;
+	
+	new = malloc(sizeof(t_ast));
+	if (!new)
+		return (NULL);
+	new->type = REDIR;
+	new->file_name = ft_strdup(tk->value);
+	new->redir_type = tk->type;
+	new->left = NULL;
+}
+
+t_ast	*parse_redirect(t_token **tk)
+{
+	t_ast	*new;
+	t_token	*tmp;
+
+	new = NULL;
+	if (!(*tk) || !tk)
+		return (NULL);
+	new = parse_cmd(tk);
+	while (*tk && is_redirect((*tk)->type))
+	{
+		tmp = *tk;
+		next_token(tk);
+		new = ast_newredir(new, tmp);
 	}
 	return (new);
 }

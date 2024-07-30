@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/30 17:23:24 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:50:21 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ add_history*/
 typedef	enum	e_node
 {
 	PIPELINE,
-	OPERATOR
+	OPERATOR,
+	REDIR
 }	t_node;
 
 typedef enum	e_token
@@ -125,6 +126,12 @@ typedef struct s_ast
 			t_type			value;
 			struct s_ast	*left;
 			struct s_ast	*right;
+		};
+		struct
+		{
+			t_type	redir_type;
+			char	*file_name;
+			t_ast	*redir_next;
 		};
 	};
 }	t_ast;
