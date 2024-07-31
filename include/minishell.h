@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/26 12:48:45 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/31 14:21:46 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ typedef enum	e_token
 	OR = 1002,
 	APPEND = 1003,
 	HERE_DOC = 1004,
-	BUILTIN = 1005,
 } t_type;
 
 typedef	struct s_token
@@ -119,6 +118,7 @@ typedef struct s_ast
 		struct
 		{
 			t_cmdlist	*lst;
+			char		*cmd;
 		};
 		struct
 		{
@@ -128,5 +128,6 @@ typedef struct s_ast
 		};
 	};
 }	t_ast;
+
 
 #endif

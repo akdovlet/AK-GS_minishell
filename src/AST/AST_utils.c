@@ -1,15 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   AST_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/31 14:22:19 by gschwand         ###   ########.fr       */
+/*   Created: 2024/07/24 12:42:52 by akdovlet          #+#    #+#             */
+/*   Updated: 2024/07/24 12:51:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "minishell.h"
 
-int ft_exec_minishell()
+void	next_token(t_token **tk)
+{
+	if (!(*tk) || !tk)
+		return ;
+	*tk = (*tk)->next;
+}

@@ -6,14 +6,16 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:03:00 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/22 10:20:54 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:36:31 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
-int ft_pwd(void)
+int ft_pwd(char **argv, t_env *env)
 {
+    (void)argv;
+    (void)env;
     char *buf;
     buf = getcwd(NULL, 0);
     if (buf == NULL)

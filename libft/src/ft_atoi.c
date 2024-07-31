@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:04:02 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/01/03 21:00:57 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:34:58 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ int	ft_atoi(const char *nptr)
 // int main()
 // {
 // 	printf("%d\n", ft_atoi("  \n  \t 2147483647"));
-// 	printf("%d\n", atoi("  \n  \t 2147483647"));
+// 	ast_print_recursive("%d\n", atoi("  \n  \t 2147483647"));
 // }

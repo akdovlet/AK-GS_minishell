@@ -6,37 +6,13 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/22 10:32:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:36:49 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-// #include <stdio.h>
-// #include <string.h>
-// #include <unistd.h>
+#include "builtins.h"
 
-// void ft_putstr_fd(char *s, int fd)
-// {
-//     if (!s)
-//         return;
-//     while (*s)
-//     {
-//         write(fd, s, 1);
-//         s++;
-//     }
-// }
-
-// int ft_strcmp(const char *s1, const char *s2)
-// {
-//     while (*s1 && (*s1 == *s2))
-//     {
-//         s1++;
-//         s2++;
-//     }
-//     return (*(unsigned char *)s1 - *(unsigned char *)s2);
-// }
-
-int ft_echo_n(char **args)
+static int ft_echo_n(char **args)
 {
     int i;
 
@@ -51,11 +27,17 @@ int ft_echo_n(char **args)
     return (0);
 }
 
-int ft_echo(char **args)
+int ft_echo(char **args, t_env *env)
 {
+    (void)env;
     int i;
 
     i = 1;
+    if (!args[1])
+    {
+        ft_putstr_fd("\n", 1);
+        return (0);
+    }
     if (args[1] && !ft_strcmp(args[1], "-n"))
         return (ft_echo_n(args));
     while (args[i])

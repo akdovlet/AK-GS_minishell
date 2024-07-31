@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   AST.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:41:40 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/22 13:46:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:46:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef AST_H
+# define AST_H
 
 # include "minishell.h"
 # include "token.h"
 
 /*###############################################################################
-#                                  tree_utils.c                                 #
+#                                  AST_debugging.c                              #
 ###############################################################################*/
 
-void	print_tree(t_ast *root);
+void	ast_print(t_ast *root);
+
+/*###############################################################################
+#                                  AST_utils.c                                  #
+###############################################################################*/
+
+void	next_token(t_token **tk);
 
 
 /*###############################################################################
-#                                  cmd_list.c                                   #
+#                                  AST.c                                        #
 ###############################################################################*/
 
-t_cmdlist	*new_cmdnode(void);
-t_ast	*parse_cmd(t_token **tk);
-t_ast	*parse_operator(t_token **tk);
-t_token	*find_operator(t_token *tk);
 t_ast	*parse(t_token **tk);
-t_ast	*ast_newoperator(t_type type);
-t_ast	*ast_newcmd(t_token **tk);
+t_ast	*parse_operator(t_token **tk);
+t_ast	*parse_cmd(t_token **tk);
 
 #endif
