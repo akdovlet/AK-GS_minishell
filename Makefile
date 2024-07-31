@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
+#    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/26 15:06:50 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/07/31 16:04:36 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC		:=	main.c					\
 			builtins/export2.c		\
 			builtins/unset.c		\
 			builtins/env.c			\
-			builtins/exit.c			
+			builtins/exit.c			\
+			wildcard/wildcard.c
 			# parsing/parsing.c		\
 
 SRC_DIR	:=	src

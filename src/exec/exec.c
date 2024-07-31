@@ -6,10 +6,13 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/31 14:22:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:58:03 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int ft_exec_minishell()
+// int ft_exec_minishell(t_ast *ast)
+// {
+    
+// }
