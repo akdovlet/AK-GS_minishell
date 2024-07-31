@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/31 20:10:51 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/31 20:16:49 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,14 @@ char *ft_add_var(char *str, char *value)
     char *res;
     int lenres;
 
-    
+    lenres = ft_strlen(str) + ft_strlen(value) - 1;
+    res = malloc(sizeof(char) * (lenres + 1));
+    if (!res)
+        return (NULL);
+    ft_strlcpy(res, str, ft_find_chr(str, '$'));
+    ft_strlcat(res, value, lenres + 1);
+    ft_strlcat(res, str + ft_find_chr(str, '$') + 1, lenres + 1);
+    return (res);
 }
 
 // renvoyer une string sans ' et "
