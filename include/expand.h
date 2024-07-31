@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 14:18:24 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/31 18:39:53 by gschwand         ###   ########.fr       */
+/*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
+/*   Updated: 2024/07/31 18:41:51 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#ifndef EXPAND_H
+# define EXPAND_H
 
-void	ft_env(char **argv, t_env *env)
-{
-    if (argv[1])
-        printf("env: too many arguments\n");
-    else
-    {
-        while (env)
-        {
-            ft_putstr_fd(env->both, 1);
-            ft_putstr_fd("\n", 1);
-            env = env->next;
-        }
-    }
-}
+#include "minishell.h"
+#include "env.h"
+
+// expand_var.c
+char *expand_var(char *str, t_env *env);
+
+
+#endif

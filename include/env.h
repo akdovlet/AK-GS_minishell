@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/26 12:34:59 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:48:11 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	print_env(t_env *lst);
 
 // exec
 int		ft_exec(char *line, t_env *env);
+
+t_env *ft_check_key(t_env **env, char *key);
 
 
 #endif

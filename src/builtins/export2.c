@@ -6,25 +6,11 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/26 12:36:17 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/07/31 19:46:28 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-static t_env *ft_check_key(t_env **env, char *key)
-{
-    t_env *tmp;
-    
-    tmp = *env;
-    while (tmp)
-    {
-        if (!ft_strncmp(tmp->key, key, ft_strlen(tmp->key)))
-            return (tmp);
-        tmp = tmp->next;
-    }
-    return (NULL);
-}
 
 static void ft_change_value(t_env *node, char *str)
 {

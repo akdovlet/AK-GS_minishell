@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/31 16:04:36 by gschwand         ###   ########.fr        #
+#    Updated: 2024/07/31 18:42:26 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ SRC		:=	main.c					\
 			builtins/unset.c		\
 			builtins/env.c			\
 			builtins/exit.c			\
-			wildcard/wildcard.c
+			expand/expand.c			\
+			expand/expand_var.c		\
+			expand/wildcard.c
 			# parsing/parsing.c		\
 
 SRC_DIR	:=	src

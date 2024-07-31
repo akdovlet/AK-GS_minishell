@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/10 18:08:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:47:45 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,18 @@ void	env_clear(t_env **lst)
 		free((*lst));
 		*lst = tmp;
 	}
+}
+
+t_env *ft_check_key(t_env **env, char *key)
+{
+    t_env *tmp;
+    
+    tmp = *env;
+    while (tmp)
+    {
+        if (!ft_strncmp(tmp->key, key, ft_strlen(tmp->key)))
+            return (tmp);
+        tmp = tmp->next;
+    }
+    return (NULL);
 }
