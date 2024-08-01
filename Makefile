@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/31 18:42:26 by gschwand         ###   ########.fr        #
+#    Updated: 2024/08/01 14:15:19 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,37 +14,40 @@
 NAME	:=	minishell
 LIBFT	:= 	libft/libft.a
 
-SRC		:=	main.c					\
-			AST/AST.c				\
-			AST/AST_debugging.c		\
-			AST/AST_utils.c			\
-			builtins/is_builtins.c	\
-			env/env_cpy.c			\
-			env/env_lst_utils.c		\
-			env/env_utils.c			\
-			token/debugging.c		\
-			token/definitions.c		\
-			token/definitions2.c	\
-			token/parenthesis.c		\
-			token/syntax_error.c	\
-			token/syntax_input.c	\
-			token/syntax_order.c	\
-			token/token_lst_utils.c	\
-			token/tokenize.c		\
-			token/type_manager.c	\
-			token/word_manager.c	\
-			exec/exec.c				\
-			builtins/cd.c			\
-			builtins/pwd.c			\
-			builtins/echo.c			\
-			builtins/export.c		\
-			builtins/export2.c		\
-			builtins/unset.c		\
-			builtins/env.c			\
-			builtins/exit.c			\
-			expand/expand.c			\
-			expand/expand_var.c		\
+SRC		:=	main.c							\
+			AST/AST.c						\
+			AST/AST_debugging.c				\
+			AST/AST_utils.c					\
+			builtins/is_builtins.c			\
+			env/env_cpy.c					\
+			env/env_lst_utils.c				\
+			env/env_utils.c					\
+			token/debugging.c				\
+			token/definitions.c				\
+			token/definitions2.c			\
+			token/parenthesis.c				\
+			token/syntax_error.c			\
+			token/syntax_input.c			\
+			token/syntax_order.c			\
+			token/token_lst_utils.c			\
+			token/tokenize.c				\
+			token/type_manager.c			\
+			token/word_manager.c			\
+			exec/exec.c						\
+			builtins/cd.c					\
+			builtins/pwd.c					\
+			builtins/echo.c					\
+			builtins/export.c				\
+			builtins/export2.c				\
+			builtins/unset.c				\
+			builtins/env.c					\
+			builtins/exit.c					\
+			expand/expand.c					\
+			expand/expand_split.c			\
+			expand/expand_debugg.c			\
+			expand/expand_quotes_utils.c	\
 			expand/wildcard.c
+			# expand/expand_var.c				\
 			# parsing/parsing.c		\
 
 SRC_DIR	:=	src
