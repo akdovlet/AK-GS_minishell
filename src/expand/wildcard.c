@@ -6,11 +6,11 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/31 18:03:02 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/01 08:15:10 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expend.h"
+#include "expand.h"
 
 // exec de "ls" et recup de la liste dans un dossier tmp
 // fonctionne comme l'expenion de variable 
@@ -18,4 +18,4 @@
 
 
 
-char *wildcard()
+// char *wildcard()

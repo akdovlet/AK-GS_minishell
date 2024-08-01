@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/31 15:58:20 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/01 07:47:47 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int main(int ac, char **av, char **env)
 			break ;
 		add_history(line);
 		tokenize(line, &tk);
-		// ft_exec(line, my_env);
+		ft_exec(line, my_env);
 		print_token(tk);
 		t_ast *ast = parse(&tk);
 		ft_printf("\n");
