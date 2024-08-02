@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/02 12:47:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:05:03 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,13 @@ int expand_tab_of_cmd(char **tab_cmd, t_env *env)
         else if (find_quotes(tab_cmd[i]) == 2)
         {
             tab_cmd[i] = ft_supp_dquotes(tab_cmd[i]);
-            printf("tab_cmd[i] = %s\n", tab_cmd[i]);
             tab_cmd[i] = expand_var(tab_cmd[i], env);
+            printf("tab_cmd[i] = %s\n", tab_cmd[i]);
         }
         else if (ft_find_chr(tab_cmd[i], '$'))
             tab_cmd[i] = expand_var(tab_cmd[i], env);
         i++;
     }
-    print_tab(tab_cmd);
     return (true);
 }
 

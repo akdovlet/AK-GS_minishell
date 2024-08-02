@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:35:52 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/02 13:01:20 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/02 13:50:27 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static char	*ft_strdup_split_e(char *str, int index, int nbchar)
         i ++;
     }
     copy[i] = '\0';
-    printf("copy = %s\n", copy);
 	return (copy);
 }
 
