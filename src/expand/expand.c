@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/02 14:05:03 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:21:16 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static int find_quotes(char *str)
     return (0);
 }
 
-// find a way to creat a priority between 'and "
 int expand_tab_of_cmd(char **tab_cmd, t_env *env)
 {
     int i;

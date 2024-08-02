@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/02 14:16:28 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:34:25 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,6 @@ void free_tab(char **tab)
     free(tab);
 }
 
-size_t ft_strlen_tab(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-			i++;
-	}
-	return (i);
-}
-
-
 // fonction qui concataine toutes les lignes d'un tableau
 char *ft_cat_tab(char **str)
 {
@@ -63,23 +49,18 @@ char *ft_cat_tab(char **str)
     lenres = 0;
     while (str[i])
     {
-        lenres += ft_strlen_tab(str[i]);
+        lenres += ft_strlen(str[i]);
         i++;
     }
     res = malloc(sizeof(char) * (lenres + 1));
     if (!res)
         return (NULL);
     i = 1;
-    ft_strlcpy(res, str[0], ft_strlen_tab(str[0]));
+    ft_strlcpy(res, str[0], ft_strlen(str[0]));
     printf("res = %s\n", res);
     while (str[i])
     {
-        if (i == 2)
-        {
-            printf("---------\nstr[i] = %s\n---------\n", str[i]);
-        }
-        ft_strlcat(res, str[i], ft_strlen_tab(str[i]));
-        printf("%der res = '%s'\n", i, res);
+        ft_strlcat(res, str[i], ft_strlen(str[i]) + ft_strlen(res) + 1);
         i++;
     }
     return (res);
@@ -108,7 +89,7 @@ char *expand_var(char *str, t_env *env)
 
     i = 0;
     res = NULL;
-    tmp = ft_split_expand(str, "$ \'\"");
+    tmp = ft_split_expand(str, " $\'\"");
     if (!tmp)
         return (NULL);
     free(str);

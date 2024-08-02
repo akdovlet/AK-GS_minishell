@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:35:52 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/02 13:50:27 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:25:21 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static int	ft_count_char_and_alloc_expand(char *str, char *charsep, char **tab)
 			nbchar++;
 		else
 		{
-			tab[m] = ft_strdup_split_e(str, i - nbchar - 1, nbchar + 1);
+			nbchar++;
+			tab[m] = ft_strdup_split_e(str, i - nbchar, nbchar);
 			if (tab[m] == NULL)
 				return (0);
 			m++;
