@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/01 08:31:48 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:52:39 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int ft_exec(char *line, t_env *env)
 {
     char **tab;
     
-    tab = ft_split(line, ' ');
+    tab = ft_split(line, '+');
     // if (is_builtins(tab[0]))
     // {
     //     if (!ft_strcmp(tab[0], "echo"))

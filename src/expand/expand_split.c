@@ -6,13 +6,13 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:35:52 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/01 14:58:15 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:54:52 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-int	ft_sep(char c, char *sep)
+static int	ft_sep(char c, char *sep)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ int	ft_sep(char c, char *sep)
 	return (0);
 }
 
-char	*ft_strdup_split(char *str, int index, int nbchar)
+static char	*ft_strdup_split_e(char *str, int index, int nbchar)
 {
 	int		i;
 	char	*copy;
@@ -37,13 +37,19 @@ char	*ft_strdup_split(char *str, int index, int nbchar)
 	copy = malloc((nbchar + 1) * sizeof(char));
 	if (copy == NULL)
 		return (0);
-	while (i < nbchar)
-		copy[i++] = str[index++];
-	copy[i] = '\0';
+    if (index < 0)
+        index = 0;
+    while (i < nbchar)
+    {
+		copy[i] = str[index + i];
+        i ++;
+    }
+    copy[i] = '\0';
+    printf("copy = %s\n", copy);
 	return (copy);
 }
 
-int	ft_count_char_and_alloc(char *str, char *charsep, char **tab)
+static int	ft_count_char_and_alloc_expand(char *str, char *charsep, char **tab)
 {
 	int	m;
 	int	nbchar;
@@ -58,7 +64,7 @@ int	ft_count_char_and_alloc(char *str, char *charsep, char **tab)
 			nbchar++;
 		else if (nbchar > 0)
 		{
-			tab[m] = ft_strdup_split(str, i - nbchar, nbchar);
+			tab[m] = ft_strdup_split_e(str, i - nbchar - 1, nbchar + 1);
 			if (tab[m] == NULL)
 				return (0);
 			m++;
@@ -69,7 +75,7 @@ int	ft_count_char_and_alloc(char *str, char *charsep, char **tab)
 	return (m);
 }
 
-int	ft_count_word(char *str, char *charsep)
+static int	ft_count_word(char *str, char *charsep)
 {
 	int	m;
 	int	nbchar;
@@ -100,12 +106,12 @@ char **ft_split_expand(char *str, char *sep)
 	if (str == NULL || str[0] == '\0')
 		nbword = 0;
 	else
-		nbword = ft_count_word(str, charset);
+		nbword = ft_count_word(str, sep);
 	tab = malloc((nbword + 1) * sizeof(char *));
 	if (tab == NULL)
 		return (NULL);
 	if (nbword > 0)
-		ft_count_char_and_alloc(str, charset, tab);
+		ft_count_char_and_alloc_expand(str, sep, tab);
 	tab[nbword] = 0;
 	return (tab);
 }

@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/08/01 14:15:19 by gschwand         ###   ########.fr        #
+#    Updated: 2024/08/02 12:16:57 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,8 @@ SRC		:=	main.c							\
 			expand/expand_split.c			\
 			expand/expand_debugg.c			\
 			expand/expand_quotes_utils.c	\
+			expand/expand_var.c				\
 			expand/wildcard.c
-			# expand/expand_var.c				\
 			# parsing/parsing.c		\
 
 SRC_DIR	:=	src
