@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/30 17:18:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:15:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,7 @@ int main(int ac, char **av, char **env)
 		return (1);
 	my_env = NULL;
 	tk = NULL;
-	copy_env(&my_env, env);
-	if (!env[0])
-		printf("empty\n");
-	// print_env(my_env);
+	env_copy(&my_env, env);
 	while (1)
 	{
 		line = readline(CYAN "minishell$> " RESET);
@@ -99,7 +96,6 @@ int main(int ac, char **av, char **env)
 			break ;
 		add_history(line);
 		tokenize(line, &tk);
-		ft_exec(line, my_env);
 		print_token(tk);
 		t_ast *ast = parse(&tk);
 		ft_printf("\n");

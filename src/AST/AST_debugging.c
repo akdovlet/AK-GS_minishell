@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 13:46:13 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:43:26 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,21 @@ void	ast_print_recursive(t_ast *root, int level)
 		return ;
 	}
 	print_indentation(level);
-	if (!root->type)
+	if (root->type == PIPELINE)
 		ft_printf("PIPELINE: %s\n", root->cmd);
-	else
+	else if (root->type == OPERATOR)
 		ft_printf("OPERATOR: %s\n", etoa(root->value));
+	else if (root->type == REDIR)
+		ft_printf("REDIR: %s\n", etoa(root->redir_type));
 	print_indentation(level);
 	ft_printf("left\n");
-	if (root->type)
+	if (root->type == OPERATOR)
 		ast_print_recursive(root->left, level + 1);
+	if (root->type == REDIR)
+		ast_print_recursive(root->redir_next, level + 1);
 	print_indentation(level);
 	ft_printf("right\n");
-	if (root->type)
+	if (root->type == OPERATOR)
 		ast_print_recursive(root->right, level + 1);
 }
 

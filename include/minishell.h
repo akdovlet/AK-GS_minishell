@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/30 17:50:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:50:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,9 @@ typedef struct s_ast
 		};
 		struct
 		{
-			t_type	redir_type;
-			char	*file_name;
-			t_ast	*redir_next;
+			t_type			redir_type;
+			char			*file_name;
+			struct	s_ast	*redir_next;
 		};
 	};
 }	t_ast;

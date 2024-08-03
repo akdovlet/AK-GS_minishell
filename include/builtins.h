@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:34:29 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/26 12:35:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:13:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "env.h"
 
-int 		is_builtins(char *cmd);
 int 		ft_echo(char **args, t_env *env);
 int 		check_export(char *arg, t_env *env);
 int 		cd(char **args, t_env *env);

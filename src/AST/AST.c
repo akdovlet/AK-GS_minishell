@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/30 17:53:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:09:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ t_ast	*ast_newcmd(t_token **tk)
 	new->lst = NULL;
 	new->cmd = ft_strdup((*tk)->value);
 	next_token(tk);
-	while (*tk && !is_logical_operator((*tk)->type) && \
-		!is_parenthesis((*tk)->type))
+	while (*tk && (*tk)->type == WORD)
+	{
+		new->cmd = ft_strjoin(new->cmd, (*tk)->value);
 		next_token(tk);
+	}
 	return (new);
 }
 
@@ -51,19 +53,19 @@ t_ast	*parse_cmd(t_token **tk)
 	new = NULL;
 	if (!(*tk) || !tk)
 		return (NULL);
-	if (!is_logical_operator((*tk)->type) && !is_parenthesis((*tk)->type))
+	if ((*tk)->type == WORD)
 		new = ast_newcmd(tk);
 	else if (is_parenthesis((*tk)->type))
 	{
 		next_token(tk);
-		new = parse_operator(tk);
+		new = parse(tk);
 		if ((*tk)->type == PARENTHESIS_R)
 			next_token(tk);
 	}
 	return (new);
 }
 
-t_ast	*ast_newredir(t_ast *left, t_token *tk)
+t_ast	*ast_newredir(t_ast *redir_next, t_token *tk)
 {
 	t_ast	*new;
 	
@@ -73,8 +75,11 @@ t_ast	*ast_newredir(t_ast *left, t_token *tk)
 	new->type = REDIR;
 	new->file_name = ft_strdup(tk->value);
 	new->redir_type = tk->type;
-	new->left = NULL;
+	new->redir_next = redir_next;
+	return (new);
 }
+
+
 
 t_ast	*parse_redirect(t_token **tk)
 {
@@ -90,6 +95,7 @@ t_ast	*parse_redirect(t_token **tk)
 		tmp = *tk;
 		next_token(tk);
 		new = ast_newredir(new, tmp);
+		next_token(tk);
 	}
 	return (new);
 }
@@ -101,12 +107,12 @@ t_ast	*parse_operator(t_token **tk)
 
 	if (!(*tk) || !tk)
 		return (NULL);
-	new = parse_cmd(tk);
+	new = parse_redirect(tk);
 	while (*tk && is_logical_operator((*tk)->type))
 	{
 		tmp = (*tk)->type;
 		next_token(tk);
-		new = ast_newop(new, tmp, parse_cmd(tk));
+		new = ast_newop(new, tmp, parse_redirect(tk));
 	}
 	return (new);
 }

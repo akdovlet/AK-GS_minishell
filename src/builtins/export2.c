@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/26 12:36:17 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:15:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int check_export(char *arg, t_env *env)
         node = ft_check_key(&env, arg);
         if (!node)
         {
-            node = ft_envnew(arg);
+            node = env_new(arg);
             if (!node)
                 return (1);
-            ft_add_back(&env, node);
+            env_add_back(&env, node);
         }
         else
             ft_change_value(node, arg);

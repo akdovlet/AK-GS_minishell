@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/26 12:36:07 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:15:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static bool	copy_env_env(t_env **cpy, t_env *env)
 
 	while (env)
 	{
-		new = ft_envnew(env->both);
+		new = env_new(env->both);
 		if (!new)
 			return (false);
-		ft_add_back(cpy, new);
+		env_add_back(cpy, new);
         env = env->next;
 	}
 	return (true);

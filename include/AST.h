@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:41:40 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 13:46:13 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:40:30 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	next_token(t_token **tk);
 ###############################################################################*/
 
 t_ast	*parse(t_token **tk);
+t_ast	*parse_redirect(t_token **tk);
 t_ast	*parse_operator(t_token **tk);
 t_ast	*parse_cmd(t_token **tk);
 
