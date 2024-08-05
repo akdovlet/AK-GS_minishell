@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/05 16:44:21 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/05 17:05:16 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_files *ft_lstnew_files(char *str)
     return (new);
 }
 
-t_files *ft_files(char *str)
+t_files *ft_recover_files(void)
 {
     DIR *dir;
     struct dirent *entry;
@@ -79,9 +79,14 @@ t_files *ft_files(char *str)
 char  *expand_wildcard(char *str)
 {
     t_files *files;
-    t_files *tmp;
     char *res;
     
+    (void)str;
+    res = NULL;
+    files = ft_recover_files();
+    // res = sort_files(files, str);
+    ft_print_lst_files(files);
+    return (res);
 }
 
 int ft_wildcard(char **tab_cmd)

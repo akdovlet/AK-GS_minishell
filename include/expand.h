@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/05 16:25:56 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/05 17:04:38 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 typedef struct s_files
 {
     char *name;
-    struct s_file *next;
+    struct s_files *next;
 }               t_files;
+
+// wildcard.c
+int ft_wildcard(char **tab_cmd);
 
 // expand_var.c
 char *expand_var(char *str, t_env *env);
@@ -37,6 +40,7 @@ char **ft_split_expand(char *str, char *sep);
 
 // expand_debugg.c
 void print_tab(char **tab);
+void ft_print_lst_files(t_files *files);
 
 
 #endif
