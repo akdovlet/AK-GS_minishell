@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/02 12:05:47 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:25:56 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 #include "minishell.h"
 #include "env.h"
+
+typedef struct s_files
+{
+    char *name;
+    struct s_file *next;
+}               t_files;
 
 // expand_var.c
 char *expand_var(char *str, t_env *env);

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/02 14:21:16 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:04:43 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,16 @@ int expand_tab_of_cmd(char **tab_cmd, t_env *env)
     return (true);
 }
 
-// int ft_expand(t_cmdlist *lst, t_env *env)
-// {
-//     while(lst)
-//     {
-//         expand_tab_of_cmd(lst->cmd, env);
-//         lst = lst->next;
-//     }
-// }
+int ft_expand(t_cmdlist *lst, t_env *env)
+{
+    while(lst)
+    {
+        expand_tab_of_cmd(lst->cmd, env);
+        if (lst->cmd[1])
+        {
+            if (ft_wildcard(lst->cmd))
+                return (false);
+        }
+        lst = lst->next;
+    }
+}
