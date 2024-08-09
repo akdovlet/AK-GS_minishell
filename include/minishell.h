@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/01 15:50:08 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/09 22:39:47 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ typedef	enum	e_node
 {
 	PIPELINE,
 	OPERATOR,
-	REDIR
+	REDIR,
+	PIPE_NODE,
+	SUBSHELL
 }	t_node;
 
 typedef enum	e_token
@@ -76,7 +78,7 @@ typedef enum	e_token
 	AND = 1001,
 	OR = 1002,
 	APPEND = 1003,
-	HERE_DOC = 1004
+	HERE_DOC = 1004,
 } t_type;
 
 typedef	struct s_token
@@ -117,15 +119,13 @@ typedef struct s_ast
 		struct
 		{
 			t_cmdlist	*lst;
-			bool		has_pipe;
-			bool		subshell;
 			char		*cmd;
 		};
 		struct
 		{
-			t_type			value;
-			struct s_ast	*left;
-			struct s_ast	*right;
+			t_type			op_type;
+			struct s_ast	*op_left;
+			struct s_ast	*op_right;
 		};
 		struct
 		{
@@ -133,6 +133,16 @@ typedef struct s_ast
 			char			*file_name;
 			struct	s_ast	*redir_next;
 		};
+		struct
+		{
+			struct s_ast	*pipe_left;
+			struct s_ast	*pipe_right;
+		};
+		struct
+		{
+			struct s_ast	*subshell_next;
+		};
+		
 	};
 }	t_ast;
 
