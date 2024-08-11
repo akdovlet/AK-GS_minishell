@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/10 14:44:58 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:57:20 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_files *ft_lstnew_files(char *str)
         perror("malloc");
         return (NULL);
     }
-    new->name = str;
+    new->name = ft_strdup(str);
     new->next = NULL;
     return (new);
 }
@@ -62,13 +62,12 @@ t_files *ft_recover_files(void)
     }
     while ((entry = readdir(dir)) != NULL)
     {
-        tmp = malloc(sizeof(t_files));
+        tmp = ft_lstnew_files(entry->d_name);
         if (!tmp)
         {
             perror("malloc");
             return (NULL);
         }
-        tmp = ft_lstnew_files(entry->d_name);
         ft_lst_add_back_files(&files, tmp);
     }
     closedir(dir);
@@ -98,6 +97,7 @@ void ft_lstdelone_files(t_files **files, t_files *to_delete)
     if (*files == to_delete)
     {
         *files = (*files)->next;
+        free(to_delete->name);
         free(to_delete);
         return;
     }
@@ -107,6 +107,7 @@ void ft_lstdelone_files(t_files **files, t_files *to_delete)
     if (tmp && tmp->next == to_delete)
     {
         tmp->next = to_delete->next;
+        free(to_delete->name);
         free(to_delete);
     }
 }
@@ -193,10 +194,13 @@ void ft_free_lst_files(t_files *files)
     }
 }
 
+// add dquotes to file name
 char *sort_files(t_files *files, char *str)
 {
     char *res;
 
+    ft_print_lst_files(files);
+    printf("\n");
     ft_lstcomp_wildcard(&files, str, ft_strcmp_start_end_wildcard);
     ft_lstcomp_wildcard(&files, str, ft_strcmp_end_start_wildcard);
     ft_print_lst_files(files);
@@ -205,15 +209,18 @@ char *sort_files(t_files *files, char *str)
     return (res);
 }
 
+// remove the first two files
 void ft_supp_point_files(t_files **files)
 {
     t_files *tmp;
     
     tmp = *files;
     *files = (*files) -> next;
+    free((*files)->name);
     free(tmp);
     tmp = *files;
     *files = (*files) -> next;
+    free((*files)->name);
     free(tmp);
 }
 
@@ -229,7 +236,7 @@ char  *expand_wildcard(char *str)
     files = ft_recover_files();
     if (!files)
         return (NULL);
-    ft_supp_point_files(&files);
+    // ft_supp_point_files(&files);
     res = sort_files(files, str);
     printf("res = %s\n", res);
     return (res);
