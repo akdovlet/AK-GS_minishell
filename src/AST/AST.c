@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/09 19:03:31 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:43:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right)
 	if (!new)
 		return (NULL);
 	new->type = OPERATOR;
-	new->left = left;
-	new->operator_type = type;
-	new->right = right;
+	new->op_left = left;
+	new->op_type = type;
+	new->op_right = right;
 	return (new);
 }
 
-t_ast	*ast_newredir(t_ast *redir_next, t_token *tk)
+t_ast	*ast_newredir(t_ast *redir_next, t_token **tk)
 {
 	t_ast	*new;
 	
@@ -54,8 +54,9 @@ t_ast	*ast_newredir(t_ast *redir_next, t_token *tk)
 	if (!new)
 		return (NULL);
 	new->type = REDIR;
-	new->file_name = ft_strdup(tk->value);
-	new->redir_type = tk->type;
+	new->redir_type = (*tk)->type;
+	next_token(tk);
+	new->file_name = ft_strdup((*tk)->value);
 	new->redir_next = redir_next;
 	return (new);
 }
@@ -108,7 +109,6 @@ t_ast	*parse_cmd(t_token **tk)
 t_ast	*parse_redirect(t_token **tk)
 {
 	t_ast	*new;
-	t_token	*tmp;
 
 	new = NULL;
 	if (!(*tk) || !tk)
@@ -116,9 +116,7 @@ t_ast	*parse_redirect(t_token **tk)
 	new = parse_cmd(tk);
 	while (*tk && is_redirect((*tk)->type))
 	{
-		tmp = *tk;
-		next_token(tk);
-		new = ast_newredir(new, tmp);
+		new = ast_newredir(new, tk);
 		next_token(tk);
 	}
 	return (new);
@@ -129,12 +127,13 @@ t_ast	*parse_pipe(t_token **tk)
 	t_ast	*new;
 
 	new = NULL;
+	if (!(*tk) || !tk)
 	new = parse_redirect(tk);
 	while (*tk && (*tk)->type == PIPE)
 	{
+		printf("in parse pipe\n");
 		next_token(tk);
 		new = ast_newpipe(new, parse_redirect(tk));
-		next_token(tk);
 	}
 	return (new);
 }
@@ -146,12 +145,12 @@ t_ast	*parse_operator(t_token **tk)
 
 	if (!(*tk) || !tk)
 		return (NULL);
-	new = parse_redirect(tk);
+	new = parse_pipe(tk);
 	while (*tk && is_logical_operator((*tk)->type))
 	{
 		tmp = (*tk)->type;
 		next_token(tk);
-		new = ast_newop(new, tmp, parse_redirect(tk));
+		new = ast_newop(new, tmp, parse_pipe(tk));
 	}
 	return (new);
 }

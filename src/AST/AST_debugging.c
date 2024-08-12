@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/09 19:10:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:36:39 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,35 @@ void	ast_print_recursive(t_ast *root, int level)
 	}
 	print_indentation(level);
 	if (root->type == PIPELINE)
-		ft_printf("PIPELINE: %s\n", root->cmd);
+		ft_printf("COMMAND: %s\n", root->cmd);
 	else if (root->type == OPERATOR)
-		ft_printf("OPERATOR: %s\n", etoa(root->operator_type));
+		ft_printf("OPERATOR: %s\n", etoa(root->op_type));
 	else if (root->type == REDIR)
+	{
 		ft_printf("REDIR: %s\n", etoa(root->redir_type));
+		print_indentation(level);
+		ft_printf("FILENAME: %s\n", root->file_name);
+	}
+	else if (root->type == PIPE_NODE)
+		ft_printf("PIPE\n");
+	else if (root->type == SUBSHELL)
+		ft_printf("SUBSHELL\n");
 	print_indentation(level);
 	ft_printf("left\n");
 	if (root->type == OPERATOR)
-		ast_print_recursive(root->left, level + 1);
+		ast_print_recursive(root->op_left, level + 1);
 	if (root->type == REDIR)
 		ast_print_recursive(root->redir_next, level + 1);
+	if (root->type == PIPE_NODE)
+		ast_print_recursive(root->pipe_left, level + 1);
 	print_indentation(level);
 	ft_printf("right\n");
 	if (root->type == OPERATOR)
-		ast_print_recursive(root->right, level + 1);
+		ast_print_recursive(root->op_right, level + 1);
+	if (root->type == PIPE_NODE)
+		ast_print_recursive(root->pipe_right, level + 1);
+	if (root->type == SUBSHELL)
+		ast_print_recursive(root->subshell_next, level + 1);
 }
 
 void	ast_print(t_ast *root)
