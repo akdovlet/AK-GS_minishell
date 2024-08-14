@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/11 15:57:20 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:02:47 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,15 @@ void ft_lstcomp_wildcard(t_files **files, char *str, int (*strcmp)(char*, char*)
     }
 }
 
+void ft_strlcat_files(char *dst, const char *src, size_t lenres)
+{
+    ft_strlcat(dst, "\"", lenres);
+    ft_strlcat(dst, src, lenres);
+    ft_strlcat(dst, "\"", lenres);
+    ft_strlcat(dst, " ", lenres);
+}
+
+
 char *write_files(t_files *files)
 {
     t_files *tmp;
@@ -163,9 +172,7 @@ char *write_files(t_files *files)
     lenres = 0;
     while (tmp)
     {
-        lenres += ft_strlen(tmp->name) + 1;
-        printf("lenres = %d\n", lenres);
-        printf("tmp->name = %s\n", tmp->name);
+        lenres += ft_strlen(tmp->name) + 3;
         tmp = tmp->next;
     }
     res = ft_calloc(sizeof(char), lenres + 1);
@@ -174,9 +181,7 @@ char *write_files(t_files *files)
     tmp = files;
     while (tmp)
     {
-        printf("tmp->name = %s\n", tmp->name);
-        ft_strlcat(res, tmp->name, lenres + 1);
-        ft_strlcat(res, " ", lenres + 1);
+        ft_strlcat_files(res, tmp->name, lenres + 1);
         tmp = tmp->next;
     }
     return (res);
