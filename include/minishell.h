@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/09 22:39:47 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:41:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ add_history*/
 
 typedef	enum	e_node
 {
-	PIPELINE,
+	CMD,
 	OPERATOR,
 	REDIR,
 	PIPE_NODE,

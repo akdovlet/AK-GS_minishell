@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/12 18:36:39 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:44:26 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ast_print_recursive(t_ast *root, int level)
 		return ;
 	}
 	print_indentation(level);
-	if (root->type == PIPELINE)
+	if (root->type == CMD)
 		ft_printf("COMMAND: %s\n", root->cmd);
 	else if (root->type == OPERATOR)
 		ft_printf("OPERATOR: %s\n", etoa(root->op_type));
