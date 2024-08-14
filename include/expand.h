@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/05 17:04:38 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:24:40 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ char **ft_split_expand(char *str, char *sep);
 // expand_debugg.c
 void print_tab(char **tab);
 void ft_print_lst_files(t_files *files);
+
+// lst_file_utils.c
+t_files *ft_recover_files(void);
+void ft_free_lst_files(t_files *files);
+void ft_lstdelone_files(t_files **files, t_files *to_delete);
+t_files *ft_lstnew_files(char *str);
+void ft_lst_add_back_files(t_files **alst, t_files *new);
+
+// sort_files.c
+int ft_strcmp_start_end_wildcard(char *file, char *str);
+int ft_strcmp_end_start_wildcard(char *file, char *str);
+void ft_lstcomp_wildcard(t_files **files, char *str, int (*strcmp)(char*, char*));
+void ft_strlcat_files(char *dst, const char *src, size_t lenres);
+char *write_files(t_files *files);
+
 
 
 #endif
