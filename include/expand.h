@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/14 10:24:40 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:15:44 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ t_files *ft_lstnew_files(char *str);
 void ft_lst_add_back_files(t_files **alst, t_files *new);
 
 // sort_files.c
-int ft_strcmp_start_end_wildcard(char *file, char *str);
+// int ft_strcmp_start_end_wildcard(char *file, char *str);
 int ft_strcmp_end_start_wildcard(char *file, char *str);
-void ft_lstcomp_wildcard(t_files **files, char *str, int (*strcmp)(char*, char*));
+void ft_lstcomp_wildcard(t_files **files, char *str);
+// void ft_lstcomp_wildcard(t_files **files, char *str, int (*strcmp)(char*, char*));
 void ft_strlcat_files(char *dst, const char *src, size_t lenres);
 char *write_files(t_files *files);
 
