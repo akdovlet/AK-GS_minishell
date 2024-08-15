@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/14 13:41:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:46:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,14 @@ typedef	struct s_cmdlist
 
 typedef struct s_ast
 {
-	t_node type;	
+	t_node type;
 	union
 	{
 		struct
 		{
 			t_cmdlist	*lst;
 			char		*cmd;
+			char		**args;
 		};
 		struct
 		{
