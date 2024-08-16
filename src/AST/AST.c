@@ -6,12 +6,26 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/15 15:12:05 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/16 19:58:27 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
+
+// t_ast	*ast_newredir(t_token **tk)
+// {
+// 	t_ast	*new;
+// 	t_ast	*tmp;
+// 	t_token	*cursor;
+
+// 	cursor = *tk;
+// 	new = NULL;
+// 	while (cursor && (is_redirect(cursor->type) || cursor->type == WORD))
+// 	{
+// 		if ()
+// 	}
+// }
 
 t_ast	*ast_newcmd(t_token **tk)
 {
@@ -46,7 +60,7 @@ t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right)
 	return (new);
 }
 
-t_ast	*ast_newredir(t_ast *redir_next, t_token **tk)
+t_ast	*ast_newredir_push_root(t_ast *redir_next, t_type type, char *filename)
 {
 	t_ast	*new;
 	
@@ -54,11 +68,9 @@ t_ast	*ast_newredir(t_ast *redir_next, t_token **tk)
 	if (!new)
 		return (NULL);
 	new->type = REDIR;
-	new->redir_type = (*tk)->type;
-	eat_token(tk);
-	new->file_name = ft_strdup((*tk)->value);
+	new->redir_type = type;
+	new->file_name = filename;
 	new->redir_next = redir_next;
-	eat_token(tk);
 	return (new);
 }
 
@@ -101,7 +113,8 @@ t_ast	*parse_cmd(t_token **tk)
 	{
 		eat_token(tk);
 		new = parse(tk);
-		new = ast_newsubshell(new);
+		if (new->type != SUBSHELL)
+			new = ast_newsubshell(new);
 		if ((*tk)->type == PARENTHESIS_R)
 			eat_token(tk);
 	}
@@ -119,12 +132,9 @@ t_ast	*parse_redirect(t_token **tk)
 	new = parse_cmd(tk);
 	while (*tk && is_redirect((*tk)->type))
 	{
-		if (!new || new->type == CMD || new->type == SUBSHELL)
-			new = ast_newredir(new, tk);
-		else if (!new || (new && new->type == REDIR))
-		{
-			new->redir_next = parse(tk);
-		}
+		new = ast_newredir_push_root(new, (*tk)->type, ft_strdup((*tk)->next->value));
+		eat_token(tk);
+		eat_token(tk);
 	}
 	return (new);
 }
@@ -173,3 +183,9 @@ t_ast	*parse(t_token **tk)
 		return (NULL);
 	return (parse_operator(tk));
 }
+
+// LOGICAL_OPERATOR (&& ||)
+// SUBSHELL
+// PIPE
+// REDIR
+// CMD

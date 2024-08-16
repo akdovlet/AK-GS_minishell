@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/14 13:44:26 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/16 20:05:50 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,12 @@ void	ast_print_recursive(t_ast *root, int level)
 	if (root->type == PIPE_NODE)
 		ast_print_recursive(root->pipe_left, level + 1);
 	print_indentation(level);
-	ft_printf("right\n");
+	if (root->type == OPERATOR || root->type == PIPE_NODE)
+	{
+		ft_printf("right\n");
+	}
+	else
+		ft_printf("next\n");
 	if (root->type == OPERATOR)
 		ast_print_recursive(root->op_right, level + 1);
 	if (root->type == PIPE_NODE)
