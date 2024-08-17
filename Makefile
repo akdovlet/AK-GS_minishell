@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/30 17:16:58 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/08/17 14:04:54 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,11 @@ NAME	:=	minishell
 LIBFT	:= 	libft/libft.a
 
 SRC		:=	main.c					\
-			AST/AST.c				\
+			AST/AST_allocations.c	\
 			AST/AST_debugging.c		\
+			AST/AST_redir_nodes.c	\
 			AST/AST_utils.c			\
+			AST/AST.c				\
 			env/env_cpy.c			\
 			env/env_lst_utils.c		\
 			env/env_setup.c			\
@@ -32,13 +34,12 @@ SRC		:=	main.c					\
 			token/token_lst_utils.c	\
 			token/tokenize.c		\
 			token/type_manager.c	\
-			token/word_manager.c			\
+			token/word_manager.c	\
 			builtins/export.c		\
 			builtins/export2.c		\
 			builtins/unset.c		\
 			builtins/env.c			\
 			builtins/exit.c			
-			# parsing/parsing.c		\
 
 SRC_DIR	:=	src
 BUILD	:=	.build
