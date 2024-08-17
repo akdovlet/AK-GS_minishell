@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:22:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 16:39:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/17 23:04:20 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	cmdlst_clear(t_cmdlist **lst)
 	while (*lst)
 	{
 		tmp = (*lst)->next;
-		ft_free((*lst)->cmd);
+		free((*lst)->str);
 		free((*lst));
 		*lst = tmp;
 	}
 }
 
-t_cmdlist	*new_cmdnode(void)
+t_cmdlist	*cmdlst_new(char *value, t_type type)
 {
 	t_cmdlist	*new;
 
@@ -54,4 +54,9 @@ t_cmdlist	*new_cmdnode(void)
 	if (!new)
 		return (NULL);
 	*new = (t_cmdlist){};
+	new->str = ft_strdup(value);
+	if (!new->str)
+		return (NULL);
+	new->type = type;
+	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/15 12:46:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/17 23:31:37 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,10 @@ typedef	struct s_token
 	struct	s_token	*next;
 }	t_token;
 
-typedef struct s_in
-{
-	t_type		type;
-	char		*file;
-	struct s_in	*next;
-}	t_in;
-
-typedef struct s_out
-{
-	t_type			type;
-	char			*file;
-	struct s_out	*next;
-}	t_out;
-
 typedef	struct s_cmdlist
 {
-	char				**cmd;
-	int					exit_status;
-	t_in				*in;
-	t_out				*out;
+	t_type	type;
+	char	*str;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
 
@@ -118,9 +102,7 @@ typedef struct s_ast
 	{
 		struct
 		{
-			t_cmdlist	*lst;
-			char		*cmd;
-			char		**args;
+			char		**cmd;
 		};
 		struct
 		{
