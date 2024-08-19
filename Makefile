@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/08/17 14:04:54 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/08/19 17:00:36 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRC		:=	main.c					\
 			AST/AST_redir_nodes.c	\
 			AST/AST_utils.c			\
 			AST/AST.c				\
+			AST/cmd_list.c			\
+			AST/split_cmdlst.c		\
 			env/env_cpy.c			\
 			env/env_lst_utils.c		\
 			env/env_setup.c			\

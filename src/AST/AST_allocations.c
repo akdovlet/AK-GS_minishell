@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:48:36 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 12:30:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:31:02 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_ast	*ast_newcmd(t_cmdlist **lst)
 	if (!new)
 		return (NULL);
 	new->type = CMD;
-	new->cmd = split_cmdlst(lst);
+	new->cmd = cmdlst_split(lst);
 	return (new);
 }
 

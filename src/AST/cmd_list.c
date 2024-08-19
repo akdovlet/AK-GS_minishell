@@ -6,16 +6,25 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:22:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/17 23:04:20 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:19:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
 
+void		cmdlst_print(t_cmdlist *lst)
+{
+	while (lst)
+	{
+		fprintf(stderr, "%s\n", lst->str);
+		lst = lst->next;
+	}
+}
+
 t_cmdlist	*cmdlst_last(t_cmdlist *lst)
 {
-	t_token	*index;
+	t_cmdlist	*index;
 
 	index = lst;
 	if (!lst)
@@ -46,7 +55,7 @@ void	cmdlst_clear(t_cmdlist **lst)
 	}
 }
 
-t_cmdlist	*cmdlst_new(char *value, t_type type)
+t_cmdlist	*cmdlst_new(char *value, int type)
 {
 	t_cmdlist	*new;
 

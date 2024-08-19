@@ -6,12 +6,24 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 14:36:22 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:15:39 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
+
+void	print_arrayofchar(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		fprintf(stderr, "%s\n", str[i]);
+		i++;
+	}
+}
 
 void	print_indentation(int level)
 {
@@ -35,7 +47,7 @@ void	ast_print_recursive(t_ast *root, int level)
 	}
 	print_indentation(level);
 	if (root->type == CMD)
-		ft_printf("COMMAND: %s\n", root->cmd);
+		ft_printf("COMMAND: %s\n", root->cmd[0]);
 	else if (root->type == OPERATOR)
 		ft_printf("OPERATOR: %s\n", etoa(root->op_type));
 	else if (root->type == REDIR)

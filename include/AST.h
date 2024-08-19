@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:41:40 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 12:54:42 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:19:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ast_print(t_ast *root);
 ###############################################################################*/
 
 void	eat_cmdlst(t_cmdlist **lst);
-t_ast	*ast_newcmdlist(t_ast **list, t_token **tk);
+t_ast	*ast_newcmdlist(t_token **tk);
 
 /*###############################################################################
 #                                  AST_utils.c                                  #
@@ -61,15 +61,17 @@ t_ast	*parse_cmd(t_token **tk);
 #                                  cmd_list.c                                   #
 ###############################################################################*/
 
+void		cmdlst_print(t_cmdlist *lst);
 t_cmdlist	*cmdlst_last(t_cmdlist *lst);
 void		cmdlst_add_back(t_cmdlist **lst, t_cmdlist *new);
 void		cmdlst_clear(t_cmdlist **lst);
-t_cmdlist	*cmdlst_new(char *value, t_type type);
+t_cmdlist	*cmdlst_new(char *value, int type);
 
 /*###############################################################################
 #                                  AST_debugging.c                              #
 ###############################################################################*/
 
-char	**split_cmdlst(t_cmdlist **lst);
+char	**cmdlst_split(t_cmdlist **lst);
+void	print_arrayofchar(char **str);
 
 #endif

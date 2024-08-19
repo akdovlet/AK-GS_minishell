@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 13:59:07 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:28:54 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ typedef struct s_ast
 		{
 			struct s_ast	*subshell_next;
 		};
-		
 	};
 }	t_ast;
 
