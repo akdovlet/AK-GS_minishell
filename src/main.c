@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/01 15:15:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:08:43 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int main(int ac, char **av, char **env)
 	char	*line;
 	t_env	*my_env;
 	t_token	*tk;
+	t_ast 	*ast;
 
 	if (ac != 1)
 		return (1);
@@ -97,7 +98,7 @@ int main(int ac, char **av, char **env)
 		add_history(line);
 		tokenize(line, &tk);
 		print_token(tk);
-		t_ast *ast = parse(&tk);
+		ast = parse(&tk);
 		ft_printf("\n");
 		ast_print(ast);
 		free(line);

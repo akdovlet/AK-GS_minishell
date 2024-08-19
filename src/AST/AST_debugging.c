@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/16 20:05:50 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:03:31 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,37 @@ void	ast_print_recursive(t_ast *root, int level)
 void	ast_print(t_ast *root)
 {
 	ast_print_recursive(root, 0);
+}
+
+
+int	exec_recursion(t_ast *ast, t_data *data)
+{
+	if (ast->type == PIPE)
+	{
+		ft_pipe_recusion(ast, data);
+	}
+	if (ast->type == CMD)
+	{
+		
+	}
+	if (ast->type == OPERATOR)
+	if (ast->type == REDIR)
+	if (ast->type == SUBSHELL)
+}
+
+int ft_pipe_recusion(t_ast *ast, t_data *data)
+{
+	int	fd[2];
+
+	if (pipe(fd) == -1)
+		retun (1);
+	data->pipeline = true;
+	data->write = fd[1];
+	data->status = exec_recursion(ast->pipe_left, data);
+	data->write = fd[0];
+	data->status = exec_recursion(ast->pipe_right, data);
+	close(fd[0]);
+	close(fd[1]);
+	data->pipeline = 0;
+	return (data->status);
 }

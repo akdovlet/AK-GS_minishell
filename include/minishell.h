@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/17 23:31:37 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:59:07 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ add_history*/
 # define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
 # define PARENTHESIS_ERR "minishell: unexpected newline while looking for closing `%c'\n"
 
+typedef struct s_env
+{
+	char	*key;
+	char	*value;
+	char	*both;
+	struct	s_env *next;
+}	t_env;
+
 typedef	enum	e_node
 {
 	CMD,
@@ -94,6 +102,23 @@ typedef	struct s_cmdlist
 	char	*str;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
+
+typedef	struct	s_pidlst
+{
+	pid_t			pid;
+	struct s_pidlst	*next;
+}	t_pidlst;
+
+typedef struct s_data
+{
+	int			read;
+	int			write;
+	int			status;
+	int			messenger;
+	bool		pipeline;
+	t_pidlst	*pidlst;
+	t_env		*env;
+}	t_data;
 
 typedef struct s_ast
 {

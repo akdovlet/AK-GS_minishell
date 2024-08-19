@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:59:55 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/17 23:25:06 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:57:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,16 @@ t_ast	*ast_newcmdlist(t_ast **list, t_token **tk)
 		head = cursor;
 		cursor = cursor->redir_next;
 	}
-	else if (cmd)
-	{
-		cursor = ast_newcmd
-	}
 	while (redir)
 	{
 		cursor = ast_newredir(redir->type, redir->str);
 		eat_cmdlst(&redir);
 		cursor = cursor->redir_next;
+	}
+	if (cmd)
+	{
+		cursor = ast_newcmd(&cmd);
+		head = cursor;
 	}
 	return (head);
 }

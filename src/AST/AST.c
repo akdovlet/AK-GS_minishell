@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/17 13:53:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:10:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_ast	*parse_cmd(t_token **tk)
 	if (!(*tk) || !tk)
 		return (NULL);
 	fprintf(stderr, "parse_cmd\n");
-	if ((*tk)->type == WORD)
-		new = ast_newcmd(tk);
+	if ((*tk)->type == WORD || (*tk)->type == REDIR)
+		new = cmdlst_split(tk);
 	else if ((*tk)->type == PARENTHESIS_L)
 	{
 		eat_token(tk);

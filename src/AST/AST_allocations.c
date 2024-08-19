@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:48:36 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/17 23:29:52 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:30:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_ast	*ast_newcmd(t_cmdlist **lst)
 	if (!new)
 		return (NULL);
 	new->type = CMD;
-	new->lst = NULL;
 	new->cmd = split_cmdlst(lst);
 	return (new);
 }
@@ -39,6 +38,7 @@ t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right)
 	new->op_right = right;
 	return (new);
 }
+
 t_ast	*ast_newredir(t_type type, char *filename)
 {
 	t_ast	*new;

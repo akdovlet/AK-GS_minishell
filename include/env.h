@@ -6,20 +6,12 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/30 17:10:29 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:32:47 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	ENV_H
 # define ENV_H
-
-typedef struct s_env
-{
-	char	*key;
-	char	*value;
-	char	*both;
-	struct	s_env *next;
-}	t_env;
 
 # include "minishell.h"
 
