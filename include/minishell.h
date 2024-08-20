@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/31 14:21:46 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:47:59 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 /* malloc, free, exit, getenv */
 # include <stdlib.h>
-/* writem access, open, read, close, fork, getcwd, chdir, dup, dup2, pipe
+/* write, access, open, read, close, fork, getcwd, chdir, dup, dup2, pipe
 execve, isatty, ttyname, ttyslot */
 # include <unistd.h>
 /* readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay
@@ -53,14 +53,26 @@ add_history*/
 # define CYAN    "\x1b[36;1m"
 # define RESET   "\x1b[0m"
 
+# define HARDPATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 # define SYNTAX_ERR "minishell: syntax error near unexpected token `%s'\n"
 # define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
 # define PARENTHESIS_ERR "minishell: unexpected newline while looking for closing `%c'\n"
 
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	char			*both;
+	struct	s_env	*next;
+}	t_env;
+
 typedef	enum	e_node
 {
-	PIPELINE,
-	OPERATOR
+	CMD,
+	OPERATOR,
+	REDIR,
+	PIPE_NODE,
+	SUBSHELL
 }	t_node;
 
 typedef enum	e_token
@@ -86,48 +98,61 @@ typedef	struct s_token
 	struct	s_token	*next;
 }	t_token;
 
-typedef struct s_in
-{
-	t_type		type;
-	char		*file;
-	struct s_in	*next;
-}	t_in;
-
-typedef struct s_out
-{
-	t_type			type;
-	char			*file;
-	struct s_out	*next;
-}	t_out;
-
 typedef	struct s_cmdlist
 {
-	char				**cmd;
-	int					exit_status;
-	t_in				*in;
-	t_out				*out;
+	t_type	type;
+	char	*str;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
 
+typedef	struct	s_pidlst
+{
+	pid_t			pid;
+	struct s_pidlst	*next;
+}	t_pidlst;
+
+typedef struct s_data
+{
+	int			read;
+	int			write;
+	int			status;
+	int			messenger;
+	bool		pipeline;
+	t_pidlst	*pidlst;
+	t_env		*env;
+}	t_data;
 
 typedef struct s_ast
 {
-	t_node type;	
+	t_node type;
 	union
 	{
 		struct
 		{
-			t_cmdlist	*lst;
-			char		*cmd;
+			char			**cmd;
 		};
 		struct
 		{
-			t_type			value;
-			struct s_ast	*left;
-			struct s_ast	*right;
+			t_type			op_type;
+			struct s_ast	*op_left;
+			struct s_ast	*op_right;
+		};
+		struct
+		{
+			t_type			redir_type;
+			char			*redir_filename;
+			struct	s_ast	*redir_next;
+		};
+		struct
+		{
+			struct s_ast	*pipe_left;
+			struct s_ast	*pipe_right;
+		};
+		struct
+		{
+			struct s_ast	*subshell_next;
 		};
 	};
 }	t_ast;
-
 
 #endif

@@ -1,31 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_cpy.c                                          :+:      :+:    :+:   */
+/*   split_cmdlst.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 13:12:54 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 16:48:40 by akdovlet         ###   ########.fr       */
+/*   Created: 2024/08/19 12:32:14 by akdovlet          #+#    #+#             */
+/*   Updated: 2024/08/19 17:03:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "env.h"
+#include "AST.h"
 
-bool	env_copy(t_env **cpy, char **env)
+int	cmdlst_len(t_cmdlist *lst)
 {
-	int		i;
-	t_env	*new;
+	int	i;
 
 	i = 0;
-	while (env[i])
+	while (lst)
 	{
-		new = env_new(env[i]);
-		if (!new)
-			return (false);
-		env_add_back(cpy, new);
 		i++;
+		lst = lst->next;
 	}
-	return (true);
+	return (i);
+}
+
+
+char	**cmdlst_split(t_cmdlist **lst)
+{
+	char	**cmd;
+	int		i;
+	int		len;
+	
+	i = 0;
+	len = cmdlst_len(*lst);
+	cmd = malloc(sizeof(char *) * (len + 1));
+	if (!cmd)
+		return (NULL);
+	while (*lst)
+	{
+		cmd[i] = ft_strdup((*lst)->str);
+		if (!cmd[i])
+			return (free_array(cmd, i), NULL);
+		i++;
+		eat_cmdlst(lst);
+	}
+	cmd[i] = NULL;
+	return (cmd);
 }

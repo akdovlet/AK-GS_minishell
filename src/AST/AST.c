@@ -6,43 +6,12 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 13:47:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:33:38 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
-
-t_ast	*ast_newcmd(t_token **tk)
-{
-	t_ast	*new;
-
-	new = malloc(sizeof(t_ast));
-	if (!new)
-		return (NULL);
-	new->type = PIPELINE;
-	new->lst = NULL;
-	new->cmd = ft_strdup((*tk)->value);
-	next_token(tk);
-	while (*tk && !is_logical_operator((*tk)->type) && \
-		!is_parenthesis((*tk)->type))
-		next_token(tk);
-	return (new);
-}
-
-t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right)
-{
-	t_ast	*new;
-
-	new = malloc(sizeof(t_ast));
-	new->type = OPERATOR;
-	if (!new)
-		return (NULL);
-	new->left = left;
-	new->value = type;
-	new->right = right;
-	return (new);
-}
 
 t_ast	*parse_cmd(t_token **tk)
 {
@@ -51,14 +20,51 @@ t_ast	*parse_cmd(t_token **tk)
 	new = NULL;
 	if (!(*tk) || !tk)
 		return (NULL);
-	if (!is_logical_operator((*tk)->type) && !is_parenthesis((*tk)->type))
-		new = ast_newcmd(tk);
-	else if (is_parenthesis((*tk)->type))
+	if ((*tk)->type == WORD || is_redirect((*tk)->type))
 	{
-		next_token(tk);
-		new = parse_operator(tk);
+		new = ast_newcmdlist(tk);
+	}
+	else if ((*tk)->type == PARENTHESIS_L)
+	{
+		eat_token(tk);
+		new = parse(tk);
+		if (new->type != SUBSHELL)
+			new = ast_newsubshell(new);
 		if ((*tk)->type == PARENTHESIS_R)
-			next_token(tk);
+			eat_token(tk);
+	}
+	return (new);
+}
+
+t_ast	*parse_redirect(t_token **tk)
+{
+	t_ast	*new;
+
+	new = NULL;
+	if (!(*tk) || !tk)
+		return (NULL);
+	new = parse_cmd(tk);
+	while (*tk && is_redirect((*tk)->type))
+	{
+		new = ast_newredir_push_root(new, (*tk)->type, ft_strdup((*tk)->next->value));
+		eat_token(tk);
+		eat_token(tk);
+	}
+	return (new);
+}
+
+t_ast	*parse_pipe(t_token **tk)
+{
+	t_ast	*new;
+
+	new = NULL;
+	if (!(*tk) || !tk)
+		return (NULL);
+	new = parse_redirect(tk);
+	while (*tk && (*tk)->type == PIPE)
+	{
+		eat_token(tk);
+		new = ast_newpipe(new, parse_redirect(tk));
 	}
 	return (new);
 }
@@ -70,12 +76,12 @@ t_ast	*parse_operator(t_token **tk)
 
 	if (!(*tk) || !tk)
 		return (NULL);
-	new = parse_cmd(tk);
+	new = parse_pipe(tk);
 	while (*tk && is_logical_operator((*tk)->type))
 	{
 		tmp = (*tk)->type;
-		next_token(tk);
-		new = ast_newop(new, tmp, parse_cmd(tk));
+		eat_token(tk);
+		new = ast_newop(new, tmp, parse_pipe(tk));
 	}
 	return (new);
 }
@@ -86,3 +92,9 @@ t_ast	*parse(t_token **tk)
 		return (NULL);
 	return (parse_operator(tk));
 }
+
+// LOGICAL_OPERATOR (&& ||)
+// SUBSHELL
+// PIPE
+// REDIR
+// CMD
