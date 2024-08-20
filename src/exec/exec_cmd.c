@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/20 14:43:45 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:08:03 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,55 @@ int ft_is_builtins(char *cmd)
     return (0);
 }
 
-int ft_exec_cmd(t_ast *ast, t_data *data)
+int ft_exec_builtins(t_ast *ast, t_data *data)
 {
-    if (ft_is_builtins(ast->cmd[0]))
+    if (!ft_strcmp(ast->cmd[0], "echo"))
+        ft_echo(ast->cmd, data->env);
+    if (!ft_strcmp(ast->cmd[0], "cd"))
+        ft_cd(ast->cmd, data->env);
+    if (!ft_strcmp(ast->cmd[0], "pwd"))
+        ft_pwd(ast->cmd, data->env);
+    if (!ft_strcmp(ast->cmd[0], "export"))
+        ft_export(ast->cmd, data->env);
+    if (!ft_strcmp(ast->cmd[0], "unset"))
+        ft_unset(ast->cmd, data->env);
+    if (!ft_strcmp(ast->cmd[0], "env"))
+        ft_env(ast->cmd, data->env);
+    if (!ft_strcmp(ast->cmd[0], "exit"))
+        ft_exit(ast->cmd, data->env);
+}
+
+int ft_fork_builtins(t_ast *ast, t_data *data)
+{
+    pid_t pid;
+    t_pidlst *new;
+    
+    pid = fork();
+    if (pid < 0)
+        return (perror("fork failed\n"), 1);
+    if (pid == 0)
     {
         ft_exec_builtins(ast, data);
     }
     else
     {
-        ft_exec_bin(ast, data);
+        new = ft_lstnew_pidlst(pid);
+        if (!new)
+            return (1);
+        ft_lstadd_back_pidlst(&data->pidlst, new);
     }
+    return (0);
 }
 
-
+int ft_builtins(t_ast *ast, t_data *data)
+{
+    if (data->pipeline == 0)
+    {
+        ft_exec_builtins(ast, data);
+    }
+    else
+    {
+        ft_fork_builtins(ast, data);
+    }
+    return (0);
+}
