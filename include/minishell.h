@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 17:28:54 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:43:30 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 /* malloc, free, exit, getenv */
 # include <stdlib.h>
-/* writem access, open, read, close, fork, getcwd, chdir, dup, dup2, pipe
+/* write, access, open, read, close, fork, getcwd, chdir, dup, dup2, pipe
 execve, isatty, ttyname, ttyslot */
 # include <unistd.h>
 /* readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay
@@ -58,10 +58,10 @@ add_history*/
 
 typedef struct s_env
 {
-	char	*key;
-	char	*value;
-	char	*both;
-	struct	s_env *next;
+	char			*key;
+	char			*value;
+	char			*both;
+	struct	s_env	*next;
 }	t_env;
 
 typedef	enum	e_node
@@ -127,7 +127,7 @@ typedef struct s_ast
 	{
 		struct
 		{
-			char		**cmd;
+			char			**cmd;
 		};
 		struct
 		{
@@ -138,7 +138,7 @@ typedef struct s_ast
 		struct
 		{
 			t_type			redir_type;
-			char			*file_name;
+			char			*redir_filename;
 			struct	s_ast	*redir_next;
 		};
 		struct

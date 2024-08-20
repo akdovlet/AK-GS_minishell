@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 12:42:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/15 13:38:29 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:33:29 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,44 @@ void	eat_token(t_token **tk)
 	free((*tk)->value);
 	free(*tk);
 	*tk = tmp;
-	if (tk && *tk)
+}
+
+void	ast_free(t_ast *ast)
+{
+	if (!ast)
+		return;
+	if (ast->type == CMD)
 	{
-		fprintf(stderr, "current token: %s\t", etoa((*tk)->type));
-		fprintf(stderr, "current value: %s\n", (*tk)->value);		
+		ft_free(ast->cmd);
+		free(ast);
+	}
+	else if (ast->type == OPERATOR)
+	{
+		ast_free(ast->op_left);
+		ast_free(ast->op_right);
+		free(ast);
+	}
+	else if (ast->type == REDIR)
+	{
+		ast_free(ast->redir_next);
+		free(ast->redir_filename);
+		free(ast);
+	}
+	else if (ast->type == PIPE_NODE)
+	{
+		ast_free(ast->pipe_left);
+		ast_free(ast->pipe_right);
+		free(ast);
+	}
+	else if (ast->type == SUBSHELL)
+	{
+		ast_free(ast->subshell_next);
+		free(ast);
 	}
 }
 
 void	next_token(t_token **tk)
 {
-	fprintf(stderr, "current token: %s\t", etoa((*tk)->type));
-	fprintf(stderr, "current value: %s\n", (*tk)->value);
 	if (!(*tk) || !tk)
 		return ;
 	*tk = (*tk)->next;

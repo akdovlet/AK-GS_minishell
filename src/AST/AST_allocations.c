@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:48:36 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 17:31:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:35:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_ast	*ast_newredir(t_type type, char *filename)
 		return (NULL);
 	new->type = REDIR;
 	new->redir_type = type;
-	new->file_name = ft_strdup(filename);
+	new->redir_filename = ft_strdup(filename);
 	new->redir_next = NULL;
 	return (new);
 }
@@ -62,7 +62,7 @@ t_ast	*ast_newredir_push_root(t_ast *redir_next, t_type type, char *filename)
 		return (NULL);
 	new->type = REDIR;
 	new->redir_type = type;
-	new->file_name = filename;
+	new->redir_filename = filename;
 	new->redir_next = redir_next;
 	return (new);
 }

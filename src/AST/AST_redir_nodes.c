@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:59:55 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 17:59:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:33:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,39 +51,19 @@ void	build_tmp_lists(t_token **tk, t_cmdlist **cmd, t_cmdlist **redir)
 t_ast	*ast_newcmdlist(t_token **tk)
 {
 	t_ast		*head;
-	t_ast		*cursor;
 	t_cmdlist	*cmd;
 	t_cmdlist	*redir;
 
 	cmd = NULL;
 	redir = NULL;
+	head = NULL;
 	build_tmp_lists(tk, &cmd, &redir);
-	fprintf(stderr, "redir list:\n");
-	cmdlst_print(redir);
-	fprintf(stderr, "cmd list:\n");
-	cmdlst_print(cmd);
-	if (redir)
-	{
-		cursor = ast_newredir(redir->type, redir->str);
-		fprintf(stderr, "redir node check: %s\n", cursor->file_name);
-		eat_cmdlst(&redir);
-		head = cursor;
-		cursor = cursor->redir_next;
-	}
-	else if (cmd)
-	{
-		cursor = ast_newcmd(&cmd);
-		head = cursor;
-		return (head);
-	}
 	while (redir)
 	{
-		cursor = ast_newredir(redir->type, redir->str);
-		fprintf(stderr, "redir node check in loop: %s\n", cursor->file_name);
+		redir_add_back(&head, ast_newredir(redir->type, redir->str));
 		eat_cmdlst(&redir);
-		cursor = cursor->redir_next;
 	}
 	if (cmd)
-		cursor = ast_newcmd(&cmd);
+		redir_add_back(&head, ast_newcmd(&cmd));
 	return (head);
 }

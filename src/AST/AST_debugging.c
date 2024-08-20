@@ -6,24 +6,13 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 17:15:39 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:36:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
 
-void	print_arrayofchar(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		fprintf(stderr, "%s\n", str[i]);
-		i++;
-	}
-}
 
 void	print_indentation(int level)
 {
@@ -33,6 +22,19 @@ void	print_indentation(int level)
 	while (i < level)
 	{
 		ft_printf("\t");
+		i++;
+	}
+}
+
+void	print_arrayofchar(char **str, int level)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		print_indentation(level);
+		fprintf(stderr, "%s\n", str[i]);
 		i++;
 	}
 }
@@ -47,14 +49,17 @@ void	ast_print_recursive(t_ast *root, int level)
 	}
 	print_indentation(level);
 	if (root->type == CMD)
-		ft_printf("COMMAND: %s\n", root->cmd[0]);
+	{
+		ft_printf("COMMAND:\n");
+		print_arrayofchar(root->cmd, level);
+	}
 	else if (root->type == OPERATOR)
 		ft_printf("OPERATOR: %s\n", etoa(root->op_type));
 	else if (root->type == REDIR)
 	{
 		ft_printf("REDIR: %s\n", etoa(root->redir_type));
 		print_indentation(level);
-		ft_printf("FILENAME: %s\n", root->file_name);
+		ft_printf("FILENAME: %s\n", root->redir_filename);
 	}
 	else if (root->type == PIPE_NODE)
 		ft_printf("PIPE\n");
@@ -87,34 +92,3 @@ void	ast_print(t_ast *root)
 {
 	ast_print_recursive(root, 0);
 }
-
-// int	exec_recursion(t_ast *ast, t_data *data)
-// {
-// 	if (ast->type == PIPE)
-// 	{
-// 		ft_pipe_recursion(ast, data);
-// 	}
-// 	if (ast->type == CMD)
-// 	{		
-// 	}
-// 	if (ast->type == OPERATOR)
-// 	if (ast->type == REDIR)
-// 	if (ast->type == SUBSHELL)
-// }
-
-// int ft_pipe_recursion(t_ast *ast, t_data *data)
-// {
-// 	int	fd[2];
-
-// 	if (pipe(fd) == -1)
-// 		retun (1);
-// 	data->pipeline = true;
-// 	data->write = fd[1];
-// 	data->status = exec_recursion(ast->pipe_left, data);
-// 	data->write = fd[0];
-// 	data->status = exec_recursion(ast->pipe_right, data);
-// 	close(fd[0]);
-// 	close(fd[1]);
-// 	data->pipeline = 0;
-// 	return (data->status);
-// }

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 17:48:47 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:33:38 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ t_ast	*parse_cmd(t_token **tk)
 	new = NULL;
 	if (!(*tk) || !tk)
 		return (NULL);
-	fprintf(stderr, "parse_cmd\n");
-	fprintf(stderr, "curr token value:%s\n", (*tk)->value);
 	if ((*tk)->type == WORD || is_redirect((*tk)->type))
 	{
-		fprintf(stderr, "in test\n");
 		new = ast_newcmdlist(tk);
 	}
 	else if ((*tk)->type == PARENTHESIS_L)
@@ -46,7 +43,6 @@ t_ast	*parse_redirect(t_token **tk)
 	new = NULL;
 	if (!(*tk) || !tk)
 		return (NULL);
-	fprintf(stderr, "parse_redirect\n");
 	new = parse_cmd(tk);
 	while (*tk && is_redirect((*tk)->type))
 	{
@@ -64,11 +60,9 @@ t_ast	*parse_pipe(t_token **tk)
 	new = NULL;
 	if (!(*tk) || !tk)
 		return (NULL);
-	fprintf(stderr, "parse_pipe\n");
 	new = parse_redirect(tk);
 	while (*tk && (*tk)->type == PIPE)
 	{
-		fprintf(stderr, "in parse pipe\n");
 		eat_token(tk);
 		new = ast_newpipe(new, parse_redirect(tk));
 	}
@@ -82,11 +76,9 @@ t_ast	*parse_operator(t_token **tk)
 
 	if (!(*tk) || !tk)
 		return (NULL);
-	fprintf(stderr, "parse_operator\n");
 	new = parse_pipe(tk);
 	while (*tk && is_logical_operator((*tk)->type))
 	{
-		fprintf(stderr, "in op\n");
 		tmp = (*tk)->type;
 		eat_token(tk);
 		new = ast_newop(new, tmp, parse_pipe(tk));
@@ -96,7 +88,6 @@ t_ast	*parse_operator(t_token **tk)
 
 t_ast	*parse(t_token **tk)
 {
-	fprintf(stderr, "parse\n");
 	if (!*tk)
 		return (NULL);
 	return (parse_operator(tk));

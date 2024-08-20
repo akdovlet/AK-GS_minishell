@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:41:40 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 17:19:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:35:14 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,18 @@ void	eat_cmdlst(t_cmdlist **lst);
 t_ast	*ast_newcmdlist(t_token **tk);
 
 /*###############################################################################
+#                                  AST_debugging.c                              #
+###############################################################################*/
+
+void	redir_add_back(t_ast **lst, t_ast *new);
+
+/*###############################################################################
 #                                  AST_utils.c                                  #
 ###############################################################################*/
 
 void	next_token(t_token **tk);
 void	eat_token(t_token **tk);
+void	ast_free(t_ast *ast);
 
 /*###############################################################################
 #                                  AST.c                                        #
@@ -72,6 +79,6 @@ t_cmdlist	*cmdlst_new(char *value, int type);
 ###############################################################################*/
 
 char	**cmdlst_split(t_cmdlist **lst);
-void	print_arrayofchar(char **str);
+void	print_arrayofchar(char **str, int level);
 
 #endif
