@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   setup.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/20 17:53:01 by akdovlet         ###   ########.fr       */
+/*   Created: 2024/08/20 14:37:42 by akdovlet          #+#    #+#             */
+/*   Updated: 2024/08/20 18:33:02 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	ENV_H
-# define ENV_H
+#ifndef	SETUP_H
+# define SETUP_H
 
-# include "minishell.h"
+#include "minishell.h"
 
-/* env.c */
+/*###############################################################################
+#                                  setup_shell.c                                #
+###############################################################################*/
 
-t_env	*env_new(char *var);
-void	env_add_back(t_env **lst, t_env *new);
-//copy the entirety of env into a linked list;
-bool	env_copy(t_env **cpy, char **env);
-void	env_clear(t_env **lst);
-void	env_print(t_env *lst);
-bool	env_setup(t_data *data, char **env);
+void	setup_shell(t_data	*data, char	**env);
+
 
 #endif

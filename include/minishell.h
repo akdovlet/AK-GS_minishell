@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/20 13:43:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:47:39 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_data
 	int			status;
 	int			messenger;
 	bool		pipeline;
+	char		*hardpath;
 	t_pidlst	*pidlst;
 	t_env		*env;
 }	t_data;
