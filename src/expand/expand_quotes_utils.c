@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:57:37 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/14 14:14:15 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/20 09:37:37 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int ft_find_chr(char *str, char c)
     int i;
 
     i = 0;
+    if (!str)
+        return (0);
     while (str[i])
     {
         if (str[i] == c)

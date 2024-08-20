@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:22:33 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/14 14:45:26 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/20 09:44:22 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ int ft_strcmp_end_start_wildcard(char *file, char *str)
     int j;
     int k;
 
-    if (!file)
+    if (!file[0])
         return (false);
-    if (!str[0])
-        return (true);
     i = ft_strlen(file) - 1;
     j = ft_strlen(str) - 1;
     k = 0;
@@ -59,6 +57,8 @@ int ft_strcmp_recursive(char *namefile, char *str)
 
     i = 0;
     j = 0;
+    if (!str[0])
+        return (1);
     while (namefile[j] && !i)
     {
         i = ft_strcmp_wildcard(namefile + j, str);
@@ -88,15 +88,21 @@ void ft_lstcomp_wildcard(t_files **files, char *str)
     while (tmp)
     {
         printf("name = %s\n", tmp->name);
-        e = ft_strcmp_recursive(tmp->name, str);
-        printf ("e = %d\n\n", e);
+        e = ft_strcmp_wildcard(tmp->name, str);
+        printf("e = %d\n", e);
+        if (e == 1)
+            e = ft_strcmp_recursive(tmp->name, str + 1);
+        else if (e > 1)
+            e = ft_strcmp_recursive(tmp->name + e - 1, str + e);
+        printf("e = %d\n", e);
         if (!e)
         {
+            printf("ok\n");
             tmp2 = tmp;
             tmp = tmp->next;
             ft_lstdelone_files(files, tmp2);
         }
-        else
+        if (e > 0)
             tmp = tmp->next;
     }
 }
