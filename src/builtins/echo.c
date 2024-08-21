@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/26 12:36:49 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/21 09:25:02 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,3 @@ int ft_echo(char **args, t_env *env)
     ft_putstr_fd("\n", 1);
     return (0);
 }
-
-// int main()
-// {
-//     char *args1[] = {"echo", "Bonjour", "le", "monde", NULL};
-//     char *args2[] = {"echo", "-n", "Bonjour", "sans", "nouvelle", "ligne", NULL};
-
-//     // Test de la fonction echo sans l'option -n
-//     echo(args1);
-
-//     // Test de la fonction echo avec l'option -n
-//     echo(args2);
-
-//     return 0;
-// }
