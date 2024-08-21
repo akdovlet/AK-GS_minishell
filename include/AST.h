@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:41:40 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 14:44:56 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:10:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_ast	*ast_newsubshell(t_ast *next);
 ###############################################################################*/
 
 void	ast_print(t_ast *root);
+void	print_arrayofchar(char **str, int level);
 
 /*###############################################################################
 #                                  AST_redir_nodes.c                            #
@@ -40,9 +41,10 @@ void	ast_print(t_ast *root);
 
 void	eat_cmdlst(t_cmdlist **lst);
 t_ast	*ast_newcmdlist(t_token **tk);
+t_ast	*ast_newredir_lst(t_token **tk, t_ast *redir_next);
 
 /*###############################################################################
-#                                  AST_debugging.c                              #
+#                                  AST_redir_utils.c                            #
 ###############################################################################*/
 
 void	redir_add_back(t_ast **lst, t_ast *new);
@@ -82,10 +84,9 @@ void		cmdlst_clear(t_cmdlist **lst);
 t_cmdlist	*cmdlst_new(char *value, int type);
 
 /*###############################################################################
-#                                  AST_debugging.c                              #
+#                                  split_cmdlst.c                               #
 ###############################################################################*/
 
 char	**cmdlst_split(t_cmdlist **lst);
-void	print_arrayofchar(char **str, int level);
 
 #endif

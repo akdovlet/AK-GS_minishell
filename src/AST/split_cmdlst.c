@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:32:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 17:03:41 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:05:20 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	cmdlst_len(t_cmdlist *lst)
 	}
 	return (i);
 }
-
 
 char	**cmdlst_split(t_cmdlist **lst)
 {

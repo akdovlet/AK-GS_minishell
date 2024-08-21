@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/26 15:10:07 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:34:14 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	find_operator(t_token *tk)
 	return (0);
 }
 
-
 int	tokenize(char *line, t_token **tk)
 {
 	int		i;
@@ -58,13 +57,11 @@ int	tokenize(char *line, t_token **tk)
 	while (line[i] && line[i] != '\n')
 	{
 		if (!dispatcher(line, &i, tk))
-		{
-			return (ft_tkclear(tk), 0);
-		}
+			return (token_clear(tk), 0);
 		else if (line[i] && is_blank(line[i]))
 			i++;
 	}
 	if (!syntax_order_check(*tk) || !parenthesis_count(line, 0))
-		return (ft_tkclear(tk), 0);
+		return (token_clear(tk), 0);
 	return (1);
 }

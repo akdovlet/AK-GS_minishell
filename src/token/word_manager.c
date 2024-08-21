@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/26 15:10:41 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:33:09 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,13 @@ int	word_management(char *line, int *i, t_token **tk)
 {
 	t_token *new;
 
-	new = ft_tokennew(NULL);
+	new = token_new(NULL);
 	if (!new)
 		return (perror("malloc"), 0);
 	new->type = WORD;
 	new->value = copy_word(line, i);
 	if (!new->value)
 		return (free(new), 0);
-	ft_token_add_back(tk, new);
+	token_add_back(tk, new);
 	return (1);
 }
