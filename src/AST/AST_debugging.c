@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/20 13:36:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:13:07 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,20 @@ void	ast_print_recursive(t_ast *root, int level)
 		ft_printf("PIPE\n");
 	else if (root->type == SUBSHELL)
 		ft_printf("SUBSHELL\n");
+	else if (root->type == WAIT_NODE)
+		ft_printf("WAIT_NODE\n");
 	print_indentation(level);
 	ft_printf("left\n");
 	if (root->type == OPERATOR)
 		ast_print_recursive(root->op_left, level + 1);
+	if (root->type == WAIT_NODE)
+		ast_print_recursive(root->wait_next, level + 1);
 	if (root->type == REDIR)
 		ast_print_recursive(root->redir_next, level + 1);
 	if (root->type == PIPE_NODE)
 		ast_print_recursive(root->pipe_left, level + 1);
 	print_indentation(level);
-	if (root->type == OPERATOR || root->type == PIPE_NODE)
+	if (root->type == OPERATOR || root->type == PIPE_NODE || root->type == WAIT_NODE)
 	{
 		ft_printf("right\n");
 	}

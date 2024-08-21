@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/20 18:40:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:27:21 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ bool	env_default_setup(t_data *data)
 	env_add_back(&data->env, new);
 	new = env_new_key(ft_strdup("SHLVL"), ft_strdup("1"));
 	env_add_back(&data->env, new);
+	data->hardpath = ft_strdup(HARDPATH);
 	return (true);
 }
 

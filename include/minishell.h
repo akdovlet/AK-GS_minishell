@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/20 17:47:39 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:25:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ typedef	enum	e_node
 	OPERATOR,
 	REDIR,
 	PIPE_NODE,
-	SUBSHELL
+	SUBSHELL,
+	WAIT_NODE
 }	t_node;
 
 typedef enum	e_token
@@ -150,6 +151,10 @@ typedef struct s_ast
 		struct
 		{
 			struct s_ast	*subshell_next;
+		};
+		struct
+		{
+			struct s_ast	*wait_next;
 		};
 	};
 }	t_ast;

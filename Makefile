@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/08/20 18:31:06 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/08/21 14:09:14 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC		:=	main.c					\
 			AST/AST_redir_nodes.c	\
 			AST/AST_redir_utils.c	\
 			AST/AST_utils.c			\
+			AST/AST_wait_nodes.c	\
 			AST/AST.c				\
 			AST/cmd_list.c			\
 			AST/split_cmdlst.c		\
