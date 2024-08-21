@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/01 15:15:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 10:05:37 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-static t_env *ft_check_key(t_env **env, char *key)
-{
-    t_env *tmp;
-    
-    tmp = *env;
-    while (tmp)
-    {
-        if (!ft_strncmp(tmp->key, key, ft_strlen(tmp->key)))
-            return (tmp);
-        tmp = tmp->next;
-    }
-    return (NULL);
-}
 
 static void ft_change_value(t_env *node, char *str)
 {

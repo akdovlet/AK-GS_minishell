@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   expand_debugg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 14:18:24 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/31 18:39:53 by gschwand         ###   ########.fr       */
+/*   Created: 2024/08/01 14:02:04 by gschwand          #+#    #+#             */
+/*   Updated: 2024/08/05 16:55:31 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "expand.h"
 
-void	ft_env(char **argv, t_env *env)
+void ft_print_lst_files(t_files *files)
 {
-    if (argv[1])
-        printf("env: too many arguments\n");
-    else
+    t_files *tmp;
+
+    tmp = files;
+    while (tmp)
     {
-        while (env)
-        {
-            ft_putstr_fd(env->both, 1);
-            ft_putstr_fd("\n", 1);
-            env = env->next;
-        }
+        printf("%s\n", tmp->name);
+        tmp = tmp->next;
+    }
+}
+
+void print_tab(char **tab)
+{
+    int i;
+
+    i = 0;
+    while (tab[i])
+    {
+        printf("%s\n", tab[i]);
+        i++;
     }
 }
