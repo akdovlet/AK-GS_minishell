@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 11:42:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/20 12:35:06 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:09:19 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,3 @@ void	redir_clear(t_ast **lst)
 		*lst = tmp;
 	}
 }
-
-// t_ast	*redir_new(char *value, int type)
-// {
-// 	t_ast	*new;
-
-// 	new = malloc(sizeof(t_ast));
-// 	if (!new)
-// 		return (NULL);
-// 	*new = (t_ast){};
-// 	new->str = ft_strdup(value);
-// 	if (!new->str)
-// 		return (NULL);
-// 	new->type = type;
-// 	return (new);
-// }

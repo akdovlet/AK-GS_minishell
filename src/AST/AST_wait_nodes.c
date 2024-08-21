@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:01:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 15:16:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:05:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int		find_subshell(t_ast	*root)
 	{
 		if (!find_subshell(root->pipe_left))
 			return (find_subshell(root->pipe_right));
+		else
+			return (1);
 	}
 	return (0);
 }
