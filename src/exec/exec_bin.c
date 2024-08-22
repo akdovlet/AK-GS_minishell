@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/22 10:05:13 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:05:39 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int ft_check_path(t_data *data)
             return ;
         node = node->next;
     }
-    if (data->path)
+    if (data->)
         node = ft_lstnew_env(data->path); //pas la bonne ft il y en a une plus approprie
     else
         node = ft_lstnew_env(".");
