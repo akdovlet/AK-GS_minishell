@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 17:35:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:19:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		parenthesis_management(char *str, int *i, t_token **token);
 #                                  syntax_error.c                               #
 ###############################################################################*/
 
+void	bad_syntax3(t_token *tk);
 void	bad_syntax2(char *str);
 // returns correct error message in case of bad syntax
 void	bad_syntax(int c);
@@ -90,7 +91,7 @@ void	print_token(t_token *tk);
 ###############################################################################*/
 
 char	*copy_value(char *str, int *i, bool (*f)(int));
-int		opperator_management(char *str, int *i, t_token **tk);
+int		operator_management(char *str, int *i, t_token **tk);
 int		redirect_management(char *str, int *i, t_token **tk);
 
 /*###############################################################################
