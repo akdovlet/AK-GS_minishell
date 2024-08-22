@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/21 16:14:39 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/22 08:26:23 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	exec_recursion(t_ast *ast, t_data *data)
 	if (ast->type == WAIT_NODE)
 		ft_wait_pid(ast, data);
 	if (ast->type == OPERATOR)
+		ft_operator(ast, data);
 	if (ast->type == REDIR)
 	if (ast->type == SUBSHELL)
 }
