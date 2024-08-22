@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 12:25:41 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:16:42 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,11 @@ typedef struct s_ast
 		};
 	};
 }	t_ast;
+
+typedef struct	s_pidlst
+{
+	pid_t				pid;
+	struct s_pidlst		*next;
+}	t_pidlst;
 
 #endif
