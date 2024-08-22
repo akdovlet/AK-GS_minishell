@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/20 17:08:03 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/22 09:17:20 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int ft_fork_builtins(t_ast *ast, t_data *data)
     pid = fork();
     if (pid < 0)
         return (perror("fork failed\n"), 1);
-    if (pid == 0)
+    else if (pid == 0)
     {
         ft_exec_builtins(ast, data);
     }

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/20 17:50:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:05:13 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,34 @@ char **ft_ll_tab(t_env *env)
     return (tab);
 }
 
-// put data->env in **tab
+int ft_check_path(t_data *data)
+{
+    t_env *node;
+
+    node = data->env;
+    while (node)
+    {
+        if (!ft_strcmp(node->key, "PATH"))
+            return ;
+        node = node->next;
+    }
+    if (data->path)
+        node = ft_lstnew_env(data->path); //pas la bonne ft il y en a une plus approprie
+    else
+        node = ft_lstnew_env(".");
+    if (!node)
+        return (1);
+    ft_lstadd_back_env(&data->env, node);
+    return (0);
+}
+
 int ft_exec_bin(t_ast *ast, t_data *data)
 {
     char **env;
     pid_t pid;
     t_pidlst *new;
 
+    ft_check_path(data);
     env = ft_ll_tab(data->env);
     pid = fork();
     if (pid < 0)
