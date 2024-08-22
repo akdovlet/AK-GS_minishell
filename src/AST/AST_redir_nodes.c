@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:59:55 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/20 13:33:08 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:08:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,21 @@ t_ast	*ast_newcmdlist(t_token **tk)
 	if (cmd)
 		redir_add_back(&head, ast_newcmd(&cmd));
 	return (head);
+}
+
+t_ast	*ast_newredir_lst(t_token **tk, t_ast *redir_next)
+{
+	t_ast	*new;
+
+	new = NULL;
+	if (!tk || !*tk)
+		return (NULL);
+	while (*tk && is_redirect((*tk)->type))
+	{
+		redir_add_back(&new, ast_newredir((*tk)->type, (*tk)->next->value));
+		eat_token(tk);
+		eat_token(tk);
+	}
+	redir_add_back(&new, redir_next);
+	return (new);
 }

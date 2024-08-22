@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/24 18:51:44 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:27:21 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,23 @@ t_env	*env_new_key(char *key, char *value)
 }
 
 // define a hard coded path
-bool	env_default_setup(t_env **my_env)
+bool	env_default_setup(t_data *data)
 {
 	t_env	*new;
 
-	new = env_new_key("PWD", getcwd(NULL, 0));
+	new = env_new_key(ft_strdup("PWD"), getcwd(NULL, 0));
 	if (!new)
 		return (false);
-	env_add_back(my_env, new);
-	new = env_new_key("SHLVL", "1");
-	env_add_back(my_env, new);
+	env_add_back(&data->env, new);
+	new = env_new_key(ft_strdup("SHLVL"), ft_strdup("1"));
+	env_add_back(&data->env, new);
+	data->hardpath = ft_strdup(HARDPATH);
 	return (true);
 }
 
-bool	env_setup(t_env **my_env, char **env)
+bool	env_setup(t_data *data, char **env)
 {
 	if (!env[0])
-		return (env_default_setup(my_env));
-	return (env_copy(my_env, env));
+		return (env_default_setup(data));
+	return (env_copy(&data->env, env));
 }	

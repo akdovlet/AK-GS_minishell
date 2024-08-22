@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/08/21 10:01:45 by gschwand         ###   ########.fr        #
+#    Updated: 2024/08/22 10:26:16 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC		:=	main.c					\
 			AST/AST_redir_nodes.c	\
 			AST/AST_redir_utils.c	\
 			AST/AST_utils.c			\
+			AST/AST_wait_nodes.c	\
 			AST/AST.c				\
 			AST/cmd_list.c			\
 			AST/split_cmdlst.c		\
@@ -27,6 +28,8 @@ SRC		:=	main.c					\
 			env/env_lst_utils.c		\
 			env/env_utils.c			\
 			env/env_setup.c			\
+			env/env_utils.c			\
+			setup/setup_shell.c		\
 			token/debugging.c		\
 			token/definitions.c		\
 			token/definitions2.c	\

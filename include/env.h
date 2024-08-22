@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 10:03:57 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:25:23 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	env_add_back(t_env **lst, t_env *new);
 bool	env_copy(t_env **cpy, char **env);
 void	env_clear(t_env **lst);
 void	env_print(t_env *lst);
-bool	env_setup(t_env **my_env, char **env);
-int ft_lstsize_env(t_env *lst);
+bool	env_setup(t_data *data, char **env);
 
 // exec
 int		ft_exec(char *line, t_env *env);

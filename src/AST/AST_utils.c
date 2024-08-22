@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 12:42:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/20 13:33:29 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:19:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ void	ast_free(t_ast *ast)
 	else if (ast->type == SUBSHELL)
 	{
 		ast_free(ast->subshell_next);
+		free(ast);
+	}
+	else if (ast->type == WAIT_NODE)
+	{
+		ast_free(ast->wait_next);
 		free(ast);
 	}
 }

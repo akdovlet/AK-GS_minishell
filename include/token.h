@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/23 11:41:52 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:35:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,9 @@ int		syntax_order_check(t_token *tk);
 #                                  token_lst_utils.c                            #
 ###############################################################################*/
 
-t_token	*ft_tokennew(char *var);
-void	ft_token_add_back(t_token **lst, t_token *new);
-t_token	*ft_tokennew(char *var);
-void	ft_tkclear(t_token **tk);
+t_token	*token_new(char *var);
+void	token_add_back(t_token **lst, t_token *new);
+void	token_clear(t_token **tk);
 
 /*###############################################################################
 #                                  tokenize.c                                   #

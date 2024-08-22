@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 10:05:29 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:26:50 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 #include "env.h"
 #include "token.h"
 #include "AST.h"
+#include "setup.h"
 
 int main(int ac, char **av, char **env)
 {
 	(void)av;
 	char	*line;
-	t_env	*my_env;
 	t_token	*tk;
 	t_ast 	*ast;
+	t_data	data;
 
 	if (ac != 1)
 		return (1);
-	my_env = NULL;
 	tk = NULL;
-	env_copy(&my_env, env);
+	setup_shell(&data, env);
+	// env_print(data.env);
 	while (1)
 	{
 		line = readline(CYAN "minishell$> " RESET);
@@ -39,10 +40,10 @@ int main(int ac, char **av, char **env)
 		ast = parse(&tk);
 		ast_print(ast);
 		free(line);
-		ft_tkclear(&tk);
+		token_clear(&tk);
 		ast_free(ast);
 	}
-	env_clear(&my_env);
+	env_clear(&data.env);
 	rl_clear_history();
 	return (0);
 }

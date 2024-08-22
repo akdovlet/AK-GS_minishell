@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 10:04:06 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:26:39 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ typedef	enum	e_node
 	OPERATOR,
 	REDIR,
 	PIPE_NODE,
-	SUBSHELL
+	SUBSHELL,
+	WAIT_NODE
 }	t_node;
 
 typedef enum	e_token
@@ -118,6 +119,7 @@ typedef struct s_data
 	int			status;
 	int			messenger;
 	bool		pipeline;
+	char		*hardpath;
 	t_pidlst	*pidlst;
 	t_env		*env;
 }	t_data;
@@ -152,7 +154,17 @@ typedef struct s_ast
 		{
 			struct s_ast	*subshell_next;
 		};
+		struct
+		{
+			struct s_ast	*wait_next;
+		};
 	};
 }	t_ast;
+
+typedef struct	s_pidlst
+{
+	pid_t				pid;
+	struct s_pidlst		*next;
+}	t_pidlst;
 
 #endif

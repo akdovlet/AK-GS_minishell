@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:38:15 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/09 15:14:32 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:33:24 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
 
-t_token	*ft_tokenlast(t_token *lst)
+t_token	*token_last(t_token *lst)
 {
 	t_token	*index;
 
@@ -25,15 +25,15 @@ t_token	*ft_tokenlast(t_token *lst)
 	return (index);
 }
 
-void	ft_token_add_back(t_token **lst, t_token *new)
+void	token_add_back(t_token **lst, t_token *new)
 {
 	if (!*(lst))
 		*lst = new;
 	else
-		ft_tokenlast(*lst)->next = new;
+		token_last(*lst)->next = new;
 }
 
-t_token	*ft_tokennew(char *var)
+t_token	*token_new(char *var)
 {
 	t_token	*node;
 
@@ -45,7 +45,7 @@ t_token	*ft_tokennew(char *var)
 	return (node);
 }
 
-void	ft_tkclear(t_token **tk)
+void	token_clear(t_token **tk)
 {
 	t_token	*tmp;
 
