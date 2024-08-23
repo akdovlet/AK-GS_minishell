@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:46:28 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/23 17:08:07 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:30:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ int	check_token(t_token *tk)
 	if (tk->type == BACKGROUND)
 		return (bad_syntax3(tk), 0);
 	if (is_operator(tk->type) && is_operator(tk->next->type))
-		return (fprintf(stderr, "5\n"), bad_syntax3(tk->next), 0);
+		return (bad_syntax3(tk->next), 0);
 	if (is_operator(tk->type) && tk->next->type == PARENTHESIS_R)
 		return (bad_syntax3(tk->next), 0);
 	if (is_redirect(tk->type) && tk->next->type != WORD)
-		return (fprintf(stderr, "6\n"), bad_syntax3(tk->next), 0);
+		return (bad_syntax3(tk->next), 0);
 	if (tk->type == PARENTHESIS_L && is_operator(tk->next->type))
-		return (fprintf(stderr, "7\n"), bad_syntax3(tk->next), 0);
+		return (bad_syntax3(tk->next), 0);
 	if (is_word(tk->type) && tk->next->type == PARENTHESIS_L)
 		return (fprintf(stderr, "curr token is: %s\n8\n", tk->value), bad_syntax3(tk->next), 0);
 	if (tk->type == PARENTHESIS_L && tk->next->type == PARENTHESIS_R)
-		return (fprintf(stderr, "9\n"), bad_syntax3(tk->next), 0);
+		return (bad_syntax3(tk->next), 0);
 	if (tk->type == PARENTHESIS_R && tk->next->type == PARENTHESIS_L)
-		return (fprintf(stderr, "10\n"), bad_syntax3(tk->next), 0);
+		return (bad_syntax3(tk->next), 0);
 	return (1);
 }
 
@@ -70,7 +70,6 @@ int	subshell_rule(t_token **tk)
 {
 	if (!*tk || (*tk)->type == PARENTHESIS_R)
 		return (0);
-	fprintf(stderr, "tk value is: %s\n", (*tk)->value);
 	while (*tk && (*tk)->type != PARENTHESIS_R && !is_operator((*tk)->type))
 	{
 		if (!check_token(*tk))
@@ -106,7 +105,7 @@ int	scope_check(t_token **tk)
 				return (3);
 		}
 		else if ((*tk)->type == PARENTHESIS_R)
-			return (fprintf(stderr, "3\n"), bad_syntax(PARENTHESIS_R), 2);
+			return (bad_syntax(PARENTHESIS_R), 2);
 		else
 			*tk = (*tk)->next;
 	}
@@ -129,12 +128,12 @@ int	syntax_order_check(t_token *tk)
 		{
 			error = scope_check(&tk);
 			if (error == 1)
-				return (fprintf(stderr, "1\n"), ft_dprintf(STDERR_FILENO, PARENTHESIS_ERR, PARENTHESIS_R), 0);
+				return (ft_dprintf(STDERR_FILENO, PARENTHESIS_ERR, PARENTHESIS_R), 0);
 			if (error == 2 || error == 3)
 				return (0);
 		}
 		else if (tk->type == PARENTHESIS_R)
-			return (fprintf(stderr, "2\n"), bad_syntax(PARENTHESIS_R), 0);
+			return (bad_syntax(PARENTHESIS_R), 0);
 		else
 			tk = tk->next;
 	}

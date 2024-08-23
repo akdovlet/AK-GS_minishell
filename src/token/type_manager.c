@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/23 16:25:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:59:21 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*copy_operator(char *str, int *i, char type)
 	int		j;
 	char	*dup;
 
-	dup = malloc(sizeof(char) * (2));
+	dup = malloc(sizeof(char) * 3);
 	if (!dup)
 		return (NULL);
 	j = 0;
