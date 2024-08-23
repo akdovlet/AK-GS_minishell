@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 12:25:41 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:35:29 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef enum	e_token
 	D_QUOTE = '\"',
 	OUT = '>',
 	IN = '<',
+	BACKGROUND = '&',
 	WORD = 1000,
 	AND = 1001,
 	OR = 1002,

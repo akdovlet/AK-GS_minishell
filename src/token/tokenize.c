@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/22 16:12:04 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:08:44 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	dispatcher(char *line, int *i, t_token **tk)
 
 int	tokenize(char *line, t_token **tk)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (line[i] && line[i] != '\n')
@@ -50,7 +50,7 @@ int	tokenize(char *line, t_token **tk)
 		else if (line[i] && is_blank(line[i]))
 			i++;
 	}
-	if (!syntax_order_check(*tk) || !parenthesis_count(line, 0))
+	if (!syntax_order_check(*tk))
 		return (token_clear(tk), 0);
 	return (1);
 }

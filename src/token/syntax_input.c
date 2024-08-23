@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 10:59:28 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/22 17:40:09 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:37:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	or_check(char *str, int i)
 int	and_check(char *str, int i)
 {
 	if (str[i + 1] != '&')
-		return ('&' * -1);
+		return ('&');
 	return (AND);
 }
 

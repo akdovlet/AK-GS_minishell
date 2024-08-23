@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/22 17:51:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:25:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ char	*copy_operator(char *str, int *i, char type)
 	int		j;
 	char	*dup;
 
-	j = 0;
-	dup = malloc(sizeof(char) * 3);
+	dup = malloc(sizeof(char) * (2));
 	if (!dup)
 		return (NULL);
 	j = 0;
@@ -65,8 +64,6 @@ int	operator_management(char *str, int *i, t_token **tk)
 		new->type = and_check(str, *i);
 	else if (str[*i] == '|')
 		new->type = or_check(str, *i);
-	if (new->type <= 0)
-		return (bad_syntax(new->type * -1), free(new), 0);
 	new->value = copy_operator(str, i, str[*i]);
 	if (!new->value)
 		return (free(new), perror("malloc"), 0);
