@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:46:28 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/23 17:30:41 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/24 11:53:42 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_token(t_token *tk)
 	if (tk->type == PARENTHESIS_L && is_operator(tk->next->type))
 		return (bad_syntax3(tk->next), 0);
 	if (is_word(tk->type) && tk->next->type == PARENTHESIS_L)
-		return (fprintf(stderr, "curr token is: %s\n8\n", tk->value), bad_syntax3(tk->next), 0);
+		return (bad_syntax3(tk->next), 0);
 	if (tk->type == PARENTHESIS_L && tk->next->type == PARENTHESIS_R)
 		return (bad_syntax3(tk->next), 0);
 	if (tk->type == PARENTHESIS_R && tk->next->type == PARENTHESIS_L)

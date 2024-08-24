@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:41:40 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 17:10:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/24 11:29:36 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #                                  AST_allocation.c                             #
 ###############################################################################*/
 
-t_ast	*ast_newcmd(t_cmdlist **lst);
+t_ast	*ast_newcmd(t_cmdlst **lst);
 t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right);
 t_ast	*ast_newredir(t_type type, char *filename);
 t_ast	*ast_newredir_push_root(t_ast *redir_next, t_type type, char *filename);
@@ -39,7 +39,7 @@ void	print_arrayofchar(char **str, int level);
 #                                  AST_redir_nodes.c                            #
 ###############################################################################*/
 
-void	eat_cmdlst(t_cmdlist **lst);
+void	eat_cmdlst(t_cmdlst **lst);
 t_ast	*ast_newcmdlist(t_token **tk);
 t_ast	*ast_newredir_lst(t_token **tk, t_ast *redir_next);
 
@@ -77,16 +77,16 @@ t_ast	*parse_cmd(t_token **tk);
 #                                  cmd_list.c                                   #
 ###############################################################################*/
 
-void		cmdlst_print(t_cmdlist *lst);
-t_cmdlist	*cmdlst_last(t_cmdlist *lst);
-void		cmdlst_add_back(t_cmdlist **lst, t_cmdlist *new);
-void		cmdlst_clear(t_cmdlist **lst);
-t_cmdlist	*cmdlst_new(char *value, int type);
+void		cmdlst_print(t_cmdlst *lst);
+t_cmdlst	*cmdlst_last(t_cmdlst *lst);
+void		cmdlst_add_back(t_cmdlst **lst, t_cmdlst *new);
+void		cmdlst_clear(t_cmdlst **lst);
+t_cmdlst	*cmdlst_new(char *value, int type);
 
 /*###############################################################################
 #                                  split_cmdlst.c                               #
 ###############################################################################*/
 
-char	**cmdlst_split(t_cmdlist **lst);
+char	**cmdlst_split(t_cmdlst **lst);
 
 #endif
