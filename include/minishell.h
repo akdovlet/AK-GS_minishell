@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/24 21:12:20 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:49:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,16 @@ typedef enum	e_token
 
 typedef	struct s_token
 {
-	int		type;
-	char	*value;
-	struct	s_token	*next;
+	int				type;
+	char			*value;
+	struct s_token	*next;
+	struct s_token	*prev; 
 }	t_token;
 
 typedef	struct s_cmdlist
 {
-	t_type	type;
-	char	*str;
+	t_type				type;
+	char				*str;
 	struct s_cmdlist	*next;
 }	t_cmdlst;
 

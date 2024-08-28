@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/23 17:59:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:43:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ int	redirect_management(char *str, int *i, t_token **tk)
 		new->type = out_check(str, *i);
 	else if (str[*i] == IN)
 		new->type = in_check(str, *i);
-	if (new->type < 0)
-		return (bad_syntax(new->type * -1), free(new), 0);
 	new->value = copy_value(str, i, is_redirect);
 	if (!new->value)
 		return (token_clear(tk), free(new), 0);

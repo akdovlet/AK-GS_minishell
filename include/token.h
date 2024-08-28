@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/23 12:05:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:11:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	token_clear(t_token **tk);
 #                                  tokenize.c                                   #
 ###############################################################################*/
 
+int		grammar_check(t_token *tk);
 int		tokenize(char *line, t_token **tk);
 void	print_token(t_token *tk);
 

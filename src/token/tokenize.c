@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/24 11:53:50 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:50:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	grammar_check(t_token *tk)
 		return (bad_syntax3(tk->next), 0);
 	if (tk->type == PARENTHESIS_L && is_operator(tk->next->type))
 		return (bad_syntax3(tk->next), 0);
-	if (is_word(tk->type) && tk->next->type == PARENTHESIS_L)
+	if (tk->type == WORD && tk->next->type == PARENTHESIS_L)
 		return (bad_syntax3(tk->next), 0);
 	if (tk->type == PARENTHESIS_L && tk->next->type == PARENTHESIS_R)
 		return (bad_syntax3(tk->next), 0);
@@ -71,22 +71,19 @@ int	tokenize(char *line, t_token **tk)
 {
 	int		i;
 	int		tk_count;
-	t_token	*previous;
 
 	i = 0;
 	tk_count = 0;
-	previous = *tk;
 	while (line[i] && line[i] != '\n')
 	{
-		previous = *tk;
 		tk_count++;
 		if (!dispatcher(line, &i, tk))
 			return (token_clear(tk), 0);
-		else if (tk_count == 1 && is_operator((*tk)->type))
+		else if ((*tk) && tk_count == 1 && is_operator((*tk)->type))
 			return (bad_syntax((*tk)->type), token_clear(tk), 0);
 		else if (line[i] && is_blank(line[i]))
 			i++;
-		if (!grammar_check(previous))
+		if ((*tk) && !grammar_check((*tk)->prev))
 			return (token_clear(tk), 0);
 	}
 	if (!syntax_order_check(*tk))
