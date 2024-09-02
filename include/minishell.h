@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/22 10:26:39 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:19:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 /* printf, perror */
 # include <stdio.h>
+# include <errno.h>
 /* malloc, free, exit, getenv */
 # include <stdlib.h>
 /* write, access, open, read, close, fork, getcwd, chdir, dup, dup2, pipe
@@ -90,7 +91,7 @@ typedef enum	e_token
 	OR = 1002,
 	APPEND = 1003,
 	HERE_DOC = 1004,
-} t_type;
+}	t_type;
 
 typedef	struct s_token
 {
