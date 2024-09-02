@@ -6,26 +6,16 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/22 12:10:03 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:18:01 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-char	*find_cmd(char **cmd, char **envp)
+void	ft_puterror(char *str_error, char *str)
 {
-	char	**path_env;
-	char	**path_cmd;
-	char	*path;
-
-	path_env = ft_split(find_path_env(envp), ':');
-	path_cmd = find_path_cmd(path_env, cmd[0]);
-	if (!path_cmd)
-		return (free_tab(path_env), NULL);
-	path = ft_strdup(path_cmd[0]);
-	free_tab(path_env);
-	free_tab(path_cmd);
-	return (path);
+	ft_putstr_fd(str_error, STDERR_FILENO);
+	ft_putendl_fd(str, STDERR_FILENO);
 }
 
 int	ft_execve_path(char **cmd, char **envp)
@@ -53,12 +43,10 @@ int	ft_execve_hard_path(char **cmd, char **envp)
 // cree une fonction que me recopie data->env dans un tableau de chaine de caractere
 char **ft_ll_tab(t_env *env)
 {
-    int len;
     char **tab;
     t_env *tmp;
     int i;
 
-    i = 0;
     tmp = env;
     i = ft_lstsize_env(env);
     tab = malloc(sizeof(char *) * (i + 1));
@@ -86,7 +74,7 @@ int ft_check_path(t_data *data)
     while (node)
     {
         if (!ft_strcmp(node->key, "PATH"))
-            return ;
+            return (0);
         node = node->next;
     }
     if (data->hardpath)

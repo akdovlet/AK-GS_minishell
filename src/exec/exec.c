@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/22 12:19:33 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:01:29 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ int	exec_recursion(t_ast *ast, t_data *data)
 	if (ast->type == REDIR)
 	if (ast->type == SUBSHELL)
 		ft_subshell(ast, data);
+	return (0);
 }

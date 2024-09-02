@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/22 10:26:39 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:49:17 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,11 +160,5 @@ typedef struct s_ast
 		};
 	};
 }	t_ast;
-
-typedef struct	s_pidlst
-{
-	pid_t				pid;
-	struct s_pidlst		*next;
-}	t_pidlst;
 
 #endif

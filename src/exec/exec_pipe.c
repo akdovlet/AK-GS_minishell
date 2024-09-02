@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/21 09:19:40 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:34:29 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int ft_pipe_recusion(t_ast *ast, t_data *data)
 	int	fd[2];
 
 	if (pipe(fd) == -1)
-		retun (1);
+		return (1);
 	data->pipeline = true;
 	data->write = fd[1];
 	data->status = exec_recursion(ast->pipe_left, data);
