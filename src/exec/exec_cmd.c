@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/02 14:33:21 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/03 11:45:06 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int ft_is_builtins(char *cmd)
 {
+    printf("ft_is_builtins\n");
     if (!ft_strcmp(cmd, "echo"))
         return (1);
     if (!ft_strcmp(cmd, "cd"))
@@ -76,10 +77,12 @@ int ft_builtins(t_ast *ast, t_data *data)
 {
     if (data->pipeline == 0)
     {
+        printf("ok1\n");
         ft_exec_builtins(ast, data);
     }
     else
     {
+        printf("ok2\n");
         ft_fork_builtins(ast, data);
     }
     return (0);

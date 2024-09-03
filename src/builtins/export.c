@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/01 15:15:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/03 11:57:30 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int ft_export(char **args, t_env *env)
     int i;
     
     i = 1;
+    printf("export\n");
     if (!args[i])
     {
         ft_sort_alpha_env(env);
@@ -93,6 +94,7 @@ int ft_export(char **args, t_env *env)
     }
     while (args[i])
     {
+        printf("rentre dans la boucle\n");
         if (check_export(args[i], env))
             return (1);
         i++;

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/03 10:26:33 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:01:41 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 // gestion hard path
 int ft_exec(t_ast *ast, t_data *data)
 {
-	printf("ft_exec\n");
+	printf("ast->cmd[1] = %s\n", ast->cmd[1]);
 	expand_tab_of_cmd(ast->cmd, data->env);
+	printf("ast->cmd[1] = %s\n", ast->cmd[1]);
 	if (ast->cmd[1])
 	{
 		if (ft_wildcard(ast->cmd))
@@ -31,7 +32,6 @@ int ft_exec(t_ast *ast, t_data *data)
 
 int	exec_recursion(t_ast *ast, t_data *data)
 {
-	printf("exec_recursion\n");
 	if (ast->type == PIPE_NODE)
 		ft_pipe_recusion(ast, data);
 	if (ast->type == CMD)
@@ -43,5 +43,5 @@ int	exec_recursion(t_ast *ast, t_data *data)
 	if (ast->type == SUBSHELL)
 		ft_subshell(ast, data);
 	// if (ast->type == REDIR)
-	return (0);
+	return (data->status);
 }

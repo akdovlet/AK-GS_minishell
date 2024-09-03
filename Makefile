@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/03 10:51:26 by gschwand         ###   ########.fr        #
+#    Updated: 2024/09/03 10:53:03 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC		:=	main.c					\
 			token/definitions.c		\
 			token/definitions2.c	\
 			token/parenthesis_scope.c	\
-			token/parenthesis.c			
+			token/parenthesis.c		\
 			token/syntax_error.c	\
 			token/syntax_input.c	\
 			token/syntax_order.c	\
