@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/08/22 10:26:16 by gschwand         ###   ########.fr        #
+#    Updated: 2024/09/02 15:10:05 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRC		:=	main.c					\
 			AST/split_cmdlst.c		\
 			env/env_cpy.c			\
 			env/env_lst_utils.c		\
-			env/env_utils.c			\
 			env/env_setup.c			\
 			env/env_utils.c			\
 			setup/setup_shell.c		\
@@ -41,7 +40,6 @@ SRC		:=	main.c					\
 			token/tokenize.c		\
 			token/type_manager.c	\
 			token/word_manager.c	\
-			exec/exec.c				\
 			builtins/cd.c			\
 			builtins/pwd.c			\
 			builtins/echo.c			\
@@ -57,7 +55,16 @@ SRC		:=	main.c					\
 			expand/expand_var.c				\
 			expand/lst_file_utils.c			\
 			expand/sort_files.c 			\
-			expand/wildcard.c
+			expand/wildcard.c			\
+			exec/exec_bin.c 			\
+			exec/exec_cmd.c 					\
+			exec/exec_pipe.c 				\
+			exec/exec.c 				\
+			exec/operator.c 			\
+			exec/pidlst.c 				\
+			exec/subshell.c 			\
+			exec/path_utils.c 			\
+			exec/wait_pid.c
 			# parsing/parsing.c		\
 
 SRC_DIR	:=	src

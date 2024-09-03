@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/22 09:17:20 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:33:21 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,18 @@ int ft_exec_builtins(t_ast *ast, t_data *data)
     if (!ft_strcmp(ast->cmd[0], "echo"))
         ft_echo(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "cd"))
-        ft_cd(ast->cmd, data->env);
+        cd(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "pwd"))
         ft_pwd(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "export"))
         ft_export(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "unset"))
-        ft_unset(ast->cmd, data->env);
+        unset(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "env"))
         ft_env(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "exit"))
         ft_exit(ast->cmd, data->env);
+    return (0);
 }
 
 int ft_fork_builtins(t_ast *ast, t_data *data)

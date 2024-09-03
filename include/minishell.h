@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/02 14:19:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:11:26 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,10 +162,6 @@ typedef struct s_ast
 	};
 }	t_ast;
 
-typedef struct	s_pidlst
-{
-	pid_t				pid;
-	struct s_pidlst		*next;
-}	t_pidlst;
+int	exec_recursion(t_ast *ast, t_data *data);
 
 #endif

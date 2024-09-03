@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_order.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:46:28 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 18:24:57 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/02 13:53:11 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
 
-int	subshell_rules(t_token **tk)
-{
-	if ((*tk)->type == PARENTHESIS_L && !((*tk)->next || is_operator((*tk)->type)))
-		return (0);
-	while ((*tk)->next)
-	{
-	}
-}
+// int	subshell_rules(t_token **tk)
+// {
+// 	if ((*tk)->type == PARENTHESIS_L && !((*tk)->next || is_operator((*tk)->type)))
+// 		return (0);
+// 	while ((*tk)->next)
+// 	{
+// 	}
+// }
 
 int	syntax_order_check(t_token *tk)
 {

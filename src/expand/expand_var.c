@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/02 14:34:25 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:22:14 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char *ft_cat_tab(char **str)
     
     i = 0;
     lenres = 0;
+    printf("ft_cat_tab\n");
     while (str[i])
     {
         lenres += ft_strlen(str[i]);
@@ -57,7 +58,6 @@ char *ft_cat_tab(char **str)
         return (NULL);
     i = 1;
     ft_strlcpy(res, str[0], ft_strlen(str[0]));
-    printf("res = %s\n", res);
     while (str[i])
     {
         ft_strlcat(res, str[i], ft_strlen(str[i]) + ft_strlen(res) + 1);
@@ -106,7 +106,6 @@ char *expand_var(char *str, t_env *env)
         }
         i++;
     }
-    print_tab(tmp);
     res = ft_cat_tab(tmp);
     return (res);   
 }
