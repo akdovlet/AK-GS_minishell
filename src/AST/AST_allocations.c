@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:48:36 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/20 12:35:06 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/24 11:29:36 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
 
-t_ast	*ast_newcmd(t_cmdlist **lst)
+t_ast	*ast_newcmd(t_cmdlst **lst)
 {
 	t_ast	*new;
 

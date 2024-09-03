@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:55:42 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/17 17:26:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:46:27 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 void	bad_syntax2(char *str)
 {
 	ft_dprintf(STDERR_FILENO, SYNTAX_ERR , str);
+}
+
+void	bad_syntax3(t_token *tk)
+{
+	if (!tk)
+		ft_dprintf(STDERR_FILENO, SYNTAX_ERR, "newline");
+	else
+		ft_dprintf(STDERR_FILENO, SYNTAX_ERR, tk->value);
 }
 
 void	bad_syntax(int c)

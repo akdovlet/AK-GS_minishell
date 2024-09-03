@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 11:06:17 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/26 15:14:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:38:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	*etoa(t_type c)
 		return ("OUT");
 	if (c == IN)
 		return ("IN");
+	if (c == BACKGROUND)
+		return ("BACKGROUND");
 	return (NULL);
 }
 

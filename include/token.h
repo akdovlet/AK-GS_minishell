@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 17:35:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:11:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,13 @@ bool	is_redirect(int c);
 bool	is_parenthesis(int c);
 
 /*###############################################################################
-#                                  parenthesis.c                               #
+#                                  parenthesis_scope.c                          #
+###############################################################################*/
+
+int	parenthesis_scope_check(char *str, int *i);
+
+/*###############################################################################
+#                                  parenthesis.c                                #
 ###############################################################################*/
 
 int		parenthesis_count(char *str, int i);
@@ -51,6 +57,7 @@ int		parenthesis_management(char *str, int *i, t_token **token);
 #                                  syntax_error.c                               #
 ###############################################################################*/
 
+void	bad_syntax3(t_token *tk);
 void	bad_syntax2(char *str);
 // returns correct error message in case of bad syntax
 void	bad_syntax(int c);
@@ -82,6 +89,7 @@ void	token_clear(t_token **tk);
 #                                  tokenize.c                                   #
 ###############################################################################*/
 
+int		grammar_check(t_token *tk);
 int		tokenize(char *line, t_token **tk);
 void	print_token(t_token *tk);
 
@@ -90,7 +98,7 @@ void	print_token(t_token *tk);
 ###############################################################################*/
 
 char	*copy_value(char *str, int *i, bool (*f)(int));
-int		opperator_management(char *str, int *i, t_token **tk);
+int		operator_management(char *str, int *i, t_token **tk);
 int		redirect_management(char *str, int *i, t_token **tk);
 
 /*###############################################################################

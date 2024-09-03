@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/02 15:21:47 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:51:44 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,29 @@ typedef enum	e_token
 	D_QUOTE = '\"',
 	OUT = '>',
 	IN = '<',
+	BACKGROUND = '&',
 	WORD = 1000,
 	AND = 1001,
 	OR = 1002,
 	APPEND = 1003,
 	HERE_DOC = 1004,
+	FILE_NAME = 1005 
 } t_type;
 
 typedef	struct s_token
 {
-	int		type;
-	char	*value;
-	struct	s_token	*next;
+	int				type;
+	char			*value;
+	struct s_token	*next;
+	struct s_token	*prev; 
 }	t_token;
 
 typedef	struct s_cmdlist
 {
-	t_type	type;
-	char	*str;
+	t_type				type;
+	char				*str;
 	struct s_cmdlist	*next;
-}	t_cmdlist;
+}	t_cmdlst;
 
 typedef	struct	s_pidlst
 {

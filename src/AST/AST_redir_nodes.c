@@ -6,16 +6,16 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:59:55 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 17:08:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/24 11:29:36 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
 
-void	eat_cmdlst(t_cmdlist **lst)
+void	eat_cmdlst(t_cmdlst **lst)
 {
-	t_cmdlist	*tmp;
+	t_cmdlst	*tmp;
 
 	if (!(*lst) || !lst)
 		return ;
@@ -25,7 +25,7 @@ void	eat_cmdlst(t_cmdlist **lst)
 	*lst = tmp;
 }
 
-void	build_tmp_lists(t_token **tk, t_cmdlist **cmd, t_cmdlist **redir)
+void	build_tmp_lists(t_token **tk, t_cmdlst **cmd, t_cmdlst **redir)
 {
 	t_type	tmp;
 	
@@ -51,8 +51,8 @@ void	build_tmp_lists(t_token **tk, t_cmdlist **cmd, t_cmdlist **redir)
 t_ast	*ast_newcmdlist(t_token **tk)
 {
 	t_ast		*head;
-	t_cmdlist	*cmd;
-	t_cmdlist	*redir;
+	t_cmdlst	*cmd;
+	t_cmdlst	*redir;
 
 	cmd = NULL;
 	redir = NULL;

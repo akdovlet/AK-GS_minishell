@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:38:15 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 17:33:24 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:33:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,25 @@
 
 t_token	*token_last(t_token *lst)
 {
-	t_token	*index;
-
-	index = lst;
 	if (!lst)
 		return (NULL);
-	while (index->next)
-		index = index->next;
-	return (index);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
 
 void	token_add_back(t_token **lst, t_token *new)
 {
+	t_token	*last;
+
 	if (!*(lst))
 		*lst = new;
 	else
-		token_last(*lst)->next = new;
+	{
+		last = token_last(*lst);
+		last->next = new;
+		new->prev = last;
+	}
 }
 
 t_token	*token_new(char *var)
