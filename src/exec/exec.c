@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/02 15:25:07 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:26:33 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int ft_exec(t_ast *ast, t_data *data)
 int	exec_recursion(t_ast *ast, t_data *data)
 {
 	printf("exec_recursion\n");
-	if (ast->type == PIPE)
+	if (ast->type == PIPE_NODE)
 		ft_pipe_recusion(ast, data);
 	if (ast->type == CMD)
 		ft_exec(ast, data);

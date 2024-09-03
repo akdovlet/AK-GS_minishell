@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:22:33 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/20 09:44:22 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:21:38 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,16 @@ void ft_lstcomp_wildcard(t_files **files, char *str)
     int e;
 
     tmp = *files;
+    printf("ft_lstcomp_wildcard\n");
     while (tmp)
     {
-        printf("name = %s\n", tmp->name);
         e = ft_strcmp_wildcard(tmp->name, str);
-        printf("e = %d\n", e);
         if (e == 1)
             e = ft_strcmp_recursive(tmp->name, str + 1);
         else if (e > 1)
             e = ft_strcmp_recursive(tmp->name + e - 1, str + e);
-        printf("e = %d\n", e);
         if (!e)
         {
-            printf("ok\n");
             tmp2 = tmp;
             tmp = tmp->next;
             ft_lstdelone_files(files, tmp2);
