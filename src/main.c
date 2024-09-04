@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/04 15:58:27 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:02:53 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int main(int ac, char **av, char **env)
 		add_history(line);
 		tokenize(line, &tk);
 		// print_token(tk);
+		// env_print(data.env);
 		ast = parse(&tk);
 		// ast_print(ast);
 		exec_recursion(ast, &data);
