@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 17:34:14 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:50:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	dispatcher(char *line, int *i, t_token **tk)
 {
 	if (is_operator(line[*i]))
 	{
-		if (!opperator_management(line, i, tk))
+		if (!operator_management(line, i, tk))
 			return (0);			
 	}
 	if (is_redirect(line[*i]))
@@ -38,30 +38,55 @@ int	dispatcher(char *line, int *i, t_token **tk)
 	return (1);
 }
 
-int	find_operator(t_token *tk)
+int	grammar_check(t_token *tk)
 {
-	while (tk && tk->type != PARENTHESIS_L && tk->type != PARENTHESIS_R)
+	if (!tk)
+		return (1);
+	if (!tk->next)
 	{
-		if (is_logical_operator(tk->type))
-			return (1);
-		tk = tk->next;
+		if (is_redirect(tk->type) || is_operator(tk->type))
+			return (bad_syntax3(tk->next), 0);
+		return (1);
 	}
-	return (0);
+	if (tk->type == BACKGROUND)
+		return (bad_syntax3(tk), 0);
+	if (is_operator(tk->type) && is_operator(tk->next->type))
+		return (bad_syntax3(tk->next), 0);
+	if (is_operator(tk->type) && tk->next->type == PARENTHESIS_R)
+		return (bad_syntax3(tk->next), 0);
+	if (is_redirect(tk->type) && tk->next->type != WORD)
+		return (bad_syntax3(tk->next), 0);
+	if (tk->type == PARENTHESIS_L && is_operator(tk->next->type))
+		return (bad_syntax3(tk->next), 0);
+	if (tk->type == WORD && tk->next->type == PARENTHESIS_L)
+		return (bad_syntax3(tk->next), 0);
+	if (tk->type == PARENTHESIS_L && tk->next->type == PARENTHESIS_R)
+		return (bad_syntax3(tk->next), 0);
+	if (tk->type == PARENTHESIS_R && tk->next->type == PARENTHESIS_L)
+		return (bad_syntax3(tk->next), 0);
+	return (1);
 }
 
 int	tokenize(char *line, t_token **tk)
 {
 	int		i;
+	int		tk_count;
 
 	i = 0;
+	tk_count = 0;
 	while (line[i] && line[i] != '\n')
 	{
+		tk_count++;
 		if (!dispatcher(line, &i, tk))
 			return (token_clear(tk), 0);
+		else if ((*tk) && tk_count == 1 && is_operator((*tk)->type))
+			return (bad_syntax((*tk)->type), token_clear(tk), 0);
 		else if (line[i] && is_blank(line[i]))
 			i++;
+		if ((*tk) && !grammar_check((*tk)->prev))
+			return (token_clear(tk), 0);
 	}
-	if (!syntax_order_check(*tk) || !parenthesis_count(line, 0))
+	if (!syntax_order_check(*tk))
 		return (token_clear(tk), 0);
 	return (1);
 }

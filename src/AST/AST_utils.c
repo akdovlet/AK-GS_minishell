@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AST_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 12:42:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 17:19:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:57:00 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	eat_token(t_token **tk)
 	free((*tk)->value);
 	free(*tk);
 	*tk = tmp;
+	if (*tk)
+		(*tk)->prev = NULL;
 }
 
 void	ast_free(t_ast *ast)

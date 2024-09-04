@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:32:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 17:05:20 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/24 11:29:36 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
 
-int	cmdlst_len(t_cmdlist *lst)
+int	cmdlst_len(t_cmdlst *lst)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	cmdlst_len(t_cmdlist *lst)
 	return (i);
 }
 
-char	**cmdlst_split(t_cmdlist **lst)
+char	**cmdlst_split(t_cmdlst **lst)
 {
 	char	**cmd;
 	int		i;

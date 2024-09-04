@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/02 14:33:21 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:44:35 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int ft_is_builtins(char *cmd)
 {
+    printf("ft_is_builtins\n");
     if (!ft_strcmp(cmd, "echo"))
         return (1);
     if (!ft_strcmp(cmd, "cd"))
@@ -31,6 +32,9 @@ int ft_is_builtins(char *cmd)
     return (0);
 }
 
+// Check when I need to use **env and when I need to use *env
+// export for sure
+// unset maybe
 int ft_exec_builtins(t_ast *ast, t_data *data)
 {
     if (!ft_strcmp(ast->cmd[0], "echo"))
@@ -40,7 +44,7 @@ int ft_exec_builtins(t_ast *ast, t_data *data)
     if (!ft_strcmp(ast->cmd[0], "pwd"))
         ft_pwd(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "export"))
-        ft_export(ast->cmd, data->env);
+        ft_export(ast->cmd, &data->env);
     if (!ft_strcmp(ast->cmd[0], "unset"))
         unset(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "env"))
@@ -75,12 +79,8 @@ int ft_fork_builtins(t_ast *ast, t_data *data)
 int ft_builtins(t_ast *ast, t_data *data)
 {
     if (data->pipeline == 0)
-    {
         ft_exec_builtins(ast, data);
-    }
     else
-    {
         ft_fork_builtins(ast, data);
-    }
     return (0);
 }

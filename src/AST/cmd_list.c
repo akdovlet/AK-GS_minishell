@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:22:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/19 17:19:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/08/24 11:29:36 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
 
-void		cmdlst_print(t_cmdlist *lst)
+void		cmdlst_print(t_cmdlst *lst)
 {
 	while (lst)
 	{
@@ -22,9 +22,9 @@ void		cmdlst_print(t_cmdlist *lst)
 	}
 }
 
-t_cmdlist	*cmdlst_last(t_cmdlist *lst)
+t_cmdlst	*cmdlst_last(t_cmdlst *lst)
 {
-	t_cmdlist	*index;
+	t_cmdlst	*index;
 
 	index = lst;
 	if (!lst)
@@ -34,7 +34,7 @@ t_cmdlist	*cmdlst_last(t_cmdlist *lst)
 	return (index);
 }
 
-void	cmdlst_add_back(t_cmdlist **lst, t_cmdlist *new)
+void	cmdlst_add_back(t_cmdlst **lst, t_cmdlst *new)
 {
 	if (!*(lst))
 		*lst = new;
@@ -42,9 +42,9 @@ void	cmdlst_add_back(t_cmdlist **lst, t_cmdlist *new)
 		cmdlst_last(*lst)->next = new;
 }
 
-void	cmdlst_clear(t_cmdlist **lst)
+void	cmdlst_clear(t_cmdlst **lst)
 {
-	t_cmdlist	*tmp;
+	t_cmdlst	*tmp;
 
 	while (*lst)
 	{
@@ -55,14 +55,14 @@ void	cmdlst_clear(t_cmdlist **lst)
 	}
 }
 
-t_cmdlist	*cmdlst_new(char *value, int type)
+t_cmdlst	*cmdlst_new(char *value, int type)
 {
-	t_cmdlist	*new;
+	t_cmdlst	*new;
 
-	new = malloc(sizeof(t_cmdlist));
+	new = malloc(sizeof(t_cmdlst));
 	if (!new)
 		return (NULL);
-	*new = (t_cmdlist){};
+	*new = (t_cmdlst){};
 	new->str = ft_strdup(value);
 	if (!new->str)
 		return (NULL);
