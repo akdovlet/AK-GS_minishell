@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:22:33 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/03 10:21:38 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:45:21 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ void ft_lstcomp_wildcard(t_files **files, char *str)
 
 void ft_strlcat_files(char *dst, const char *src, size_t lenres)
 {
-    ft_strlcat(dst, "\"", lenres);
+    ft_strlcat(dst, "\'", lenres);
     ft_strlcat(dst, src, lenres);
-    ft_strlcat(dst, "\"", lenres);
+    ft_strlcat(dst, "\'", lenres);
     ft_strlcat(dst, " ", lenres);
 }
 

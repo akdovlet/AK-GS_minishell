@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 15:44:35 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:17:15 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int ft_is_builtins(char *cmd)
 {
-    printf("ft_is_builtins\n");
     if (!ft_strcmp(cmd, "echo"))
         return (1);
     if (!ft_strcmp(cmd, "cd"))
@@ -40,7 +39,7 @@ int ft_exec_builtins(t_ast *ast, t_data *data)
     if (!ft_strcmp(ast->cmd[0], "echo"))
         ft_echo(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "cd"))
-        cd(ast->cmd, data->env);
+        cd(ast->cmd, &data->env);
     if (!ft_strcmp(ast->cmd[0], "pwd"))
         ft_pwd(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "export"))

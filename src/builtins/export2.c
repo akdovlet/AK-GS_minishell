@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 16:17:24 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:43:39 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int check_export(char *arg, t_env **env)
 {
     t_env *node;
     
+    // Check if the first character is a letter is not right
     if (!ft_isalpha(arg[0]))
             printf("minishell: export: %s: not a valid identifier\n", arg);
     else if (ft_strchr(arg, '='))
