@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 15:13:36 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:28:57 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int ft_exec(t_ast *ast, t_data *data)
 int	exec_recursion(t_ast *ast, t_data *data)
 {
 	if (ast->type == PIPE_NODE)
-		ft_pipe_recusion(ast, data);
+		ft_pipe_recursion(ast, data);
 	if (ast->type == CMD)
 		ft_exec(ast, data);
 	if (ast->type == WAIT_NODE)
@@ -40,6 +40,7 @@ int	exec_recursion(t_ast *ast, t_data *data)
 		ft_operator(ast, data);
 	if (ast->type == SUBSHELL)
 		ft_subshell(ast, data);
-	// if (ast->type == REDIR)
+	if (ast->type == REDIR)
+		redir_node(ast, data);
 	return (data->status);
 }

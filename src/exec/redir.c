@@ -6,33 +6,35 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/04 16:02:47 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:44:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	redir_out(t_ast *ast, t_data *data)
+int	redir_out(t_ast *ast)
 {
 	int	fd;
 
 	if (ast->redir_type == OUT)
 	{
-		fd = open(ast->redir_filename, O_CREAT, O_RDWR, O_TRUNC, 0644);
+		fd = open(ast->redir_filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd == -1)
 			return (ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", ast->redir_filename, strerror(errno)),1);
 	}
-	else if (ast->redir_type == APPEND)
+	else
 	{
-		fd = open(ast->redir_filename, O_CREAT, O_RDWR, O_APPEND, 0644);
+		fd = open(ast->redir_filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd == -1)
 			return (ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", ast->redir_filename, strerror(errno)), 1);
 	}
-	dup2(fd, STDOUT_FILENO);
+	if (dup2(fd, STDOUT_FILENO) == -1)
+		return (ft_dprintf(STDERR_FILENO, "minishell: %s\n", strerror(errno)), 1);
 	close(fd);
+	return (0);
 }
 
-int	redir_in(t_ast *ast, t_data *data)
+int	redir_in(t_ast *ast)
 {
 	int	fd;
 
@@ -42,17 +44,21 @@ int	redir_in(t_ast *ast, t_data *data)
 		ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", ast->redir_filename, strerror(errno));
 		return (1);
 	}
-	dup2(fd, STDIN_FILENO);
+	if (dup2(fd, STDIN_FILENO) == -1)
+		return (ft_dprintf(STDERR_FILENO, "minishell: %s\n", strerror(errno)), 1);
 	close(fd);
+	return (0);
 }
 
-int	redir_hd(t_ast *ast, t_data *data)
+int	redir_hd(t_ast *ast)
 {
 	int		fd;
 	int		tty;
+	int		line_count;
 	char	*line;
 
 	line = NULL;
+	line_count = 0;
 	tty = open("/dev/tty", O_RDWR);
 	if (tty == -1)
 	{
@@ -68,19 +74,27 @@ int	redir_hd(t_ast *ast, t_data *data)
 	}
 	while (1)
 	{
+		line_count++;
 		write(tty, "> ", 2);
 		line = get_next_line(tty);
 		if (!line)
 		{
-			ft_dprintf(STDERR_FILENO, "minishell: ");
+			ft_dprintf(STDERR_FILENO, "\nminishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n", line_count, ast->redir_filename);
+			break ;
+		}
+		if (!ft_strncmp(line, ast->redir_filename, ft_strlen(line) - 1))
+		{
+			free(line);
 			break ;
 		}
 		write(fd, line, ft_strlen(line));
 		free(line);
 	}
-	dup2(fd, STDIN_FILENO);
+	if (dup2(fd, STDIN_FILENO) == -1)
+		return (ft_dprintf(STDERR_FILENO, "minishell: %s\n", strerror(errno)), 1);
 	close(fd);
 	close(tty);
+	return (0);
 }
 
 int	backup(t_type type)
@@ -107,15 +121,15 @@ int	redir_node(t_ast *ast, t_data *data)
 {
 	int	backup_fd;
 
-	backup_fd = backup(ast->type);
+	backup_fd = backup(ast->redir_type);
 	if (ast->redir_type == OUT || ast->redir_type == APPEND)
-		data->status = redir_out(ast, data);
+		data->status = redir_out(ast);
 	else if (ast->redir_type == IN || ast->redir_type == HERE_DOC)
 	{
 		if (ast->redir_type == IN)
-			data->status = redir_in(ast, data);
+			data->status = redir_in(ast);
 		else 
-			data->status = redir_hd(ast, data);
+			data->status = redir_hd(ast);
 	}
 	if (data->status != 0)
 		return (data->status);
