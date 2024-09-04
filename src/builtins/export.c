@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/03 11:57:30 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:58:29 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int ft_sort_alpha_env(t_env *env)
     if (!cpy)
         return (1);
     *cpy = NULL;
-    if (copy_env_env(cpy, env) == false)
+    if (copy_env_env(cpy, env) == false) // need to free cpy
         return (1);
     ft_sort_alpha(cpy);
     print_env_lst(*cpy);
@@ -81,21 +81,24 @@ static int ft_sort_alpha_env(t_env *env)
 // Args doit contenir "="
 // retour export seulememt pour premier caractere pas alpha ": not a valid identifier"
 // check if key already exist
-int ft_export(char **args, t_env *env)
+int ft_export(char **args, t_env **env)
 {
     int i;
     
     i = 1;
-    printf("export\n");
     if (!args[i])
     {
-        ft_sort_alpha_env(env);
+        ft_sort_alpha_env(*env);
         return (0);
     }
     while (args[i])
     {
         printf("rentre dans la boucle\n");
-        if (check_export(args[i], env))
+        
+        // check_export retourne 1, la boucle s'arrête immédiatement, ce qui
+        //  pourrait empêcher le traitement des autres variables.
+        
+        if (check_export(args[i], env)) 
             return (1);
         i++;
     }

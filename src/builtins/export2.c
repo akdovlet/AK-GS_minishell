@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/03 12:04:31 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:37:44 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void ft_change_value(t_env *node, char *str)
     node->both = ft_strdup(str);
 }
 
-int check_export(char *arg, t_env *env)
+int check_export(char *arg, t_env **env)
 {
     t_env *node;
     
@@ -31,13 +31,13 @@ int check_export(char *arg, t_env *env)
             printf("minishell: export: %s: not a valid identifier\n", arg);
     else if (ft_strchr(arg, '='))
     {
-        node = ft_check_key(&env, arg);
+        node = ft_check_key(env, arg);
         if (!node)
         {
             node = env_new(arg);
             if (!node)
                 return (1);
-            env_add_back(&env, node);
+            env_add_back(env, node);
         }
         else
             ft_change_value(node, arg);
