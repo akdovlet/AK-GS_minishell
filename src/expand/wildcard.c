@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/03 10:28:42 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:52:07 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char *sort_files(t_files *files, char *str)
 
 char  *expand_wildcard(char *str)
 {
-    printf("expand_wildcard\n");
+    // printf("expand_wildcard\n");
     t_files *files;
     char *res;
     
@@ -48,7 +48,7 @@ int ft_wildcard(char **tab_cmd)
     {
         if (ft_find_chr(tab_cmd[i], '*'))
         {
-            printf("--- on est la ---\n");
+            // printf("--- on est la ---\n");
             tab_cmd[i] = expand_wildcard(tab_cmd[i]);
             if (!tab_cmd[i])
                 return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/03 10:22:14 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:52:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char *ft_cat_tab(char **str)
     
     i = 0;
     lenres = 0;
-    printf("ft_cat_tab\n");
+    // printf("ft_cat_tab\n");
     while (str[i])
     {
         lenres += ft_strlen(str[i]);

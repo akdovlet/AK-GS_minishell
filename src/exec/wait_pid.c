@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_pid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/03 11:37:41 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 19:02:27 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	pip_wait_children(t_data *data)
 
 int ft_wait_pid(t_ast *ast, t_data *data)
 {
-    exec_recursion(ast->wait_next, data);
+    data->status = exec_recursion(ast->wait_next, data);
     if (!data->pidlst)
         return (data->status);
     pip_wait_children(data);

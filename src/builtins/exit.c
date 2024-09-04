@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:04:41 by gschwand          #+#    #+#             */
-/*   Updated: 2024/07/26 12:36:01 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:51:20 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int check_only_digit(char *str)
         if (!ft_isdigit(str[i]))
         {
             printf("exit\n");
-            printf("minishell: exit: %s: numeric argument required\n", str);
+            ft_dprintf(STDERR_FILENO, "minishell: exit: %s: numeric argument required\n", str);
             exit(2);
         }
         i++;
@@ -50,7 +50,7 @@ void ft_exit(char **tab, t_env *env)
     if (tab[1] && tab[2])
     {
         printf("exit\n");
-        printf("minishell: exit: too many arguments\n");
+        ft_dprintf(STDERR_FILENO, "minishell: exit: too many arguments\n");
     }
     else if (tab[1])
     {

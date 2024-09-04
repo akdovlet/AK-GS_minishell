@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/02 15:18:01 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:48:28 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ int ft_check_path(t_data *data)
 
 int ft_exec_bin(t_ast *ast, t_data *data)
 {
-    char **env;
-    pid_t pid;
-    t_pidlst *new;
+    char		**env;
+    pid_t		pid;
+    t_pidlst	*new;
 
     ft_check_path(data);
     env = ft_ll_tab(data->env);
