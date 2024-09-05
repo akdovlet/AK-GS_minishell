@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 18:47:44 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/05 09:11:36 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ static char  *expand_wildcard(t_files **files, char *str)
     char *res;
     
     res = NULL;
-    printf("ok3\n");
     files_tmp = ft_recover_files();
-    printf("ok2\n");
     if (!files_tmp)
         return (ft_free_lst_files(files), NULL);
     files_tmp = sort_files(files_tmp, str);
@@ -61,23 +59,25 @@ static char  *expand_wildcard(t_files **files, char *str)
 char **ft_files_to_tab(t_files *files)
 {
     char **tab;
+    t_files *tmp;
     int i;
-    int len;
 
     i = 0;
-    len = 0;
-    while (files)
+    tmp = files;
+    while (tmp)
     {
-        len++;
-        files = files->next;
+        i++;
+        tmp = tmp->next;
     }
-    tab = malloc(sizeof(char *) * (len + 1));
+    tab = malloc(sizeof(char *) * (i + 1));
     if (!tab)
         return (NULL);
-    while (files)
+    i = 0;
+    tmp = files;
+    while (tmp)
     {
-        tab[i] = files->name;
-        files = files->next;
+        tab[i] = tmp->name;
+        tmp = tmp->next;
         i++;
     }
     tab[i] = NULL;
@@ -87,25 +87,31 @@ char **ft_files_to_tab(t_files *files)
 char **ft_wildcard(char **tab_cmd)
 {
     t_files *files;
+    t_files *tmp;
     int i;
 
-    printf("ft_wildcard\n");
+    files = NULL;
     i = 0;
     while (tab_cmd[i])
     {
-        printf("tab_cmd[%d] = %s\n", i, tab_cmd[i]);
-        printf("allez batard\n");
         if (ft_find_chr(tab_cmd[i], '*'))
         {
-            printf("baard?\n");
             expand_wildcard(&files, tab_cmd[i]);
             if (!tab_cmd[i])
                 return (NULL);
         }
+        else
+        {
+            tmp = ft_lstnew_files(tab_cmd[i]);
+            if (!tmp)
+                return (NULL);
+            ft_lst_add_back_files(&files, tmp);
+        }
         i++;
     }
-    ft_print_lst_files(files);
     ft_free_tab(tab_cmd);
     tab_cmd = ft_files_to_tab(files);
+    if (!tab_cmd)
+        return (NULL);
     return (tab_cmd);
 }
