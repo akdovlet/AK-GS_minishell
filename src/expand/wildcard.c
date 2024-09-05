@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/05 09:11:36 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/05 09:24:43 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,7 @@ char **ft_wildcard(char **tab_cmd)
     while (tab_cmd[i])
     {
         if (ft_find_chr(tab_cmd[i], '*'))
-        {
             expand_wildcard(&files, tab_cmd[i]);
-            if (!tab_cmd[i])
-                return (NULL);
-        }
         else
         {
             tmp = ft_lstnew_files(tab_cmd[i]);
