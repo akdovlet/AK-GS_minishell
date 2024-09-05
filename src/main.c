@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/04 15:58:27 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/05 17:39:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int main(int ac, char **av, char **env)
 		// print_token(tk);
 		ast = parse(&tk);
 		// ast_print(ast);
-		exec_recursion(ast, &data);
+		if (ast)
+			exec_recursion(ast, &data);
 		free(line);
 		token_clear(&tk);
 		ast_free(ast);

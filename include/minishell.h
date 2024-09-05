@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/04 16:07:48 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:21:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,11 @@ typedef	struct	s_pidlst
 
 typedef struct s_data
 {
-	int			read;
-	int			write;
 	int			status;
-	int			messenger;
+	int			pipe[2];
 	bool		pipeline;
+	bool		read_from_pipe;
+	bool		write_to_pipe;
 	char		*hardpath;
 	t_pidlst	*pidlst;
 	t_env		*env;

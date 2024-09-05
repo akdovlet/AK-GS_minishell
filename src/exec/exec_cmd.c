@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 15:44:35 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/05 17:37:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int ft_is_builtins(char *cmd)
 {
-    printf("ft_is_builtins\n");
+    // printf("ft_is_builtins\n");
     if (!ft_strcmp(cmd, "echo"))
         return (1);
     if (!ft_strcmp(cmd, "cd"))

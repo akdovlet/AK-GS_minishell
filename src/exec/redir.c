@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/04 17:44:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/05 17:50:48 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	redir_in(t_ast *ast)
 
 int	redir_hd(t_ast *ast)
 {
-	int		fd;
+	int		tmp_file;
 	int		tty;
 	int		line_count;
 	char	*line;
@@ -65,8 +65,8 @@ int	redir_hd(t_ast *ast)
 		ft_dprintf(STDERR_FILENO, "minishell: %s\n", strerror(errno));
 		return (1);
 	}
-	fd = open("/tmp", __O_TMPFILE | O_RDWR, 0644);
-	if (fd == -1)
+	tmp_file = open("/tmp", __O_TMPFILE | O_RDWR, 0644);
+	if (tmp_file == -1)
 	{
 		close(tty);
 		ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", ast->redir_filename, strerror(errno));
@@ -87,12 +87,13 @@ int	redir_hd(t_ast *ast)
 			free(line);
 			break ;
 		}
-		write(fd, line, ft_strlen(line));
+		write(tmp_file, line, ft_strlen(line));
 		free(line);
 	}
-	if (dup2(fd, STDIN_FILENO) == -1)
+	lseek(tmp_file, 0, SEEK_SET);
+	if (dup2(tmp_file, STDIN_FILENO) == -1)
 		return (ft_dprintf(STDERR_FILENO, "minishell: %s\n", strerror(errno)), 1);
-	close(fd);
+	close(tmp_file);
 	close(tty);
 	return (0);
 }
