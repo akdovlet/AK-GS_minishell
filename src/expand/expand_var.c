@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/03 10:22:14 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/06 16:31:13 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,12 @@ char *ft_cat_tab(char **str)
     
     i = 0;
     lenres = 0;
-    printf("ft_cat_tab\n");
     while (str[i])
     {
         lenres += ft_strlen(str[i]);
         i++;
     }
-    res = malloc(sizeof(char) * (lenres + 1));
+    res = ft_calloc(sizeof(char), lenres + 1);
     if (!res)
         return (NULL);
     i = 1;
@@ -88,7 +87,6 @@ char *expand_var(char *str, t_env *env)
     int i;
 
     i = 0;
-    res = NULL;
     tmp = ft_split_expand(str, " $\'\"");
     if (!tmp)
         return (NULL);
@@ -98,11 +96,11 @@ char *expand_var(char *str, t_env *env)
         if (tmp[i][0] == '$')
         {
             node = ft_check_key_expand(env, tmp[i] + 1);
-            free(tmp[i]);
-            if (!node)
-                tmp[i] = NULL;
-            else
+            if (node)
+            {
+                free(tmp[i]);
                 tmp[i] = node->value;
+            }
         }
         i++;
     }
