@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/05 17:50:48 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:25:52 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	restore_backup(int backup_fd, t_type type)
 {
 	if (type == OUT || type == APPEND)
 		dup2(backup_fd, STDOUT_FILENO);
-	if (type == IN || type == HERE_DOC)
+	else if (type == IN || type == HERE_DOC)
 		dup2(backup_fd, STDIN_FILENO);
 	close(backup_fd);
 }
@@ -133,7 +133,7 @@ int	redir_node(t_ast *ast, t_data *data)
 			data->status = redir_hd(ast);
 	}
 	if (data->status != 0)
-		return (data->status);
+		return (perror("redir node"), data->status);
 	if (ast->redir_next)
 		data->status = exec_recursion(ast->redir_next, data);
 	restore_backup(backup_fd, ast->redir_type);

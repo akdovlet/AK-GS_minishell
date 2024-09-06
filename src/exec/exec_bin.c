@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/05 18:11:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:00:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int ft_exec_bin(t_ast *ast, t_data *data)
     else
     {
         new = ft_lstnew_pidlst(pid);
+		fprintf(stderr, "pid in exec_bin is: %d\n", new->pid);
         if (!new)
             return (data->status);
         ft_lstadd_back_pidlst(&data->pidlst, new);

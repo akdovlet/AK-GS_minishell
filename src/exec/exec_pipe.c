@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/05 18:28:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:39:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int ft_pipe_recursion(t_ast *ast, t_data *data)
 
 	backup_in = dup(STDIN_FILENO);
 	backup_out = dup(STDOUT_FILENO);
+	data->pipeline = true;
 	if (pipe(pipe_fd) == -1)
 		return (perror("pipe"), 1);
-	data->pipeline = true;
 	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
 		perror("dup2");
 	close(pipe_fd[1]);

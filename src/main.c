@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/05 17:39:18 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:42:07 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(int ac, char **av, char **env)
 		tokenize(line, &tk);
 		// print_token(tk);
 		ast = parse(&tk);
-		// ast_print(ast);
+		ast_print(ast);
 		if (ast)
 			exec_recursion(ast, &data);
 		free(line);
