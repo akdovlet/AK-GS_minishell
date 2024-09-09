@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/06 13:45:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/08 14:17:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@ static void	pip_wait_children(t_data *data)
 	int	status;
     t_pidlst *node;
     t_pidlst *tmp;
-	int		count;
 
-	count = 0;
-	fprintf(stderr, "in pip_wait\n");
     node = data->pidlst;
 	while (node)
 	{
-		fprintf(stderr, "node pid in pip_wait_children is: %d\n", node->pid);
 		waitpid(node->pid, &status, 0);
 		if (WIFEXITED(status))
 			data->status = 128 + WTERMSIG(status);

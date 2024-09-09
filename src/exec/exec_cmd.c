@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/06 13:51:22 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/08 14:17:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int ft_fork_builtins(t_ast *ast, t_data *data)
         return (perror("fork failed\n"), 1);
     else if (pid == 0)
     {
+        fdlst_close_in_child(&data->fdlst);
         ft_exec_builtins(ast, data);
     }
 	if (pid != 0)
@@ -71,7 +72,6 @@ int ft_fork_builtins(t_ast *ast, t_data *data)
         new = ft_lstnew_pidlst(pid);
         if (!new)
             return (1);
-		fprintf(stderr, "pid in fork builtins is: %d\n", new->pid);
         ft_lstadd_back_pidlst(&data->pidlst, new);
     }
     return (0);

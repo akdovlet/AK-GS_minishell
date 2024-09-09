@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/06 13:25:52 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/08 14:06:01 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	redir_in(t_ast *ast)
 	return (0);
 }
 
+//tmp file flag does not work without lseek(), either write in a pipe
+// or create my own tmp file. Also can not use strncmp to find delimiter.
 int	redir_hd(t_ast *ast)
 {
 	int		tmp_file;
@@ -123,6 +125,7 @@ int	redir_node(t_ast *ast, t_data *data)
 	int	backup_fd;
 
 	backup_fd = backup(ast->redir_type);
+	fdlst_add_back(&data->fdlst, fdlst_new(backup_fd, true));
 	if (ast->redir_type == OUT || ast->redir_type == APPEND)
 		data->status = redir_out(ast);
 	else if (ast->redir_type == IN || ast->redir_type == HERE_DOC)
@@ -133,7 +136,7 @@ int	redir_node(t_ast *ast, t_data *data)
 			data->status = redir_hd(ast);
 	}
 	if (data->status != 0)
-		return (perror("redir node"), data->status);
+		return (data->status);
 	if (ast->redir_next)
 		data->status = exec_recursion(ast->redir_next, data);
 	restore_backup(backup_fd, ast->redir_type);

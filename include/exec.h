@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 18:29:01 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/08 12:51:19 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,17 @@ char    *find_path_env(char **env);
 char    **find_path_cmd(char **path_env, char *cmd);
 char    *find_cmd(char **cmd, char **envp);
 
+//	redir_lst_clear.c
+void	fdlst_dont_close_in_child(t_fdlst *lst, int fd_target);
+void	fdlst_clear(t_fdlst **lst);
+void	fdlst_eat(t_fdlst **node);
+
+//	redir_lst.c
+t_fdlst	*fdlst_new(int fd, bool close_in_child);
+void	fdlst_add_back(t_fdlst	**lst, t_fdlst *new);
+void	fdlst_close_in_child(t_fdlst **lst);
+
 //	redir.c
-int	redir_node(t_ast *ast, t_data *data);
+int		redir_node(t_ast *ast, t_data *data);
 
 #endif

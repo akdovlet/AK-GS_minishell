@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/05 14:21:06 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/07 21:11:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,20 @@ typedef	struct	s_pidlst
 	struct s_pidlst	*next;
 }	t_pidlst;
 
+typedef struct s_fdlst
+{
+	int				fd;
+	bool			close_in_child;
+	struct s_fdlst	*next;
+}	t_fdlst;
+
 typedef struct s_data
 {
 	int			status;
-	int			pipe[2];
 	bool		pipeline;
-	bool		read_from_pipe;
-	bool		write_to_pipe;
 	char		*hardpath;
 	t_pidlst	*pidlst;
+	t_fdlst		*fdlst;
 	t_env		*env;
 }	t_data;
 
