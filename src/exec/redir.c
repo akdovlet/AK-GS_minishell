@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/08 14:06:01 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/09 18:20:53 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,6 @@ int	redir_node(t_ast *ast, t_data *data)
 	if (ast->redir_next)
 		data->status = exec_recursion(ast->redir_next, data);
 	restore_backup(backup_fd, ast->redir_type);
+	fdlst_delete_node(&data->fdlst, backup_fd);
 	return (data->status);
 }

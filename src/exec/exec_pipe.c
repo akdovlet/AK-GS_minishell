@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/08 13:28:43 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/09 18:21:22 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ int ft_pipe_recursion(t_ast *ast, t_data *data)
 	data->status = exec_recursion(ast->pipe_left, data);
 	dup2(backup_out, STDOUT_FILENO);
 	close(backup_out);
-	// fdlst_dont_close_in_child(data->fdlst, backup_out);
+	fdlst_delete_node(&data->fdlst, backup_out);
 	backup_in = dup(STDIN_FILENO);
 	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
 		perror("dup2");
 	fdlst_add_back(&data->fdlst, fdlst_new(backup_in, true));
 	close(pipe_fd[0]);
-	// fdlst_dont_close_in_child(data->fdlst, pipe_fd[0]);
-	// fdlst_dont_close_in_child(data->fdlst, backup_out);
+	fdlst_delete_node(&data->fdlst, pipe_fd[0]);
+	fdlst_delete_node(&data->fdlst, backup_out);
 	data->status = exec_recursion(ast->pipe_right, data);
 	data->pipeline = 0;
 	dup2(backup_in, STDIN_FILENO);
