@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/04 16:19:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:34:03 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,15 @@ t_env	*ft_last(t_env *lst)
 
 void	env_add_back(t_env **lst, t_env *new)
 {
+	t_env *tmp;
+	
 	if (!*(lst))
 		*lst = new;
 	else
-		ft_last(*lst)->next = new;
+	{
+		tmp = *lst;
+		ft_last(tmp)->next = new;
+	}
 }
 
 char	*copy_key(char *str)
@@ -61,6 +66,8 @@ t_env	*env_new(char *var)
 	if (!node->value)
 		return (NULL);
 	node->both = ft_strdup(var);
+	if (!node->both)
+		return (NULL);
 	node->next = NULL;
 	return (node);
 }

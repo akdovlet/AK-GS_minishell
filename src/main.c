@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/08 14:18:22 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:34:39 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int main(int ac, char **av, char **env)
 		add_history(line);
 		tokenize(line, &tk);
 		// print_token(tk);
+		// env_print(data.env);
 		ast = parse(&tk);
 		// ast_print(ast);
 		if (ast)

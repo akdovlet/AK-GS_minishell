@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:22:33 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 18:52:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:35:02 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ void ft_lstcomp_wildcard(t_files **files, char *str)
 
 void ft_strlcat_files(char *dst, const char *src, size_t lenres)
 {
-    ft_strlcat(dst, "\"", lenres);
+    ft_strlcat(dst, "\'", lenres);
     ft_strlcat(dst, src, lenres);
-    ft_strlcat(dst, "\"", lenres);
+    ft_strlcat(dst, "\'", lenres);
     ft_strlcat(dst, " ", lenres);
 }
 

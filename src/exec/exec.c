@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/08 14:16:18 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:32:34 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int ft_exec(t_ast *ast, t_data *data)
 	expand_tab_of_cmd(ast->cmd, data->env);
 	if (ast->cmd[1])
 	{
-		if (ft_wildcard(ast->cmd))
-			return (false);
+		ast->cmd = ft_wildcard(ast->cmd);
+		if (!ast->cmd)
+			return (1);
 	}
     if (ft_is_builtins(ast->cmd[0]))
         ft_builtins(ast, data);

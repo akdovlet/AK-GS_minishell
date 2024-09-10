@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/14 10:10:30 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:22:29 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ void ft_lstdelone_files(t_files **files, t_files *to_delete)
     }
 }
 
-void ft_free_lst_files(t_files *files)
+void ft_free_lst_files(t_files **files)
 {
     t_files *tmp;
 
     while (files)
     {
-        tmp = files;
-        files = files->next;
+        tmp = *files;
+        *files = (*files)->next;
         free(tmp);
     }
 }
