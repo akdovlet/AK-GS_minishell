@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 16:59:26 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/10 13:53:59 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int modif_pwd(t_env **env)
 
 int	cd(char **args, t_env **env)
 {
-	if (!args[1])
+	if (!args[1] || !ft_strcmp(args[1], "~"))
 	{
 		if (modif_oldpwd(env))
 			return (1);
