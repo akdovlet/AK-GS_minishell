@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/07 21:11:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:23:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ add_history*/
 /* tgetent, tgetflag, tgetnum, getstr, tgoto, tputs */
 # include <curses.h>
 # include <stdbool.h>
+# include <signal.h>
+# include <sys/types.h>
 # include "libft.h"
 // lib for signals
-# include "signal_minishell.h"
 
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"
