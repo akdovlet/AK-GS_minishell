@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 11:27:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/09 17:38:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/10 10:51:51 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,14 @@ void	fdlst_add_back(t_fdlst	**lst, t_fdlst *new)
 		fdlst_last(*lst)->next = new;
 }
 
-void	fdlst_close_in_child(t_fdlst **lst)
+void	fdlst_close_in_child(t_fdlst *lst)
 {
-	if (!*lst || !lst)
+	if (!lst)
 		return ;
-	while (*lst)
+	while (lst)
 	{
-		if ((*lst)->close_in_child)
-		{
-			close((*lst)->fd);
-			(*lst)->close_in_child = false;
-		}
-		*lst = (*lst)->next;
+		if (lst->close_in_child)
+			close(lst->fd);
+		lst = lst->next;
 	}
 }

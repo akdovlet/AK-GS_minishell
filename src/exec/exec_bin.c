@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/08 13:49:34 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/10 10:52:14 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int ft_exec_bin(t_ast *ast, t_data *data)
         return (perror("fork failed\n"), 1);
     else if (pid == 0)
     {
-        fdlst_close_in_child(&data->fdlst);
+        fdlst_close_in_child(data->fdlst);
         if (access(ast->cmd[0], F_OK) == -1)
             data->status = ft_execve_path(ast->cmd, env);
         else
