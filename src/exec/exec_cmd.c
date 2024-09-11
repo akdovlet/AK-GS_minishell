@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 17:17:15 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:54:45 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ int ft_is_builtins(char *cmd)
 int ft_exec_builtins(t_ast *ast, t_data *data)
 {
     if (!ft_strcmp(ast->cmd[0], "echo"))
-        ft_echo(ast->cmd, data->env);
+        data->status = ft_echo(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "cd"))
-        cd(ast->cmd, &data->env);
+        data->status = cd(ast->cmd, &data->env);
     if (!ft_strcmp(ast->cmd[0], "pwd"))
-        ft_pwd(ast->cmd, data->env);
+        data->status = ft_pwd(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "export"))
-        ft_export(ast->cmd, &data->env);
+        data->status = ft_export(ast->cmd, &data->env);
     if (!ft_strcmp(ast->cmd[0], "unset"))
-        unset(ast->cmd, data->env);
+        data->status = unset(ast->cmd, data->env); 
     if (!ft_strcmp(ast->cmd[0], "env"))
-        ft_env(ast->cmd, data->env);
+        data->status = ft_env(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "exit"))
-        ft_exit(ast->cmd, data->env);
+        data->status = ft_exit(ast->cmd, data->env, data);
     return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 15:58:29 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:14:22 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,31 +76,25 @@ static int ft_sort_alpha_env(t_env *env)
     return (0);
 }
 
-// need a sort for empty string
-// Var doit commencer par alpha
-// Args doit contenir "="
 // retour export seulememt pour premier caractere pas alpha ": not a valid identifier"
 // check if key already exist
 int ft_export(char **args, t_env **env)
 {
     int i;
+    int e;
+    int tmp;
     
+    e = 0;
+    tmp = 0;
     i = 1;
     if (!args[i])
-    {
-        ft_sort_alpha_env(*env);
-        return (0);
-    }
+        return (ft_sort_alpha_env(*env));
     while (args[i])
     {
-        printf("rentre dans la boucle\n");
-        
-        // check_export retourne 1, la boucle s'arrête immédiatement, ce qui
-        //  pourrait empêcher le traitement des autres variables.
-        
-        if (check_export(args[i], env)) 
-            return (1);
+        tmp = check_export(args[i], env);
+        if (tmp)
+            e = tmp;
         i++;
     }
-    return (0);
+    return (e);
 }

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/05 08:33:10 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:03:07 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int check_export(char *arg, t_env **env)
     t_env *node;
     
     if (!ft_isalpha(arg[0]))
-            printf("minishell: export: %s: not a valid identifier\n", arg);
+    {
+        return 
+        (ft_dprintf(2, "minishell: export: %s: not a valid identifier\n", arg), 1);
+    }
     else if (ft_strchr(arg, '='))
     {
         node = ft_check_key(env, arg);
