@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_pid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/08 14:17:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:02:24 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	pip_wait_children(t_data *data)
 	while (node)
 	{
 		waitpid(node->pid, &status, 0);
-		if (WIFEXITED(status))
-			data->status = 128 + WTERMSIG(status);
-		else
+		// if (WIFEXITED(status))
+		// 	data->status = 128 + WTERMSIG(status);
+		// else
 			data->status = WEXITSTATUS(status);
         tmp = node;
 		node = node->next;

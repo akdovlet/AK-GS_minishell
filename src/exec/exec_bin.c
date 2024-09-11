@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/10 10:52:14 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:58:17 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int ft_exec_bin(t_ast *ast, t_data *data)
     {
         new = ft_lstnew_pidlst(pid);
         if (!new)
-            return (data->status);
+            return (1);
         ft_lstadd_back_pidlst(&data->pidlst, new);
     }
     free_tab(env);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
+#    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/08 12:08:38 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/09/11 16:45:25 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ fclean: clean
 	@$(MAKE) --no-print-directory fclean -C libft
 
 val : all
-	/usr/local/bin/valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes ./${NAME}
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes ./${NAME}
 
 re: fclean all
 
