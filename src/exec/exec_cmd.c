@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/11 16:37:25 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:42:34 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int ft_is_builtins(char *cmd)
 {
+    // printf("ft_is_builtins\n");
     if (!ft_strcmp(cmd, "echo"))
         return (1);
     if (!ft_strcmp(cmd, "cd"))
@@ -66,7 +67,7 @@ int ft_fork_builtins(t_ast *ast, t_data *data)
         ft_exec_builtins(ast, data); //need to free who need to be freed
         exit(data->status);
     }
-    else
+	if (pid != 0)
     {
         new = ft_lstnew_pidlst(pid);
         if (!new)

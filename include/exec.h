@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/02 15:17:03 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/10 10:52:03 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 int exec_recursion(t_ast *ast, t_data *data);
 
 // exec_pipe.c
-int ft_pipe_recusion(t_ast *ast, t_data *data);
+int			ft_pipe_recursion(t_ast *ast, t_data *data);
 
 // exec_cmd.c
-int ft_is_builtins(char *cmd);
-int ft_builtins(t_ast *ast, t_data *data);
+int			ft_is_builtins(char *cmd);
+int			ft_builtins(t_ast *ast, t_data *data);
 
 // pidlst.c
 t_pidlst	*ft_lstnew_pidlst(pid_t pid);
@@ -49,5 +49,19 @@ void    free_tab(char **tab);
 char    *find_path_env(char **env);
 char    **find_path_cmd(char **path_env, char *cmd);
 char    *find_cmd(char **cmd, char **envp);
+
+//	redir_lst_clear.c
+void	fdlst_dont_close_in_child(t_fdlst *lst, int fd_target);
+void	fdlst_clear(t_fdlst **lst);
+void	fdlst_eat(t_fdlst **node);
+void	fdlst_delete_node(t_fdlst **lst, int key);
+
+//	redir_lst.c
+t_fdlst	*fdlst_new(int fd, bool close_in_child);
+void	fdlst_add_back(t_fdlst	**lst, t_fdlst *new);
+void	fdlst_close_in_child(t_fdlst *lst);
+
+//	redir.c
+int		redir_node(t_ast *ast, t_data *data);
 
 #endif

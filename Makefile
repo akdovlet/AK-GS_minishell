@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
+#    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/03 10:53:03 by gschwand         ###   ########.fr        #
+#    Updated: 2024/09/08 12:08:38 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,15 +56,18 @@ SRC		:=	main.c					\
 			expand/expand_var.c				\
 			expand/lst_file_utils.c			\
 			expand/sort_files.c 			\
-			expand/wildcard.c			\
-			exec/exec_bin.c 			\
-			exec/exec_cmd.c 					\
+			expand/wildcard.c				\
+			exec/exec_bin.c 				\
+			exec/exec_cmd.c 				\
 			exec/exec_pipe.c 				\
-			exec/exec.c 				\
-			exec/operator.c 			\
-			exec/pidlst.c 				\
-			exec/subshell.c 			\
-			exec/path_utils.c 			\
+			exec/exec.c 					\
+			exec/operator.c 				\
+			exec/pidlst.c 					\
+			exec/subshell.c 				\
+			exec/redir_lst_clear.c			\
+			exec/redir_lst.c				\
+			exec/redir.c					\
+			exec/path_utils.c 				\
 			exec/wait_pid.c
 
 SRC_DIR	:=	src
@@ -92,7 +95,7 @@ $(BUILD)/%.o: $(SRC_DIR)/%.c
 	@printf "\033[1;32%sm\tCompiled: $<\033[0m\n";
 
 $(LIBFT):
-	@$(MAKE) --no-print-directory -C  libft
+	@$(MAKE) --no-print-directory -C libft
 
 clean:
 	@if [ -d $(BUILD) ]; then $(RM) -rf $(BUILD) && echo "\033[1;31m\tDeleted: $(NAME) $(BUILD)\033[0m"; fi

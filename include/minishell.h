@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/03 10:51:44 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:23:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 /* printf, perror */
 # include <stdio.h>
+# include <errno.h>
 /* malloc, free, exit, getenv */
 # include <stdlib.h>
 /* write, access, open, read, close, fork, getcwd, chdir, dup, dup2, pipe
@@ -41,9 +42,10 @@ add_history*/
 /* tgetent, tgetflag, tgetnum, getstr, tgoto, tputs */
 # include <curses.h>
 # include <stdbool.h>
+# include <signal.h>
+# include <sys/types.h>
 # include "libft.h"
 // lib for signals
-# include "signal_minishell.h"
 
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"
@@ -91,8 +93,7 @@ typedef enum	e_token
 	OR = 1002,
 	APPEND = 1003,
 	HERE_DOC = 1004,
-	FILE_NAME = 1005 
-} t_type;
+}	t_type;
 
 typedef	struct s_token
 {
@@ -115,15 +116,20 @@ typedef	struct	s_pidlst
 	struct s_pidlst	*next;
 }	t_pidlst;
 
+typedef struct s_fdlst
+{
+	int				fd;
+	bool			close_in_child;
+	struct s_fdlst	*next;
+}	t_fdlst;
+
 typedef struct s_data
 {
-	int			read;
-	int			write;
 	int			status;
-	int			messenger;
 	bool		pipeline;
 	char		*hardpath;
 	t_pidlst	*pidlst;
+	t_fdlst		*fdlst;
 	t_env		*env;
 }	t_data;
 

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:04:41 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/11 13:55:07 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:42:55 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int check_only_digit(char *str)
         if (!ft_isdigit(str[i]))
         {
             printf("exit\n");
-            printf("minishell: exit: %s: numeric argument required\n", str);
+            ft_dprintf(STDERR_FILENO, "minishell: exit: %s: numeric argument required\n", str);
             exit(2);
         }
         i++;
@@ -50,7 +50,7 @@ int ft_exit(char **tab, t_env *env, t_data *data)
     if (tab[1] && tab[2])
     {
         printf("exit\n");
-        printf("minishell: exit: too many arguments\n");
+        ft_dprintf(STDERR_FILENO, "minishell: exit: too many arguments\n");
     }
     else if (tab[1])
     {

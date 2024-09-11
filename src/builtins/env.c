@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:18:24 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/11 13:53:18 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:43:04 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_env(char **argv, t_env *env)
 {
     if (argv[1])
-        printf("env: too many arguments\n");
+        ft_dprintf(STDERR_FILENO, "env: too many arguments\n");
     else
     {
         while (env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/02 15:18:01 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/10 10:52:14 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,23 @@ int ft_check_path(t_data *data)
     return (0);
 }
 
+void    close_all(void)
+{
+    int i;
+
+    i = 3;
+    while (i < 256)
+    {
+        close(i);
+        i++;
+    }
+}
+
 int ft_exec_bin(t_ast *ast, t_data *data)
 {
-    char **env;
-    pid_t pid;
-    t_pidlst *new;
+    char		**env;
+    pid_t		pid;
+    t_pidlst	*new;
 
     ft_check_path(data);
     env = ft_ll_tab(data->env);
@@ -100,6 +112,7 @@ int ft_exec_bin(t_ast *ast, t_data *data)
         return (perror("fork failed\n"), 1);
     else if (pid == 0)
     {
+        fdlst_close_in_child(data->fdlst);
         if (access(ast->cmd[0], F_OK) == -1)
             data->status = ft_execve_path(ast->cmd, env);
         else

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:30:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/13 11:33:09 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:41:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,20 @@ int	char_tobuffer(int c, t_print *data)
 	return (1);
 }
 
+int	int_tobuffer(int n, t_print *data)
+{
+	char	*nb;
+	int		wrote;	
+	
+	wrote = 0;
+	nb = ft_itoa(n);
+	if (!nb)
+		return (wrote);
+	wrote = string_tobuffer(nb, data);
+	free(nb);
+	return (wrote);
+}
+
 int	ft_ddraft(char flag, t_print *data, va_list *arg)
 {
 	int	wrote;
@@ -60,8 +74,10 @@ int	ft_ddraft(char flag, t_print *data, va_list *arg)
 		wrote += string_tobuffer(va_arg(*arg, char *), data);
 	if (flag == 'c')
 		wrote += char_tobuffer(va_arg(*arg, int), data);
+	if (flag == 'd')
+		wrote += int_tobuffer(va_arg(*arg, int), data);
 	else
-		return (-1);
+		return (0);
 	return (wrote);
 }
 
