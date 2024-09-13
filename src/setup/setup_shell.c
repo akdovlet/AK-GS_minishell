@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:37:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/10 17:02:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:37:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 void	interrupt(int sig)
 {
 	if (sig == SIGINT)
-		printf("^C\n");
+	{
+		printf("\nminishell$> ");
+	}
 	else if (sig == SIGTERM)
 		printf("ctrl-d\n");
 	else if (sig == SIGQUIT)
@@ -29,7 +31,14 @@ void	interrupt(int sig)
 void	setup_shell(t_data	*data, char	**env)
 {
 	struct sigaction sa;
+	struct	termios termios_new;
+	struct	termios termios_save;
+	int		rc;
 
+	rc = tcgetattr(0, &termios_save);
+	termios_new = termios_save;
+	termios_new.c_lflag &= ~ECHOCTL;
+	rc = tcsetattr(0, 0, &termios_new);
 	*data = (t_data){};
 	sa.sa_handler = interrupt;
 	sigemptyset(&sa.sa_mask);
