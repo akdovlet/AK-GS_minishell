@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/11 16:42:07 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:59:18 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int ft_pipe_recursion(t_ast *ast, t_data *data)
 	int	backup_out;
 
 	backup_out = dup(STDOUT_FILENO);
-	fdlst_add_back(&data->fdlst, fdlst_new(backup_out, true));
+	fdlst_add_back(&data->fdlst, fdlst_new(backup_out, true)); //pas protege est ce un probleme ?
 	data->pipeline = true;
 	if (pipe(pipe_fd) == -1)
 		return (perror("pipe"), 1);
