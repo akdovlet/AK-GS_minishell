@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 18:31:24 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:59:39 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_files *ft_recover_files(void);
 void ft_free_lst_files(t_files **files);
 void ft_lstdelone_files(t_files **files, t_files *to_delete);
 t_files *ft_lstnew_files(char *str);
+int ft_new_lst_add_back_files(t_files **alst, t_files *new);
 void ft_lst_add_back_files(t_files **alst, t_files *new);
 
 // sort_files.c

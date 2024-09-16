@@ -6,11 +6,29 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 18:22:29 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/16 10:08:39 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+
+int ft_new_lst_add_back_files(t_files **alst, t_files *new)
+{
+    t_files *tmp;
+
+    if (!new)
+        return (1);
+    if (!*alst)
+    {
+        *alst = new;
+        return (0);
+    }
+    tmp = *alst;
+    while (tmp->next)
+        tmp = tmp->next;
+    tmp->next = new;
+    return (0);
+}
 
 void ft_lst_add_back_files(t_files **alst, t_files *new)
 {
@@ -38,6 +56,12 @@ t_files *ft_lstnew_files(char *str)
         return (NULL);
     }
     new->name = ft_strdup(str);
+    if (!new->name)
+    {
+        perror("malloc");
+        free(new);
+        return (NULL);
+    }
     new->next = NULL;
     return (new);
 }

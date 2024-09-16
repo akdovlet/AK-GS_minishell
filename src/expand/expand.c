@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/13 18:11:11 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/16 10:15:36 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,23 @@ char *ft_supp_dquotes(char *str)
     return (res);
 }
 
-static int find_quotes(char *str)
-{
-    int i;
+// static int find_quotes(char *str)
+// {
+//     int i;
 
-    i = 0;
-    if (!str)
-        return (0);
-    while (str[i])
-    {
-        if (str[i] == '\'')
-            return (1);
-        else if (str[i] == '\"')
-            return (2);
-        i++;
-    }
-    return (0);
-}
+//     i = 0;
+//     if (!str)
+//         return (0);
+//     while (str[i])
+//     {
+//         if (str[i] == '\'')
+//             return (1);
+//         else if (str[i] == '\"')
+//             return (2);
+//         i++;
+//     }
+//     return (0);
+// }
 
 static int copy_squote(char *str, int *i, t_files **files)
 {
@@ -97,51 +97,111 @@ static int copy_squote(char *str, int *i, t_files **files)
         return (1);
     ft_lst_add_back_files(files, new);
     i = &j;
+    return (0);
 }
 
-static int copy_var(char *str, int *i, t_files **files)
+// quit lorsque la variable n'existe pas
+// sorti aussi des dquotes
+static int copy_var(char *str, int *i, t_files **files, t_env *env)
 {
     int j;
     char *tmp;
     t_files *new;
+    t_env *node;
     
     j = *i + 1;
-    while (str[j] || str[j] != '\'' || str[j] != '\"' || str[j] != '$')
+    while (str[j] && str[j] != '\'' && str[j] != '\"' && str[j] != '$')
         j++;
     tmp = ft_strndup(str + *i + 1, j - *i - 1);
-    new = ft_lstnew_files(tmp);
+    node = ft_check_key(&env, tmp);
+    if (!node)
+        return (free(tmp), 2);
+    new = ft_lstnew_files(node->value);
     if (!new)
         return (1);
     ft_lst_add_back_files(files, new);
-    i = &j;
+    *i = j;
+    return (0);
 }
 
-int expand_str(char *str, t_env *env, t_files **files)
+// probleme avec cette liste chaine on strdup 2x la meme chaine
+static int copy_dquotes(char *str, int *i, t_files **files, t_env *env)
 {
-    t_files *tmp;
-    int i;
-    
-    i = 0;
-    while (str[i])
+    int j;
+    char *tmp;
+    j = *i + 1;
+    while (str[j] || str[j] != '\"')
     {
-        if (str[i] == '\'')
+        if (str[j] == '$')
         {
-            if (copy_squote(str, &i, files))
+            tmp = ft_strndup(str + *i + 1, j - *i - 1);
+            if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
                 return (1);
-        }
-        else if (str[i] == '\"')
-        {
-            if (copy_dquote(str, &i, files))
-                return (1);
-        }
-        else if (str[i] == '$')
-        {
-            if (copy_var(str, &i, env, files))
-                return (1);
+            if (copy_var(str, &j, files, env))
+                return (0);
+            *i = j;
         }
         else
-            i++;
+            j++;
     }
+    tmp = ft_strndup(str + *i + 1, j - *i - 1);
+    if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
+        return (1);
+    *i = j;
+    return (0);
+}
+
+int tri_char(char *str, int *i, t_files **files, t_env *env)
+{
+    if (str[*i] == '\'')
+    {
+        if (copy_squote(str, i, files))
+            return (1);
+    }
+    else if (str[*i] == '\"')
+    {
+        if (copy_dquotes(str, i, files, env))
+            return (1);
+    }
+    else if (str[*i] == '$')
+    {
+        if (copy_var(str, i, files, env))
+            return (1);
+    }
+    return (0);
+}
+
+// probleme tout ce qui ne rentre pas dans l'une des fonctions ne va pas etre copier
+// dans notre liste chainee = potentiellement reglé
+int expand_str(char *str, t_env *env, t_files **files)
+{
+    char *tmp;
+    int *i;
+    int j;
+    
+    i = malloc(sizeof(int *));
+    *i = 0;
+    j = 0;
+    while (str[*i])
+    {
+        if (str[*i] == '\'' || str[*i] == '\"' || str[*i] == '$')
+        {
+            if (*i != j)
+            {
+                tmp = ft_strndup(str + j, *i - j);
+                if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
+                    return (1);
+            }
+            if (tri_char(str, i, files, env))
+                return (1);
+            j = *i;
+        }
+        else
+            (*i)++;
+    }
+    tmp = ft_strndup(str + j, *i - j);
+    if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
+        return (1);
     return (0);
 }
 
@@ -152,9 +212,20 @@ int expand_tab_of_cmd(char **tab_cmd, t_env *env)
     t_files *files;
 
     i = 0;
+    files = NULL;
     while (tab_cmd[i])
     {
-        expand_str(tab_cmd[i], env, &files);
+        printf("tab_cmd[%d] = %s\n", i, tab_cmd[i]);
+        if (expand_str(tab_cmd[i], env, &files))
+            return (1);
+        printf("ok\n");
+        free(tab_cmd[i]);
+        ft_print_lst_files(files);
+        tab_cmd[i] = write_files(files);
+        ft_free_lst_files(&files);
+        printf("tab_cmd[%d] = %s\n", i, tab_cmd[i]);
+        if (!tab_cmd[i])
+            return (1);
         i++;
     }
     return (true);
