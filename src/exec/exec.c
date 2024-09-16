@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/13 14:34:24 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:50:54 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 // gestion hard path
 int ft_exec(t_ast *ast, t_data *data)
 {
-	// print_tab(ast->cmd);
 	expand_tab_of_cmd(ast->cmd, data->env);
 	ast->cmd = ft_wildcard(ast->cmd);
+	print_tab(ast->cmd);
 	if (!ast->cmd)
 		return (1);
     if (ft_is_builtins(ast->cmd[0]))

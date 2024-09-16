@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/13 15:35:10 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:49:26 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ t_files *sort_files(t_files *files, char *str)
 {
     t_files *tmp;
 
-    ft_print_lst_files(files);
+    // ft_print_lst_files(files);
     ft_lstcomp_wildcard(&files, str);\
     printf("____________________\n");
-    ft_print_lst_files(files);
+    // ft_print_lst_files(files);
     if (!files)
     {
         tmp = ft_lstnew_files(str);
@@ -97,7 +97,7 @@ char **ft_wildcard(char **tab_cmd)
 
     files = NULL;
     i = 0;
-    print_tab(tab_cmd);
+    // print_tab(tab_cmd);
     while (tab_cmd[i])
     {
         if (ft_find_chr(tab_cmd[i], '*'))
@@ -113,7 +113,7 @@ char **ft_wildcard(char **tab_cmd)
     }
     ft_free_tab(tab_cmd);
     tab_cmd = ft_files_to_tab(files);
-    print_tab(tab_cmd);
+    // print_tab(tab_cmd);
     if (!tab_cmd)
         return (NULL);
     return (tab_cmd);

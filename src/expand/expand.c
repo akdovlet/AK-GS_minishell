@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/16 10:15:36 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:54:09 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,15 @@ static int copy_squote(char *str, int *i, t_files **files)
 {
     int j;
     char *tmp;
-    t_files *new;
 
+    printf("copy_squote\n");
     j = *i + 1;
-    while (str[j] || str[j] != '\'')
+    while (str[j] && str[j] != '\'')
         j++;
     tmp = ft_strndup(str + *i + 1, j - *i - 1);
-    new = ft_lstnew_files(tmp);
-    if (!new)
+    if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
         return (1);
-    ft_lst_add_back_files(files, new);
-    i = &j;
+    *i = j + 1;
     return (0);
 }
 
@@ -109,13 +107,19 @@ static int copy_var(char *str, int *i, t_files **files, t_env *env)
     t_files *new;
     t_env *node;
     
+    printf("cpy_var\n");
     j = *i + 1;
     while (str[j] && str[j] != '\'' && str[j] != '\"' && str[j] != '$')
         j++;
     tmp = ft_strndup(str + *i + 1, j - *i - 1);
+    printf("tmp = %s\n", tmp);
     node = ft_check_key(&env, tmp);
     if (!node)
+    {
+        printf("node = NULL\n");
+        *i = j;
         return (free(tmp), 2);
+    }
     new = ft_lstnew_files(node->value);
     if (!new)
         return (1);
@@ -129,25 +133,38 @@ static int copy_dquotes(char *str, int *i, t_files **files, t_env *env)
 {
     int j;
     char *tmp;
-    j = *i + 1;
-    while (str[j] || str[j] != '\"')
+
+    printf("copy_dquotes\n");
+    j = *i;
+    while (str[j] && str[j] != '\"')
     {
         if (str[j] == '$')
         {
-            tmp = ft_strndup(str + *i + 1, j - *i - 1);
+            tmp = ft_strndup(str + *i, j - *i);
             if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
                 return (1);
-            if (copy_var(str, &j, files, env))
-                return (0);
+            if (copy_var(str, &j, files, env) == 1)
+                return (1);
             *i = j;
+            printf("///str[j] = %c///\n", str[j]);
         }
         else
             j++;
     }
-    tmp = ft_strndup(str + *i + 1, j - *i - 1);
-    if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
-        return (1);
-    *i = j;
+    if (str[j] == '\"')
+    {
+        printf("j = %d\ni = %d\n", j, *i);
+        printf("okkkkkkkkk\n");
+        
+    }
+    if (j != *i)
+    {
+        tmp = ft_strndup(str + *i, j - *i);
+        printf("tmp = %s\n", tmp);
+        if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
+            return (1);
+    }
+    *i = j + 1;
     return (0);
 }
 
@@ -160,12 +177,12 @@ int tri_char(char *str, int *i, t_files **files, t_env *env)
     }
     else if (str[*i] == '\"')
     {
-        if (copy_dquotes(str, i, files, env))
+        if (copy_dquotes(str, i + 1, files, env))
             return (1);
     }
     else if (str[*i] == '$')
     {
-        if (copy_var(str, i, files, env))
+        if (copy_var(str, i, files, env) == 1)
             return (1);
     }
     return (0);
@@ -193,15 +210,18 @@ int expand_str(char *str, t_env *env, t_files **files)
                     return (1);
             }
             if (tri_char(str, i, files, env))
-                return (1);
+                return (printf ("ok fini\n"), 1);
             j = *i;
         }
         else
             (*i)++;
     }
-    tmp = ft_strndup(str + j, *i - j);
-    if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
-        return (1);
+    if (j != *i)
+    {
+        tmp = ft_strndup(str + j, *i - j);
+        if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
+            return (1);
+    }
     return (0);
 }
 
@@ -213,17 +233,14 @@ int expand_tab_of_cmd(char **tab_cmd, t_env *env)
 
     i = 0;
     files = NULL;
-    while (tab_cmd[i])
+    while (tab_cmd[i] && i < 10)
     {
-        printf("tab_cmd[%d] = %s\n", i, tab_cmd[i]);
         if (expand_str(tab_cmd[i], env, &files))
             return (1);
-        printf("ok\n");
         free(tab_cmd[i]);
-        ft_print_lst_files(files);
-        tab_cmd[i] = write_files(files);
-        ft_free_lst_files(&files);
-        printf("tab_cmd[%d] = %s\n", i, tab_cmd[i]);
+        // ft_print_lst_files(files);
+        tab_cmd[i] = write_files_expand(files);
+        ft_free_lst_files_expand(&files);
         if (!tab_cmd[i])
             return (1);
         i++;
