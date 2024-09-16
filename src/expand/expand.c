@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/16 13:54:09 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:29:11 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int copy_var(char *str, int *i, t_files **files, t_env *env)
     
     printf("cpy_var\n");
     j = *i + 1;
-    while (str[j] && str[j] != '\'' && str[j] != '\"' && str[j] != '$')
+    while (str[j] && str[j] != '\'' && str[j] != '\"' && str[j] != '$' && str[j] != ' ')
         j++;
     tmp = ft_strndup(str + *i + 1, j - *i - 1);
     printf("tmp = %s\n", tmp);
@@ -135,32 +135,24 @@ static int copy_dquotes(char *str, int *i, t_files **files, t_env *env)
     char *tmp;
 
     printf("copy_dquotes\n");
-    j = *i;
-    while (str[j] && str[j] != '\"')
+    j = *i + 1;
+    while (str[j] && str[j] != '\"' && j < 100)
     {
         if (str[j] == '$')
         {
-            tmp = ft_strndup(str + *i, j - *i);
+            tmp = ft_strndup(str + *i + 1, j - *i - 1);
             if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
                 return (1);
             if (copy_var(str, &j, files, env) == 1)
                 return (1);
-            *i = j;
-            printf("///str[j] = %c///\n", str[j]);
+            *i = j - 1;
         }
         else
             j++;
     }
-    if (str[j] == '\"')
-    {
-        printf("j = %d\ni = %d\n", j, *i);
-        printf("okkkkkkkkk\n");
-        
-    }
     if (j != *i)
     {
-        tmp = ft_strndup(str + *i, j - *i);
-        printf("tmp = %s\n", tmp);
+        tmp = ft_strndup(str + *i + 1, j - *i - 1);
         if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
             return (1);
     }
@@ -177,7 +169,7 @@ int tri_char(char *str, int *i, t_files **files, t_env *env)
     }
     else if (str[*i] == '\"')
     {
-        if (copy_dquotes(str, i + 1, files, env))
+        if (copy_dquotes(str, i, files, env))
             return (1);
     }
     else if (str[*i] == '$')
