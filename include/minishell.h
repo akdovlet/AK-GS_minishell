@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/10 15:23:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/14 14:17:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_data
 {
 	int			status;
 	bool		pipeline;
+	bool		interactive_mode;
 	char		*hardpath;
 	t_pidlst	*pidlst;
 	t_fdlst		*fdlst;

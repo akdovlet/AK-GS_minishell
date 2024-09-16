@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/09 18:20:53 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/16 21:43:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	redir_hd(t_ast *ast)
 	int		tmp_file;
 	int		tty;
 	int		line_count;
+	struct termios		termios_save;
 	char	*line;
 
 	line = NULL;

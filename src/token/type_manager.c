@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/28 14:43:56 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:26:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ int	operator_management(char *str, int *i, t_token **tk)
 
 	new = token_new(NULL);
 	if (!new)
-		return (perror("malloc"), 0);
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: operator_management: %s\n", strerror(errno));
+		return (0);
+	}
 	*new = (t_token){};
 	if (str[*i] == '&')
 		new->type = and_check(str, *i);
@@ -66,26 +69,43 @@ int	operator_management(char *str, int *i, t_token **tk)
 		new->type = or_check(str, *i);
 	new->value = copy_operator(str, i, str[*i]);
 	if (!new->value)
-		return (free(new), perror("malloc"), 0);
-	token_add_back(tk, new);
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: operator_management: %s\n", strerror(errno));
+		free(new);
+		return (0);
+	}
+	if (!token_add_back_grammar(tk, new))
+		return (0);
 	return (1);
 }
 
+// build here document here
 int	redirect_management(char *str, int *i, t_token **tk)
 {
 	t_token	*new;
 
 	new = token_new(NULL);
 	if (!new)
-		return (token_clear(tk), 0);
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: redirect_management: %s\n", strerror(errno));
+		return (0);
+	}
 	if (str[*i] == OUT)
 		new->type = out_check(str, *i);
 	else if (str[*i] == IN)
 		new->type = in_check(str, *i);
-	new->value = copy_value(str, i, is_redirect);
+	new->value = copy_operator(str, i, str[*i]);
 	if (!new->value)
-		return (token_clear(tk), free(new), 0);
-	token_add_back(tk, new);
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: redirect_management: %s\n", strerror(errno));
+		free(new);
+		return (0);
+	}
+	// if (new->type == HERE_DOC)
+	// 	if (!create_here_doc(new));
+	// 		return (0);
+	if (!token_add_back_grammar(tk, new))
+		return (0);
 	return (1);
 }
 

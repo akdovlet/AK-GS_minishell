@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 18:05:43 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/14 20:10:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ast	*parse_cmd(t_token **tk)
 	t_ast	*new;
 
 	new = NULL;
-	if (!(*tk) || !tk)
+	if (!tk || !*tk)
 		return (NULL);
 	if ((*tk)->type == WORD || is_redirect((*tk)->type))
 		new = ast_newcmdlist(tk);
@@ -39,7 +39,7 @@ t_ast	*parse_redirect(t_token **tk)
 	t_ast	*new;
 
 	new = NULL;
-	if (!(*tk) || !tk)
+	if (!tk || !*tk)
 		return (NULL);
 	new = parse_cmd(tk);
 	if (*tk && is_redirect((*tk)->type))
@@ -52,7 +52,7 @@ t_ast	*parse_pipe(t_token **tk)
 	t_ast	*new;
 
 	new = NULL;
-	if (!(*tk) || !tk)
+	if (!tk || !*tk)
 		return (NULL);
 	new = parse_redirect(tk);
 	while (*tk && (*tk)->type == PIPE)
@@ -70,7 +70,7 @@ t_ast	*parse_operator(t_token **tk)
 	t_ast	*new;
 	t_type	tmp;
 
-	if (!(*tk) || !tk)
+	if (!tk || !*tk)
 		return (NULL);
 	new = parse_pipe(tk);
 	while (*tk && is_logical_operator((*tk)->type))
@@ -84,7 +84,7 @@ t_ast	*parse_operator(t_token **tk)
 
 t_ast	*parse(t_token **tk)
 {
-	if (!*tk)
+	if (!tk || !*tk)
 		return (NULL);
 	return (parse_operator(tk));
 }

@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/08 12:08:38 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/09/16 19:20:14 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC		:=	main.c					\
 			token/debugging.c		\
 			token/definitions.c		\
 			token/definitions2.c	\
-			token/parenthesis_scope.c	\
+			token/grammar_check.c	\
 			token/parenthesis.c		\
 			token/syntax_error.c	\
 			token/syntax_input.c	\

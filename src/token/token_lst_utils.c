@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:38:15 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/28 13:33:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:01:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,25 @@ t_token	*token_last(t_token *lst)
 	return (lst);
 }
 
-void	token_add_back(t_token **lst, t_token *new)
+int	token_add_back_grammar(t_token **lst, t_token *new)
 {
 	t_token	*last;
 
+	last = NULL;
 	if (!*(lst))
+	{
 		*lst = new;
+		new->prev = last;
+	}
 	else
 	{
 		last = token_last(*lst);
 		last->next = new;
 		new->prev = last;
+		if (!grammar_check(last))
+			return (0);
 	}
+	return (1);
 }
 
 t_token	*token_new(char *var)

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 14:53:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/23 15:42:07 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/14 20:06:19 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,19 @@ int	parenthesis_management(char *str, int *i, t_token **tk)
 
 	new = token_new(NULL);
 	if (!new)
-		return (perror("malloc"), 0);
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: parenthesis_management: %s\n", strerror(errno));
+		return (0);
+	}
 	new->type = str[*i];
-	if (!new->type)
-		return (free(new), 0);
 	new->value = copy_parenthesis(str, i);
 	if (!new->value)
-		return (free(new), perror("malloc"), 0);
-	token_add_back(tk, new);
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: parenthesis_management: %s\n", strerror(errno));
+		free(new);
+		return (0);
+	}
+	if (!token_add_back_grammar(tk, new))
+		return (0);
 	return (1);
 }

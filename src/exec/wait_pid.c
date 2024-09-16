@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/08 14:17:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/14 20:17:42 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	pip_wait_children(t_data *data)
 	while (node)
 	{
 		waitpid(node->pid, &status, 0);
-		if (WIFEXITED(status))
+		if (WIFSIGNALED(status))
 			data->status = 128 + WTERMSIG(status);
 		else
 			data->status = WEXITSTATUS(status);

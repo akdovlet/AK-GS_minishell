@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_order.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:46:28 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/03 10:52:01 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/14 20:35:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	scope_recursive(t_token **tk)
 
 int	subshell_rule(t_token **tk)
 {
-	if (!*tk || (*tk)->type == PARENTHESIS_R)
+	if (!tk || !*tk || (*tk)->type == PARENTHESIS_R)
 		return (0);
 	while (*tk && (*tk)->type != PARENTHESIS_R && !is_operator((*tk)->type))
 	{
