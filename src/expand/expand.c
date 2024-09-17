@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/16 14:29:11 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:54:01 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,21 @@ static int copy_squote(char *str, int *i, t_files **files)
     return (0);
 }
 
+int creat_node_n_add_back_if_str(t_files **files, char *tmp)
+{
+    t_files *new;
+
+    if (tmp[0] == '\0')
+        return (0);
+    if (!tmp)
+        return (1);
+    new = ft_lstnew_files(tmp);
+    if (!new)
+        return (1);
+    ft_lst_add_back_files(files, new);
+    return (0);
+}
+
 // quit lorsque la variable n'existe pas
 // sorti aussi des dquotes
 static int copy_var(char *str, int *i, t_files **files, t_env *env)
@@ -107,16 +122,13 @@ static int copy_var(char *str, int *i, t_files **files, t_env *env)
     t_files *new;
     t_env *node;
     
-    printf("cpy_var\n");
     j = *i + 1;
     while (str[j] && str[j] != '\'' && str[j] != '\"' && str[j] != '$' && str[j] != ' ')
         j++;
     tmp = ft_strndup(str + *i + 1, j - *i - 1);
-    printf("tmp = %s\n", tmp);
     node = ft_check_key(&env, tmp);
     if (!node)
     {
-        printf("node = NULL\n");
         *i = j;
         return (free(tmp), 2);
     }
@@ -132,16 +144,13 @@ static int copy_var(char *str, int *i, t_files **files, t_env *env)
 static int copy_dquotes(char *str, int *i, t_files **files, t_env *env)
 {
     int j;
-    char *tmp;
 
-    printf("copy_dquotes\n");
     j = *i + 1;
     while (str[j] && str[j] != '\"' && j < 100)
     {
         if (str[j] == '$')
         {
-            tmp = ft_strndup(str + *i + 1, j - *i - 1);
-            if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
+            if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, *i - j)))
                 return (1);
             if (copy_var(str, &j, files, env) == 1)
                 return (1);
@@ -150,12 +159,8 @@ static int copy_dquotes(char *str, int *i, t_files **files, t_env *env)
         else
             j++;
     }
-    if (j != *i)
-    {
-        tmp = ft_strndup(str + *i + 1, j - *i - 1);
-        if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
-            return (1);
-    }
+    if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, *i - j)))
+        return (1);
     *i = j + 1;
     return (0);
 }
@@ -182,9 +187,11 @@ int tri_char(char *str, int *i, t_files **files, t_env *env)
 
 // probleme tout ce qui ne rentre pas dans l'une des fonctions ne va pas etre copier
 // dans notre liste chainee = potentiellement reglé
+
+
+
 int expand_str(char *str, t_env *env, t_files **files)
 {
-    char *tmp;
     int *i;
     int j;
     
@@ -195,25 +202,17 @@ int expand_str(char *str, t_env *env, t_files **files)
     {
         if (str[*i] == '\'' || str[*i] == '\"' || str[*i] == '$')
         {
-            if (*i != j)
-            {
-                tmp = ft_strndup(str + j, *i - j);
-                if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
+            if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, *i - j)))
                     return (1);
-            }
             if (tri_char(str, i, files, env))
-                return (printf ("ok fini\n"), 1);
+                return (1);
             j = *i;
         }
         else
             (*i)++;
     }
-    if (j != *i)
-    {
-        tmp = ft_strndup(str + j, *i - j);
-        if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
-            return (1);
-    }
+    if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, *i - j)))
+        return (1);
     return (0);
 }
 
@@ -230,7 +229,6 @@ int expand_tab_of_cmd(char **tab_cmd, t_env *env)
         if (expand_str(tab_cmd[i], env, &files))
             return (1);
         free(tab_cmd[i]);
-        // ft_print_lst_files(files);
         tab_cmd[i] = write_files_expand(files);
         ft_free_lst_files_expand(&files);
         if (!tab_cmd[i])
