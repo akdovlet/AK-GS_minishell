@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:22:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/24 11:29:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:42:05 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		cmdlst_print(t_cmdlst *lst)
 {
 	while (lst)
 	{
-		fprintf(stderr, "%s\n", lst->str);
+		ft_dprintf(STDERR_FILENO, "%s\n", lst->str);
 		lst = lst->next;
 	}
 }
@@ -46,6 +46,8 @@ void	cmdlst_clear(t_cmdlst **lst)
 {
 	t_cmdlst	*tmp;
 
+	if (!lst || !*lst)
+		return ;
 	while (*lst)
 	{
 		tmp = (*lst)->next;
@@ -61,11 +63,17 @@ t_cmdlst	*cmdlst_new(char *value, int type)
 
 	new = malloc(sizeof(t_cmdlst));
 	if (!new)
+	{
+		perror("minishell: cmdlst_new");
 		return (NULL);
+	}
 	*new = (t_cmdlst){};
 	new->str = ft_strdup(value);
 	if (!new->str)
-		return (NULL);
+	{
+		perror("minishell: cmdlst_new");
+		return (free(new),NULL);
+	}
 	new->type = type;
 	return (new);
 }

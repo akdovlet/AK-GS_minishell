@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/16 19:13:31 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:23:24 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,16 @@ int	dispatcher(char *line, int *i, t_token **tk)
 int	tokenize(char *line, t_token **tk)
 {
 	int	i;
-	int	tk_count;
 
 	i = 0;
-	tk_count = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		tk_count++;
 		if (!dispatcher(line, &i, tk))
 			return (token_clear(tk), 2);
-		// if ((*tk) && tk_count == 1 && is_operator((*tk)->type))
-		// 	return (bad_syntax((*tk)->type), token_clear(tk), 2);
 		if (line[i] && is_blank(line[i]))
 			i++;
 	}
 	if (!syntax_order_check(*tk))
-	{
-		printf("less efficient\n");	
 		return (token_clear(tk), 2);
-	}
-	return (1);
+	return (0);
 }

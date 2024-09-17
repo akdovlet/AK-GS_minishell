@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/10 10:52:03 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:59:09 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,8 @@ void	fdlst_close_in_child(t_fdlst *lst);
 
 //	redir.c
 int		redir_node(t_ast *ast, t_data *data);
+
+// execution_loop.c
+void	execution_loop(t_data *data);
 
 #endif

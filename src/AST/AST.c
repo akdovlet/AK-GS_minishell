@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/14 20:10:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:08:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,21 @@ t_ast	*parse_cmd(t_token **tk)
 {
 	t_ast	*new;
 
-	new = NULL;
 	if (!tk || !*tk)
 		return (NULL);
+	new = NULL;
 	if ((*tk)->type == WORD || is_redirect((*tk)->type))
+	{
 		new = ast_newcmdlist(tk);
+		if (!new)
+			return (NULL);
+	}
 	else if ((*tk)->type == PARENTHESIS_L)
 	{
 		eat_token(tk);
 		new = parse(tk);
+		if (!new)
+			return (NULL);
 		if (new->type != SUBSHELL)
 			new = ast_newsubshell(new);
 		if ((*tk)->type == PARENTHESIS_R)
@@ -38,9 +44,9 @@ t_ast	*parse_redirect(t_token **tk)
 {
 	t_ast	*new;
 
-	new = NULL;
 	if (!tk || !*tk)
 		return (NULL);
+	new = NULL;
 	new = parse_cmd(tk);
 	if (*tk && is_redirect((*tk)->type))
 		new = ast_newredir_lst(tk, new);
@@ -51,14 +57,23 @@ t_ast	*parse_pipe(t_token **tk)
 {
 	t_ast	*new;
 
-	new = NULL;
 	if (!tk || !*tk)
 		return (NULL);
+	new = NULL;
 	new = parse_redirect(tk);
+	if (!new)	
+		return (NULL);
 	while (*tk && (*tk)->type == PIPE)
 	{
 		eat_token(tk);
 		new = ast_newpipe(new, parse_redirect(tk));
+		if (!new)
+			return (NULL);
+		if (!new->pipe_right)
+		{
+			ast_free(new);
+			return (NULL);
+		}
 	}
 	if (find_subshell(new))
 		new = ast_newwait(new);
@@ -73,11 +88,20 @@ t_ast	*parse_operator(t_token **tk)
 	if (!tk || !*tk)
 		return (NULL);
 	new = parse_pipe(tk);
+	if (!new)
+		return (NULL);
 	while (*tk && is_logical_operator((*tk)->type))
 	{
 		tmp = (*tk)->type;
 		eat_token(tk);
 		new = ast_newop(new, tmp, parse_pipe(tk));
+		if (!new)
+			return (NULL);
+		if (!new->op_right)
+		{
+			ast_free(new);
+			return (NULL);
+		}
 	}
 	return (new);
 }

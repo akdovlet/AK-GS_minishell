@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:32:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/24 11:29:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:38:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,18 @@ char	**cmdlst_split(t_cmdlst **lst)
 	len = cmdlst_len(*lst);
 	cmd = malloc(sizeof(char *) * (len + 1));
 	if (!cmd)
+	{
+		perror("minishell: cmdlst_split");
 		return (NULL);
+	}
 	while (*lst)
 	{
 		cmd[i] = ft_strdup((*lst)->str);
 		if (!cmd[i])
+		{
+			perror("minishell: cmdlst_split");
 			return (free_array(cmd, i), NULL);
+		}
 		i++;
 		eat_cmdlst(lst);
 	}

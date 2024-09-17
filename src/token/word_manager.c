@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/14 20:09:39 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:40:22 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	quote_len(char *str, int *i, int symbol)
 }
 
 
-int		quote_management(char *dup, int *j, char *str, int *i)
+int	quote_management(char *dup, int *j, char *str, int *i)
 {
 	char	symbol;
 
@@ -81,7 +81,10 @@ char	*copy_word(char *str, int *i)
 	j = word_len(str, i);
 	dup = malloc(sizeof(char) * j + 1);
 	if (!dup)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: word_management: %s\n", strerror(errno));
 		return (NULL);
+	}
 	j = 0;
 	while (str[*i] && str[*i] != '\n' && is_word(str[*i]))
 	{
@@ -115,7 +118,6 @@ int	word_management(char *line, int *i, t_token **tk)
 	new->value = copy_word(line, i);
 	if (!new->value)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: word_management: %s\n", strerror(errno));
 		free(new);
 		return (0);
 	}

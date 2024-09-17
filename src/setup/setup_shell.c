@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:37:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/16 21:48:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:03:26 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	setup_shell(t_data	*data, char	**env)
 
 	rc = tcgetattr(0, &termios_save);
 	termios_new = termios_save;
-	termios_new.c_lflag &= ~ECHOCTL;
+	// termios_new.c_lflag &= ~ECHOCTL;
+	// termios_new.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
 	rc = tcsetattr(0, 0, &termios_new);
 	sa.sa_handler = interrupt;
 	sigemptyset(&sa.sa_mask);
