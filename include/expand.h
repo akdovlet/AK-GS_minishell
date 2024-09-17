@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/16 12:56:21 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:28:59 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char **ft_wildcard(char **tab_cmd);
 
 // expand_var.c
 char *expand_var(char *str, t_env *env);
-int expand_tab_of_cmd(char **tab_cmd, t_env *env);
+int expand_tab_of_cmd(char **tab_cmd, t_data *data);
 
 // expand_quotes_utils.c
 int ft_find_chr(char *str, char c);
