@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/16 12:49:26 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:16:53 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ t_files *sort_files(t_files *files, char *str)
 {
     t_files *tmp;
 
-    // ft_print_lst_files(files);
     ft_lstcomp_wildcard(&files, str);\
-    printf("____________________\n");
-    // ft_print_lst_files(files);
     if (!files)
     {
         tmp = ft_lstnew_files(str);
@@ -43,19 +40,43 @@ t_files *sort_files(t_files *files, char *str)
     return (files);
 }
 
+void del_files_hidden(t_files **files)
+{
+    t_files *tmp;
+    t_files *node;
+
+    tmp = *files;
+    node = *files;
+    while (*files && (*files)->name[0] == '.')
+    {
+        *files = (*files)->next;
+        free(node->name);
+        free(node);
+        node = *files;
+    }
+    tmp = *files;
+    while (tmp)
+    {
+        if (tmp->next && tmp->next->name[0] == '.')
+        {
+            node = tmp->next;
+            tmp->next = tmp->next->next;
+            free(node->name);
+            free(node);
+        }
+        tmp = tmp->next;
+    }
+}
 t_files  *expand_wildcard(t_files **files, char *str)
 {
     t_files *files_tmp;
     
-    printf("expand_wildcard\n");
     files_tmp = ft_recover_files();
+    del_files_hidden(&files_tmp);
     if (!files_tmp)
         return (ft_free_lst_files(files), NULL);
     files_tmp = sort_files(files_tmp, str);
-    printf("files_tmp\n");
-    ft_print_lst_files(files_tmp);
     ft_lst_add_back_files(files, files_tmp);
-    // ft_print_lst_files(*files);
     return (*files);
 }
 
@@ -113,7 +134,6 @@ char **ft_wildcard(char **tab_cmd)
     }
     ft_free_tab(tab_cmd);
     tab_cmd = ft_files_to_tab(files);
-    // print_tab(tab_cmd);
     if (!tab_cmd)
         return (NULL);
     return (tab_cmd);
