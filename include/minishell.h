@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/14 14:17:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:04:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ add_history*/
 # define SYNTAX_ERR "minishell: syntax error near unexpected token `%s'\n"
 # define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
 # define PARENTHESIS_ERR "minishell: unexpected newline while looking for closing `%c'\n"
+# define PARENT 0
+# define CHILD 1
+# define HD 2
+
+extern sig_atomic_t	program_state;
 
 typedef struct s_env
 {
@@ -127,7 +132,6 @@ typedef struct s_data
 {
 	int			status;
 	bool		pipeline;
-	bool		interactive_mode;
 	char		*hardpath;
 	t_pidlst	*pidlst;
 	t_fdlst		*fdlst;
@@ -172,5 +176,4 @@ typedef struct s_ast
 }	t_ast;
 
 int	exec_recursion(t_ast *ast, t_data *data);
-
 #endif
