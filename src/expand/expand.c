@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 08:15:43 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/18 08:59:40 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ static char *extract_var_name(char *str, int *i)
     int tmp;
     
     j = *i + 1;
-    while (str[j] && str[j] != '\'' && str[j] != '\"' && str[j] != '$' && str[j] != ' ')
+    while (str[j] && ft_isalnum(str[j]))
         j++;
     tmp = *i;
     *i = j;
