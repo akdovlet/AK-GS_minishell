@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 10:18:55 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:23:41 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,26 +269,25 @@ int tri_char(char *str, int *i, t_files **files, t_data *data)
 
 int expand_str(char *str, t_data *data, t_files **files)
 {
-    int *i;
+    int i;
     int j;
     
-    i = malloc(sizeof(int *));
-    *i = 0;
+    i = 0;
     j = 0;
-    while (str[*i])
+    while (str[i])
     {
-        if (str[*i] == '\'' || str[*i] == '\"' || (str[*i] == '$' && ft_isalpha(str[*i + 1])))
+        if (str[i] == '\'' || str[i] == '\"' || (str[i] == '$' && ft_isalpha(str[i + 1])))
         {
-            if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, *i - j)))
+            if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, i - j)))
                     return (1);
-            if (tri_char(str, i, files, data))
+            if (tri_char(str, &i, files, data))
                 return (1);
-            j = *i;
+            j = i;
         }
         else
-            (*i)++;
+            (i)++;
     }
-    if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, *i - j)))
+    if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, i - j)))
         return (1);
     return (0);
 }
