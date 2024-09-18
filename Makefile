@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/11 16:45:25 by gschwand         ###   ########.fr        #
+#    Updated: 2024/09/18 13:08:06 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,7 @@ $(LIBFT):
 	@$(MAKE) --no-print-directory -C libft
 
 clean:
-	@if [ -d $(BUILD) ]; then $(RM) -rf $(BUILD) && echo "\033[1;31m\tDeleted: $(NAME) $(BUILD)\033[0m"; fi
+	@if [ -d "$(BUILD)" ]; then $(RM) -rf "$(BUILD)" && echo "\033[1;31m\tDeleted: $(NAME) $(BUILD)\033[0m"; fi
 	@$(MAKE) --no-print-directory clean -C libft
 
 fclean: clean
