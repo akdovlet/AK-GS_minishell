@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 09:27:04 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:18:55 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,36 +82,8 @@ char *ft_supp_dquotes(char *str)
 //     return (0);
 // }
 
-static int copy_squote(char *str, int *i, t_files **files)
-{
-    int j;
-    char *tmp;
 
-    printf("copy_squote\n");
-    j = *i + 1;
-    while (str[j] && str[j] != '\'')
-        j++;
-    tmp = ft_strndup(str + *i + 1, j - *i - 1);
-    if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
-        return (1);
-    *i = j + 1;
-    return (0);
-}
 
-int creat_node_n_add_back_if_str(t_files **files, char *tmp)
-{
-    t_files *new;
-
-    if (tmp[0] == '\0')
-        return (0);
-    if (!tmp)
-        return (1);
-    new = ft_lstnew_files(tmp);
-    if (!new)
-        return (1);
-    ft_lst_add_back_files(files, new);
-    return (0);
-}
 
 // quit lorsque la variable n'existe pas
 // sorti aussi des dquotes
@@ -150,6 +122,21 @@ int creat_node_n_add_back_if_str(t_files **files, char *tmp)
 //     return (0);
 // }
 
+int creat_node_n_add_back_if_str(t_files **files, char *tmp)
+{
+    t_files *new;
+
+    if (!tmp)
+        return (1);
+    if (tmp[0] == '\0')
+        return (0);
+    new = ft_lstnew_files(tmp);
+    if (!new)
+        return (1);
+    ft_lst_add_back_files(files, new);
+    return (0);
+}
+
 static char *extract_var_name(char *str, int *i) 
 {
     int j;
@@ -177,7 +164,7 @@ static char *get_var_value(char *var_name, t_data *data)
     }
     node = ft_check_key(&data->env, var_name);
     if (!node)
-        return NULL;
+        return (NULL);
     return (node->value);
 }
 
@@ -192,6 +179,13 @@ static int create_and_add_file(char *value, t_files **files)
     return (0);
 }
 
+// int ft_whitespace(char c)
+// {
+//     if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
+//         return (1);
+//     return (0);
+// }
+
 static int copy_var(char *str, int *i, t_files **files, t_data *data)
 {
     char *var_name;
@@ -201,12 +195,26 @@ static int copy_var(char *str, int *i, t_files **files, t_data *data)
     var_name = extract_var_name(str, i);
     if (!var_name)
         return (1);
-
     value = get_var_value(var_name, data);
     if (!value)
         return (free(var_name), 2);
     result = create_and_add_file(value, files);
     return (free(var_name), result);
+}
+
+static int copy_squote(char *str, int *i, t_files **files)
+{
+    int j;
+    char *tmp;
+
+    j = *i + 1;
+    while (str[j] && str[j] != '\'')
+        j++;
+    tmp = ft_strndup(str + *i + 1, j - *i - 1);
+    if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
+        return (1);
+    *i = j + 1;
+    return (0);
 }
 
 // probleme avec cette liste chaine on strdup 2x la meme chaine
@@ -215,7 +223,7 @@ static int copy_dquotes(char *str, int *i, t_files **files, t_data *data)
     int j;
 
     j = *i + 1;
-    while (str[j] && str[j] != '\"' && j < 100)
+    while (str[j] && str[j] != '\"')
     {
         if (str[j] == '$' && ft_isalpha(str[j + 1]))
         {
@@ -292,7 +300,7 @@ int expand_tab_of_cmd(char **tab_cmd, t_data *data)
 
     i = 0;
     files = NULL;
-    while (tab_cmd[i] && i < 10)
+    while (tab_cmd[i])
     {
         if (expand_str(tab_cmd[i], data, &files))
             return (1);
