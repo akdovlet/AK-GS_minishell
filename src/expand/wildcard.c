@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 09:16:53 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:18:18 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_files *sort_files(t_files *files, char *str)
     return (files);
 }
 
+// del all files that start with a '.' in the list
 void del_files_hidden(t_files **files)
 {
     t_files *tmp;
