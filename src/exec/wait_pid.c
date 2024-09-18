@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/12 15:50:55 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/18 08:43:44 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	pip_wait_children(t_data *data)
 
 int ft_wait_pid(t_ast *ast, t_data *data)
 {
-    data->status = exec_recursion(ast->wait_next, data);
+    exec_recursion(ast->wait_next, data);
     if (!data->pidlst)
         return (data->status);
     pip_wait_children(data);
