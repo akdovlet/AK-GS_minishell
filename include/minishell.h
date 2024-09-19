@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/18 19:04:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:26:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ add_history*/
 # define SYNTAX_ERR "minishell: syntax error near unexpected token `%s'\n"
 # define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
 # define PARENTHESIS_ERR "minishell: unexpected newline while looking for closing `%c'\n"
-# define PARENT 0
-# define CHILD 1
-# define HD 2
+# define PARENT 14682
+# define CHILD 21621
+# define HD 10777
 
-extern sig_atomic_t	program_state;
+extern int program_state;
 
 typedef struct s_env
 {

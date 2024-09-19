@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:00:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/18 19:22:43 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:18:09 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,35 @@ void	parent_handler(int sig)
 	if (sig == SIGINT)
 	{
 		write(STDOUT_FILENO, "\n", 1);
-		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		rl_replace_line("", 0);
+		return ;
 	}
 }
 
 void	child_handler(int sig)
 {
-	
+	if (sig == SIGINT)
+	{
+		program_state = SIGINT;
+	}
 }
 
 void	here_doc_handler(int sig)
 {
-	
+	if (sig == SIGINT)
+	{
+		program_state = SIGINT;
+	}
 }
 
 void	signal_handler(int sig)
 {
 	if (program_state == PARENT)
 		parent_handler(sig);
-	if (program_state == CHILD)
-		child_handler(sig);
+	// if (program_state == CHILD)
+	// 	child_handler(sig);
 	if (program_state == HD)
 		here_doc_handler(sig);
 }
@@ -50,10 +57,11 @@ void	setup_signals(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = signal_handler;
 	sa.sa_flags = 0;
+	sigaddset(&sa.sa_mask, SIGQUIT);
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGTERM, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-	sa.sa_flags = SA_RESETHAND;
-	sa.sa_handler = 0;
-	sigaction(SIGINT, &sa, NULL);
+	// sigaction(SIGQUIT, &sa, NULL);
+	// sa.sa_flags = SA_RESETHAND;
+	// sa.sa_handler = 0;
+	// sigaction(SIGINT, &sa, NULL);
 }

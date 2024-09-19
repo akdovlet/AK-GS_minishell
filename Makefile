@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/18 19:04:39 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/09/19 11:00:53 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC		:=	main.c							\
 			env/env_setup.c					\
 			env/env_utils.c					\
 			setup/setup_shell.c				\
-			setup/setup_signal.c				\
+			setup/setup_signal.c			\
 			token/debugging.c				\
 			token/definitions.c				\
 			token/definitions2.c			\
