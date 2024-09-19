@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 08:26:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/11 17:00:34 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:30:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // penser a remettre data->status a 0 
 int ft_operator(t_ast *ast, t_data *data)
 {
-    printf("ft_operator\n");
+    // printf("ft_operator\n");
     exec_recursion(ast->op_left, data);
     printf("data->status = %d\n", data->status);
     if (ast->op_type == OR && data->status)

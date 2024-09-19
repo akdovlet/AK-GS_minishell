@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 12:27:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:50:05 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ bool	env_default_setup(t_data *data)
 	new = env_new_key(ft_strdup("PWD"), getcwd(NULL, 0));
 	if (!new)
 		return (false);
+	env_add_back(&data->env, new);
+	new = env_new_key(ft_strdup("OLDPWD"), NULL);
 	env_add_back(&data->env, new);
 	new = env_new_key(ft_strdup("SHLVL"), ft_strdup("1"));
 	env_add_back(&data->env, new);
