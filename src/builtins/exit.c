@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:04:41 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 18:51:20 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:42:55 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void free_tab(char **tab)
     free(tab);
 }
 
-void ft_exit(char **tab, t_env *env)
+int ft_exit(char **tab, t_env *env, t_data *data)
 {
     unsigned char status;
 
@@ -58,11 +58,12 @@ void ft_exit(char **tab, t_env *env)
         status = (unsigned char) ft_atoi(tab[1]);
         free_tab(tab);
         env_clear(&env);
-        exit(status);
+        exit(data->status);
     }
     else
     {
         env_clear(&env);
         exit(EXIT_SUCCESS);
     }
+    return (0);
 }

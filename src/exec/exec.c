@@ -6,9 +6,10 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/19 14:11:26 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:46:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "exec.h"
 
@@ -26,7 +27,7 @@ int ft_exec(t_ast *ast, t_data *data)
         ft_builtins(ast, data);
     else
         ft_exec_bin(ast, data);
-    return (0);
+    return (data->status);
 }
 
 int	exec_recursion(t_ast *ast, t_data *data)

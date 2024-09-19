@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:18:24 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 18:50:28 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:43:04 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	ft_env(char **argv, t_env *env)
+int	ft_env(char **argv, t_env *env)
 {
     if (argv[1])
         ft_dprintf(STDERR_FILENO, "env: too many arguments\n");
@@ -24,4 +24,5 @@ void	ft_env(char **argv, t_env *env)
             env = env->next;
         }
     }
+    return (0);
 }

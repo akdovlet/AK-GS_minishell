@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/19 14:08:28 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:43:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int ft_exec_bin(t_ast *ast, t_data *data)
 		// signal_wait_state();
         new = ft_lstnew_pidlst(pid);
         if (!new)
-            return (data->status);
+            return (1);
         ft_lstadd_back_pidlst(&data->pidlst, new);
     }
     free_tab(env);
