@@ -6,11 +6,12 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/19 18:45:32 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:15:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "AST.h"
 #include "exec.h"
 
 // gestion hard path
@@ -57,7 +58,7 @@ int	find_path_loop(char **cmd_arr, char **path)
 	{
 		cmd_path = path_join(path[i], cmd_arr[0]);
 		if (!cmd_path)
-			return (ft_free(path), 1);
+			return (1);
 		if (!access(cmd_path, F_OK))
 		{
 			if (!access(cmd_path, X_OK))
@@ -76,9 +77,16 @@ int	find_path_loop(char **cmd_arr, char **path)
 	return (127);
 }
 
-int	hard_patch_check(char *str)
+int	hard_patch_check(char *cmd)
 {
-	
+	if (!access(cmd, F_OK))
+	{
+		if (!access(cmd, X_OK))
+			return (0);
+		ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", cmd, strerror(errno));
+		return (126);
+	}
+	return (127);
 }
 
 int	resolve_path(char **cmd, t_data *data)
@@ -108,29 +116,60 @@ int	resolve_path(char **cmd, t_data *data)
 	return (err);
 }
 
+void	clear_exit(t_data *data, int code)
+{
+	ast_free(data->ast_root);
+	env_clear(&data->env);
+	fdlst_clear(&data->fdlst);
+	free(data->hardpath);
+	exit(code);
+}
+
 int	execute_prog(t_ast *ast, t_data *data)
 {
-	char	**env;
-	int		err;
+	char		**env;
+	int			err;
+	pid_t		pid;
+	t_pidlst	*new;
 
-	err = resolve_path(ast->cmd, data);
-	if (err)
-		return (err);
-	env = copy_env(data->env);
-	execve(ast->cmd[0], ast->cmd, env);
+	pid = fork();
+	if (pid < 0)
+		return (perror("minishell: execute_prog"), 1);
+	if (!pid)
+	{
+		fdlst_close_in_child(data->fdlst);
+		err = resolve_path(ast->cmd, data);
+		if (err)
+			clear_exit(data, err);
+		env = copy_env(data->env);
+		if (!env)
+			return (clear_exit(data, 1), 1);
+		execve(ast->cmd[0], ast->cmd, env);
+		ft_dprintf(STDERR_FILENO, "minishell: %s, %s\n", ast->cmd[0], strerror(errno));
+		ft_free(env);
+		clear_exit(data, err);
+	}
+	else
+	{
+		new = ft_lstnew_pidlst(pid);
+		if (!new)
+			return (1); 
+		ft_lstadd_back_pidlst(&data->pidlst, new);	
+	}
 	return (0);
 }
 
 int	command_node(t_ast *ast, t_data *data)
 {
+	int	err;
+
 	expand_tab_of_cmd(ast->cmd, data->env);
 	if (!ast->cmd)
 		return (perror("minishell: command_node"), 1);
 	// if (ft_is_builtins(ast->cmd[0]))
-	// 	execute_builtin(ast, data);
+	// 	return (execute_builtin(ast, data));
 	// else
-		execute_prog(ast, data);
-	return (data->status);
+		return (execute_prog(ast, data));
 }
 
 int ft_exec(t_ast *ast, t_data *data)

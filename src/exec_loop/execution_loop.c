@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/17 19:44:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:45:58 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	interactive_shell(t_data *data)
 		add_history(line);
 		data->status = tokenize(line, &tk);
 		free(line);
-		ast = parse(&tk);
+		data->ast_root = parse(&tk);
 		token_clear(&tk);
-		if (ast)
-			data->status = exec_recursion(ast, data);
-		ast_free(ast);
+		if (data->ast_root)
+			data->status = exec_recursion(data->ast_root, data);
+		ast_free(data->ast_root);
 	}
 }
 
@@ -65,12 +65,12 @@ void	non_interactive_shell(t_data *data)
 			break ;
 		}
 		free(line);
-		ast = parse(&tk);
+		data->ast_root = parse(&tk);
 		token_clear(&tk);
-		if (ast)
+		if (data->ast_root)
 		{
-			exec_recursion(ast, data);
-			ast_free(ast);
+			exec_recursion(data->ast_root, data);
+			ast_free(data->ast_root);
 		}
 		line_count++;
 	}

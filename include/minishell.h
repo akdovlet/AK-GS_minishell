@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/19 14:26:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:13:16 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef enum	e_token
 	AND = 1001,
 	OR = 1002,
 	APPEND = 1003,
-	HERE_DOC = 1004,
+	HERE_DOC = 1004
 }	t_type;
 
 typedef	struct s_token
@@ -127,16 +127,6 @@ typedef struct s_fdlst
 	bool			close_in_child;
 	struct s_fdlst	*next;
 }	t_fdlst;
-
-typedef struct s_data
-{
-	int			status;
-	bool		pipeline;
-	char		*hardpath;
-	t_pidlst	*pidlst;
-	t_fdlst		*fdlst;
-	t_env		*env;
-}	t_data;
 
 typedef struct s_ast
 {
@@ -174,6 +164,17 @@ typedef struct s_ast
 		};
 	};
 }	t_ast;
+
+typedef struct s_data
+{
+	int			status;
+	bool		pipeline;
+	char		*hardpath;
+	t_ast		*ast_root;
+	t_pidlst	*pidlst;
+	t_fdlst		*fdlst;
+	t_env		*env;
+}	t_data;
 
 int	exec_recursion(t_ast *ast, t_data *data);
 #endif

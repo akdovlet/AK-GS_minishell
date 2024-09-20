@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pidlst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 15:18:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/20 17:10:21 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:28:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_pidlst	*ft_lstnew_pidlst(pid_t pid)
     
     new = malloc(sizeof(t_pidlst));
     if (!new)
-        return (perror("malloc failed\n"), NULL);
+        return (perror("minishell: pidlst_new"), NULL);
     new->next = NULL;
     new->pid = pid;
     return (new);
