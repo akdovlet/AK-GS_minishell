@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 17:04:51 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:28:28 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int ft_exec_builtins(t_ast *ast, t_data *data)
     if (!ft_strcmp(ast->cmd[0], "export"))
         data->status = ft_export(ast->cmd, data);
     if (!ft_strcmp(ast->cmd[0], "unset"))
-        data->status = unset(ast->cmd, data->env); 
+        data->status = unset(ast->cmd, data); 
     if (!ft_strcmp(ast->cmd[0], "env"))
         data->status = ft_env(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "exit"))
