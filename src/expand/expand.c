@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 10:23:41 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:40:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,9 +264,6 @@ int tri_char(char *str, int *i, t_files **files, t_data *data)
 
 // probleme tout ce qui ne rentre pas dans l'une des fonctions ne va pas etre copier
 // dans notre liste chainee = potentiellement reglé
-
-
-
 int expand_str(char *str, t_data *data, t_files **files)
 {
     int i;
@@ -297,6 +294,7 @@ int expand_tab_of_cmd(char **tab_cmd, t_data *data)
     int i;
     t_files *files;
 
+	(void)data;
     i = 0;
     files = NULL;
     while (tab_cmd[i])

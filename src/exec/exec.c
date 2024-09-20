@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 15:47:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:07:57 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,32 +151,32 @@ int	execute_prog(t_ast *ast, t_data *data)
 
 int	command_node(t_ast *ast, t_data *data)
 {
-	expand_tab_of_cmd(ast->cmd, data->env);
+	expand_tab_of_cmd(ast->cmd, data);
 	if (!ast->cmd)
 		return (perror("minishell: command_node"), 1);
 	if (!ast->cmd[0])
 		return (0);
-	if (ft_is_builtins(ast->cmd[0]))
-		return (execute_builtin(ast, data));
-	else
+	// if (ft_is_builtins(ast->cmd[0]))
+	// 	return (execute_builtin(ast, data));
+	// else
 	return (execute_prog(ast, data));
 }
 
-int ft_exec(t_ast *ast, t_data *data)
-{
-	expand_tab_of_cmd(ast->cmd, data->env);
-	if (ast->cmd[1])
-	{
-		ast->cmd = ft_wildcard(ast->cmd);
-		if (!ast->cmd)
-			return (1);
-	}
-    if (ft_is_builtins(ast->cmd[0]))
-        ft_builtins(ast, data);
-    else
-        ft_exec_bin(ast, data);
-    return (data->status);
-}
+// int ft_exec(t_ast *ast, t_data *data)
+// {
+// 	expand_tab_of_cmd(ast->cmd, data->env);
+// 	if (ast->cmd[1])
+// 	{
+// 		ast->cmd = ft_wildcard(ast->cmd);
+// 		if (!ast->cmd)
+// 			return (1);
+// 	}
+//     if (ft_is_builtins(ast->cmd[0]))
+//         ft_builtins(ast, data);
+//     else
+//         ft_exec_bin(ast, data);
+//     return (data->status);
+// }
 
 int	exec_recursion(t_ast *ast, t_data *data)
 {
