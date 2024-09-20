@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 13:01:39 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:05:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int ft_echo(char **args, t_env *env)
     {
         if (!args[i][0])
             i++;
+		if (!args[i])
+			break ;
         ft_putstr_fd(args[i], 1);
         if (args[i + 1])
             ft_putstr_fd(" ", 1);
