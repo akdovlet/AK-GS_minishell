@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 18:31:24 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:28:59 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char **ft_wildcard(char **tab_cmd);
 
 // expand_var.c
 char *expand_var(char *str, t_env *env);
-int expand_tab_of_cmd(char **tab_cmd, t_env *env);
+int expand_tab_of_cmd(char **tab_cmd, t_data *data);
 
 // expand_quotes_utils.c
 int ft_find_chr(char *str, char c);
@@ -47,7 +47,11 @@ t_files *ft_recover_files(void);
 void ft_free_lst_files(t_files **files);
 void ft_lstdelone_files(t_files **files, t_files *to_delete);
 t_files *ft_lstnew_files(char *str);
+int ft_new_lst_add_back_files(t_files **alst, t_files *new);
 void ft_lst_add_back_files(t_files **alst, t_files *new);
+void ft_free_lst_files_expand(t_files **files);
+char *write_files_expand(t_files *files);
+
 
 // sort_files.c
 // int ft_strcmp_start_end_wildcard(char *file, char *str);

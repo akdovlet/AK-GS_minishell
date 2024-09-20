@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/19 14:45:41 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:48:16 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,61 @@ static int	modif_pwd(t_env **env)
 }
 
 // problem with error message 
+// funct add / at the end of the path
+
+char *add_slash(char *path)
+{
+	int i;
+	char *tmp;
+
+	i = 0;
+	while (path[i])
+		i++;
+	if (path[i - 1] != '/')
+	{
+		tmp = ft_strjoin(path, "/");
+		if (tmp == NULL)
+			return (NULL);
+		path = tmp;
+	}
+	else
+	{
+		tmp = ft_strdup(path);
+		if (tmp == NULL)
+			return (NULL);
+		path = tmp;
+	}
+	return (path);
+}
+
+int chg_dir(char *path, t_env **env)
+{
+	char *pathn;
+	
+	if (modif_oldpwd(env))
+		return (1);
+	pathn = add_slash(path);
+	if (!pathn)
+		return (1);
+	if (chdir(pathn))
+	{
+		if (access(pathn, F_OK))
+			return (free(pathn),ft_dprintf(2, "minishell: cd: %s: Not a directory\n", path), 1);
+		return (free(pathn),ft_dprintf(2, "minishell: cd: %s: No such file or directory\n", path), 1);
+	}
+	if (modif_pwd(env))
+		return (free(pathn),1);
+	return (free(pathn),0);
+}
+	
+
 int	cd(char **args, t_env **env)
 {
 	if (!args[1] || !ft_strcmp(args[1], "~"))
 	{
 		if (modif_oldpwd(env))
 			return (1);
-		if (chdir(getenv("HOME")) != 0)
+		if (chdir(getenv("HOME")))
 			return (perror("minishell: cd failed\n"), 1);
 		if (modif_pwd(env))
 			return (1);
@@ -60,11 +108,7 @@ int	cd(char **args, t_env **env)
 		ft_dprintf(2, "minishell: cd: too many arguments\n");
 	else
 	{
-		if (modif_oldpwd(env))
-			return (1);
-		if (chdir(args[1]) != 0)
-			return (ft_dprintf(2, "minishell: cd: %s: No such file or directory\n", args[1]), 1);
-		if (modif_pwd(env))
+		if (chg_dir(args[1], env))
 			return (1);
 	}
 	return (0);

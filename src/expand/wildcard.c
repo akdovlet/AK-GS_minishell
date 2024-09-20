@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/10 11:35:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:18:18 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_files *sort_files(t_files *files, char *str)
 {
     t_files *tmp;
 
-    ft_lstcomp_wildcard(&files, str);
+    ft_lstcomp_wildcard(&files, str);\
     if (!files)
     {
         tmp = ft_lstnew_files(str);
@@ -40,18 +40,45 @@ t_files *sort_files(t_files *files, char *str)
     return (files);
 }
 
-static char  *expand_wildcard(t_files **files, char *str)
+// del all files that start with a '.' in the list
+void del_files_hidden(t_files **files)
+{
+    t_files *tmp;
+    t_files *node;
+
+    tmp = *files;
+    node = *files;
+    while (*files && (*files)->name[0] == '.')
+    {
+        *files = (*files)->next;
+        free(node->name);
+        free(node);
+        node = *files;
+    }
+    tmp = *files;
+    while (tmp)
+    {
+        if (tmp->next && tmp->next->name[0] == '.')
+        {
+            node = tmp->next;
+            tmp->next = tmp->next->next;
+            free(node->name);
+            free(node);
+        }
+        tmp = tmp->next;
+    }
+}
+t_files  *expand_wildcard(t_files **files, char *str)
 {
     t_files *files_tmp;
-    char *res;
     
-    res = NULL;
     files_tmp = ft_recover_files();
+    del_files_hidden(&files_tmp);
     if (!files_tmp)
         return (ft_free_lst_files(files), NULL);
     files_tmp = sort_files(files_tmp, str);
     ft_lst_add_back_files(files, files_tmp);
-    return (res);
+    return (*files);
 }
 
 // fonction qui va revoyer un tableau de char * avec les noms des fichiers
@@ -92,10 +119,11 @@ char **ft_wildcard(char **tab_cmd)
 
     files = NULL;
     i = 0;
+    // print_tab(tab_cmd);
     while (tab_cmd[i])
     {
         if (ft_find_chr(tab_cmd[i], '*'))
-            expand_wildcard(&files, tab_cmd[i]);
+            files = expand_wildcard(&files, tab_cmd[i]);
         else
         {
             tmp = ft_lstnew_files(tab_cmd[i]);

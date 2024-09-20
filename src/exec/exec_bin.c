@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/19 14:43:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:48:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_puterror(char *str_error, char *str)
 	ft_putendl_fd(str, STDERR_FILENO);
 }
 
-int	ft_execve_path(char **cmd, char **envp)
+int	ft_execve_path(char **cmd, char **envp, t_data *data)
 {
 	char	*path_cmd;
 
@@ -28,16 +28,19 @@ int	ft_execve_path(char **cmd, char **envp)
 		execve(path_cmd, cmd, envp);
 		free(path_cmd);
 	}
-	ft_puterror("command not found: ", cmd[0]);
-	exit(EXIT_FAILURE);
+	ft_dprintf(2, "minishell: %s: command not found\n", cmd[0]);
+    data->status = 127;
+	exit(data->status);
 }
 
-int	ft_execve_hard_path(char **cmd, char **envp)
+// attention au message d'erreur
+int	ft_execve_hard_path(char **cmd, char **envp, t_data *data)
 {
 	execve(cmd[0], cmd, envp);
 	free_tab(cmd);
-	ft_putstr_fd("execve failed\n", STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	ft_dprintf(2, "minishell: %s: command not found\n", cmd[0]);
+    data->status = 127;
+	exit(data->status);
 }
 
 // cree une fonction que me recopie data->env dans un tableau de chaine de caractere
@@ -102,6 +105,22 @@ void    close_all(void)
     }
 }
 
+int ft_find_chr_exec(char *str, char c)
+{
+    int i;
+
+    i = 0;
+    if (!str)
+        return (0);
+    while (str[i])
+    {
+        if (str[i] == c)
+            return (1);
+        i++;
+    }
+    return (-1);
+}
+
 int ft_exec_bin(t_ast *ast, t_data *data)
 {
     char		**env;
@@ -118,10 +137,10 @@ int ft_exec_bin(t_ast *ast, t_data *data)
     else if (pid == 0)
     {
         fdlst_close_in_child(data->fdlst);
-        if (access(ast->cmd[0], F_OK) == -1)
-            data->status = ft_execve_path(ast->cmd, env);
+        if (ft_find_chr_exec(ast->cmd[0], '/') >= 0)
+            ft_execve_hard_path(ast->cmd, env, data);
         else
-            data->status = ft_execve_hard_path(ast->cmd, env);
+            ft_execve_path(ast->cmd, env, data);
     }
     else
     {

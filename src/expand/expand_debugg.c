@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 14:02:04 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/05 16:55:31 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:38:18 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void print_tab(char **tab)
     i = 0;
     while (tab[i])
     {
-        printf("%s\n", tab[i]);
+        printf("tab[%d] = %s\n", i, tab[i]);
         i++;
     }
 }

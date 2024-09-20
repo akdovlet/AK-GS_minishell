@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:22:33 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/10 11:35:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/16 08:44:20 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void ft_lstcomp_wildcard(t_files **files, char *str)
     int e;
 
     tmp = *files;
-    // printf("ft_lstcomp_wildcard\n");
     while (tmp)
     {
         e = ft_strcmp_wildcard(tmp->name, str);

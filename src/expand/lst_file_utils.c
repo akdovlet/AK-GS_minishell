@@ -6,11 +6,29 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/04 18:22:29 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:56:55 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+
+int ft_new_lst_add_back_files(t_files **alst, t_files *new)
+{
+    t_files *tmp;
+
+    if (!new)
+        return (1);
+    if (!*alst)
+    {
+        *alst = new;
+        return (0);
+    }
+    tmp = *alst;
+    while (tmp->next)
+        tmp = tmp->next;
+    tmp->next = new;
+    return (0);
+}
 
 void ft_lst_add_back_files(t_files **alst, t_files *new)
 {
@@ -38,6 +56,12 @@ t_files *ft_lstnew_files(char *str)
         return (NULL);
     }
     new->name = ft_strdup(str);
+    if (!new->name)
+    {
+        perror("malloc");
+        free(new);
+        return (NULL);
+    }
     new->next = NULL;
     return (new);
 }
@@ -76,6 +100,20 @@ void ft_free_lst_files(t_files **files)
     }
 }
 
+void ft_free_lst_files_expand(t_files **files)
+{
+    t_files *tmp;
+    int i = 0;
+
+    while (*files)
+    {
+        tmp = *files;
+        *files = (*files)->next;
+        i++;
+        free(tmp);
+    }
+}
+
 t_files *ft_recover_files(void)
 {
     DIR *dir;
@@ -102,4 +140,29 @@ t_files *ft_recover_files(void)
     }
     closedir(dir);
     return (files);
+}
+
+char *write_files_expand(t_files *files)
+{
+    t_files *tmp;
+    char *res;
+    int lenres;
+
+    tmp = files;
+    lenres = 0;
+    while (tmp)
+    {
+        lenres += ft_strlen(tmp->name);
+        tmp = tmp->next;
+    }
+    res = ft_calloc(sizeof(char), lenres + 1);
+    if (!res)
+        return (perror("malloc"), NULL);
+    tmp = files;
+    while (tmp)
+    {
+        ft_strlcat(res, tmp->name, lenres + 1);
+        tmp = tmp->next;
+    }
+    return (res);
 }
