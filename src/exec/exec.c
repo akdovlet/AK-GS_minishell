@@ -6,28 +6,16 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 14:15:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:28:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
 #include "exec.h"
+#include "env.h"
 
 // gestion hard path
-char	*env_get_value(t_env *env, char *key)
-{
-	if (!env || !key)
-		return (NULL);
-	while (env)
-	{
-		if (!ft_strcmp(env->key, key))
-			return (env->value);
-		env = env->next;
-	}
-	return (NULL);
-}
-
 char	*path_join(char *s1, char *s2)
 {
 	int		i;
@@ -73,11 +61,11 @@ int	find_path_loop(char **cmd_arr, char **path)
 		free(cmd_path);
 		i++;
 	}
-	ft_dprintf(STDERR_FILENO, "minishell %s: %s\n", cmd_arr[0], strerror(errno));
+	ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", cmd_arr[0], strerror(errno));
 	return (127);
 }
 
-int	hard_patch_check(char *cmd)
+int	hard_path_check(char *cmd)
 {
 	if (!access(cmd, F_OK))
 	{
@@ -122,6 +110,7 @@ void	clear_exit(t_data *data, int code)
 	env_clear(&data->env);
 	fdlst_clear(&data->fdlst);
 	free(data->hardpath);
+	rl_clear_history();
 	exit(code);
 }
 
@@ -141,13 +130,14 @@ int	execute_prog(t_ast *ast, t_data *data)
 		err = resolve_path(ast->cmd, data);
 		if (err)
 			clear_exit(data, err);
-		env = copy_env(data->env);
+		env = env_copy_to_char_arr(data->env);
 		if (!env)
 			return (clear_exit(data, 1), 1);
 		execve(ast->cmd[0], ast->cmd, env);
-		ft_dprintf(STDERR_FILENO, "minishell: %s, %s\n", ast->cmd[0], strerror(errno));
+		ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", ast->cmd[0], strerror(errno));
 		ft_free(env);
-		clear_exit(data, err);
+		// ft_dprintf(STDERR_FILENO, "err value is: %d\n", err);
+		clear_exit(data, 1);
 	}
 	else
 	{
@@ -161,15 +151,15 @@ int	execute_prog(t_ast *ast, t_data *data)
 
 int	command_node(t_ast *ast, t_data *data)
 {
-	int	err;
-
 	expand_tab_of_cmd(ast->cmd, data->env);
 	if (!ast->cmd)
 		return (perror("minishell: command_node"), 1);
-	// if (ft_is_builtins(ast->cmd[0]))
-	// 	return (execute_builtin(ast, data));
-	// else
-		return (execute_prog(ast, data));
+	if (!ast->cmd[0])
+		return (0);
+	if (ft_is_builtins(ast->cmd[0]))
+		return (execute_builtin(ast, data));
+	else
+	return (execute_prog(ast, data));
 }
 
 int ft_exec(t_ast *ast, t_data *data)
@@ -193,7 +183,7 @@ int	exec_recursion(t_ast *ast, t_data *data)
 	if (ast->type == PIPE_NODE)
 		data->status = ft_pipe_recursion(ast, data);
 	if (ast->type == CMD)
-		data->status = ft_exec(ast, data);
+		data->status = command_node(ast, data);
 	if (ast->type == WAIT_NODE)
 		data->status = ft_wait_pid(ast, data);
 	if (ast->type == OPERATOR)

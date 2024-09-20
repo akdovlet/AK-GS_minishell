@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/17 16:27:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:38:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@
 // sudo cat /proc/1003/environ | tr '\0' '\n'
 // displays env variables of given process
 // can see that last cmd is not always last
+
+char	*env_get_value(t_env *env, char *key)
+{
+	if (!env || !key)
+		return (NULL);
+	while (env)
+	{
+		if (!ft_strcmp(env->key, key))
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
+}
 
 void	env_print(t_env *lst)
 {

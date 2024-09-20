@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/20 11:45:58 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:47:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void	interactive_shell(t_data *data)
 {
 	char	*line;
 	t_token	*tk;
-	t_ast	*ast;
 
 	tk = NULL;
-	ast = NULL;
 	while (1)
 	{
 		line = readline(CYAN "minishell$> " RESET);
@@ -47,7 +45,6 @@ void	non_interactive_shell(t_data *data)
 {
 	char	*line;
 	t_token	*tk;
-	t_ast	*ast;
 	size_t	line_count;
 
 	line_count = 1;

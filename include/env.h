@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/02 15:15:31 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:45:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 /* env.c */
 
+char	*env_get_value(t_env *env, char *key);
+char	**env_copy_to_char_arr(t_env *env);
 t_env	*env_new(char *var);
 void	env_add_back(t_env **lst, t_env *new);
 //copy the entirety of env into a linked list;
