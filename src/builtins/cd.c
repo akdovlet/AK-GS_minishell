@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 12:32:52 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 13:53:24 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ char *add_slash(char *path)
 	if (path[i - 1] != '/')
 	{
 		tmp = ft_strjoin(path, "/");
+		if (tmp == NULL)
+			return (NULL);
+		path = tmp;
+	}
+	else
+	{
+		tmp = ft_strdup(path);
 		if (tmp == NULL)
 			return (NULL);
 		path = tmp;
