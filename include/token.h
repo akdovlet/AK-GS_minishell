@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/28 14:11:56 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:13:01 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ bool	is_metacharacter(int c);
 bool	is_word(int c);
 
 /*###############################################################################
+#                                  grammar_check.c                              #
+###############################################################################*/
+
+int	grammar_check(t_token *tk);
+
+/*###############################################################################
 #                                  definitions.c                                #
 ###############################################################################*/
 
@@ -50,7 +56,6 @@ int	parenthesis_scope_check(char *str, int *i);
 #                                  parenthesis.c                                #
 ###############################################################################*/
 
-int		parenthesis_count(char *str, int i);
 int		parenthesis_management(char *str, int *i, t_token **token);
 
 /*###############################################################################
@@ -82,16 +87,14 @@ int		syntax_order_check(t_token *tk);
 ###############################################################################*/
 
 t_token	*token_new(char *var);
-void	token_add_back(t_token **lst, t_token *new);
+int		token_add_back_grammar(t_token **lst, t_token *new);
 void	token_clear(t_token **tk);
 
 /*###############################################################################
 #                                  tokenize.c                                   #
 ###############################################################################*/
 
-int		grammar_check(t_token *tk);
 int		tokenize(char *line, t_token **tk);
-void	print_token(t_token *tk);
 
 /*###############################################################################
 #                                  type_manager.c                               #

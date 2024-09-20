@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_file_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/16 12:56:55 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:21:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,13 @@ void ft_free_lst_files(t_files **files)
 void ft_free_lst_files_expand(t_files **files)
 {
     t_files *tmp;
-    int i = 0;
 
     while (*files)
     {
-        tmp = *files;
-        *files = (*files)->next;
-        i++;
-        free(tmp);
+        tmp = (*files)->next;
+		free((*files)->name);
+        free(*files);
+        *files = tmp;
     }
 }
 

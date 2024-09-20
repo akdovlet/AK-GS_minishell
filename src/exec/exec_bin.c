@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 18:21:01 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:52:25 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ char **ft_ll_tab(t_env *env)
     i = ft_lstsize_env(env);
     tab = malloc(sizeof(char *) * (i + 1));
     if (!tab)
+	{
+		perror("minishell: ft_ll_tab");
         return (NULL);
+	}
     i = 0;
     tmp = env;
     while (tmp)
@@ -141,6 +144,8 @@ int ft_exec_bin(t_ast *ast, t_data *data)
 
     ft_check_path(data);
     env = ft_ll_tab(data->env);
+	if (!env)
+		return (1);
     pid = fork();
     if (pid < 0)
         return (perror("fork failed\n"), 1);
@@ -154,6 +159,7 @@ int ft_exec_bin(t_ast *ast, t_data *data)
     }
     else
     {
+		// signal_wait_state();
         new = ft_lstnew_pidlst(pid);
         if (!new)
             return (1);

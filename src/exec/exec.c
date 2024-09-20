@@ -3,38 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 08:51:36 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:58:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+#include "AST.h"
 #include "exec.h"
+#include "env.h"
 
 // gestion hard path
-int ft_exec(t_ast *ast, t_data *data)
-{
-	expand_tab_of_cmd(ast->cmd, data);
-	ast->cmd = ft_wildcard(ast->cmd);
-	data->status = 0;
-	if (!ast->cmd)
-		return (1);
-	if (ast->cmd[0] == NULL)
-		return (0);
-    if (ft_is_builtins(ast->cmd[0]))
-        ft_builtins(ast, data);
-    else
-        ft_exec_bin(ast, data);
-    return (data->status);
-}
+
+// int ft_exec(t_ast *ast, t_data *data)
+// {
+// 	expand_tab_of_cmd(ast->cmd, data->env);
+// 	if (ast->cmd[1])
+// 	{
+// 		ast->cmd = ft_wildcard(ast->cmd);
+// 		if (!ast->cmd)
+// 			return (1);
+// 	}
+//     if (ft_is_builtins(ast->cmd[0]))
+//         ft_builtins(ast, data);
+//     else
+//         ft_exec_bin(ast, data);
+//     return (data->status);
+// }
 
 int	exec_recursion(t_ast *ast, t_data *data)
 {
 	if (ast->type == PIPE_NODE)
 		data->status = ft_pipe_recursion(ast, data);
 	if (ast->type == CMD)
-		data->status = ft_exec(ast, data);
+		data->status = command_node(ast, data);
 	if (ast->type == WAIT_NODE)
 		data->status = ft_wait_pid(ast, data);
 	if (ast->type == OPERATOR)

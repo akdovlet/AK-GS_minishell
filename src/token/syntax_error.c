@@ -6,17 +6,12 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:55:42 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/23 15:46:27 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/14 19:32:07 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
-
-void	bad_syntax2(char *str)
-{
-	ft_dprintf(STDERR_FILENO, SYNTAX_ERR , str);
-}
 
 void	bad_syntax3(t_token *tk)
 {
@@ -24,6 +19,11 @@ void	bad_syntax3(t_token *tk)
 		ft_dprintf(STDERR_FILENO, SYNTAX_ERR, "newline");
 	else
 		ft_dprintf(STDERR_FILENO, SYNTAX_ERR, tk->value);
+}
+
+void	bad_syntax2(char *str)
+{
+	ft_dprintf(STDERR_FILENO, SYNTAX_ERR , str);
 }
 
 void	bad_syntax(int c)

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/10 10:52:03 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:17:37 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include "builtins.h"
 # include "expand.h"
+
+// command_node.c
+int	command_node(t_ast *ast, t_data *data);
+
+// command_utils.c
+void	clear_exit(t_data *data, int code);
+char	*path_join(char *s1, char *s2);
 
 // exec.c
 int exec_recursion(t_ast *ast, t_data *data);
@@ -29,6 +36,7 @@ int			ft_builtins(t_ast *ast, t_data *data);
 // pidlst.c
 t_pidlst	*ft_lstnew_pidlst(pid_t pid);
 void	ft_lstadd_back_pidlst(t_pidlst **lst, t_pidlst *new);
+void	pidlst_clear(t_pidlst **lst);
 
 // exec_bin.c
 int ft_exec_bin(t_ast *ast, t_data *data);
@@ -63,5 +71,8 @@ void	fdlst_close_in_child(t_fdlst *lst);
 
 //	redir.c
 int		redir_node(t_ast *ast, t_data *data);
+
+// execution_loop.c
+void	execution_loop(t_data *data);
 
 #endif

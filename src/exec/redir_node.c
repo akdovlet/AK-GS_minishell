@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/18 08:43:59 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:44:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	redir_hd(t_ast *ast)
 
 	line = NULL;
 	line_count = 0;
+	program_state = HD;
 	tty = open("/dev/tty", O_RDWR);
 	if (tty == -1)
 	{
@@ -79,6 +80,12 @@ int	redir_hd(t_ast *ast)
 		line_count++;
 		write(tty, "> ", 2);
 		line = get_next_line(tty);
+		if (program_state == SIGINT)
+		{
+			printf("about to break\n");
+			program_state = PARENT;
+			return (130);
+		}
 		if (!line)
 		{
 			ft_dprintf(STDERR_FILENO, "\nminishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')\n", line_count, ast->redir_filename);
@@ -97,6 +104,7 @@ int	redir_hd(t_ast *ast)
 		return (ft_dprintf(STDERR_FILENO, "minishell: %s\n", strerror(errno)), 1);
 	close(tmp_file);
 	close(tty);
+	program_state = PARENT;
 	return (0);
 }
 
