@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:33:23 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/11 13:52:06 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:17:18 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void ft_lstdelone_env(t_env **env, t_env **delone)
     prev->next = (*delone)->next;
     free((*delone)->key);
     free((*delone)->value);
-    free((*delone)->both);
     free((*delone));
 }
 

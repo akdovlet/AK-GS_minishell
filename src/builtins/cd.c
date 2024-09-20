@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 13:53:24 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:18:05 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ static int	modif_oldpwd(t_env **env)
 	tmp->value = getcwd(NULL, 0);
 	if (tmp->value == NULL)
 		return (1);
-	free(tmp->both);
-	tmp->both = ft_strjoin("OLDPWD=", tmp->value);
-	if (tmp->both == NULL)
-		return (1);
 	return (0);
 }
 
@@ -36,10 +32,6 @@ static int	modif_pwd(t_env **env)
 	free(tmp->value);
 	tmp->value = getcwd(NULL, 0);
 	if (tmp->value == NULL)
-		return (1);
-	free(tmp->both);
-	tmp->both = ft_strjoin("PWD=", tmp->value);
-	if (tmp->both == NULL)
 		return (1);
 	return (0);
 }

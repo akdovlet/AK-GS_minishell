@@ -3,32 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   env_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 12:27:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:42:51 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
 
-char	*env_join_keyvalue(char *key, char *value)
+
+// recode la meme fonction que env_join_keyvalue mais sans i = - 1 et j = -1
+char	*env_join_keyvalue2(char *key, char *value)
 {
 	int		i;
 	int		j;
 	char	*fusion;
 
-	i = -1;
-	j = -1;
+	i = 0;
+	j = 0;
 	fusion = malloc(sizeof(char) * ((ft_strlen(key) + (ft_strlen(value) + 2))));
 	if (!fusion)
 		return (NULL);
-	while (key[++i])
+	while (key[i])
+	{
 		fusion[i] = key[i];
+		i++;
+	}
 	fusion[i++] = '=';
-	while (value[++j])
-		fusion[i + j] = value[j];
+	if (value)
+	{
+		while (value[j])
+		{
+			fusion[i + j] = value[j];
+			j++;
+		}
+	}
 	fusion[i + j] = '\0';
 	return (fusion);
 }
@@ -42,9 +53,6 @@ t_env	*env_new_key(char *key, char *value)
 		return (NULL);
 	new->key = key;
 	new->value = value;
-	new->both = env_join_keyvalue(key, value);
-	if (!new->both)
-		return (NULL);
 	new->next = NULL;
 	return (new);
 }
@@ -64,9 +72,95 @@ bool	env_default_setup(t_data *data)
 	return (true);
 }
 
+int lstdup_env(t_env **dst, t_env *src)
+{
+	t_env	*new;
+	t_env	*tmp;
+
+	while (src)
+	{
+		new = env_new_key(ft_strdup(src->key), ft_strdup(src->value));
+		if (!new)
+			return (env_clear(dst), 1);
+		if (!*dst)
+			*dst = new;
+		else
+		{
+			tmp = *dst;
+			while (tmp->next)
+				tmp = tmp->next;
+			tmp->next = new;
+		}
+		src = src->next;
+	}
+	if (!ft_check_key(dst, "OLDPWD"))
+	{
+		new = env_new_key(ft_strdup("OLDPWD"), NULL);
+		if (!new)
+			return (env_clear(dst), 1);
+		env_add_back(dst, new);
+	}
+	return (0);
+}
+
+static void ft_sort_alpha(t_env **env)
+{
+    t_env *tmp;
+    t_env *tmp2;
+	char *tmp3;
+	
+    tmp = *env;
+    while (tmp->next)
+    {
+        tmp2 = tmp->next;
+        while (tmp2)
+        {
+            if (ft_strcmp(tmp->key, tmp2->key) > 0)
+            {
+				tmp3 = tmp->key;
+				tmp->key = tmp2->key;
+				tmp2->key = tmp3;
+				tmp3 = tmp->value;
+				tmp->value = tmp2->value;
+				tmp2->value = tmp3;
+            }
+            tmp2 = tmp2->next;
+        }
+        tmp = tmp->next;
+    }
+}
+
+int export_default_setup(t_data *data)
+{
+	if (lstdup_env(&data->export, data->env))
+		return (1);
+	ft_sort_alpha(&data->export);
+	return (0);
+}
+
+int	env_export_default_setup(t_data *data)
+{
+	if (env_default_setup(data))
+		return (1);
+	if (export_default_setup(data))
+		return (1);
+	return (0);
+}
+
+int env_export_copy(t_data *data, char **env)
+{
+	data->env = NULL;
+	data->export = NULL;
+	if (env_copy(&data->env, env))
+		return (1);
+	if (export_default_setup(data))
+		return (1);
+	return (0);
+}
+
 bool	env_setup(t_data *data, char **env)
 {
 	if (!env[0])
-		return (env_default_setup(data));
-	return (env_copy(&data->env, env));
+		return (env_export_default_setup(data));
+	return (env_export_copy(data, env));
 }	

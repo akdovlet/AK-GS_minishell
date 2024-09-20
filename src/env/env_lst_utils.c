@@ -6,12 +6,26 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/11 16:42:47 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:31:23 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
+
+int find_chr(char *str, char c)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 t_env	*ft_last(t_env *lst)
 {
@@ -34,7 +48,9 @@ void	env_add_back(t_env **lst, t_env *new)
 	else
 	{
 		tmp = *lst;
-		ft_last(tmp)->next = new;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
 }
 
@@ -62,12 +78,14 @@ t_env	*env_new(char *var)
 	node->key = copy_key(var);
 	if (!node->key)
 		return (NULL);
-	node->value = ft_strdup(var + ft_strlen(node->key) + 1);
-	if (!node->value)
-		return (NULL);
-	node->both = ft_strdup(var);
-	if (!node->both)
-		return (NULL);
+	if (find_chr(var, '='))
+	{
+		node->value = ft_strdup(var + ft_strlen(node->key) + 1);
+		if (!node->value)
+			return (NULL);
+	}
+	else
+		node->value = NULL;
 	node->next = NULL;
 	return (node);
 }

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 10:06:17 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:18:29 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	last_cmd(t_env **my_env, char *str)
 	{
 		free(runner->next->key);
 		free(runner->next->value);
-		free(runner->next->both);
 		tmp = runner->next->next;
 		free(runner->next);
 		runner->next = env_new(str);
@@ -48,7 +47,7 @@ void	env_print(t_env *lst)
 {
 	while (lst)
 	{
-		ft_printf("%s\n", lst->both);
+		ft_printf("%s=%s\n", lst->key, lst->value);
 		lst = lst->next;
 	}
 }

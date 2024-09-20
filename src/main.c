@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/18 08:17:37 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:34:26 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int ac, char **av, char **env)
 		return (1);
 	tk = NULL;
 	setup_shell(&data, env);
-	// env_print(data.env);
+	// env_print(data.export);
 	while (1)
 	{
 		line = readline(CYAN "minishell$> " RESET);
@@ -36,10 +36,7 @@ int main(int ac, char **av, char **env)
 			break ;
 		add_history(line);
 		tokenize(line, &tk);
-		// print_token(tk);
-		// env_print(data.env);
 		ast = parse(&tk);
-		// ast_print(ast);
 		if (ast)
 		{
 			exec_recursion(ast, &data);
