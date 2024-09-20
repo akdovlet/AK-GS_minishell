@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/20 15:51:04 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/09/20 17:07:26 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,8 @@ SRC		:=	main.c							\
 			expand/lst_file_utils.c			\
 			expand/sort_files.c 			\
 			expand/wildcard.c				\
+			exec/command_node.c				\
+			exec/command_utils.c			\
 			exec/exec_bin.c 				\
 			exec/exec_cmd.c 				\
 			exec/exec_pipe.c 				\
@@ -67,7 +69,7 @@ SRC		:=	main.c							\
 			exec/subshell.c 				\
 			exec/redir_lst_clear.c			\
 			exec/redir_lst.c				\
-			exec/redir.c					\
+			exec/redir_node.c				\
 			exec/path_utils.c 				\
 			exec/wait_pid.c					\
 			exec_loop/execution_loop.c
@@ -108,7 +110,6 @@ fclean: clean
 	@$(MAKE) --no-print-directory fclean -C libft
 
 val : all
-	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes ./${NAME}
 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes ./${NAME}
 
 re: fclean all

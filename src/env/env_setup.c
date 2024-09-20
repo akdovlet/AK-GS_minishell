@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/20 14:32:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:05:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*env_join_keyvalue(char *key, char *value)
 
 	i = -1;
 	j = -1;
+	if (!value)
+		return (ft_strdup(key));
 	fusion = malloc(sizeof(char) * ((ft_strlen(key) + (ft_strlen(value) + 2))));
 	if (!fusion)
 		return (NULL);

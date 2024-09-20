@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 15:18:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 11:28:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:39:46 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,20 @@ void	ft_lstadd_back_pidlst(t_pidlst **lst, t_pidlst *new)
     while (tmp->next)
         tmp = tmp->next;
     tmp->next = new;
+}
+
+void	pidlst_clear(t_pidlst **lst)
+{
+	t_pidlst	*tmp;
+
+	
+	if (!lst || !*lst)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
+	}
+	*lst = NULL;
 }
