@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 18:18:23 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:37:32 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int check_export_export(t_env *export, char *str)
 	t_env	*node;
 
 	if (!check_alnum_str(str))
-		return (1);
+		return (printf("sortie\n"), 1);
 	node = ft_check_key(&export, str);
 	if (!node)
 	{
@@ -87,9 +87,9 @@ int check_export_export(t_env *export, char *str)
 
 int	check_export(char *arg, t_data *data)
 {
-	if (check_export_env(data->env, arg))
-		return (1);
 	if (check_export_export(data->export, arg))
+		return (1);
+	if (check_export_env(data->env, arg))
 		return (1);
 	return (0);
 }
