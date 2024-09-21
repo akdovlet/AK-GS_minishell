@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/20 14:13:16 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:54:37 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ typedef struct s_data
 	t_pidlst	*pidlst;
 	t_fdlst		*fdlst;
 	t_env		*env;
+	t_env		*export;
 }	t_data;
 
 int	exec_recursion(t_ast *ast, t_data *data);

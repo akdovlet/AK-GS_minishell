@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 17:10:44 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:52:40 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int ft_exec_builtins(t_ast *ast, t_data *data)
     if (!ft_strcmp(ast->cmd[0], "pwd"))
         data->status = ft_pwd(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "export"))
-        data->status = ft_export(ast->cmd, &data->env);
+        data->status = ft_export(ast->cmd, data);
     if (!ft_strcmp(ast->cmd[0], "unset"))
-        data->status = unset(ast->cmd, data->env); 
+        data->status = unset(ast->cmd, data); 
     if (!ft_strcmp(ast->cmd[0], "env"))
         data->status = ft_env(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "exit"))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 15:48:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/20 18:52:25 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,21 @@ int	ft_execve_hard_path(char **cmd, char **envp, t_data *data)
 	exit(data->status);
 }
 
+char *both_env(t_env *env)
+{
+    char *str;
+    char *tmp;
+
+    str = ft_strjoin(env->key, "=");
+    if (!str)
+        return (NULL);
+    tmp = ft_strjoin(str, env->value);
+    free(str);
+    return (tmp);
+}
+
 // cree une fonction que me recopie data->env dans un tableau de chaine de caractere
+// plus de both donc cree une fonction qui concatene key et value et egale
 char **ft_ll_tab(t_env *env)
 {
     char **tab;
@@ -62,7 +76,7 @@ char **ft_ll_tab(t_env *env)
     tmp = env;
     while (tmp)
     {
-        tab[i] = ft_strdup(tmp->both);
+        tab[i] = both_env(tmp);
         if (!tab[i])
             return (free_tab(tab), NULL);
         i++;
@@ -72,6 +86,7 @@ char **ft_ll_tab(t_env *env)
     return (tab);
 }
 
+// faux modif ne doit pas etre dans l'env
 int ft_check_path(t_data *data)
 {
     t_env *node;

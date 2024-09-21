@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 14:19:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:34:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	env_print(t_env *lst)
 {
 	while (lst)
 	{
-		ft_printf("%s\n", lst->both);
+		ft_printf("%s=%s\n", lst->key, lst->value);
 		lst = lst->next;
 	}
 }
