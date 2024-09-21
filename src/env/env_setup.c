@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/20 17:05:13 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:19:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,4 @@ bool	env_setup(t_data *data, char **env)
 	if (!env[0])
 		return (env_default_setup(data));
 	return (env_copy(&data->env, env));
-}	
+}

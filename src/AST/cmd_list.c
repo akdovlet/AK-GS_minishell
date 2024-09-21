@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:22:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/17 16:42:05 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:17:39 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
 
-void		cmdlst_print(t_cmdlst *lst)
+void	cmdlst_print(t_cmdlst *lst)
 {
 	while (lst)
 	{
@@ -72,7 +72,7 @@ t_cmdlst	*cmdlst_new(char *value, int type)
 	if (!new->str)
 	{
 		perror("minishell: cmdlst_new");
-		return (free(new),NULL);
+		return (free(new), NULL);
 	}
 	new->type = type;
 	return (new);

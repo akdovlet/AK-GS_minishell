@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 15:55:42 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/14 19:32:07 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:39:24 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	bad_syntax3(t_token *tk)
 
 void	bad_syntax2(char *str)
 {
-	ft_dprintf(STDERR_FILENO, SYNTAX_ERR , str);
+	ft_dprintf(STDERR_FILENO, SYNTAX_ERR, str);
 }
 
 void	bad_syntax(int c)
 {
-	char *token;
+	char	*token;
 
 	token = NULL;
 	if (c == '|')
@@ -51,5 +51,5 @@ void	bad_syntax(int c)
 		token = ">";
 	else if (c == PARENTHESIS_R)
 		token = ")";
-	ft_dprintf(STDERR_FILENO, SYNTAX_ERR , token);
+	ft_dprintf(STDERR_FILENO, SYNTAX_ERR, token);
 }

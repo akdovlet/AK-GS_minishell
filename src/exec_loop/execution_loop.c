@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/20 18:42:29 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:07:42 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	interactive_shell(t_data *data)
 		}
 		add_history(line);
 		data->status = tokenize(line, &tk);
-		print_token(tk);
 		free(line);
 		data->ast_root = parse(&tk);
 		token_clear(&tk);

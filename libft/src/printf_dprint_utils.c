@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:30:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/04 16:41:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:09:22 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	int_tobuffer(int n, t_print *data)
 {
 	char	*nb;
 	int		wrote;	
-	
+
 	wrote = 0;
 	nb = ft_itoa(n);
 	if (!nb)
@@ -79,30 +79,4 @@ int	ft_ddraft(char flag, t_print *data, va_list *arg)
 	else
 		return (0);
 	return (wrote);
-}
-
-int	ak_printf(int fd, const char *str, va_list *arg)
-{
-	int		i;
-	t_print	data;
-
-	i = -1;
-	data.j = 0;
-	data.wrote = 0;
-	data.fd = fd;
-	data.buffer[MAX_BUFFER] = '\0';
-	while (str[++i])
-	{
-		if (str[i] == '%')
-			data.wrote += ft_ddraft(str[++i], &data, arg);
-		else
-		{
-			data.buffer[data.j] = str[i];
-			data.j++;
-		}
-		if (data.j >= MAX_BUFFER)
-			print_buffer(data.fd, data.buffer, &data.j);
-	}
-	print_buffer(fd, data.buffer, &data.j);
-	return (data.wrote);
 }

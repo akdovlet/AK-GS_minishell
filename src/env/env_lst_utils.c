@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/11 16:42:47 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:20:21 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_env	*ft_last(t_env *lst)
 
 void	env_add_back(t_env **lst, t_env *new)
 {
-	t_env *tmp;
-	
+	t_env	*tmp;
+
 	if (!*(lst))
 		*lst = new;
 	else
@@ -49,7 +49,7 @@ char	*copy_key(char *str)
 	key = ft_strndup(str, i);
 	if (!key)
 		return (NULL);
-	return (key);	
+	return (key);
 }
 
 t_env	*env_new(char *var)
@@ -72,10 +72,10 @@ t_env	*env_new(char *var)
 	return (node);
 }
 
-int ft_lstsize_env(t_env *lst)
+int	ft_lstsize_env(t_env *lst)
 {
-	int i;
-	t_env *tmp;
+	int		i;
+	t_env	*tmp;
 
 	i = 0;
 	tmp = lst;

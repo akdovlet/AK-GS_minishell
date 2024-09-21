@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:01:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/21 16:05:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:16:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "AST.h"
 
-int		find_subshell(t_ast	*root)
+int	find_subshell(t_ast	*root)
 {
 	if (!root)
 		return (0);

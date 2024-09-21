@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 15:43:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:26:10 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 static void	pip_wait_children(t_data *data)
 {
-	int	status;
-	t_pidlst *node;
-	t_pidlst *tmp;
+	int			status;
+	t_pidlst	*node;
+	t_pidlst	*tmp;
 
 	node = data->pidlst;
 	while (node)
 	{
-		// signal_wait_state();
 		waitpid(node->pid, &status, 0);
 		if (WIFSIGNALED(status))
 			data->status = 128 + WTERMSIG(status);
@@ -32,7 +31,6 @@ static void	pip_wait_children(t_data *data)
 		free(tmp);
 		tmp = NULL;
 	}
-	// reset_signal_state();
 	data->pidlst = NULL;
 }
 

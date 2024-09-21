@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   AST_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 12:42:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/03 10:57:00 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:56:30 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
+#include "AST.h"
 
 void	eat_token(t_token **tk)
 {
@@ -27,10 +28,8 @@ void	eat_token(t_token **tk)
 		(*tk)->prev = NULL;
 }
 
-void	ast_free(t_ast *ast)
+void	ast_free_first_half(t_ast *ast)
 {
-	if (!ast)
-		return;
 	if (ast->type == CMD)
 	{
 		ft_free(ast->cmd);
@@ -48,7 +47,11 @@ void	ast_free(t_ast *ast)
 		free(ast->redir_filename);
 		free(ast);
 	}
-	else if (ast->type == PIPE_NODE)
+}
+
+void	ast_free_second_half(t_ast *ast)
+{
+	if (ast->type == PIPE_NODE)
 	{
 		ast_free(ast->pipe_left);
 		ast_free(ast->pipe_right);
@@ -64,6 +67,17 @@ void	ast_free(t_ast *ast)
 		ast_free(ast->wait_next);
 		free(ast);
 	}
+}
+
+void	ast_free(t_ast *ast)
+{
+	if (!ast)
+		return ;
+	if (ast->type == CMD || ast->type == OPERATOR
+		|| ast->type == REDIR)
+		ast_free_first_half(ast);
+	else
+		ast_free_second_half(ast);
 }
 
 void	next_token(t_token **tk)

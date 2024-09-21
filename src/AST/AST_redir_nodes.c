@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:59:55 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/17 16:37:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:16:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	eat_cmdlst(t_cmdlst **lst)
 void	build_tmp_lists(t_token **tk, t_cmdlst **cmd, t_cmdlst **redir)
 {
 	t_type	tmp;
-	
+
 	while (*tk && (is_redirect((*tk)->type) || (*tk)->type == WORD))
 	{
 		if (is_redirect((*tk)->type))

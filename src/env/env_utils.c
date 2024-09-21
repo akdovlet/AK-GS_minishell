@@ -6,16 +6,12 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/20 14:38:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:19:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
-
-// sudo cat /proc/1003/environ | tr '\0' '\n'
-// displays env variables of given process
-// can see that last cmd is not always last
 
 char	*env_get_value(t_env *env, char *key)
 {
@@ -56,14 +52,14 @@ void	env_clear(t_env **lst)
 
 t_env	*ft_check_key(t_env **env, char *key)
 {
-    t_env *tmp;
-    
-    tmp = *env;
-    while (tmp)
-    {
-        if (!ft_strncmp(tmp->key, key, ft_strlen(tmp->key)))
-            return (tmp);
-        tmp = tmp->next;
-    }
-    return (NULL);
+	t_env	*tmp;
+
+	tmp = *env;
+	while (tmp)
+	{
+		if (!ft_strncmp(tmp->key, key, ft_strlen(tmp->key)))
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

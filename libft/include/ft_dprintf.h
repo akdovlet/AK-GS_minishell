@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:06:16 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/07/13 11:33:46 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:10:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define FT_DPRINTF_H
 
 # include "libft.h"
-
-
 # define MAX_BUFFER 4096
 
 typedef struct s_print

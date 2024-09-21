@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:37:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/19 14:25:54 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:05:10 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	program_state;
 
 void	setup_shell(t_data	*data, char	**env)
 {
-	struct termios		config;
+	struct termios	config;
+
 	if (isatty(STDIN_FILENO) && tcgetattr(STDIN_FILENO, &config) < 0)
 		perror("minishell: setup_shell");
 	else

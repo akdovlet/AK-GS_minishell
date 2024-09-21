@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 13:28:27 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/28 14:52:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:36:46 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	is_blank(int c)
 
 bool	is_metacharacter(int c)
 {
-	if (c == NEWLINE || is_blank(c)|| is_operator(c) || is_redirect(c))
+	if (c == NEWLINE || is_blank(c) || is_operator(c) || is_redirect(c))
 		return (true);
 	return (false);
 }

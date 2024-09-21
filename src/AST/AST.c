@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/17 19:08:18 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:59:02 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_ast	*parse_pipe(t_token **tk)
 		return (NULL);
 	new = NULL;
 	new = parse_redirect(tk);
-	if (!new)	
+	if (!new)
 		return (NULL);
 	while (*tk && (*tk)->type == PIPE)
 	{

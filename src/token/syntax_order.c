@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:46:28 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/14 20:35:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:37:48 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	scope_recursive(t_token **tk)
 			(*tk) = (*tk)->next;
 			return (0);
 		}
-		else 
+		else
 			*tk = (*tk)->next;
 	}
 	return (1);
@@ -59,8 +59,8 @@ int	subshell_rule(t_token **tk)
 
 int	scope_check(t_token **tk)
 {
-	int error;
-	
+	int	error;
+
 	error = 0;
 	if (!(*tk) || !tk)
 		return (1);
@@ -101,7 +101,8 @@ int	syntax_order_check(t_token *tk)
 		{
 			error = scope_check(&tk);
 			if (error == 1)
-				return (ft_dprintf(STDERR_FILENO, PARENTHESIS_ERR, PARENTHESIS_R), 0);
+				return (ft_dprintf(STDERR_FILENO, \
+				PARENTHESIS_ERR, PARENTHESIS_R), 0);
 			if (error == 2 || error == 3)
 				return (0);
 		}

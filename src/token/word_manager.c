@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/17 18:40:22 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:52:02 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	quote_len(char *str, int *i, int symbol)
 	}
 	return (len);
 }
-
 
 int	quote_management(char *dup, int *j, char *str, int *i)
 {
@@ -82,7 +81,8 @@ char	*copy_word(char *str, int *i)
 	dup = malloc(sizeof(char) * j + 1);
 	if (!dup)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: word_management: %s\n", strerror(errno));
+		ft_dprintf(STDERR_FILENO, \
+		"minishell: word_management: %s\n", strerror(errno));
 		return (NULL);
 	}
 	j = 0;
@@ -94,11 +94,7 @@ char	*copy_word(char *str, int *i)
 				return (free(dup), NULL);
 		}
 		else
-		{
-			dup[j] = str[*i];
-			j++;
-			(*i)++;			
-		}
+			dup[j++] = str[(*i)++];
 	}
 	dup[j] = '\0';
 	return (dup);
@@ -106,12 +102,13 @@ char	*copy_word(char *str, int *i)
 
 int	word_management(char *line, int *i, t_token **tk)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = token_new(NULL);
 	if (!new)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: word_management: %s\n", strerror(errno));
+		ft_dprintf(STDERR_FILENO, \
+		"minishell: word_management: %s\n", strerror(errno));
 		return (0);
 	}
 	new->type = WORD;

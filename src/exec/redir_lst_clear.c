@@ -6,26 +6,11 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 12:01:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/09 17:53:28 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:55:28 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-void	fdlst_dont_close_in_child(t_fdlst *lst, int fd_target)
-{
-	if (!lst)
-		return ;
-	while (lst)
-	{
-		if (lst->fd == fd_target)
-		{
-			lst->close_in_child = false;
-			break ;
-		}
-		lst = lst->next;
-	}
-}
 
 void	fdlst_eat(t_fdlst **node)
 {

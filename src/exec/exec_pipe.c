@@ -3,48 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 08:43:32 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:58:38 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include <signal.h>
 
-//int	left_pipe_setup(t_ast *ast, t_data *data)
-//int	right_pipe_setup(t_ast *ast, t_data *data)
+int	left_pipe_setup(t_data *data, int pipe_fd[2], int backup_fd[2])
+{
+	backup_fd[1] = dup(STDOUT_FILENO);
+	if (backup_fd[1] == -1)
+		return (perror("minishell: left_pipe_setup"), 1);
+	if (fdlst_add_front(&data->fdlst, fdlst_new(backup_fd[1], true)))
+	{
+		close(backup_fd[1]);
+		perror("minishell: left_pipe_setup");
+		return (1);
+	}
+	if (pipe(pipe_fd) == -1)
+	{
+		close(backup_fd[1]);
+		return (perror("minishell: left_pipe_setup"), 1);
+	}
+	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
+	{
+		close(backup_fd[1]);
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
+		return (perror("minishell: left_pipe_setup"), 1);
+	}
+	close(pipe_fd[1]);
+	fdlst_add_front(&data->fdlst, fdlst_new(pipe_fd[0], true));
+	return (0);
+}
 
-int ft_pipe_recursion(t_ast *ast, t_data *data)
+int	right_pipe_setup(t_data *data, int pipe_fd[2], int backup_fd[2])
+{
+	if (dup2(backup_fd[1], STDOUT_FILENO) == -1)
+	{
+		close(pipe_fd[0]);
+		close(backup_fd[1]);
+		return (perror("minishell: right_pipe_setup"), 1);
+	}
+	close(backup_fd[1]);
+	fdlst_delete_node(&data->fdlst, backup_fd[1]);
+	fdlst_delete_node(&data->fdlst, pipe_fd[0]);
+	backup_fd[0] = dup(STDIN_FILENO);
+	if (backup_fd[0] == -1)
+		return (close(pipe_fd[0]), perror("minishell: right_pipe_setup"), 1);
+	if (fdlst_add_front(&data->fdlst, fdlst_new(backup_fd[0], true)))
+	{
+		close(backup_fd[0]);
+		close(pipe_fd[0]);
+		return (perror("minishell: right_pipe_setup"), 1);
+	}
+	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
+	{
+		close(backup_fd[0]);
+		close(pipe_fd[0]);
+		return (perror("minishell: right_pipe_setup"), 1);
+	}
+	return (close(pipe_fd[0]), 0);
+}
+
+int	ft_pipe_recursion(t_ast *ast, t_data *data)
 {
 	int	pipe_fd[2];
-	int	backup_in;
-	int	backup_out;
+	int	backup_fd[2];
 
-	backup_out = dup(STDOUT_FILENO);
-	fdlst_add_back(&data->fdlst, fdlst_new(backup_out, true)); //pas protege est ce un probleme ?
+	if (left_pipe_setup(data, pipe_fd, backup_fd))
+	{
+		fdlst_clear(&data->fdlst);
+		return (-1);
+	}
 	data->pipeline = true;
-	if (pipe(pipe_fd) == -1)
-		return (perror("pipe"), 1);
-	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
-		perror("dup2");
-	close(pipe_fd[1]);
-	fdlst_add_back(&data->fdlst, fdlst_new(pipe_fd[0], true));
 	data->status = exec_recursion(ast->pipe_left, data);
-	dup2(backup_out, STDOUT_FILENO);
-	close(backup_out);
-	fdlst_delete_node(&data->fdlst, backup_out);
-	fdlst_delete_node(&data->fdlst, pipe_fd[0]);
-	backup_in = dup(STDIN_FILENO);
-	fdlst_add_back(&data->fdlst, fdlst_new(backup_in, true));
-	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
-		perror("dup2");
-	close(pipe_fd[0]);
+	if (right_pipe_setup(data, pipe_fd, backup_fd))
+	{
+		fdlst_clear(&data->fdlst);
+		data->pipeline = false;
+		return (-1);
+	}
 	data->status = exec_recursion(ast->pipe_right, data);
-	data->pipeline = 0;
-	dup2(backup_in, STDIN_FILENO);
-	close(backup_in);
+	data->pipeline = false;
+	dup2(backup_fd[0], STDIN_FILENO);
+	close(backup_fd[0]);
 	fdlst_clear(&data->fdlst);
 	return (data->status);
 }

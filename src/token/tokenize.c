@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/17 16:23:24 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:13:37 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	dispatcher(char *line, int *i, t_token **tk)
 			return (0);
 	if (is_redirect(line[*i]))
 		if (!redirect_management(line, i, tk))
-			return (0);			
+			return (0);
 	if (is_parenthesis(line[*i]))
 		if (!parenthesis_management(line, i, tk))
 			return (0);
 	if (is_word(line[*i]))
 		if (!word_management(line, i, tk))
-			return (0);					
+			return (0);
 	return (1);
 }
 

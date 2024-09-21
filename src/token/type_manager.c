@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/16 19:26:23 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:44:22 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	operator_management(char *str, int *i, t_token **tk)
 	new = token_new(NULL);
 	if (!new)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: operator_management: %s\n", strerror(errno));
+		ft_dprintf(STDERR_FILENO, \
+		"minishell: operator_management: %s\n", strerror(errno));
 		return (0);
 	}
 	*new = (t_token){};
@@ -70,7 +71,8 @@ int	operator_management(char *str, int *i, t_token **tk)
 	new->value = copy_operator(str, i, str[*i]);
 	if (!new->value)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: operator_management: %s\n", strerror(errno));
+		ft_dprintf(STDERR_FILENO, \
+		"minishell: operator_management: %s\n", strerror(errno));
 		free(new);
 		return (0);
 	}
@@ -87,7 +89,8 @@ int	redirect_management(char *str, int *i, t_token **tk)
 	new = token_new(NULL);
 	if (!new)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: redirect_management: %s\n", strerror(errno));
+		ft_dprintf(STDERR_FILENO, \
+		"minishell: redirect_management: %s\n", strerror(errno));
 		return (0);
 	}
 	if (str[*i] == OUT)
@@ -97,15 +100,12 @@ int	redirect_management(char *str, int *i, t_token **tk)
 	new->value = copy_operator(str, i, str[*i]);
 	if (!new->value)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: redirect_management: %s\n", strerror(errno));
+		ft_dprintf(STDERR_FILENO, \
+		"minishell: redirect_management: %s\n", strerror(errno));
 		free(new);
 		return (0);
 	}
-	// if (new->type == HERE_DOC)
-	// 	if (!create_here_doc(new));
-	// 		return (0);
 	if (!token_add_back_grammar(tk, new))
 		return (0);
 	return (1);
 }
-

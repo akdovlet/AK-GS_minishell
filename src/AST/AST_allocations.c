@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:48:36 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/17 16:48:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:15:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right)
 t_ast	*ast_newredir(t_type type, char *filename)
 {
 	t_ast	*new;
-	
+
 	new = malloc(sizeof(t_ast));
 	if (!new)
 	{
@@ -76,26 +76,9 @@ t_ast	*ast_newredir(t_type type, char *filename)
 	return (new);
 }
 
-t_ast	*ast_newredir_push_root(t_ast *redir_next, t_type type, char *filename)
-{
-	t_ast	*new;
-	
-	new = malloc(sizeof(t_ast));
-	if (!new)
-	{
-		perror("minishell: ast_newredir");
-		return (NULL);
-	}
-	new->type = REDIR;
-	new->redir_type = type;
-	new->redir_filename = filename;
-	new->redir_next = redir_next;
-	return (new);
-}
-
 t_ast	*ast_newpipe(t_ast *left, t_ast *right)
 {
-	t_ast *new;
+	t_ast	*new;
 
 	new = malloc(sizeof(t_ast));
 	if (!new)

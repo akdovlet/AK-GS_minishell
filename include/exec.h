@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 17:17:37 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:15:36 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	command_node(t_ast *ast, t_data *data);
 // command_utils.c
 void	clear_exit(t_data *data, int code);
 char	*path_join(char *s1, char *s2);
+int		hard_path_check(char *cmd);
 
 // exec.c
 int exec_recursion(t_ast *ast, t_data *data);
@@ -59,14 +60,13 @@ char    **find_path_cmd(char **path_env, char *cmd);
 char    *find_cmd(char **cmd, char **envp);
 
 //	redir_lst_clear.c
-void	fdlst_dont_close_in_child(t_fdlst *lst, int fd_target);
 void	fdlst_clear(t_fdlst **lst);
 void	fdlst_eat(t_fdlst **node);
 void	fdlst_delete_node(t_fdlst **lst, int key);
 
 //	redir_lst.c
 t_fdlst	*fdlst_new(int fd, bool close_in_child);
-void	fdlst_add_back(t_fdlst	**lst, t_fdlst *new);
+int		fdlst_add_front(t_fdlst	**lst, t_fdlst *new);
 void	fdlst_close_in_child(t_fdlst *lst);
 
 //	redir.c
