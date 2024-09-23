@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/23 15:18:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 21:39:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ add_history*/
 # define CHILD 21621
 # define HD 10777
 
-extern int program_state;
+extern int *program_state;
 
 typedef struct s_env
 {
@@ -102,6 +102,7 @@ typedef enum	e_token
 typedef	struct s_token
 {
 	int				type;
+	int				fd;
 	char			*value;
 	struct s_token	*next;
 	struct s_token	*prev; 
@@ -174,6 +175,7 @@ typedef struct s_data
 	t_fdlst		*fdlst;
 	t_env		*env;
 	t_env		*export;
+	struct sigaction	sa;
 }	t_data;
 
 int	exec_recursion(t_ast *ast, t_data *data);

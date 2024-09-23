@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/20 17:07:26 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/09/23 21:11:55 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,7 +109,10 @@ fclean: clean
 	@if [ -f $(NAME) ]; then $(RM) -rf $(NAME) && echo "\033[1;31m\tDeleted: $(NAME)\033[0m"; fi
 	@$(MAKE) --no-print-directory fclean -C libft
 
-val : all
+val: all
+	valgrind --leak-check=full --track-fds=yes --trace-children=yes ./${NAME}
+
+full: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes ./${NAME}
 
 re: fclean all

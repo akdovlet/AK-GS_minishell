@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/20 18:50:31 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/23 21:37:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@ int main(int ac, char **av, char **env)
 {
 	(void)av;
 	t_data	data;
+	struct termios	backup_term;
 
 	if (ac != 1)
 		return (1);
+	tcgetattr(STDIN_FILENO, &backup_term);
 	setup_shell(&data, env);
 	execution_loop(&data);
 	env_clear(&data.env);
+	env_clear(&data.export);
 	rl_clear_history();
-	return (0);
+	tcsetattr(STDIN_FILENO, TCSANOW, &backup_term);
+	return (data.status);
 }

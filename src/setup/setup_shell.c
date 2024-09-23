@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:37:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/23 15:20:55 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:04:02 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "setup.h"
 #include "env.h"
 
-int	program_state;
+int	*program_state;
 
 void	setup_shell(t_data	*data, char	**env)
 {
@@ -25,10 +25,10 @@ void	setup_shell(t_data	*data, char	**env)
 	else
 	{
 		// config.c_lflag &= ~ECHOCTL;
-		tcsetattr(STDIN_FILENO, TCSAFLUSH, &config);
+		tcsetattr(STDIN_FILENO, TCSANOW, &config);
 	}
 	*data = (t_data){};
+	program_state = &data->status;
 	env_setup(data, env);
-	program_state = PARENT;
-	setup_signals();
+	setup_signals(data);
 }

@@ -6,11 +6,12 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/21 14:26:10 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 21:10:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "setup.h"
 
 static void	pip_wait_children(t_data *data)
 {
@@ -19,6 +20,7 @@ static void	pip_wait_children(t_data *data)
 	t_pidlst	*tmp;
 
 	node = data->pidlst;
+	status = 0;
 	while (node)
 	{
 		waitpid(node->pid, &status, 0);
@@ -31,7 +33,13 @@ static void	pip_wait_children(t_data *data)
 		free(tmp);
 		tmp = NULL;
 	}
+	if (WTERMSIG(status) == SIGINT)
+		write(1, "\n", 1);
+	if (WTERMSIG(status) == SIGQUIT)
+		write(1, "Quit\n", 5);
+	fprintf(stderr, "status is %d\n", data->status);
 	data->pidlst = NULL;
+	sigaction(SIGINT, &data->sa, NULL);
 }
 
 int	ft_wait_pid(t_ast *ast, t_data *data)

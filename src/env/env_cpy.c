@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:12:54 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/23 15:16:14 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:34:27 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**env_copy_to_char_arr(t_env *env)
 		return (NULL);
 	while (env)
 	{
-		strs[i] = meet_in_the_middle(env->key, env->value, ':');
+		strs[i] = meet_in_the_middle(env->key, env->value, '=');
 		if (!strs[i])
 			return (ft_free(strs), NULL);
 		i++;

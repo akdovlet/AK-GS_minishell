@@ -6,12 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/23 15:14:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 21:35:20 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "exec.h"
+#include "setup.h"
+#include "AST.h"
 
 int	find_path_loop(char **cmd_arr, char **path)
 {
@@ -51,7 +53,7 @@ int	resolve_path(char **cmd, t_data *data)
 	full_path = NULL;
 	path = NULL;
 	if (ft_strchr(cmd[0], '/'))
-		return (0);
+		return (hard_path_check(cmd[0]));
 	full_path = env_get_value(data->env, "PATH");
 	if (!full_path)
 	{
@@ -96,9 +98,14 @@ int	execute_prog(t_ast *ast, t_data *data)
 	if (pid < 0)
 		return (perror("minishell: execute_prog"), 1);
 	if (!pid)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		forked_execution(ast, data);
+	}
 	else
 	{
+		signal(SIGINT, SIG_IGN);
 		new = ft_lstnew_pidlst(pid);
 		if (!new)
 			return (1);
