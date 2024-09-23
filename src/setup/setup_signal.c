@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:00:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/19 14:18:09 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:58:37 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	parent_handler(int sig)
 	{
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
-		rl_redisplay();
 		rl_replace_line("", 0);
+		rl_redisplay();
 		return ;
 	}
 }

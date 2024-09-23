@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:37:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 13:05:10 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:57:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	setup_shell(t_data	*data, char	**env)
 		perror("minishell: setup_shell");
 	else
 	{
-		config.c_lflag &= ~ECHOCTL;
+		// config.c_lflag &= ~ECHOCTL;
 		tcsetattr(STDIN_FILENO, TCSAFLUSH, &config);
 	}
 	*data = (t_data){};
