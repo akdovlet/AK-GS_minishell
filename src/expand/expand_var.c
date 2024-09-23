@@ -6,104 +6,66 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/11 16:42:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:28:34 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-// size_t	ft_strlen_expand(const char *s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	if (s)
-// 	{
-// 		while (s[i] && s[i] != '\'' && s[i] != '\"')
-// 			i++;
-// 	}
-// 	return (i);
-// }
-
-void free_tab(char **tab)
+static char *extract_var_name(char *str, int *i) 
 {
-    int i;
-
-    i = 0;
-    while (tab[i])
-    {
-        free(tab[i]);
-        i++;
-    }
-    free(tab);
-}
-
-// fonction qui concataine toutes les lignes d'un tableau
-char *ft_cat_tab(char **str)
-{
-    int i;
-    int lenres;
-    char *res;
+    int j;
+    int tmp;
     
-    i = 0;
-    lenres = 0;
-    while (str[i])
-    {
-        lenres += ft_strlen(str[i]);
-        i++;
-    }
-    res = ft_calloc(sizeof(char), lenres + 1);
-    if (!res)
-        return (NULL);
-    i = 1;
-    ft_strlcpy(res, str[0], ft_strlen(str[0]));
-    while (str[i])
-    {
-        ft_strlcat(res, str[i], ft_strlen(str[i]) + ft_strlen(res) + 1);
-        i++;
-    }
-    return (res);
+    j = *i + 1;
+    while (str[j] || ft_isalnum(str[j]) || str[j] == '_')
+        j++;
+    tmp = *i;
+    *i = j;
+    return (ft_strndup(str + tmp + 1, j - tmp - 1));
 }
 
-static t_env *ft_check_key_expand(t_env *env, char *key)
+static char *get_var_value(char *var_name, t_data *data)
 {
-    t_env *tmp;
-    
-    tmp = env;
-    while (tmp)
-    {
-        if (!ft_strcmp(tmp->key, key))
-            return (tmp);
-        tmp = tmp->next;
-    }
-    return (NULL);
-}
-
-char *expand_var(char *str, t_env *env)
-{
+    char *value;
     t_env *node;
-    char *res;
-    char **tmp;
-    int i;
-
-    i = 0;
-    tmp = ft_split_expand(str, " $\'\"");
-    if (!tmp)
-        return (NULL);
-    free(str);
-    while (tmp[i])
+    
+    if (strcmp(var_name, "?") == 0) 
     {
-        if (tmp[i][0] == '$')
-        {
-            node = ft_check_key_expand(env, tmp[i] + 1);
-            if (node)
-            {
-                free(tmp[i]);
-                tmp[i] = node->value;
-            }
-        }
-        i++;
+        value = ft_itoa(data->status);
+        if (!value)
+            return (NULL);
+        return (value);
     }
-    res = ft_cat_tab(tmp);
-    return (res);   
+    node = ft_check_key(&data->env, var_name);
+    if (!node)
+        return (NULL);
+    return (node->value);
+}
+
+static int create_and_add_file(char *value, t_files **files) 
+{
+    t_files *new;
+    
+    new = ft_lstnew_files(value);
+    if (!new)
+        return (1);
+    ft_lst_add_back_files(files, new);
+    return (0);
+}
+
+int copy_var(char *str, int *i, t_files **files, t_data *data)
+{
+    char *var_name;
+    char *value;
+    int result;
+
+    var_name = extract_var_name(str, i);
+    if (!var_name)
+        return (1);
+    value = get_var_value(var_name, data);
+    if (!value)
+        return (free(var_name), 2);
+    result = create_and_add_file(value, files);
+    return (free(var_name), result);
 }

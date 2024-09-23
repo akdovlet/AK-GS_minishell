@@ -6,13 +6,13 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 14:37:28 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:59:04 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-void ft_free_tab(char **tab)
+void free_tab(char **tab)
 {
     int i;
 
@@ -32,7 +32,7 @@ t_files *sort_files(t_files *files, char *str)
     ft_lstcomp_wildcard(&files, str);\
     if (!files)
     {
-        tmp = ft_lstnew_files(str);
+        tmp = ft_lstnew_files_dup(str);
         if (!files)
             return (NULL);
         files = tmp;
@@ -120,21 +120,20 @@ char **ft_wildcard(char **tab_cmd)
 
     files = NULL;
     i = 0;
-    // print_tab(tab_cmd);
     while (tab_cmd[i])
     {
         if (ft_find_chr(tab_cmd[i], '*'))
             files = expand_wildcard(&files, tab_cmd[i]);
         else
         {
-            tmp = ft_lstnew_files(tab_cmd[i]);
+            tmp = ft_lstnew_files_dup(tab_cmd[i]);
             if (!tmp)
                 return (NULL);
             ft_lst_add_back_files(&files, tmp);
         }
         i++;
     }
-    ft_free_tab(tab_cmd);
+    free_tab(tab_cmd);
     tab_cmd = ft_files_to_tab(files);
     if (!tab_cmd)
         return (NULL);
