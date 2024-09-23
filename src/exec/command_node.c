@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 16:15:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:14:38 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	find_path_loop(char **cmd_arr, char **path)
 	i = 0;
 	while (path[i])
 	{
-		cmd_path = path_join(path[i], cmd_arr[0]);
+		cmd_path = meet_in_the_middle(path[i], cmd_arr[0], '/');
 		if (!cmd_path)
 			return (1);
 		if (!access(cmd_path, F_OK))

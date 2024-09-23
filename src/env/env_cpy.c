@@ -6,12 +6,13 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:12:54 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 16:33:24 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:16:14 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env.h"
+#include "exec.h"
 
 int	env_len(t_env *env)
 {
@@ -39,7 +40,7 @@ char	**env_copy_to_char_arr(t_env *env)
 		return (NULL);
 	while (env)
 	{
-		strs[i] = ft_strdup(env->both);
+		strs[i] = meet_in_the_middle(env->key, env->value, ':');
 		if (!strs[i])
 			return (ft_free(strs), NULL);
 		i++;

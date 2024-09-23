@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:57:43 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 16:15:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:14:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "AST.h"
 #include "exec.h"
 
-char	*path_join(char *s1, char *s2)
+char	*meet_in_the_middle(char *s1, char *s2, char c)
 {
 	int		i;
 	int		j;
@@ -25,10 +25,10 @@ char	*path_join(char *s1, char *s2)
 	j = -1;
 	fusion = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
 	if (!fusion)
-		return (perror("minishell: path_join"), NULL);
+		return (perror("minishell: meet_in_the_middle"), NULL);
 	while (s1[++i])
 		fusion[i] = s1[i];
-	fusion[i++] = '/';
+	fusion[i++] = c;
 	while (s2[++j])
 		fusion[i + j] = s2[j];
 	fusion[i + j] = '\0';

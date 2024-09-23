@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/21 16:15:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:14:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	command_node(t_ast *ast, t_data *data);
 
 // command_utils.c
 void	clear_exit(t_data *data, int code);
-char	*path_join(char *s1, char *s2);
+char	*meet_in_the_middle(char *s1, char *s2, char c);
 int		hard_path_check(char *cmd);
 
 // exec.c

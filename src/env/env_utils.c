@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 16:34:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:18:28 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	env_clear(t_env **lst)
 		tmp = (*lst)->next;
 		free((*lst)->key);
 		free((*lst)->value);
-		free((*lst)->both);
 		free((*lst));
 		*lst = tmp;
 	}
