@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 16:55:48 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:53:28 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ t_files *ft_recover_files(void)
     }
     while ((entry = readdir(dir)) != NULL)
     {
-        tmp = ft_lstnew_files(entry->d_name);
+        tmp = ft_lstnew_files_dup(entry->d_name);
         if (!tmp)
         {
             perror("malloc");
@@ -179,4 +179,32 @@ char *write_files_expand(t_files *files)
         tmp = tmp->next;
     }
     return (res);
+}
+
+int creat_node_n_add_back_if_str(t_files **files, char *tmp)
+{
+    t_files *new;
+
+    if (!tmp)
+        return (perror("minishell: ft_strndup failed"), 1);
+    if (tmp[0] == '\0')
+        return (0);
+    new = ft_lstnew_files_dup(tmp);
+    if (!new)
+        return (1);
+    ft_lst_add_back_files(files, new);
+    return (0);
+}
+
+int creat_node_n_add_back(t_files **files, char *tmp)
+{
+    t_files *new;
+
+    if (!tmp)
+        return (perror("minishell: ft_strndup failed"), 1);
+    new = ft_lstnew_files_dup(tmp);
+    if (!new)
+        return (1);
+    ft_lst_add_back_files(files, new);
+    return (0);
 }

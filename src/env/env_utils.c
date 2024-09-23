@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/23 15:18:28 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:19:57 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_env	*ft_check_key(t_env **env, char *key)
 	tmp = *env;
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->key, key, ft_strlen(tmp->key)))
+		if (!ft_strcmp(tmp->key, key))
 			return (tmp);
 		tmp = tmp->next;
 	}

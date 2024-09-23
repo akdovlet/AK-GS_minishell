@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 16:58:15 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:54:22 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_files
 }               t_files;
 
 // expand.c
-int expand_tab_of_cmd(char **tab_cmd, t_data *data);
+char **expand_tab_of_cmd(char **tab_cmd, t_data *data);
 
 // wildcard.c
 char **ft_wildcard(char **tab_cmd);
@@ -55,6 +55,8 @@ int ft_new_lst_add_back_files(t_files **alst, t_files *new);
 void ft_lst_add_back_files(t_files **alst, t_files *new);
 void ft_free_lst_files_expand(t_files **files);
 char *write_files_expand(t_files *files);
+int creat_node_n_add_back_if_str(t_files **files, char *str);
+int creat_node_n_add_back(t_files **files, char *str);
 
 
 // sort_files.c

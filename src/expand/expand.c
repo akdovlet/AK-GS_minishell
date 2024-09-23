@@ -6,26 +6,13 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 17:17:18 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:56:35 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-int creat_node_n_add_back_if_str(t_files **files, char *tmp)
-{
-    t_files *new;
 
-    if (!tmp)
-        return (perror("minishell: ft_strndup failed"), 1);
-    if (tmp[0] == '\0')
-        return (0);
-    new = ft_lstnew_files(tmp);
-    if (!new)
-        return (1);
-    ft_lst_add_back_files(files, new);
-    return (0);
-}
 
 static int copy_squote(char *str, int *i, t_files **files)
 {
@@ -81,7 +68,7 @@ int tri_char(char *str, int *i, t_files **files, t_data *data)
         if (copy_dquotes(str, i, files, data))
             return (1);
     }
-    else if (str[*i] == '$' && ft_isalpha(str[*i + 1]))
+    else if (str[*i] == '$')
     {
         if (copy_var(str, i, files, data) == 1)
             return (1);
@@ -100,7 +87,7 @@ int expand_str(char *str, t_data *data, t_files **files)
     j = 0;
     while (str[i])
     {
-        if (str[i] == '\'' || str[i] == '\"' || (str[i] == '$' && ft_isalpha(str[i + 1])))
+        if (str[i] == '\'' || str[i] == '\"' || str[i] == '$')
         {
             if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, i - j)))
                     return (1);
@@ -116,23 +103,32 @@ int expand_str(char *str, t_data *data, t_files **files)
     return (0);
 }
 
-int expand_tab_of_cmd(char **tab_cmd, t_data *data)
+char **expand_tab_of_cmd(char **tab_cmd, t_data *data)
 {
     int i;
     t_files *files;
+    t_files *cmd;
+    t_files *tmp;
 
     i = 0;
+    tmp = cmd;
     files = NULL;
     while (tab_cmd[i])
     {
-        if (expand_str(tab_cmd[i], data, &files))
-            return (1);
-        free(tab_cmd[i]);
-        tab_cmd[i] = write_files_expand(files);
-        ft_free_lst_files_expand(&files);
-        if (!tab_cmd[i])
-            return (1);
-        i++;
+        if (copy_var(tab_cmd[i], 0, &files, data) == 2)
+            i++;
+        else
+        {
+            if (expand_str(tab_cmd[i], data, &files))
+                return (1);
+            creat_node_n_add_back_if_str(&cmd, write_files_expand(files));
+            if (!cmd)
+                return (1);
+            ft_free_lst_files_expand(&files);
+            i++;
+        }
     }
-    return (true);
+    free_tab(tab_cmd);
+    ft_lst_to_tab(cmd, tab_cmd);
+    return (tab_cmd);
 }
