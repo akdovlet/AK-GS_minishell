@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 09:18:18 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/23 14:37:28 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void del_files_hidden(t_files **files)
         tmp = tmp->next;
     }
 }
+
 t_files  *expand_wildcard(t_files **files, char *str)
 {
     t_files *files_tmp;

@@ -3,85 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 19:05:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 14:12:15 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int ft_whitespace(char c)
+int	ft_whitespace(char c)
 {
-    if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
-        return (1);
-    return (0);
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
+		return (1);
+	return (0);
 }
 
-int flag_n(char *str)
+int	flag_n(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (str[i] != '-')
-        return (1);
-    i++;
-    while (str[i])
-    {
-        if (str[i] != 'n')
-            return (1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	if (str[i] != '-')
+		return (1);
+	i++;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-static int ft_echo_n(char **args)
+static int	ft_echo_n(char **args)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 2;
-    j = 0;
-    while (args[i])
-    {
-        if (!flag_n(args[i]) && !j)
-            i++;
-        else
-            j++;
-        ft_putstr_fd(args[i], 1);
-        if (args[i + 1])
-            ft_putstr_fd(" ", 1);
-        i++;
-    }
-    return (0);
+	i = 2;
+	j = 0;
+	while (args[i])
+	{
+		if (!flag_n(args[i]) && !j)
+			i++;
+		else
+			j++;
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1])
+			ft_putstr_fd(" ", 1);
+		i++;
+	}
+	return (0);
 }
 
 // correction maybe not good
-int ft_echo(char **args, t_env *env)
+int	ft_echo(char **args, t_env *env)
 {
-    (void)env;
-    int i;
+	int	i;
 
-    i = 1;
-    if (!args[1])
-    {
-        ft_putstr_fd("\n", 1);
-        return (0);
-    }
-    if (!flag_n(args[1]))
-        return (ft_echo_n(args));
-    while (args[i])
-    {
-        if (!args[i][0])
-            i++;
+	(void)env;
+	i = 1;
+	if (!args[1])
+	{
+		ft_putstr_fd("\n", 1);
+		return (0);
+	}
+	if (!flag_n(args[1]))
+		return (ft_echo_n(args));
+	while (args[i])
+	{
+		if (!args[i][0])
+			i++;
 		if (!args[i])
 			break ;
-        ft_putstr_fd(args[i], 1);
-        if (args[i + 1])
-            ft_putstr_fd(" ", 1);
-        i++;
-    }
-    ft_putstr_fd("\n", 1);
-    return (0);
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1])
+			ft_putstr_fd(" ", 1);
+		i++;
+	}
+	ft_putstr_fd("\n", 1);
+	return (0);
 }

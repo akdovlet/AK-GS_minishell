@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 18:50:48 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/23 14:36:07 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,10 @@ static int	modif_pwd(t_env **env)
 	return (0);
 }
 
-// problem with error message 
-// funct add / at the end of the path
-
-char *add_slash(char *path)
+char	*add_slash(char *path)
 {
-	int i;
-	char *tmp;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	while (path[i])
@@ -64,10 +61,10 @@ char *add_slash(char *path)
 	return (path);
 }
 
-int chg_dir(char *path, t_env **env)
+int	chg_dir(char *path, t_env **env)
 {
-	char *pathn;
-	
+	char	*pathn;
+
 	if (modif_oldpwd(env))
 		return (1);
 	pathn = add_slash(path);
@@ -76,14 +73,17 @@ int chg_dir(char *path, t_env **env)
 	if (chdir(pathn))
 	{
 		if (access(pathn, F_OK))
-			return (free(pathn),ft_dprintf(2, "minishell: cd: %s: Not a directory\n", path), 1);
-		return (free(pathn),ft_dprintf(2, "minishell: cd: %s: No such file or directory\n", path), 1);
+		{
+			ft_dprintf(2, "minishell: cd: %s: Not a directory\n", path);
+			return (free(pathn), 1);
+		}
+		ft_dprintf(2, "minishell: cd: %s: No such file or directory\n", path);
+		return (free(pathn), 1);
 	}
 	if (modif_pwd(env))
-		return (free(pathn),1);
-	return (free(pathn),0);
+		return (free(pathn), 1);
+	return (free(pathn), 0);
 }
-	
 
 int	cd(char **args, t_env **env)
 {
