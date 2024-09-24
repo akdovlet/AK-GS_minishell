@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 19:20:35 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:34:51 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static char *extract_var_name(char *str, int *i)
         j++;
     tmp = *i;
     *i = j;
-    printf("----------------\nstr[%d] = %c\n---------------\n", *i, str[j]);
     return (ft_strndup(str + tmp + 1, j - tmp - 1));
 }
 
@@ -74,4 +73,26 @@ int copy_var(char *str, int *i, t_files **files, t_data *data)
         return (free(var_name), 2);
     result = create_and_add_file(value, files);
     return (free(var_name), result);
+}
+
+// fonction qui check si une string commence par un $
+// si oui, me dit si cette variable existe dans l'environnement
+// si non return 1
+int check_var(char *str, t_data *data)
+{
+    int i;
+    char *var_name;
+    t_env *node;
+
+    i = 0;
+    if (str[1] == '?')
+        return (0);
+    var_name = extract_var_name(str, &i);
+    if (!var_name)
+        return (1);
+    node = ft_check_key(&data->env, var_name);
+    free(var_name);
+    if (!node)
+        return (1);
+    return (0);
 }

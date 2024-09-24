@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 19:53:28 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:44:27 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,4 +207,19 @@ int creat_node_n_add_back(t_files **files, char *tmp)
         return (1);
     ft_lst_add_back_files(files, new);
     return (0);
+}
+
+int lst_size_files(t_files **files)
+{
+    t_files *tmp;
+    int i;
+
+    i = 0;
+    tmp = *files;
+    while (tmp)
+    {
+        i++;
+        tmp = tmp->next;
+    }
+    return (i);
 }

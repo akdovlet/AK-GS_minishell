@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 19:54:22 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:44:43 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void free_tab(char **tab);
 
 // expand_var.c
 int copy_var(char *str, int *i, t_files **files, t_data *data);
+int check_var(char *str, t_data *data);
 
 // expand_quotes_utils.c
 int ft_find_chr(char *str, char c);
@@ -57,6 +58,7 @@ void ft_free_lst_files_expand(t_files **files);
 char *write_files_expand(t_files *files);
 int creat_node_n_add_back_if_str(t_files **files, char *str);
 int creat_node_n_add_back(t_files **files, char *str);
+int lst_size_files(t_files **files);
 
 
 // sort_files.c
