@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:35:52 by gschwand          #+#    #+#             */
-/*   Updated: 2024/08/02 14:25:21 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:34:08 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static char	*ft_strdup_split_e(char *str, int index, int nbchar)
 	copy = malloc((nbchar + 1) * sizeof(char));
 	if (copy == NULL)
 		return (0);
-    if (index < 0)
-        index = 0;
-    while (i < nbchar)
-    {
+	if (index < 0)
+		index = 0;
+	while (i < nbchar)
+	{
 		copy[i] = str[index + i];
-        i ++;
-    }
-    copy[i] = '\0';
+		i++;
+	}
+	copy[i] = '\0';
 	return (copy);
 }
 
@@ -98,7 +98,7 @@ static int	ft_count_word(char *str, char *charsep)
 	return (m);
 }
 
-char **ft_split_expand(char *str, char *sep)
+char	**ft_split_expand(char *str, char *sep)
 {
 	char	**tab;
 	int		nbword;
@@ -115,5 +115,3 @@ char **ft_split_expand(char *str, char *sep)
 	tab[nbword] = 0;
 	return (tab);
 }
-
-

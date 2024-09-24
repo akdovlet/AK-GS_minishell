@@ -6,48 +6,24 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:57:37 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/18 07:40:29 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:34:04 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-int ft_find_chr(char *str, char c)
+int	ft_find_chr(char *str, char c)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!str)
-        return (0);
-    while (str[i])
-    {
-        if (str[i] == c)
-            return (1);
-        i++;
-    }
-    return (0);
-}
-
-int ft_strlen_wo_c(const char *str, char c)
-{
-    int len = 0;
-    while (*str) 
-    {
-        if (*str != c) 
-            len++;
-        str++;
-    }
-    return len;
-}
-
-void ft_strlcpy_wo_c(char *dst, const char *src, char c)
-{
-    while (*src) {
-        if (*src != c) {
-            *dst = *src;
-            dst++;
-        }
-        src++;
-    }
-    *dst = '\0';
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

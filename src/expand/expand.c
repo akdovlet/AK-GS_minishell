@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 13:46:56 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:36:28 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,34 +102,6 @@ int	expand_str(char *str, t_data *data, t_files **files)
 	return (0);
 }
 
-// fonction qui me copie toute ma liste chainee dans un tableau
-// de chaine de caractere
-char	**ft_lst_to_tab(t_files **files)
-{
-	t_files	*tmp;
-	char	**tab;
-	int		i;
-
-	tmp = *files;
-	i = lst_size_files(files);
-	tab = malloc(sizeof(char *) * (i + 1));
-	if (!tab)
-		return (perror("malloc"), NULL);
-	i = 0;
-	tmp = *files;
-	while (tmp)
-	{
-		tab[i] = ft_strdup(tmp->name);
-		if (!tab[i])
-			return (perror("malloc"), NULL);
-		tmp = tmp->next;
-		i++;
-	}
-	tab[i] = NULL;
-	ft_free_lst_files_expand(files);
-	return (tab);
-}
-
 char	**expand_tab_of_cmd(char **tab_cmd, t_data *data)
 {
 	int		i;
@@ -142,7 +114,7 @@ char	**expand_tab_of_cmd(char **tab_cmd, t_data *data)
 	{
 		files = NULL;
 		while (tab_cmd[i] && tab_cmd[i][0] == '$' && check_var(tab_cmd[i],
-				data)) // modif ici
+				data))
 			i++;
 		if (!tab_cmd[i])
 			break ;

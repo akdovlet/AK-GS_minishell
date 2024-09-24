@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_debugg.c                                    :+:      :+:    :+:   */
+/*   wildcard_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 14:02:04 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 14:34:00 by gschwand         ###   ########.fr       */
+/*   Created: 2024/09/24 15:32:23 by gschwand          #+#    #+#             */
+/*   Updated: 2024/09/24 15:32:31 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-void	ft_print_lst_files(t_files *files)
+int	ft_strcasecmp(char *s1, char *s2)
 {
-	t_files	*tmp;
-
-	tmp = files;
-	while (tmp)
+	while (*s1 || *s2)
 	{
-		printf("%s\n", tmp->name);
-		tmp = tmp->next;
+		if (tolower(*s1) != tolower(*s2))
+			return (tolower(*s1) - tolower(*s2));
+		s1++;
+		s2++;
 	}
-}
-
-void	print_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		printf("tab[%d] = %s\n", i, tab[i]);
-		i++;
-	}
+	return (tolower(*s1) - tolower(*s2));
 }

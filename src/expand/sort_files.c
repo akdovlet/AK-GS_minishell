@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:22:33 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/16 08:44:20 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:45:48 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,30 +109,4 @@ void ft_strlcat_files(char *dst, const char *src, size_t lenres)
     ft_strlcat(dst, src, lenres);
     ft_strlcat(dst, "\'", lenres);
     ft_strlcat(dst, " ", lenres);
-}
-
-
-char *write_files(t_files *files)
-{
-    t_files *tmp;
-    char *res;
-    int lenres;
-
-    tmp = files;
-    lenres = 0;
-    while (tmp)
-    {
-        lenres += ft_strlen(tmp->name) + 3;
-        tmp = tmp->next;
-    }
-    res = ft_calloc(sizeof(char), lenres + 1);
-    if (!res)
-        return (perror("malloc"), NULL);
-    tmp = files;
-    while (tmp)
-    {
-        ft_strlcat_files(res, tmp->name, lenres + 1);
-        tmp = tmp->next;
-    }
-    return (res);
 }
