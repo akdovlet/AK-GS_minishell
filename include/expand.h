@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 15:32:51 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:24:21 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_files
 
 // expand.c
 char				**expand_tab_of_cmd(char **tab_cmd, t_data *data);
+int	expand_str(char *str, t_data *data, t_files **files);
+
 
 // expand_var.c
 int					copy_var(char *str, int *i, t_files **files, t_data *data);

@@ -6,12 +6,13 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/24 14:55:35 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:26:11 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "exec.h"
+#include "expand.h"
+#include "minishell.h"
 
 int	find_path_loop(char **cmd_arr, char **path)
 {
@@ -92,6 +93,15 @@ int	execute_prog(t_ast *ast, t_data *data)
 	pid_t		pid;
 	t_pidlst	*new;
 
+	ast->cmd = expand_tab_of_cmd(ast->cmd, data);
+	if (!ast->cmd)
+		return (perror("minishell: command_node"), 1);
+	if (ast->cmd[1])
+	{
+		ast->cmd = ft_wildcard(ast->cmd);
+		if (!ast->cmd)
+			return (1);
+	}
 	pid = fork();
 	if (pid < 0)
 		return (perror("minishell: execute_prog"), 1);
@@ -107,21 +117,43 @@ int	execute_prog(t_ast *ast, t_data *data)
 	return (0);
 }
 
+// return errror si var n'exite pas
+char	*expand_first_cmd(char *cmd, t_data *data)
+{
+	t_files	*files;
+
+	files = NULL;
+	if (cmd[0] == '$' && check_var(cmd, data))
+		return (NULL);
+	if (expand_str(cmd, data, &files))
+		return (NULL);
+	free(cmd);
+	cmd = write_files_expand(files);
+	return (cmd);
+}
+
 int	command_node(t_ast *ast, t_data *data)
 {
-	if (!ast->cmd[0])
+	if (!ast->cmd || !ast->cmd[0])
 		return (0);
-	ast->cmd = expand_tab_of_cmd(ast->cmd, data);
-	if (!ast->cmd)
-		return (perror("minishell: command_node"), 1);
-	if (ast->cmd[1])
-	{
-		ast->cmd = ft_wildcard(ast->cmd);
-		if (!ast->cmd)
-			return (1);
-	}
+	ast->cmd[0] = expand_first_cmd(ast->cmd[0], data);
 	if (ft_is_builtins(ast->cmd[0]))
+	{
+		if (ft_strcmp(ast->cmd[0], "export") != 0 && ft_strcmp(ast->cmd[0],
+				"unset") != 0)
+		{
+			ast->cmd = expand_tab_of_cmd(ast->cmd, data);
+			if (!ast->cmd)
+				return (perror("minishell: command_node"), 1);
+			if (ast->cmd[1])
+			{
+				ast->cmd = ft_wildcard(ast->cmd);
+				if (!ast->cmd)
+					return (1);
+			}
+		}
 		return (ft_builtins(ast, data));
+	}
 	else
 		return (execute_prog(ast, data));
 }
