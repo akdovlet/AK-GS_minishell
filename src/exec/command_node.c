@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/24 17:26:11 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:57:04 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,22 @@ int	execute_prog(t_ast *ast, t_data *data)
 }
 
 // return errror si var n'exite pas
-char	*expand_first_cmd(char *cmd, t_data *data)
+// probleme ici car ne cree pas de tableau pour une variable d'envirronement
+char	*expand_first_cmd(char **cmd, t_data *data)
 {
-	t_files	*files;
+	t_files	*files_first;
+	t_files	*files_second;
 
-	files = NULL;
-	if (cmd[0] == '$' && check_var(cmd, data))
+	files_first = NULL;
+	files_second = NULL;
+	if (cmd[0][0] == '$' && check_var(cmd, data))
 		return (NULL);
-	if (expand_str(cmd, data, &files))
+	if (expand_str(cmd[0], data, &files_first))
 		return (NULL);
-	free(cmd);
-	cmd = write_files_expand(files);
+	if (cmd[1])
+		tab_to_lst_files(&files_second, cmd + 1);
+	ft_lst_add_back_files(&files_first, files_second);
+	cmd = write_files_expand(files_first);
 	return (cmd);
 }
 
@@ -136,7 +141,7 @@ int	command_node(t_ast *ast, t_data *data)
 {
 	if (!ast->cmd || !ast->cmd[0])
 		return (0);
-	ast->cmd[0] = expand_first_cmd(ast->cmd[0], data);
+	ast->cmd = expand_first_cmd(ast->cmd, data);
 	if (ft_is_builtins(ast->cmd[0]))
 	{
 		if (ft_strcmp(ast->cmd[0], "export") != 0 && ft_strcmp(ast->cmd[0],
