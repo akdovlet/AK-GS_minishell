@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/23 21:11:55 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/09/24 18:55:28 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ SRC		:=	main.c							\
 			token/definitions.c				\
 			token/definitions2.c			\
 			token/grammar_check.c			\
+			token/here_doc_loop.c			\
+			token/here_doc_manager.c		\
 			token/parenthesis.c				\
 			token/syntax_error.c			\
 			token/syntax_input.c			\
@@ -67,6 +69,7 @@ SRC		:=	main.c							\
 			exec/operator.c 				\
 			exec/pidlst.c 					\
 			exec/subshell.c 				\
+			exec/redir_hd.c					\
 			exec/redir_lst_clear.c			\
 			exec/redir_lst.c				\
 			exec/redir_node.c				\

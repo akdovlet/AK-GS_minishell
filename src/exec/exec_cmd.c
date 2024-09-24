@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 18:52:40 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:24:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,21 @@ int ft_fork_builtins(t_ast *ast, t_data *data)
 {
     pid_t pid;
     t_pidlst *new;
-    
+
     pid = fork();
     if (pid < 0)
         return (perror("fork failed\n"), 1);
     else if (pid == 0)
     {
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
         fdlst_close_in_child(data->fdlst);
         ft_exec_builtins(ast, data); //need to free who need to be freed
         clear_exit(data, data->status);
     }
 	if (pid != 0)
     {
+		signal(SIGINT, SIG_IGN);
         new = ft_lstnew_pidlst(pid);
         if (!new)
             return (1);

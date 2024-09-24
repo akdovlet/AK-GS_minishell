@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/17 17:28:59 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:20:50 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int ft_new_lst_add_back_files(t_files **alst, t_files *new);
 void ft_lst_add_back_files(t_files **alst, t_files *new);
 void ft_free_lst_files_expand(t_files **files);
 char *write_files_expand(t_files *files);
+t_files *files_lstnew(char *str);
 
 
 // sort_files.c

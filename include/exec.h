@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 15:14:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:53:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ void	fdlst_delete_node(t_fdlst **lst, int key);
 t_fdlst	*fdlst_new(int fd, bool close_in_child);
 int		fdlst_add_front(t_fdlst	**lst, t_fdlst *new);
 void	fdlst_close_in_child(t_fdlst *lst);
+
+//	redir_hd.c
+int	redir_hd(t_ast *ast);
 
 //	redir.c
 int		redir_node(t_ast *ast, t_data *data);

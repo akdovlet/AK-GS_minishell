@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 18:21:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:24:10 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,21 @@ void ft_lst_add_back_files(t_files **alst, t_files *new)
 }
 
 t_files *ft_lstnew_files(char *str)
+{
+    t_files *new;
+
+    new = malloc(sizeof(t_files));
+    if (!new)
+    {
+        perror("malloc");
+        return (NULL);
+    }
+    new->name = str;
+    new->next = NULL;
+    return (new);
+}
+
+t_files *ft_lstnew_files_dup(char *str)
 {
     t_files *new;
 
