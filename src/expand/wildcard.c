@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 15:04:37 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:43:51 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,45 +74,13 @@ t_files	*expand_wildcard(t_files **files, char *str)
 	t_files	*files_tmp;
 
 	files_tmp = ft_recover_files();
-    ft_sort_alpha_files(&files_tmp);
+	ft_sort_alpha_files(&files_tmp);
 	del_files_hidden(&files_tmp);
 	if (!files_tmp)
 		return (ft_free_lst_files(files), NULL);
 	files_tmp = sort_files(files_tmp, str);
 	ft_lst_add_back_files(files, files_tmp);
 	return (*files);
-}
-
-// fonction qui va revoyer un tableau de char * avec les noms des fichiers
-// qui correspondent a la wildcard
-
-// cette fonction a ete recode
-char	**ft_files_to_tab(t_files *files)
-{
-	char	**tab;
-	t_files	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = files;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	tab = malloc(sizeof(char *) * (i + 1));
-	if (!tab)
-		return (NULL);
-	i = 0;
-	tmp = files;
-	while (tmp)
-	{
-		tab[i] = tmp->name;
-		tmp = tmp->next;
-		i++;
-	}
-	tab[i] = NULL;
-	return (tab);
 }
 
 char	**ft_wildcard(char **tab_cmd)

@@ -6,99 +6,99 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 14:41:10 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:40:35 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-t_files *ft_lstnew_files(char *str)
+t_files	*ft_lstnew_files(char *str)
 {
-    t_files *new;
+	t_files	*new;
 
-    new = malloc(sizeof(t_files));
-    if (!new)
-    {
-        perror("malloc");
-        return (NULL);
-    }
-    new->name = str;
-    new->next = NULL;
-    return (new);
+	new = malloc(sizeof(t_files));
+	if (!new)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+	new->name = str;
+	new->next = NULL;
+	return (new);
 }
 
-t_files *ft_lstnew_files_dup(char *str)
+t_files	*ft_lstnew_files_dup(char *str)
 {
-    t_files *new;
+	t_files	*new;
 
-    new = malloc(sizeof(t_files));
-    if (!new)
-    {
-        perror("malloc");
-        return (NULL);
-    }
-    new->name = ft_strdup(str);
-    if (!new->name)
-    {
-        perror("malloc");
-        free(new);
-        return (NULL);
-    }
-    new->next = NULL;
-    return (new);
+	new = malloc(sizeof(t_files));
+	if (!new)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+	new->name = ft_strdup(str);
+	if (!new->name)
+	{
+		perror("malloc");
+		free(new);
+		return (NULL);
+	}
+	new->next = NULL;
+	return (new);
 }
 
-int ft_new_lst_add_back_files(t_files **alst, t_files *new)
+int	ft_new_lst_add_back_files(t_files **alst, t_files *new)
 {
-    t_files *tmp;
+	t_files	*tmp;
 
-    if (!new)
-        return (1);
-    if (!*alst)
-    {
-        *alst = new;
-        return (0);
-    }
-    tmp = *alst;
-    while (tmp->next)
-        tmp = tmp->next;
-    tmp->next = new;
-    return (0);
+	if (!new)
+		return (1);
+	if (!*alst)
+	{
+		*alst = new;
+		return (0);
+	}
+	tmp = *alst;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	return (0);
 }
 
-void ft_lst_add_back_files(t_files **alst, t_files *new)
+void	ft_lst_add_back_files(t_files **alst, t_files *new)
 {
-    t_files *tmp;
+	t_files	*tmp;
 
-    if (!*alst)
-    {
-        *alst = new;
-        return ;
-    }
-    tmp = *alst;
-    while (tmp->next)
-        tmp = tmp->next;
-    tmp->next = new;
+	if (!*alst)
+	{
+		*alst = new;
+		return ;
+	}
+	tmp = *alst;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
 }
 
-void ft_lstdelone_files(t_files **files, t_files *to_delete)
+void	ft_lstdelone_files(t_files **files, t_files *to_delete)
 {
-    t_files *tmp;
+	t_files	*tmp;
 
-    if (*files == to_delete)
-    {
-        *files = (*files)->next;
-        free(to_delete->name);
-        free(to_delete);
-        return;
-    }
-    tmp = *files;
-    while (tmp && tmp->next != to_delete)
-        tmp = tmp->next;
-    if (tmp && tmp->next == to_delete)
-    {
-        tmp->next = to_delete->next;
-        free(to_delete->name);
-        free(to_delete);
-    }
+	if (*files == to_delete)
+	{
+		*files = (*files)->next;
+		free(to_delete->name);
+		free(to_delete);
+		return ;
+	}
+	tmp = *files;
+	while (tmp && tmp->next != to_delete)
+		tmp = tmp->next;
+	if (tmp && tmp->next == to_delete)
+	{
+		tmp->next = to_delete->next;
+		free(to_delete->name);
+		free(to_delete);
+	}
 }
