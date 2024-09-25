@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:51:44 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 17:53:03 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:07:32 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	ft_change_value(t_env *node, char *str)
 		tmp = ft_strdup(str + ft_strlen(node->key) + 1);
 		if (!tmp)
 			return (1);
-		node->value = tmp;
+		str = remove_quotes(tmp);
+		if (!str)
+			return (1);
+		node->value = str;
 	}
 	else
 		node->value = NULL;

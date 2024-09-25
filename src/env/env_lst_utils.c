@@ -6,12 +6,13 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 16:35:50 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:50:34 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "minishell.h"
+#include "builtins.h"
 
 int	find_chr(char *str, char c)
 {
@@ -71,6 +72,7 @@ char	*copy_key(char *str)
 t_env	*env_new(char *var)
 {
 	t_env	*node;
+	char *tmp;
 
 	node = malloc(sizeof(t_env));
 	if (!node)
@@ -80,7 +82,10 @@ t_env	*env_new(char *var)
 		return (NULL);
 	if (find_chr(var, '='))
 	{
-		node->value = ft_strdup(var + ft_strlen(node->key) + 1);
+		tmp = ft_strdup(var + ft_strlen(node->key) + 1);
+		if (!tmp)
+			return (NULL);
+		node->value = remove_quotes(tmp);
 		if (!node->value)
 			return (NULL);
 	}
