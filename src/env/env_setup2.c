@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:40:42 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 17:13:04 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:39:36 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ bool	env_setup(t_data *data, char **env)
 	if (!env[0])
 	{
 		if (env_export_default_setup(data))
-            return (1);
+			return (1);
 		return (0);
 	}
 	return (env_export_copy(data, env));
