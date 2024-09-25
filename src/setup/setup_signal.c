@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:00:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 18:37:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:56:09 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	signal_handler(int sig)
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		if (*program_state != 69)
-				rl_redisplay();
-		*program_state = 130;
+		if (*g_state != 69)
+			rl_redisplay();
+		*g_state = 130;
 	}
 }
 

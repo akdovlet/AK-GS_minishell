@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 17:10:54 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:55:26 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ add_history*/
 # define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
 # define PARENTHESIS_ERR "minishell: unexpected newline while looking for closing `%c'\n"
 
-extern int *program_state;
+extern int *g_state;
 
 typedef struct s_env
 {

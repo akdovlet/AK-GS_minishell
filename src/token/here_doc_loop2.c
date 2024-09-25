@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:38:19 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 17:53:57 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:09:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ int	hd_no_expand(t_token *tk, int tty)
 	char	*line;
 
 	line_count = 0;
+	tk->value = remove_quotes(tk->value);
 	while (++line_count)
 	{
 		write(tty, "> ", 2);
 		line = get_next_line(tty);
 		if (!line)
 			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 1);
-		if (*program_state == 130)
+		if (*g_state == 130)
 			return (free(line), 1);
 		if (hd_strcmp(tk->value, line))
 		{
