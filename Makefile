@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/24 15:33:53 by gschwand         ###   ########.fr        #
+#    Updated: 2024/09/25 14:53:35 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC		:=	main.c							\
 			expand/expand_debugg.c			\
 			expand/expand_quotes_utils.c	\
 			expand/expand_var.c				\
+			expand/expand_first_cmd.c		\
 			expand/lst_file_utils.c			\
 			expand/lst_file_utils2.c		\
 			expand/lst_file_utils3.c		\

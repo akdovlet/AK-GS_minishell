@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 17:24:21 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:55:28 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int					check_var(char *str, t_data *data);
 int					ft_find_chr(char *str, char c);
 
 // expand_split.c
-char				**ft_split_expand(char *str, char *sep);
+// char				**ft_split_expand(char *str, char *sep);
+t_files				*ft_split_to_list(char *str);
 
 // expand_debugg.c
 void				print_tab(char **tab);
@@ -71,5 +72,8 @@ void				free_tab(char **tab);
 
 // wildcard_utils.c
 int					ft_strcasecmp(char *s1, char *s2);
+
+// expand_first_cmd.c
+char				**expand_first_cmd(char **tab_cmd, t_data *data);
 
 #endif

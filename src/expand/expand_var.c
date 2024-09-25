@@ -6,13 +6,16 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 14:50:12 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:19:45 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "env.h"
 
+
+// renvoie une liste chainee qui sera plug dans 
+// la liste chainee de la commande
 static char	*extract_var_name(char *str, int *i)
 {
 	int	j;
@@ -49,11 +52,16 @@ static char	*get_var_value(char *var_name, t_data *data)
 	return (node->value);
 }
 
+
+// c'est ici qu'on pourrait envoyer notre split
 static int	create_and_add_file(char *value, t_files **files)
 {
 	t_files	*new;
 
-	new = ft_lstnew_files_dup(value);
+	// new = ft_lstnew_files_dup(value);
+	// if (!new)
+	// 	return (1);
+	new = ft_split_to_list(value);
 	if (!new)
 		return (1);
 	ft_lst_add_back_files(files, new);

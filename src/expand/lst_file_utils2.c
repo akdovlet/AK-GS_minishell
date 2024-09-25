@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:37:59 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 15:47:54 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:42:20 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,13 @@ int	creat_node_n_add_back_if_str(t_files **files, char *tmp)
 	t_files	*new;
 
 	if (!tmp)
-		return (perror("minishell: ft_strndup failed"), 1);
+		return (ft_free_lst_files_expand(files),
+			perror("minishell: ft_strndup failed"), 1);
 	if (tmp[0] == '\0')
 		return (0);
 	new = ft_lstnew_files_dup(tmp);
 	if (!new)
-		return (1);
+		return (ft_free_lst_files_expand(files), 1);
 	ft_lst_add_back_files(files, new);
 	return (0);
 }

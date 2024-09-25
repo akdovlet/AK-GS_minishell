@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 15:14:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:11:19 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	pidlst_clear(t_pidlst **lst);
 // exec_bin.c
 int ft_exec_bin(t_ast *ast, t_data *data);
 void ft_puterror(char *str_error, char *str);
+int ft_find_chr_exec(char *str, char c);
 
 // exec_wait_pid.c
 int ft_wait_pid(t_ast *ast, t_data *data);
