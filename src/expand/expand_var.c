@@ -6,15 +6,14 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 12:19:45 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:47:08 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expand.h"
 #include "env.h"
+#include "expand.h"
 
-
-// renvoie une liste chainee qui sera plug dans 
+// renvoie une liste chainee qui sera plug dans
 // la liste chainee de la commande
 static char	*extract_var_name(char *str, int *i)
 {
@@ -52,15 +51,10 @@ static char	*get_var_value(char *var_name, t_data *data)
 	return (node->value);
 }
 
-
-// c'est ici qu'on pourrait envoyer notre split
 static int	create_and_add_file(char *value, t_files **files)
 {
 	t_files	*new;
 
-	// new = ft_lstnew_files_dup(value);
-	// if (!new)
-	// 	return (1);
 	new = ft_split_to_list(value);
 	if (!new)
 		return (1);
@@ -84,9 +78,6 @@ int	copy_var(char *str, int *i, t_files **files, t_data *data)
 	return (free(var_name), result);
 }
 
-// fonction qui check si une string commence par un $
-// si oui, me dit si cette variable existe dans l'environnement
-// si non return 1
 int	check_var(char *str, t_data *data)
 {
 	int		i;
