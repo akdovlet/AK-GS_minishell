@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:04:41 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 14:48:31 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:48:29 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	check_only_digit(char *str)
 		if (!ft_isdigit(str[i]))
 		{
 			printf("exit\n");
-			ft_dprintf(2, "minishell: exit: %s: numeric argument required\n", 
-			str);
+			ft_dprintf(2, "minishell: exit: %s: numeric argument required\n",
+				str);
 			exit(2);
 		}
 		i++;
