@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 18:52:40 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:06:29 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int ft_exec_builtins(t_ast *ast, t_data *data)
     if (!ft_strcmp(ast->cmd[0], "env"))
         data->status = ft_env(ast->cmd, data->env);
     if (!ft_strcmp(ast->cmd[0], "exit"))
-        data->status = ft_exit(ast->cmd, data->env, data);
+        data->status = ft_exit(ast->cmd, data);
     return (0);
 }
 
