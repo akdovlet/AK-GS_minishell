@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 14:48:15 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:01:54 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,14 +122,11 @@ int	command_node(t_ast *ast, t_data *data)
 	ast->cmd = expand_first_cmd(ast->cmd, data);
 	if (!ast->cmd || !ast->cmd[0])
 		return (0);
-	printf("command_node: %s\n", ast->cmd[0]);
 	if (ft_is_builtins(ast->cmd[0]))
 	{
-		printf("command_node: %s\n", ast->cmd[0]);
 		if (ft_strcmp(ast->cmd[0], "export") != 0 && ft_strcmp(ast->cmd[0],
 				"unset") != 0)
 		{
-			printf("ok\n");
 			ast->cmd = expand_tab_of_cmd(ast->cmd, data);
 			if (!ast->cmd)
 				return (perror("minishell: command_node"), 1);

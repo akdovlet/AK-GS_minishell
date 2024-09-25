@@ -6,13 +6,12 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/24 14:59:45 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:10:32 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "env.h"
-
+#include "minishell.h"
 
 // recode la meme fonction que env_join_keyvalue mais sans i = - 1 et j = -1
 char	*env_join_keyvalue2(char *key, char *value)
@@ -64,17 +63,19 @@ bool	env_default_setup(t_data *data)
 
 	new = env_new_key(ft_strdup("PWD"), getcwd(NULL, 0));
 	if (!new)
-		return (false);
-	env_add_back(&data->env, new);
-	new = env_new_key(ft_strdup("OLDPWD"), NULL);
+		return (1);
 	env_add_back(&data->env, new);
 	new = env_new_key(ft_strdup("SHLVL"), ft_strdup("1"));
+	if (!new)
+		return (1);
 	env_add_back(&data->env, new);
 	data->hardpath = ft_strdup(HARDPATH);
-	return (true);
+	if (!data->hardpath)
+		return (1);
+	return (0);
 }
 
-int lstdup_env(t_env **dst, t_env *src)
+int	lstdup_env(t_env **dst, t_env *src)
 {
 	t_env	*new;
 	t_env	*tmp;
@@ -95,74 +96,5 @@ int lstdup_env(t_env **dst, t_env *src)
 		}
 		src = src->next;
 	}
-	if (!ft_check_key(dst, "OLDPWD"))
-	{
-		new = env_new_key(ft_strdup("OLDPWD"), NULL);
-		if (!new)
-			return (env_clear(dst), 1);
-		env_add_back(dst, new);
-	}
 	return (0);
 }
-
-static void ft_sort_alpha(t_env **env)
-{
-    t_env *tmp;
-    t_env *tmp2;
-	char *tmp3;
-	
-    tmp = *env;
-    while (tmp->next)
-    {
-        tmp2 = tmp->next;
-        while (tmp2)
-        {
-            if (ft_strcmp(tmp->key, tmp2->key) > 0)
-            {
-				tmp3 = tmp->key;
-				tmp->key = tmp2->key;
-				tmp2->key = tmp3;
-				tmp3 = tmp->value;
-				tmp->value = tmp2->value;
-				tmp2->value = tmp3;
-            }
-            tmp2 = tmp2->next;
-        }
-        tmp = tmp->next;
-    }
-}
-
-int export_default_setup(t_data *data)
-{
-	if (lstdup_env(&data->export, data->env))
-		return (1);
-	ft_sort_alpha(&data->export);
-	return (0);
-}
-
-int	env_export_default_setup(t_data *data)
-{
-	if (env_default_setup(data))
-		return (1);
-	if (export_default_setup(data))
-		return (1);
-	return (0);
-}
-
-int env_export_copy(t_data *data, char **env)
-{
-	data->env = NULL;
-	data->export = NULL;
-	if (env_copy(&data->env, env))
-		return (1);
-	if (export_default_setup(data))
-		return (1);
-	return (0);
-}
-
-bool	env_setup(t_data *data, char **env)
-{
-	if (!env[0])
-		return (env_export_default_setup(data));
-	return (env_export_copy(data, env));
-}	

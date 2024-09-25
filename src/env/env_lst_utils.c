@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 16:35:55 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:35:50 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "env.h"
+#include "minishell.h"
 
-int find_chr(char *str, char c)
+int	find_chr(char *str, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -88,19 +88,4 @@ t_env	*env_new(char *var)
 		node->value = NULL;
 	node->next = NULL;
 	return (node);
-}
-
-int	ft_lstsize_env(t_env *lst)
-{
-	int		i;
-	t_env	*tmp;
-
-	i = 0;
-	tmp = lst;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
 }

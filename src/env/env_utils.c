@@ -6,12 +6,12 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/23 19:19:57 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:39:42 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "env.h"
+#include "minishell.h"
 
 char	*env_get_value(t_env *env, char *key)
 {
@@ -30,7 +30,7 @@ void	env_print(t_env *lst)
 {
 	while (lst)
 	{
-		ft_printf("%s=%s\n", lst->key, lst->value);
+		printf("%s=%s\n", lst->key, lst->value);
 		lst = lst->next;
 	}
 }
@@ -61,4 +61,19 @@ t_env	*ft_check_key(t_env **env, char *key)
 		tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+int	ft_lstsize_env(t_env *lst)
+{
+	int		i;
+	t_env	*tmp;
+
+	i = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }
