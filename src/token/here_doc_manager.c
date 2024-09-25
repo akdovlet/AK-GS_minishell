@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:56:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/24 19:09:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:35:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char	*remove_quotes(char *str)
 	j = 0;
 	i = 0;
 	dup = malloc(sizeof(char) * (redir_len(str) + 1));
+	if (!dup)
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] && is_quote(str[i]))
@@ -86,19 +88,7 @@ char	*remove_quotes(char *str)
 
 int	here_doc_manager(t_token *tk, t_env *env)
 {
-	bool	expand;
-
-	if (ft_strchr(tk->value, '\'') || ft_strchr(tk->value, '"'))
-	{
-		expand = false;
-		tk->value = remove_quotes(tk->value);
-		if (!tk->value)
-			return (0);
-	}
-	else
-		expand = true;
-	if (here_doc(tk, expand, env))
+	if (!here_doc(tk, env))
 		return (0);
-	printf("%s\n", tk->value);
 	return (1);
 }

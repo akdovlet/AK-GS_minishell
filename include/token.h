@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/24 19:10:14 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:42:21 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,22 @@ int	grammar_check(t_token *tk);
 #                                  here_doc_loop.c                              #
 ###############################################################################*/
 
-int	here_doc_loop(t_token *tk, bool expand, t_env *env, int tty);
-int	here_doc(t_token *tk, bool expand, t_env *env);
+int	here_doc_loop(t_token *tk, t_env *env, int tty);
+int	here_doc(t_token *tk, t_env *env);
+
+/*###############################################################################
+#                                  here_doc_loop2.c                              #
+###############################################################################*/
+
+bool	hd_strcmp(char *s1, char *s2);
+int		hd_no_expand(t_token *tk, int tty);
 
 /*###############################################################################
 #                                  here_doc_manager.c                           #
 ###############################################################################*/
 
-int	here_doc_manager(t_token *tk, t_env *env);
+int		here_doc_manager(t_token *tk, t_env *env);
+char	*remove_quotes(char *str);
 
 /*###############################################################################
 #                                  definitions.c                                #

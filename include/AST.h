@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:41:40 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/08/24 11:29:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:14:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 t_ast	*ast_newcmd(t_cmdlst **lst);
 t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right);
-t_ast	*ast_newredir(t_type type, char *filename);
+t_ast	*ast_newredir(t_type type, char *filename, int fd);
 t_ast	*ast_newredir_push_root(t_ast *redir_next, t_type type, char *filename);
 t_ast	*ast_newpipe(t_ast *left, t_ast *right);
 t_ast	*ast_newsubshell(t_ast *next);
@@ -81,7 +81,7 @@ void		cmdlst_print(t_cmdlst *lst);
 t_cmdlst	*cmdlst_last(t_cmdlst *lst);
 void		cmdlst_add_back(t_cmdlst **lst, t_cmdlst *new);
 void		cmdlst_clear(t_cmdlst **lst);
-t_cmdlst	*cmdlst_new(char *value, int type);
+t_cmdlst	*cmdlst_new(char *value, int type, int tk);
 
 /*###############################################################################
 #                                  split_cmdlst.c                               #

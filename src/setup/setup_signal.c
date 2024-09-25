@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:00:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/24 18:53:58 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:20:46 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	parent_handler(int sig)
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		rl_redisplay();
-		*program_state = SIGINT;
+		if (*program_state != 69)
+				rl_redisplay();
+		*program_state = 130;
 	}
 }
 
@@ -40,7 +41,7 @@ void	setup_signals(t_data *data)
 
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = signal_handler;
-	sa.sa_flags = SA_RESTART;
+	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGTERM, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
