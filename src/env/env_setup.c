@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 17:10:32 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:45:33 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*env_join_keyvalue2(char *key, char *value)
 	j = 0;
 	fusion = malloc(sizeof(char) * ((ft_strlen(key) + (ft_strlen(value) + 2))));
 	if (!fusion)
-		return (NULL);
+		return (perror("minishell: env_join_keyvalue2"), NULL);
 	while (key[i])
 	{
 		fusion[i] = key[i];
@@ -47,9 +47,13 @@ t_env	*env_new_key(char *key, char *value)
 {
 	t_env	*new;
 
+	if (!key)
+		return (perror("minishell: ft_strdup"), NULL);
+	if (!value)
+		return (perror("minishell: ft_strdup"), free(key), NULL);
 	new = malloc(sizeof(t_env));
 	if (!new)
-		return (NULL);
+		return (free(key), free(value), perror("minishell: env_new_key"), NULL);
 	new->key = key;
 	new->value = value;
 	new->next = NULL;
@@ -61,7 +65,7 @@ bool	env_default_setup(t_data *data)
 {
 	t_env	*new;
 
-	new = env_new_key(ft_strdup("PWD"), getcwd(NULL, 0));
+	new = env_new_key(ft_strdup("PWD"), ft_strdup(getcwd(NULL, 0)));
 	if (!new)
 		return (1);
 	env_add_back(&data->env, new);
@@ -71,7 +75,7 @@ bool	env_default_setup(t_data *data)
 	env_add_back(&data->env, new);
 	data->hardpath = ft_strdup(HARDPATH);
 	if (!data->hardpath)
-		return (1);
+		return (perror("minishell: ft_strdup"), 1);
 	return (0);
 }
 
