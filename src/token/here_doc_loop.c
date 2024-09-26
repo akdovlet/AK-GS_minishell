@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 11:39:50 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:47:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ char	*find_var(char *line, int *i, t_env *env)
 	(*i)++;
 	index = *i;
 	j = 0;
-	while (line[index] && ft_isalpha(line[index++]))
+	if (line[*i] == '?')
+		return (exit_status_to_char());
+	while (line[index] && is_variable(line[index++]))
 		j++;
 	key = malloc(sizeof(char) * j + 1);
 	if (!key)
 		return (NULL);
 	j = 0;
-	while (line[*i] && ft_isalpha(line[*i]))
+	while (line[*i] && is_variable(line[*i]))
 	{
 		key[j] = line[*i];
 		j++;
@@ -69,12 +71,10 @@ char	*line_expand(char *line, t_env *env)
 
 	i = 0;
 	j = 0;
-	if (!ft_strchr(line, '$'))
-		return (ft_strdup(line));
 	buffer = malloc(sizeof(char) * 4096);
 	while (line[i])
 	{
-		if (line[i] == '$' && ft_isalpha(line[i + 1]))
+		if (line[i] == '$' && (is_variable(line[i + 1]) || line[i + 1] == '?'))
 		{
 			value = find_var(line, &i, env);
 			cpy_to_buffer(value, buffer, &j);
@@ -97,18 +97,17 @@ int	hd_expand(t_token *tk, t_env *env, int tty)
 	line_count = 0;
 	while (++line_count)
 	{
-		if (*g_state == 130)
-			return (1);
 		write(tty, "> ", 2);
 		line = get_next_line(tty);
+		if (!line && *g_state != 130)
+			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 1);
 		if (*g_state == 130)
 			return (free(line), 1);
-		if (!line && *g_state != 130)
-			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 0);
 		if (hd_strcmp(tk->value, line))
 			return (free(line), 0);
-		expansion = line_expand(line, env);
-		write(tk->fd, expansion, ft_strlen(line));
+		if (ft_strchr(line, '$'))
+			expansion = line_expand(line, env);
+		write(tk->fd, expansion, ft_strlen(expansion));
 		free(line);
 		free(expansion);
 	}

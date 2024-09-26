@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:20:00 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 10:47:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:04:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int ft_subshell(t_ast *ast, t_data *data)
 			data->status = WEXITSTATUS(status);
     }
 	sigaction(SIGINT, &data->sa, NULL);
-    return (0);
+    return (data->status);
 }

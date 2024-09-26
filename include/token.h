@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 16:42:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:18:31 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	print_token(t_token *tk);
 bool	is_blank(int c);
 bool	is_metacharacter(int c);
 bool	is_word(int c);
+bool	is_variable(int c);
 
 /*###############################################################################
 #                                  grammar_check.c                              #
@@ -43,6 +44,7 @@ int	grammar_check(t_token *tk);
 
 int	here_doc_loop(t_token *tk, t_env *env, int tty);
 int	here_doc(t_token *tk, t_env *env);
+void	cpy_to_buffer(char *value, char *buffer, int *j);
 
 /*###############################################################################
 #                                  here_doc_loop2.c                              #

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 13:58:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:34:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_arrayofchar(char **str, int level)
 	while (str[i])
 	{
 		print_indentation(level);
-		fprintf(stderr, "%s\n", str[i]);
+		ft_dprintf(STDERR_FILENO, "%s\n", str[i]);
 		i++;
 	}
 }

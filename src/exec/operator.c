@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 08:26:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 18:51:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:51:21 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_operator(t_ast *ast, t_data *data)
 {
 	exec_recursion(ast->op_left, data);
 	if (ast->op_type == OR && data->status)
-		exec_recursion(ast->op_right, data);
+		data->status = exec_recursion(ast->op_right, data);
 	else if (ast->op_type == AND && !data->status)
-		exec_recursion(ast->op_right, data);
+		data->status = exec_recursion(ast->op_right, data);
 	return (data->status);
 }

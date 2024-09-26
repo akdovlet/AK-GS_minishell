@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 11:42:09 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:16:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ typedef struct s_data
 	t_env		*env;
 	t_env		*export;
 	struct sigaction sa;
+	struct termios	term;
 }	t_data;
 
 int		exec_recursion(t_ast *ast, t_data *data);

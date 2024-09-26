@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 11:24:53 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:46:15 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	interactive_shell(t_data *data)
 {
 	char	*line;
 	t_token	*tk;
+	int		err;
 
 	tk = NULL;
+	err = 0;
 	while (1)
 	{
 		line = readline(CYAN "minishell$> " RESET);
@@ -31,7 +33,9 @@ void	interactive_shell(t_data *data)
 			break ;
 		}
 		add_history(line);
-		data->status = tokenize(line, &tk, data->env);
+		err = tokenize(line, &tk, data->env);
+		if (err)
+			data->status = err;
 		free(line);
 		data->ast_root = parse(&tk);
 		token_clear(&tk);

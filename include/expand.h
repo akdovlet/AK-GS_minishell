@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 11:35:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:57:31 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ char				**expand_first_cmd(char **tab_cmd, t_data *data);
 // expand_first_cmd2.c
 t_files				*tab_to_lst_files(t_files **files, char **tab);
 char				**strdup_tab(char **tab);
+
+char	*exit_status_to_char(void);
 
 #endif

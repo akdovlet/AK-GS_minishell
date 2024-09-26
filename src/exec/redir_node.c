@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 17:48:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:18:47 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,5 @@ int	redir_node(t_ast *ast, t_data *data)
 		data->status = exec_recursion(ast->redir_next, data);
 	restore_backup(backup_fd, ast->redir_type);
 	fdlst_delete_node(&data->fdlst, backup_fd);
-	if (ast->redir_type == HERE_DOC)
-		unlink(ast->redir_filename);
 	return (data->status);
 }

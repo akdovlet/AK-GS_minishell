@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 11:24:31 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:34:42 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	pip_wait_children(t_data *data)
 		write(1, "\n", 1);
 	if (WTERMSIG(status) == SIGQUIT)
 		write(1, "Quit\n", 5);
+	if (WTERMSIG(status) == SIGBUS)
+		write(1, "Bus error (core dumped)\n", 25);
 	data->pidlst = NULL;
 	sigaction(SIGINT, &data->sa, NULL);
 }
