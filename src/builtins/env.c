@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:18:24 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 14:12:34 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:46:48 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_env(char **argv, t_env *env)
 {
 	if (argv[1])
-		ft_dprintf(STDERR_FILENO, "env: too many arguments\n");
+		ft_dprintf(STDERR_FILENO, "minishell: env: too many arguments\n");
 	else
 	{
 		while (env)
