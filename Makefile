@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/26 14:28:05 by gschwand         ###   ########.fr        #
+#    Updated: 2024/09/26 15:38:22 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRC		:=	main.c							\
 			expand/lst_file_utils3.c		\
 			expand/sort_files.c 			\
 			expand/wildcard.c				\
+			expand/wildcard_first_cmd.c		\
 			expand/wildcard_utils.c			\
 			exec/command_node.c				\
 			exec/command_utils.c			\

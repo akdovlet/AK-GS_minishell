@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:39:17 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 15:23:41 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:16:30 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**ft_lst_to_tab(t_files **files)
 	{
 		tab[i] = ft_strdup(tmp->name);
 		if (!tab[i])
-			return (perror("minishell: ft_strdup"), NULL);
+			return (NULL);
 		tmp = tmp->next;
 		i++;
 	}

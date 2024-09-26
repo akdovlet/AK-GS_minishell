@@ -6,11 +6,12 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 15:43:51 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:46:32 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+#include "exec.h"
 
 void	free_tab(char **tab)
 {
@@ -93,7 +94,7 @@ char	**ft_wildcard(char **tab_cmd)
 	i = 0;
 	while (tab_cmd[i])
 	{
-		if (ft_find_chr(tab_cmd[i], '*'))
+		if (ft_find_chr_exec(tab_cmd[i], '*'))
 			files = expand_wildcard(&files, tab_cmd[i]);
 		else
 		{

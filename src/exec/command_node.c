@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_node.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 11:32:57 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:53:52 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,9 @@ int	execute_prog(t_ast *ast, t_data *data)
 int	command_node(t_ast *ast, t_data *data)
 {
 	ast->cmd = expand_first_cmd(ast->cmd, data);
+	if (!ast->cmd || !ast->cmd[0])
+		return (0);
+	ast->cmd = ft_wildcard_first_cmd(ast->cmd);
 	if (!ast->cmd || !ast->cmd[0])
 		return (0);
 	if (ft_is_builtins(ast->cmd[0]))
