@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 15:45:33 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:23:09 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_env	*env_new_key(char *key, char *value)
 	if (!key)
 		return (perror("minishell: ft_strdup"), NULL);
 	if (!value)
-		return (perror("minishell: ft_strdup"), free(key), NULL);
+		return (NULL);
 	new = malloc(sizeof(t_env));
 	if (!new)
 		return (free(key), free(value), perror("minishell: env_new_key"), NULL);
