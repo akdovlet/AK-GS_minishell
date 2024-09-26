@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 21:10:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:24:31 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	pip_wait_children(t_data *data)
 		write(1, "\n", 1);
 	if (WTERMSIG(status) == SIGQUIT)
 		write(1, "Quit\n", 5);
-	fprintf(stderr, "status is %d\n", data->status);
 	data->pidlst = NULL;
 	sigaction(SIGINT, &data->sa, NULL);
 }

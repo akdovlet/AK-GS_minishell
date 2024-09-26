@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 19:09:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:26:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ int	hd_expand(t_token *tk, t_env *env, int tty)
 			return (1);
 		write(tty, "> ", 2);
 		line = get_next_line(tty);
-		if (!line && *g_state != 130)
-			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 1);
 		if (*g_state == 130)
 			return (free(line), 1);
+		if (!line && *g_state != 130)
+			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 0);
 		if (hd_strcmp(tk->value, line))
 			return (free(line), 0);
 		expansion = line_expand(line, env);
