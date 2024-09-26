@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 11:35:51 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:42:09 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ typedef struct s_data
 	struct sigaction sa;
 }	t_data;
 
-int	exec_recursion(t_ast *ast, t_data *data);
+int		exec_recursion(t_ast *ast, t_data *data);
 void	clear_exit(t_data *data, int code);
 
 #endif

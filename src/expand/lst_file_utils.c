@@ -6,47 +6,11 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 11:37:44 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:41:27 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
-
-t_files	*ft_lstnew_files(char *str)
-{
-	t_files	*new;
-
-	new = malloc(sizeof(t_files));
-	if (!new)
-	{
-		perror("malloc");
-		return (NULL);
-	}
-	new->name = str;
-	new->next = NULL;
-	return (new);
-}
-
-t_files	*ft_lstnew_files_dup(char *str)
-{
-	t_files	*new;
-
-	new = malloc(sizeof(t_files));
-	if (!new)
-	{
-		perror("malloc");
-		return (NULL);
-	}
-	new->name = ft_strdup(str);
-	if (!new->name)
-	{
-		perror("malloc");
-		free(new);
-		return (NULL);
-	}
-	new->next = NULL;
-	return (new);
-}
 
 int	ft_new_lst_add_back_files(t_files **alst, t_files *new)
 {

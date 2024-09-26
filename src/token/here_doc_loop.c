@@ -6,13 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 11:26:41 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:39:50 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
 #include "expand.h"
+#include "env.h"
 
 char	*find_var(char *line, int *i, t_env *env)
 {
