@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
+#    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/25 18:35:14 by gschwand         ###   ########.fr        #
+#    Updated: 2024/09/26 11:34:25 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,9 @@ SRC		:=	main.c							\
 			token/definitions.c				\
 			token/definitions2.c			\
 			token/grammar_check.c			\
+			token/here_doc_loop.c			\
+			token/here_doc_loop2.c			\
+			token/here_doc_manager.c		\
 			token/parenthesis.c				\
 			token/syntax_error.c			\
 			token/syntax_input.c			\
@@ -75,6 +78,7 @@ SRC		:=	main.c							\
 			exec/operator.c 				\
 			exec/pidlst.c 					\
 			exec/subshell.c 				\
+			exec/redir_hd.c					\
 			exec/redir_lst_clear.c			\
 			exec/redir_lst.c				\
 			exec/redir_node.c				\
@@ -117,7 +121,10 @@ fclean: clean
 	@if [ -f $(NAME) ]; then $(RM) -rf $(NAME) && echo "\033[1;31m\tDeleted: $(NAME)\033[0m"; fi
 	@$(MAKE) --no-print-directory fclean -C libft
 
-val : all
+val: all
+	valgrind --leak-check=full --track-fds=yes --trace-children=yes ./${NAME}
+
+full: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes ./${NAME}
 
 re: fclean all

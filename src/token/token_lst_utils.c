@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:38:15 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/16 19:01:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:00:30 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_token	*token_new(char *var)
 		return (NULL);
 	*node = (t_token){};
 	node->value = var;
+	node->fd = -1;
 	return (node);
 }
 
@@ -62,6 +63,8 @@ void	token_clear(t_token **tk)
 	while (*tk)
 	{
 		tmp = (*tk)->next;
+		if ((*tk)->fd != -1)
+			close ((*tk)->fd);
 		free((*tk)->value);
 		free((*tk));
 		*tk = tmp;

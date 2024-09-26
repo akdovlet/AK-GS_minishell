@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_cpy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:12:54 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 16:02:59 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:36:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**env_copy_to_char_arr(t_env *env)
 		return (NULL);
 	while (env)
 	{
-		strs[i] = meet_in_the_middle(env->key, env->value, ':');
+		strs[i] = meet_in_the_middle(env->key, env->value, '=');
 		if (!strs[i])
 			return (ft_free(strs), NULL);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:22:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 14:17:39 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:11:52 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cmdlst_clear(t_cmdlst **lst)
 	}
 }
 
-t_cmdlst	*cmdlst_new(char *value, int type)
+t_cmdlst	*cmdlst_new(char *value, int type, int fd)
 {
 	t_cmdlst	*new;
 
@@ -69,6 +69,7 @@ t_cmdlst	*cmdlst_new(char *value, int type)
 	}
 	*new = (t_cmdlst){};
 	new->str = ft_strdup(value);
+	new->fd = fd;
 	if (!new->str)
 	{
 		perror("minishell: cmdlst_new");

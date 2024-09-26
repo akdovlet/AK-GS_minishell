@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:48:36 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 14:15:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:02:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right)
 	return (new);
 }
 
-t_ast	*ast_newredir(t_type type, char *filename)
+t_ast	*ast_newredir(t_type type, char *filename, int fd)
 {
 	t_ast	*new;
 
@@ -64,12 +64,14 @@ t_ast	*ast_newredir(t_type type, char *filename)
 		return (NULL);
 	}
 	new->type = REDIR;
+	new->redir_fd = fd;
 	new->redir_type = type;
 	new->redir_filename = ft_strdup(filename);
 	if (!new->redir_filename)
 	{
 		perror("minishell: ast_newredir");
 		free(new);
+		close(fd);
 		return (NULL);
 	}
 	new->redir_next = NULL;

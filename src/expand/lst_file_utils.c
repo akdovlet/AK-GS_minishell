@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_file_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 15:40:35 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:37:44 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,43 @@ void	ft_lst_add_back_files(t_files **alst, t_files *new)
 	tmp->next = new;
 }
 
-void	ft_lstdelone_files(t_files **files, t_files *to_delete)
+t_files *ft_lstnew_files(char *str)
+{
+    t_files *new;
+
+    new = malloc(sizeof(t_files));
+    if (!new)
+    {
+        perror("malloc");
+        return (NULL);
+    }
+    new->name = str;
+    new->next = NULL;
+    return (new);
+}
+
+t_files *ft_lstnew_files_dup(char *str)
+{
+    t_files *new;
+
+    new = malloc(sizeof(t_files));
+    if (!new)
+    {
+        perror("malloc");
+        return (NULL);
+    }
+    new->name = ft_strdup(str);
+    if (!new->name)
+    {
+        perror("malloc");
+        free(new);
+        return (NULL);
+    }
+    new->next = NULL;
+    return (new);
+}
+
+void ft_lstdelone_files(t_files **files, t_files *to_delete)
 {
 	t_files	*tmp;
 

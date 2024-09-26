@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operator.c                                         :+:      :+:    :+:   */
+/*   redir_hd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 08:26:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 18:51:02 by akdovlet         ###   ########.fr       */
+/*   Created: 2024/09/24 15:36:44 by akdovlet          #+#    #+#             */
+/*   Updated: 2024/09/25 17:48:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "minishell.h"
 
-// penser a remettre data->status a 0 
-int	ft_operator(t_ast *ast, t_data *data)
+int	redir_hd(t_ast *ast)
 {
-	exec_recursion(ast->op_left, data);
-	if (ast->op_type == OR && data->status)
-		exec_recursion(ast->op_right, data);
-	else if (ast->op_type == AND && !data->status)
-		exec_recursion(ast->op_right, data);
-	return (data->status);
+	if (dup2(ast->redir_fd, STDIN_FILENO) == -1)
+		return (ft_dprintf(STDERR_FILENO, "minishell: %s\n", strerror(errno)), 1);
+	close(ast->redir_fd);
+	return (0);
 }

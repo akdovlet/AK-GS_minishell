@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:57:43 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/23 15:14:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/23 21:35:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	hard_path_check(char *cmd)
 		ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", cmd, strerror(errno));
 		return (126);
 	}
+	ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", cmd, strerror(errno));
 	return (127);
 }
 

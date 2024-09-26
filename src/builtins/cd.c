@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/23 14:36:07 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:36:05 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	cd(char **args, t_env **env)
 		if (modif_oldpwd(env))
 			return (1);
 		if (chdir(getenv("HOME")))
-			return (perror("minishell: cd failed\n"), 1);
+			return (perror("minishell: cd failed"), 1);
 		if (modif_pwd(env))
 			return (1);
 	}

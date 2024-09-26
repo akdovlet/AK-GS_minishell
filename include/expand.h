@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 17:47:20 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:35:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void				ft_free_lst_files(t_files **files);
 void				ft_free_lst_files_expand(t_files **files);
 t_files				*ft_recover_files(void);
 char				*write_files_expand(t_files *files);
+t_files *files_lstnew(char *str);
 int					creat_node_n_add_back_if_str(t_files **files, char *str);
 
 // lst_file_utils3.c
