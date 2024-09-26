@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:37:59 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 12:42:05 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:21:53 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_files	*ft_recover_files(void)
 	files = NULL;
 	dir = opendir(".");
 	if (dir == NULL)
-		return (perror("opendir"), NULL);
+		return (perror("minishell: ft_recover_files"), NULL);
 	while (1)
 	{
 		entry = readdir(dir);
@@ -56,7 +56,7 @@ t_files	*ft_recover_files(void)
 		tmp = ft_lstnew_files_dup(entry->d_name);
 		if (!tmp)
 		{
-			perror("malloc");
+			perror("minishell: ft_recover_files");
 			return (NULL);
 		}
 		ft_lst_add_back_files(&files, tmp);
@@ -80,7 +80,7 @@ char	*write_files_expand(t_files *files)
 	}
 	res = ft_calloc(sizeof(char), lenres + 1);
 	if (!res)
-		return (perror("malloc"), NULL);
+		return (perror("minishell: ft_calloc"), NULL);
 	tmp = files;
 	while (tmp)
 	{
@@ -96,7 +96,7 @@ int	creat_node_n_add_back_if_str(t_files **files, char *tmp)
 
 	if (!tmp)
 		return (ft_free_lst_files_expand(files),
-			perror("minishell: ft_strndup failed"), 1);
+			perror("minishell: ft_strndup"), 1);
 	if (tmp[0] == '\0')
 		return (free(tmp), 0);
 	new = ft_lstnew_files(tmp);

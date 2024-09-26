@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_file_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 11:41:27 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:19:55 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_files *ft_lstnew_files(char *str)
     new = malloc(sizeof(t_files));
     if (!new)
     {
-        perror("malloc");
+        perror("minishell: ft_lstnew_files");
         return (NULL);
     }
     new->name = str;
@@ -67,13 +67,13 @@ t_files *ft_lstnew_files_dup(char *str)
     new = malloc(sizeof(t_files));
     if (!new)
     {
-        perror("malloc");
+        perror("minishell: ft_lstnew_files_dup");
         return (NULL);
     }
     new->name = ft_strdup(str);
     if (!new->name)
     {
-        perror("malloc");
+        perror("minishell: ft_lstnew_files_dup");
         free(new);
         return (NULL);
     }
