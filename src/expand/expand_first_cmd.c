@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:47:44 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 18:22:39 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:40:54 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ char	**expand_first_cmd(char **cmd, t_data *data)
 	files_first = NULL;
 	files_second = NULL;
 	if (ft_find_chr_exec(cmd[0], '$') == -1)
-		return (strdup_tab(cmd));
+		return (cmd);
 	if (handle_variable(cmd, data, &files_first))
-		return (NULL);
-	ft_print_lst_files(files_first);
-	if (ft_find_chr_exec(cmd[0], '$') == -1 && handle_expansion(cmd, data, &files_first))
-		return (NULL);
+		return (free_tab(cmd), NULL);
+	if (!files_first)
+	{
+		if (handle_expansion(cmd, data, &files_first)) //leak potentiel ici
+			return (free_tab(cmd), NULL);
+	}
 	if (cmd[1])
 	{
 		files_second = handle_file_list_expansion(cmd + 1);
@@ -82,6 +84,7 @@ char	**expand_first_cmd(char **cmd, t_data *data)
 			return (NULL);
 		ft_lst_add_back_files(&files_first, files_second);
 	}
+	free_tab(cmd);
 	cmd = ft_lst_to_tab(&files_first);
 	ft_free_lst_files_expand(&files_first);
 	return (cmd);

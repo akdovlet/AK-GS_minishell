@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 19:08:12 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:46:02 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	check_export_env(t_env *env, char *str)
 	if (!key_tmp)
 		return (1);
 	node = ft_check_key(&env, key_tmp);
+	free(key_tmp);
 	if (!node)
 	{
 		node = env_new(str);
@@ -62,6 +63,7 @@ int	export_of_value(t_env *export, char *str)
 	if (!key_tmp)
 		return (1);
 	node = ft_check_key(&export, key_tmp);
+	free(key_tmp);
 	if (!node)
 	{
 		node = env_new(str);
