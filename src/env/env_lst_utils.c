@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 18:50:34 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:27:40 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_env	*env_new(char *var)
 	{
 		tmp = ft_strdup(var + ft_strlen(node->key) + 1);
 		if (!tmp)
-			return (NULL);
+			return (perror("minishell: ft_strdup"), NULL);
 		node->value = remove_quotes(tmp);
 		if (!node->value)
 			return (NULL);

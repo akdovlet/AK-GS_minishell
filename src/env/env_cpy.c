@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_cpy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:12:54 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 11:36:13 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:26:37 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**env_copy_to_char_arr(t_env *env)
 		return (NULL);
 	strs = malloc(sizeof(char *) * (env_len(env) + 1));
 	if (!strs)
-		return (NULL);
+		return (perror("minishell: env_copy_to_char_arr"), NULL);
 	while (env)
 	{
 		strs[i] = meet_in_the_middle(env->key, env->value, '=');
