@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/27 14:25:54 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:11:04 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,49 +88,6 @@ t_env	*env_new(char *var)
 		node->value = remove_quotes(tmp);
 		if (!node->value)
 			return (NULL);
-	}
-	else
-		node->value = NULL;
-	node->next = NULL;
-	return (node);
-}
-
-char *add_dquotes(char *str)
-{
-	char	*tmp;
-	char	*tmp2;
-
-	tmp = ft_strjoin("\"", str);
-	if (!tmp)
-		return (NULL);
-	tmp2 = ft_strjoin(tmp, "\"");
-	free(tmp);
-	if (!tmp2)
-		return (NULL);
-	free(str);
-	return (tmp2);
-}
-
-t_env	*export_new(char *var)
-{
-	t_env	*node;
-	char *tmp;
-
-	node = malloc(sizeof(t_env));
-	if (!node)
-		return (NULL);
-	node->key = copy_key(var);
-	if (!node->key)
-		return (NULL);
-	if (find_chr(var, '='))
-	{
-		tmp = ft_strdup(var + ft_strlen(node->key) + 1);
-		if (!tmp)
-			return (perror("minishell: ft_strdup"), NULL);
-		node->value = remove_quotes(tmp);
-		if (!node->value)
-			return (NULL);
-		node->value = add_dquotes(node->value);
 	}
 	else
 		node->value = NULL;

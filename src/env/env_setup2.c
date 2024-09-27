@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:40:42 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 14:58:14 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:10:23 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,6 @@ void	ft_sort_alpha(t_env **env)
 	}
 }
 
-int add_dquotes_all_values(t_env **export)
-{
-	t_env	*tmp;
-
-	tmp = *export;
-	while (tmp)
-	{
-		if (tmp->value)
-		{
-			tmp->value = add_dquotes(tmp->value);
-			if (!tmp->value)
-				return (1);
-		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
 int	export_default_setup(t_data *data)
 {
 	t_env	*new;
@@ -72,8 +54,6 @@ int	export_default_setup(t_data *data)
 		env_add_back(&data->export, new);
 	}
 	ft_sort_alpha(&data->export);
-	if (add_dquotes_all_values(&data->export))
-		return (1);
 	return (0);
 }
 

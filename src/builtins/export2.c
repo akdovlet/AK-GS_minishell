@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 14:26:23 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:10:56 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	export_of_value(t_env *export, char *str)
 	free(key_tmp);
 	if (!node)
 	{
-		node = export_new(str);
+		node = env_new(str);
 		if (!node)
 			return (1);
 		env_add_back(&export, node);

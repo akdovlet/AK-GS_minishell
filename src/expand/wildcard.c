@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 12:28:50 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:04:24 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ t_files	*expand_wildcard(t_files **files, char *str)
 	if (!files_tmp)
 		return (ft_free_lst_files(files), NULL);
 	files_tmp = sort_files(files_tmp, str);
+	if (!files_tmp)
+	{
+		files_tmp = ft_lstnew_files_dup(str);
+		if (!files_tmp)
+			return (ft_free_lst_files(files), NULL);
+	}
 	ft_lst_add_back_files(files, files_tmp);
 	return (*files);
 }
