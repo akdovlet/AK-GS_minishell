@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:04:41 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 15:15:52 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:36:44 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,22 @@
 static int	check_only_digit(char *str)
 {
 	int	i;
+	int n;
 
 	i = 0;
+	n = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (str[0] == '-')
+		n = 1;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
 			return (2);
 		i++;
 	}
+	if (check_overflow(str + 1, n))
+		return (2);
 	return (0);
 }
 
@@ -51,6 +59,7 @@ static int	handle_exit_with_argument(char *arg, t_data *data)
 	if (check_only_digit(arg))
 		return (handle_numeric_argument_error(arg, data));
 	exit_code = (unsigned char)ft_atoi(arg);
+	printf("exit\n");
 	clear_exit(data, exit_code);
 	return (exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:34:29 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 14:27:54 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:31:17 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		ft_change_value(t_env *node, char *str);
 int		check_alnum_str(char *str);
 int		unset(char **tab, t_data *data);
 int		ft_exit(char **tab, t_data *data);
+int		check_overflow(char *str, int n);
 char	*remove_quotes(char *str);
 
 #endif

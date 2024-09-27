@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/27 14:40:22 by gschwand         ###   ########.fr        #
+#    Updated: 2024/09/27 16:31:34 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC		:=	main.c							\
 			builtins/unset.c				\
 			builtins/env.c					\
 			builtins/exit.c					\
+			builtins/exit2.c				\
 			expand/expand.c					\
 			expand/expand_split.c			\
 			expand/expand_debugg.c			\
