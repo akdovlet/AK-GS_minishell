@@ -6,15 +6,13 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 17:47:08 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:21:50 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "expand.h"
 
-// renvoie une liste chainee qui sera plug dans
-// la liste chainee de la commande
 static char	*extract_var_name(char *str, int *i)
 {
 	int	j;
@@ -85,11 +83,13 @@ int	check_var(char *str, t_data *data)
 	t_env	*node;
 
 	i = 0;
-	if (str[1] == '?')
+	if (!ft_isalpha(str[1]))
 		return (0);
 	var_name = extract_var_name(str, &i);
 	if (!var_name)
 		return (1);
+	if (!ft_isalpha(var_name[1]))
+		return (free(var_name), 0);
 	node = ft_check_key(&data->env, var_name);
 	free(var_name);
 	if (!node)
