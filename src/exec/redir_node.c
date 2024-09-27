@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 19:18:47 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:56:28 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	redir_node(t_ast *ast, t_data *data)
 	int	backup_fd;
 
 	backup_fd = backup(ast->redir_type);
+	if (ast->redir_type != HERE_DOC)
+		ast->redir_filename = expand_filename(ast->redir_filename, data->env);
 	fdlst_add_front(&data->fdlst, fdlst_new(backup_fd, true));
 	if (ast->redir_type == OUT || ast->redir_type == APPEND)
 		data->status = redir_out(ast);

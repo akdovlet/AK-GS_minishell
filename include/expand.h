@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 16:57:31 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:09:37 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ t_files				*tab_to_lst_files(t_files **files, char **tab);
 char				**strdup_tab(char **tab);
 
 char	*exit_status_to_char(void);
+char	*expand_filename(char *str, t_env *env);
 
 #endif

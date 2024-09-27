@@ -3,45 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_setup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 17:10:32 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:30:54 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "minishell.h"
-
-// recode la meme fonction que env_join_keyvalue mais sans i = - 1 et j = -1
-char	*env_join_keyvalue2(char *key, char *value)
-{
-	int		i;
-	int		j;
-	char	*fusion;
-
-	i = 0;
-	j = 0;
-	fusion = malloc(sizeof(char) * ((ft_strlen(key) + (ft_strlen(value) + 2))));
-	if (!fusion)
-		return (NULL);
-	while (key[i])
-	{
-		fusion[i] = key[i];
-		i++;
-	}
-	fusion[i++] = '=';
-	if (value)
-	{
-		while (value[j])
-		{
-			fusion[i + j] = value[j];
-			j++;
-		}
-	}
-	fusion[i + j] = '\0';
-	return (fusion);
-}
 
 t_env	*env_new_key(char *key, char *value)
 {
@@ -56,7 +26,6 @@ t_env	*env_new_key(char *key, char *value)
 	return (new);
 }
 
-// define a hard coded path
 bool	env_default_setup(t_data *data)
 {
 	t_env	*new;
