@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 14:07:36 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:51:42 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ int	copy_var(char *str, int *i, t_files **files, t_data *data)
 	if (!var_name)
 		return (1);
 	value = get_var_value(var_name, data);
-	if (!value)
-		return (free(var_name), 2);
+	// if (!value)
+	// {
+	// 	return (free(var_name), 2);
+	// }
 	result = create_and_add_file(value, files);
 	return (free(var_name), result);
 }
@@ -84,7 +86,7 @@ int check_str_var(char *str)
 	len1 = 0;
 	while (str[len1])
 		len1++;
-	len2 = 0;
+	len2 = 1;
 	while (str[len2] && (ft_isalnum(str[len2]) || str[len2] == '_'))
 		len2++;
 	if (len1 != len2)

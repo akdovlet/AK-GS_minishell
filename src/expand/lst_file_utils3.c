@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:39:17 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 16:16:30 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:38:01 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	**ft_lst_to_tab(t_files **files)
 	int		i;
 
 	tmp = *files;
+	if (!tmp)
+		return (NULL);
 	i = lst_size_files(files);
 	tab = malloc(sizeof(char *) * (i + 1));
 	if (!tab)

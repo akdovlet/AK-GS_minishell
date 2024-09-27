@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/27 16:13:50 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:38:48 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	command_node(t_ast *ast, t_data *data)
 {
 	ast->cmd = expand_tab_of_cmd(ast->cmd, data);
 	if (!ast->cmd)
-		return (perror("minishell: command_node"), 1);
+		return (1);
 	ast->cmd = ft_wildcard(ast->cmd);
 	if (!ast->cmd)
 		return (1);
