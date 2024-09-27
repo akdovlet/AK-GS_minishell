@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/27 12:30:04 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:41:19 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,29 +127,14 @@ int	execute_prog(t_ast *ast, t_data *data)
 
 int	command_node(t_ast *ast, t_data *data)
 {
-	ast->cmd = expand_first_cmd(ast->cmd, data);
-	if (!ast->cmd || !ast->cmd[0])
-		return (0);
-	ast->cmd = ft_wildcard_first_cmd(ast->cmd);
-	if (!ast->cmd || !ast->cmd[0])
-		return (0);
+	ast->cmd = expand_tab_of_cmd(ast->cmd, data);
+	if (!ast->cmd)
+		return (perror("minishell: command_node"), 1);
+	ast->cmd = ft_wildcard(ast->cmd);
+	if (!ast->cmd)
+		return (1);
 	if (ft_is_builtins(ast->cmd[0]))
-	{
-		if (ft_strcmp(ast->cmd[0], "export") && ft_strcmp(ast->cmd[0], "unset"))
-		{
-			ast->cmd = expand_tab_of_cmd(ast->cmd, data);
-			if (!ast->cmd)
-				return (perror("minishell: command_node"), 1);
-			
-			if (ast->cmd[1])
-			{
-				ast->cmd = ft_wildcard(ast->cmd);
-				if (!ast->cmd)
-					return (1);
-			}
-		}
 		return (ft_builtins(ast, data));
-	}
 	else
 		return (execute_prog(ast, data));
 }

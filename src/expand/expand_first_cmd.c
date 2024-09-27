@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:47:44 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 12:54:40 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:38:09 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	**expand_first_cmd(char **cmd, t_data *data)
 	free_tab(cmd);
 	cmd = ft_lst_to_tab(&files_first);
 	ft_free_lst_files_expand(&files_first);
-	if (ft_find_chr_exec(cmd[0], '$') != -1)
-		return (expand_first_cmd(cmd, data));
+	// if (ft_find_chr_exec(cmd[0], '$') != -1)
+	// 	return (expand_first_cmd(cmd, data));
 	return (cmd);
 }
