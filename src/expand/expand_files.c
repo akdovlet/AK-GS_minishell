@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:13:00 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/27 19:55:31 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:14:46 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*files_join(t_files **lst)
 		}
 		files_eat(lst);
 	}
+	fusion[i] = '\0';
 	return (fusion);
 }
 
@@ -141,7 +142,10 @@ void	var_copy(char *str, int *i, t_env *env, t_files **lst)
 	while (str[*i] && is_variable(str[*i]))
 		key[j++] = str[(*i)++];
 	key[j] = '\0';
+	fprintf(stderr, "key is: %s\n", key);
 	value = env_get_value(env, key);
+	fprintf(stderr, "value is: %s\n", value);
+	free(key);
 	if (!value)
 		return ;
 	ft_lst_add_back_files(lst, ft_lstnew_files_dup(value));
@@ -222,6 +226,5 @@ char	*expand_filename(char *str, t_env *env)
 			regular_copy(str, &i, &lst);
 	}
 	fusion = files_join(&lst);
-	free(str);
 	return (fusion);
 }
