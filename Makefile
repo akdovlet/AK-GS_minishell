@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/26 15:38:22 by gschwand         ###   ########.fr        #
+#    Updated: 2024/09/27 14:40:22 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC		:=	main.c							\
 			env/env_setup.c					\
 			env/env_setup2.c				\
 			env/env_utils.c					\
+			env/debug.c 					\
 			setup/setup_shell.c				\
 			setup/setup_signal.c			\
 			token/debugging.c				\
