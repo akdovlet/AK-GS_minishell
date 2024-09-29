@@ -6,15 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 19:46:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:34:19 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
 #include "AST.h"
-#include "token.h"
-#include "setup.h"
+#include "exec.h"
 
 void	interactive_shell(t_data *data)
 {
@@ -26,7 +25,7 @@ void	interactive_shell(t_data *data)
 	err = 0;
 	while (1)
 	{
-		line = readline(CYAN "minishell$> " RESET);
+		line = readline("minishell$> ");
 		if (!line)
 		{
 			printf("exit\n");

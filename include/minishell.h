@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 15:16:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:29:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,19 +166,18 @@ typedef struct s_ast
 
 typedef struct s_data
 {
-	int			status;
-	bool		pipeline;
-	char		*hardpath;
-	t_ast		*ast_root;
-	t_pidlst	*pidlst;
-	t_fdlst		*fdlst;
-	t_env		*env;
-	t_env		*export;
-	struct sigaction sa;
-	struct termios	term;
+	int					status;
+	bool				pipeline;
+	char				*hardpath;
+	t_ast				*ast_root;
+	t_pidlst			*pidlst;
+	t_fdlst				*fdlst;
+	t_env				*env;
+	t_env				*export;
+	struct sigaction	sa;
+	struct termios		term;
 }	t_data;
 
-int		exec_recursion(t_ast *ast, t_data *data);
 void	clear_exit(t_data *data, int code);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:57:43 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/23 21:35:56 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:39:36 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	clear_exit(t_data *data, int code)
 {
 	ast_free(data->ast_root);
 	env_clear(&data->env);
+	env_clear(&data->export);
 	fdlst_clear(&data->fdlst);
 	pidlst_clear(&data->pidlst);
 	free(data->hardpath);

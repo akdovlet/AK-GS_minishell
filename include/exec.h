@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 11:34:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:29:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int			ft_builtins(t_ast *ast, t_data *data);
 t_pidlst	*ft_lstnew_pidlst(pid_t pid);
 void	ft_lstadd_back_pidlst(t_pidlst **lst, t_pidlst *new);
 void	pidlst_clear(t_pidlst **lst);
+
+int		exec_recursion(t_ast *ast, t_data *data);
 
 // exec_bin.c
 int ft_exec_bin(t_ast *ast, t_data *data);
