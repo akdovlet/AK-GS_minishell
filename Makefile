@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/27 18:10:11 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/09/29 15:51:40 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC		:=	main.c							\
 			env/env_setup.c					\
 			env/env_setup2.c				\
 			env/env_utils.c					\
+			env/debug.c 					\
 			setup/setup_shell.c				\
 			setup/setup_signal.c			\
 			token/debugging.c				\
@@ -47,6 +48,7 @@ SRC		:=	main.c							\
 			token/type_manager.c			\
 			token/word_manager.c			\
 			builtins/cd.c					\
+			builtins/cd2.c					\
 			builtins/pwd.c					\
 			builtins/echo.c					\
 			builtins/export.c				\
@@ -55,6 +57,7 @@ SRC		:=	main.c							\
 			builtins/unset.c				\
 			builtins/env.c					\
 			builtins/exit.c					\
+			builtins/exit2.c				\
 			expand/expand.c					\
 			expand/expand_split.c			\
 			expand/expand_files.c			\
@@ -68,6 +71,7 @@ SRC		:=	main.c							\
 			expand/lst_file_utils3.c		\
 			expand/sort_files.c 			\
 			expand/wildcard.c				\
+			expand/wildcard_first_cmd.c		\
 			expand/wildcard_utils.c			\
 			exec/command_node.c				\
 			exec/command_utils.c			\

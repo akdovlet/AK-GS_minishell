@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 19:08:12 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:10:56 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ int	check_export_env(t_env *env, char *str)
 	char	*key_tmp;
 
 	if (check_alnum_str(str) != 1)
-		return (0);
+		return (ft_dprintf(2, "minishell: export: `%s': not a valid identifier\n",
+				str), 1);
 	key_tmp = ft_strndup(str, ft_strchr(str, '=') - str);
 	if (!key_tmp)
 		return (1);
 	node = ft_check_key(&env, key_tmp);
+	free(key_tmp);
 	if (!node)
 	{
 		node = env_new(str);
@@ -62,6 +64,7 @@ int	export_of_value(t_env *export, char *str)
 	if (!key_tmp)
 		return (1);
 	node = ft_check_key(&export, key_tmp);
+	free(key_tmp);
 	if (!node)
 	{
 		node = env_new(str);
@@ -83,7 +86,8 @@ int	check_export_export(t_env *export, char *str)
 
 	i = check_alnum_str(str);
 	if (!i)
-		return (0);
+		return (ft_dprintf(2, "minishell: export: `%s': not a valid identifier\n",
+				str), 1);
 	else if (i == 2)
 	{
 		if (check_key_export(export, str))

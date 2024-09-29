@@ -6,11 +6,12 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 15:43:51 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:04:24 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+#include "exec.h"
 
 void	free_tab(char **tab)
 {
@@ -79,6 +80,12 @@ t_files	*expand_wildcard(t_files **files, char *str)
 	if (!files_tmp)
 		return (ft_free_lst_files(files), NULL);
 	files_tmp = sort_files(files_tmp, str);
+	if (!files_tmp)
+	{
+		files_tmp = ft_lstnew_files_dup(str);
+		if (!files_tmp)
+			return (ft_free_lst_files(files), NULL);
+	}
 	ft_lst_add_back_files(files, files_tmp);
 	return (*files);
 }
@@ -93,7 +100,7 @@ char	**ft_wildcard(char **tab_cmd)
 	i = 0;
 	while (tab_cmd[i])
 	{
-		if (ft_find_chr(tab_cmd[i], '*'))
+		if (ft_find_chr_exec(tab_cmd[i], '*') == 1)
 			files = expand_wildcard(&files, tab_cmd[i]);
 		else
 		{

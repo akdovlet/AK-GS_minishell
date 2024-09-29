@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 17:28:31 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:39:58 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_env	*ft_last(t_env *lst);
 void	env_add_back(t_env **lst, t_env *new);
 char	*copy_key(char *str);
 t_env	*env_new(char *var);
+char *add_dquotes(char *str);
+t_env	*export_new(char *var);
 
 // env_setup.c
 char	*env_join_keyvalue2(char *key, char *value);
@@ -46,5 +48,8 @@ void	env_print(t_env *lst);
 void	env_clear(t_env **lst);
 t_env	*ft_check_key(t_env **env, char *key);
 int		ft_lstsize_env(t_env *lst);
+
+// debug.c
+void	print_lst_env(t_env *env);
 
 #endif

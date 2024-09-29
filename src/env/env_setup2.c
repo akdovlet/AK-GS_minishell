@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:40:42 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 17:39:36 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:10:23 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ int	export_default_setup(t_data *data)
 
 	if (lstdup_env(&data->export, data->env))
 		return (1);
-	new = env_new_key(ft_strdup("OLDPWD"), NULL);
+	new = ft_check_key(&data->export, "OLDPWD");
 	if (!new)
-		return (1);
-	env_add_back(&data->export, new);
+	{
+		new = env_new_key(ft_strdup("OLDPWD"), NULL);
+		if (!new)
+			return (1);
+		env_add_back(&data->export, new);
+	}
 	ft_sort_alpha(&data->export);
 	return (0);
 }

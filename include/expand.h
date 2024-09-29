@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 18:09:37 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:52:15 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void				ft_strlcat_files(char *dst, const char *src, size_t lenres);
 
 // wildcard.c
 char				**ft_wildcard(char **tab_cmd);
+t_files				*expand_wildcard(t_files **files, char *str);
 void				free_tab(char **tab);
 
 // wildcard_utils.c
@@ -79,6 +80,9 @@ char				**expand_first_cmd(char **tab_cmd, t_data *data);
 // expand_first_cmd2.c
 t_files				*tab_to_lst_files(t_files **files, char **tab);
 char				**strdup_tab(char **tab);
+
+// wildcard_first_cmd.c
+char				**ft_wildcard_first_cmd(char **cmd);
 
 char	*exit_status_to_char(void);
 char	*expand_filename(char *str, t_env *env);

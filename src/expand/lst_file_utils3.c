@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:39:17 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 15:33:24 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:38:01 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	creat_node_n_add_back(t_files **files, char *tmp)
 	t_files	*new;
 
 	if (!tmp)
-		return (perror("minishell: ft_strndup failed"), 1);
-	new = ft_lstnew_files_dup(tmp);
+		return (perror("minishell: ft_strndup"), 1);
+	new = ft_lstnew_files(tmp);
 	if (!new)
 		return (1);
 	ft_lst_add_back_files(files, new);
@@ -49,17 +49,19 @@ char	**ft_lst_to_tab(t_files **files)
 	int		i;
 
 	tmp = *files;
+	if (!tmp)
+		return (NULL);
 	i = lst_size_files(files);
 	tab = malloc(sizeof(char *) * (i + 1));
 	if (!tab)
-		return (perror("malloc"), NULL);
+		return (perror("minishell: ft_lst_to_tab"), NULL);
 	i = 0;
 	tmp = *files;
 	while (tmp)
 	{
 		tab[i] = ft_strdup(tmp->name);
 		if (!tab[i])
-			return (perror("malloc"), NULL);
+			return (NULL);
 		tmp = tmp->next;
 		i++;
 	}
@@ -83,7 +85,7 @@ char	*write_files(t_files *files)
 	}
 	res = ft_calloc(sizeof(char), lenres + 1);
 	if (!res)
-		return (perror("malloc"), NULL);
+		return (perror("minishell: ft_calloc"), NULL);
 	tmp = files;
 	while (tmp)
 	{

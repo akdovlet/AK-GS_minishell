@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:14:48 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/20 18:52:25 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:24:59 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ int ft_exec_bin(t_ast *ast, t_data *data)
     }
     else
     {
-		// signal_wait_state();
         new = ft_lstnew_pidlst(pid);
         if (!new)
             return (1);

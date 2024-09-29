@@ -6,15 +6,13 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 19:34:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:53:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "expand.h"
 
-// renvoie une liste chainee qui sera plug dans
-// la liste chainee de la commande
 static char	*extract_var_name(char *str, int *i)
 {
 	int	j;
@@ -72,10 +70,28 @@ int	copy_var(char *str, int *i, t_files **files, t_data *data)
 	if (!var_name)
 		return (1);
 	value = get_var_value(var_name, data);
-	if (!value)
-		return (free(var_name), 2);
+	// if (!value)
+	// {
+	// 	return (free(var_name), 2);
+	// }
 	result = create_and_add_file(value, files);
 	return (free(var_name), result);
+}
+
+int check_str_var(char *str)
+{
+	int	len1;
+	int	len2;
+
+	len1 = 0;
+	while (str[len1])
+		len1++;
+	len2 = 1;
+	while (str[len2] && (ft_isalnum(str[len2]) || str[len2] == '_'))
+		len2++;
+	if (len1 != len2)
+		return (1);
+	return (0);
 }
 
 int	check_var(char *str, t_data *data)
@@ -85,11 +101,15 @@ int	check_var(char *str, t_data *data)
 	t_env	*node;
 
 	i = 0;
-	if (str[1] == '?')
+	if (!ft_isalpha(str[1]))
+		return (0);
+	if (check_str_var(str))
 		return (0);
 	var_name = extract_var_name(str, &i);
 	if (!var_name)
 		return (1);
+	if (!ft_isalpha(var_name[1]))
+		return (free(var_name), 0);
 	node = ft_check_key(&data->env, var_name);
 	free(var_name);
 	if (!node)

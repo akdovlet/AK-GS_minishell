@@ -6,20 +6,54 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:06:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/27 15:30:54 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:52:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "minishell.h"
 
+// recode la meme fonction que env_join_keyvalue mais sans i = - 1 et j = -1
+char	*env_join_keyvalue2(char *key, char *value)
+{
+	int		i;
+	int		j;
+	char	*fusion;
+
+	i = 0;
+	j = 0;
+	fusion = malloc(sizeof(char) * ((ft_strlen(key) + (ft_strlen(value) + 2))));
+	if (!fusion)
+		return (perror("minishell: env_join_keyvalue2"), NULL);
+	while (key[i])
+	{
+		fusion[i] = key[i];
+		i++;
+	}
+	fusion[i++] = '=';
+	if (value)
+	{
+		while (value[j])
+		{
+			fusion[i + j] = value[j];
+			j++;
+		}
+	}
+	fusion[i + j] = '\0';
+	return (fusion);
+}
+
 t_env	*env_new_key(char *key, char *value)
 {
 	t_env	*new;
 
+	if (!key)
+		return (perror("minishell: ft_strdup"), NULL);
+	if (!value)
+		return (NULL);
 	new = malloc(sizeof(t_env));
 	if (!new)
-		return (NULL);
+		return (free(key), free(value), perror("minishell: env_new_key"), NULL);
 	new->key = key;
 	new->value = value;
 	new->next = NULL;
@@ -30,7 +64,7 @@ bool	env_default_setup(t_data *data)
 {
 	t_env	*new;
 
-	new = env_new_key(ft_strdup("PWD"), getcwd(NULL, 0));
+	new = env_new_key(ft_strdup("PWD"), ft_strdup(getcwd(NULL, 0)));
 	if (!new)
 		return (1);
 	env_add_back(&data->env, new);
@@ -40,7 +74,7 @@ bool	env_default_setup(t_data *data)
 	env_add_back(&data->env, new);
 	data->hardpath = ft_strdup(HARDPATH);
 	if (!data->hardpath)
-		return (1);
+		return (perror("minishell: ft_strdup"), 1);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 11:36:05 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:27:30 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	modif_oldpwd(t_env **env)
 	t_env	*tmp;
 
 	tmp = ft_check_key(env, "OLDPWD");
+	if (tmp == NULL)
+		return (0);
 	free(tmp->value);
 	tmp->value = getcwd(NULL, 0);
 	if (tmp->value == NULL)
@@ -29,6 +31,8 @@ static int	modif_pwd(t_env **env)
 	t_env	*tmp;
 
 	tmp = ft_check_key(env, "PWD");
+	if (tmp == NULL)
+		return (0);
 	free(tmp->value);
 	tmp->value = getcwd(NULL, 0);
 	if (tmp->value == NULL)
@@ -91,8 +95,8 @@ int	cd(char **args, t_env **env)
 	{
 		if (modif_oldpwd(env))
 			return (1);
-		if (chdir(getenv("HOME")))
-			return (perror("minishell: cd failed"), 1);
+		if (go_home(env))
+			return (1);
 		if (modif_pwd(env))
 			return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 16:02:32 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:44:06 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ static int	copy_dquotes(char *str, int *i, t_files **files, t_data *data)
 	return (0);
 }
 
+int check_decla_var(char *str)
+{
+	if (str[0] == '$' && (ft_isalpha(str[1]) || str[1] == '?'))
+		return (1);
+	return (0);
+}
+
 int	tri_char(char *str, int *i, t_files **files, t_data *data)
 {
 	if (str[*i] == '\'')
@@ -67,7 +74,7 @@ int	tri_char(char *str, int *i, t_files **files, t_data *data)
 		if (copy_dquotes(str, i, files, data))
 			return (1);
 	}
-	else if (str[*i] == '$')
+	else if (check_decla_var(str + *i))
 	{
 		if (copy_var(str, i, files, data) == 1)
 			return (1);
@@ -84,7 +91,7 @@ int	expand_str(char *str, t_data *data, t_files **files)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'' || str[i] == '\"' || str[i] == '$')
+		if (str[i] == '\'' || str[i] == '\"' || check_decla_var(str + i))
 		{
 			if (creat_node_n_add_back_if_str(files, ft_strndup(str + j, i - j)))
 				return (1);

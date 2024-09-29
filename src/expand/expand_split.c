@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:35:52 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 17:42:28 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:52:30 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ t_files	*ft_split_to_list(char *str)
 	char	*word;
 
 	head = NULL;
+	if (!str)
+		return (NULL);
 	while (*str)
 	{
 		while (*str && ft_whitespace(*str))

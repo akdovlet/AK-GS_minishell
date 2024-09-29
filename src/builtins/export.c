@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 19:08:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:11:55 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	print_env_lst(t_env *lst)
 	while (lst)
 	{
 		if (lst->value)
-			printf("export %s=%s\n", lst->key, lst->value);
+			printf("export %s=\"%s\"\n", lst->key, lst->value);
 		else
 			printf("export %s\n", lst->key);
 		lst = lst->next;

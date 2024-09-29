@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   cd2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 14:18:24 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 14:46:48 by gschwand         ###   ########.fr       */
+/*   Created: 2024/09/26 14:27:13 by gschwand          #+#    #+#             */
+/*   Updated: 2024/09/26 14:27:27 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	ft_env(char **argv, t_env *env)
+int	go_home(t_env **env)
 {
-	if (argv[1])
-		ft_dprintf(STDERR_FILENO, "minishell: env: too many arguments\n");
-	else
+	t_env	*tmp;
+
+	tmp = ft_check_key(env, "HOME");
+	if (tmp == NULL)
 	{
-		while (env)
-		{
-			printf("%s=%s\n", env->key, env->value);
-			env = env->next;
-		}
+		ft_dprintf(2, "minishell: cd: HOME not set\n");
+		return (1);
 	}
+	if (chdir(tmp->value))
+		return (perror("minishell: cd failed"), 1);
 	return (0);
 }
