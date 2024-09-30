@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/29 15:51:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:24:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,6 @@ int	execute_prog(t_ast *ast, t_data *data)
 	pid_t		pid;
 	t_pidlst	*new;
 
-	ast->cmd = expand_tab_of_cmd(ast->cmd, data);
-	if (!ast->cmd)
-		return (perror("minishell: command_node"), 1);
-	if (ast->cmd[1])
-	{
-		ast->cmd = ft_wildcard(ast->cmd);
-		if (!ast->cmd)
-			return (1);
-	}
 	pid = fork();
 	if (pid < 0)
 		return (perror("minishell: execute_prog"), 1);

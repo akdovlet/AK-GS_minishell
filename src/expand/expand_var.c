@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/29 15:53:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:25:39 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*get_var_value(char *var_name, t_data *data)
 			return (NULL);
 		return (value);
 	}
-	node = ft_check_key(&data->env, var_name);
+	node = env_get_node(data->env, var_name);
 	if (!node)
 		return (NULL);
 	return (node->value);
@@ -110,7 +110,7 @@ int	check_var(char *str, t_data *data)
 		return (1);
 	if (!ft_isalpha(var_name[1]))
 		return (free(var_name), 0);
-	node = ft_check_key(&data->env, var_name);
+	node = env_get_node(data->env, var_name);
 	free(var_name);
 	if (!node)
 		return (1);

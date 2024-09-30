@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:37:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 18:55:54 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/30 19:09:29 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 int	*g_state;
 
-void	setup_shell(t_data	*data, char	**env)
+int	setup_shell(t_data	*data, char	**env)
 {
 	*data = (t_data){};
 	g_state = &data->status;
-	env_setup(data, env);
+	if (env_setup(data, env))
+		return (1);
 	setup_signals(data);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:41:40 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 17:14:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:14:44 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 t_ast	*ast_newcmd(t_cmdlst **lst);
 t_ast	*ast_newop(t_ast *left, t_type type, t_ast *right);
 t_ast	*ast_newredir(t_type type, char *filename, int fd);
-t_ast	*ast_newredir_push_root(t_ast *redir_next, t_type type, char *filename);
 t_ast	*ast_newpipe(t_ast *left, t_ast *right);
 t_ast	*ast_newsubshell(t_ast *next);
 

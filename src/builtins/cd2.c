@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 14:27:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 14:27:27 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:24:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	go_home(t_env **env)
 {
 	t_env	*tmp;
 
-	tmp = ft_check_key(env, "HOME");
+	tmp = env_get_node(*env, "HOME");
 	if (tmp == NULL)
 	{
 		ft_dprintf(2, "minishell: cd: HOME not set\n");

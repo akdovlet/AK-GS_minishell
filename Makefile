@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/09/29 15:51:40 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/09/30 17:28:25 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,6 @@ SRC		:=	main.c							\
 			expand/wildcard_utils.c			\
 			exec/command_node.c				\
 			exec/command_utils.c			\
-			exec/exec_bin.c 				\
 			exec/exec_cmd.c 				\
 			exec/exec_pipe.c 				\
 			exec/exec.c 					\

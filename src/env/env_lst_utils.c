@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/30 15:34:47 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:56:05 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	*copy_key(char *str)
 t_env	*env_new(char *var)
 {
 	t_env	*node;
-	char *tmp;
 
 	node = malloc(sizeof(t_env));
 	if (!node)
@@ -82,8 +81,8 @@ t_env	*env_new(char *var)
 		return (NULL);
 	if (find_chr(var, '='))
 	{
-		tmp = ft_strdup(var + ft_strlen(node->key) + 1);
-		if (!tmp)
+		node->value = ft_strdup(var + ft_strlen(node->key) + 1);
+		if (!node->value)
 			return (perror("minishell: ft_strdup"), NULL);
 	}
 	else

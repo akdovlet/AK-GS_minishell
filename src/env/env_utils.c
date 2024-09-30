@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 16:39:42 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:46:32 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ char	*env_get_value(t_env *env, char *key)
 	{
 		if (!ft_strcmp(env->key, key))
 			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+t_env	*env_get_node(t_env *env, char *key)
+{
+	while (env)
+	{
+		if (!ft_strcmp(env->key, key))
+			return (env);
 		env = env->next;
 	}
 	return (NULL);
@@ -47,33 +58,4 @@ void	env_clear(t_env **lst)
 		free((*lst));
 		*lst = tmp;
 	}
-}
-
-t_env	*ft_check_key(t_env **env, char *key)
-{
-	t_env	*tmp;
-
-	tmp = *env;
-	while (tmp)
-	{
-		if (!ft_strcmp(tmp->key, key))
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
-int	ft_lstsize_env(t_env *lst)
-{
-	int		i;
-	t_env	*tmp;
-
-	i = 0;
-	tmp = lst;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
 }

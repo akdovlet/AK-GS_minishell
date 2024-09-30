@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 18:29:57 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 16:10:56 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:25:22 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_export_env(t_env *env, char *str)
 	key_tmp = ft_strndup(str, ft_strchr(str, '=') - str);
 	if (!key_tmp)
 		return (1);
-	node = ft_check_key(&env, key_tmp);
+	node = env_get_node(env, key_tmp);
 	free(key_tmp);
 	if (!node)
 	{
@@ -44,7 +44,7 @@ int	check_key_export(t_env *export, char *str)
 {
 	t_env	*node;
 
-	node = ft_check_key(&export, str);
+	node = env_get_node(export, str);
 	if (!node)
 	{
 		node = env_new(str);
@@ -63,7 +63,7 @@ int	export_of_value(t_env *export, char *str)
 	key_tmp = ft_strndup(str, ft_strchr(str, '=') - str);
 	if (!key_tmp)
 		return (1);
-	node = ft_check_key(&export, key_tmp);
+	node = env_get_node(export, key_tmp);
 	free(key_tmp);
 	if (!node)
 	{

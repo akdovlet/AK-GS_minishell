@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 14:27:30 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:25:04 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	modif_oldpwd(t_env **env)
 {
 	t_env	*tmp;
 
-	tmp = ft_check_key(env, "OLDPWD");
+	tmp = env_get_node(*env, "OLDPWD");
 	if (tmp == NULL)
 		return (0);
 	free(tmp->value);
@@ -30,7 +30,7 @@ static int	modif_pwd(t_env **env)
 {
 	t_env	*tmp;
 
-	tmp = ft_check_key(env, "PWD");
+	tmp = env_get_node(*env, "PWD");
 	if (tmp == NULL)
 		return (0);
 	free(tmp->value);

@@ -6,13 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:12:54 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/30 15:59:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/30 19:23:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "exec.h"
 #include "minishell.h"
+#include "AST.h"
 
 int	env_len(t_env *env)
 {
@@ -53,7 +54,6 @@ char	**env_copy_to_char_arr(t_env *env)
 t_env	*env_new_shlvl(char *var)
 {
 	t_env	*node;
-	char	*tmp;
 	int		lvl;
 
 	lvl = 0;
@@ -63,11 +63,13 @@ t_env	*env_new_shlvl(char *var)
 	node->key = copy_key(var);
 	if (!node->key)
 		return (NULL);
-	if (find_chr(var, '='))
+	if (ft_strchr(var, '='))
 	{
 		lvl = ft_atoi(var + ft_strlen(node->key) + 1);
 		lvl++;
 		node->value = ft_itoa(lvl);
+		if (!node->value)
+			return (free(node->key), free(node), NULL);
 	}
 	else
 		node->value = NULL;
@@ -75,7 +77,7 @@ t_env	*env_new_shlvl(char *var)
 	return (node);
 }
 
-bool	env_copy(t_env **cpy, char **env)
+int	env_copy(t_env **cpy, char **env)
 {
 	int		i;
 	int		check;
@@ -85,9 +87,11 @@ bool	env_copy(t_env **cpy, char **env)
 	check = 0;
 	while (env[i])
 	{
-		if (!check && ft_strncmp(env[i], "SHLVL=", 7))
+		if (!check && !ft_strncmp(env[i], "SHLVL=", 6))
 		{
 			new = env_new_shlvl(env[i]);
+			if (!new)
+				return (env_clear(cpy), 1);
 			check = 1;
 		}
 		else

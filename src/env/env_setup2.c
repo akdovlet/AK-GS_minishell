@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:40:42 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/30 15:35:43 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:23:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ void	ft_sort_alpha(t_env **env)
 int	export_default_setup(t_data *data)
 {
 	t_env	*new;
+	char	*tmp;
 
-	if (lstdup_env(&data->export, data->env))
+	if (env_lstdup(&data->export, data->env))
 		return (1);
-	new = ft_check_key(&data->export, "OLDPWD");
-	if (!new)
+	tmp = env_get_value(data->export, "OLDPWD");
+	if (!tmp)
 	{
 		new = env_new_key(ft_strdup("OLDPWD"), NULL);
 		if (!new)
@@ -60,9 +61,9 @@ int	export_default_setup(t_data *data)
 int	env_export_default_setup(t_data *data)
 {
 	if (env_default_setup(data))
-		return (1);
+		return (env_clear(&data->env), 1);
 	if (export_default_setup(data))
-		return (1);
+		return (env_clear(&data->env), env_clear(&data->export), 1);
 	return (0);
 }
 
@@ -71,17 +72,13 @@ int	env_export_copy(t_data *data, char **env)
 	if (env_copy(&data->env, env))
 		return (1);
 	if (export_default_setup(data))
-		return (1);
+		return (env_clear(&data->env), env_clear(&data->export), 1);
 	return (0);
 }
 
-bool	env_setup(t_data *data, char **env)
+int	env_setup(t_data *data, char **env)
 {
 	if (!env[0])
-	{
-		if (env_export_default_setup(data))
-			return (1);
-		return (0);
-	}
+		return (env_export_default_setup(data));
 	return (env_export_copy(data, env));
 }

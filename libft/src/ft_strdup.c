@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:51:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/01/03 21:00:57 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:02:50 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s)
 	char	*dup;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	dup = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!dup)
 		return (NULL);

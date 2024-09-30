@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/29 15:52:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:28:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char				**strdup_tab(char **tab);
 
 // wildcard_first_cmd.c
 char				**ft_wildcard_first_cmd(char **cmd);
+int					ft_find_chr_exec(char *str, char c);
 
 char	*exit_status_to_char(void);
 char	*expand_filename(char *str, t_env *env);
