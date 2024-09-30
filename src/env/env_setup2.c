@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_setup2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:40:42 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 16:10:23 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:35:43 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int	env_export_default_setup(t_data *data)
 
 int	env_export_copy(t_data *data, char **env)
 {
-	data->env = NULL;
-	data->export = NULL;
 	if (env_copy(&data->env, env))
 		return (1);
 	if (export_default_setup(data))

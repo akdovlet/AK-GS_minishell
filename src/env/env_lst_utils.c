@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:50:24 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/27 16:11:04 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:34:47 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ t_env	*env_new(char *var)
 		tmp = ft_strdup(var + ft_strlen(node->key) + 1);
 		if (!tmp)
 			return (perror("minishell: ft_strdup"), NULL);
-		node->value = remove_quotes(tmp);
-		if (!node->value)
-			return (NULL);
 	}
 	else
 		node->value = NULL;
