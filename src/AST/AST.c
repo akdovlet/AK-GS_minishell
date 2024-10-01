@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 13:59:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:26:19 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_ast	*parse_cmd(t_token **tk)
 			return (NULL);
 		if (new->type != SUBSHELL)
 			new = ast_newsubshell(new);
-		if ((*tk)->type == PARENTHESIS_R)
+		if (*tk && (*tk)->type == PARENTHESIS_R)
 			eat_token(tk);
 	}
 	return (new);

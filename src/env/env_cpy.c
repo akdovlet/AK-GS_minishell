@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:12:54 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/30 19:23:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:28:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,12 @@ t_env	*env_new_shlvl(char *var)
 	t_env	*node;
 	int		lvl;
 
-	lvl = 0;
 	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
 	node->key = copy_key(var);
 	if (!node->key)
-		return (NULL);
+		return (free(node), NULL);
 	if (ft_strchr(var, '='))
 	{
 		lvl = ft_atoi(var + ft_strlen(node->key) + 1);

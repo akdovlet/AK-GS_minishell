@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/26 18:47:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:34:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	hd_expand(t_token *tk, t_env *env, int tty)
 	char	*expansion;
 
 	line_count = 0;
+	expansion = NULL;
 	while (++line_count)
 	{
 		write(tty, "> ", 2);
@@ -120,7 +121,6 @@ int	here_doc(t_token *tk, t_env *env)
 	int		tty;
 	int		err;
 
-	err = 0;
 	tty = open("/dev/tty", O_RDWR);
 	if (tty == -1)
 		return (ft_dprintf(2, "minishell: %s\n", strerror(errno), 0));
