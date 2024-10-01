@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 16:57:56 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:17:50 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*copy_word(char *str, int *i)
 	char	*dup;
 
 	j = word_len(str, i);
-	dup = malloc(sizeof(char) * j + 1);
+	dup = malloc(sizeof(char) * (j + 1));
 	if (!dup)
 	{
 		ft_dprintf(STDERR_FILENO, \
