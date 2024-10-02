@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/29 15:29:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:19:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ add_history*/
 # define YELLOW  "\x1b[33m"
 # define BLUE    "\x1b[34m"
 # define MAGENTA "\x1b[35m"
-# define CYAN    "\x1b[36;1m"
-# define RESET   "\x1b[0m"
+# define CYAN    "\001\x1b[36;1m\002"
+# define RESET   "\001\x1b[0m\002"
 
 # define HARDPATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 # define SYNTAX_ERR "minishell: syntax error near unexpected token `%s'\n"

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:38:30 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 19:18:13 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 16:28:38 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int	exec_recursion(t_ast *ast, t_data *data)
 {
 	if (ast->type == PIPE_NODE)
-		ft_pipe_recursion(ast, data);
+		pipe_node(ast, data);
 	if (ast->type == CMD)
 		command_node(ast, data);
 	if (ast->type == WAIT_NODE)

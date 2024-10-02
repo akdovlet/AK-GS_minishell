@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/29 15:29:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 16:28:38 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		hard_path_check(char *cmd);
 int exec_recursion(t_ast *ast, t_data *data);
 
 // exec_pipe.c
-int			ft_pipe_recursion(t_ast *ast, t_data *data);
+int			pipe_node(t_ast *ast, t_data *data);
 
 // exec_cmd.c
 int			ft_is_builtins(char *cmd);

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/21 15:58:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 16:28:38 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	right_pipe_setup(t_data *data, int pipe_fd[2], int backup_fd[2])
 	return (close(pipe_fd[0]), 0);
 }
 
-int	ft_pipe_recursion(t_ast *ast, t_data *data)
+int	pipe_node(t_ast *ast, t_data *data)
 {
 	int	pipe_fd[2];
 	int	backup_fd[2];

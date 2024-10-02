@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 16:04:24 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:52:04 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_files	*sort_files(t_files *files, char *str)
 	ft_lstcomp_wildcard(&files, str);
 	if (!files)
 	{
-		tmp = ft_lstnew_files_dup(str);
+		tmp = ft_lstnew_files(str);
 		if (!files)
 			return (NULL);
 		files = tmp;
@@ -115,5 +115,6 @@ char	**ft_wildcard(char **tab_cmd)
 	tab_cmd = ft_lst_to_tab(&files);
 	if (!tab_cmd)
 		return (NULL);
+
 	return (tab_cmd);
 }

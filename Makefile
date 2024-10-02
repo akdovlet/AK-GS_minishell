@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/10/01 17:25:14 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/10/02 17:30:02 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,6 +129,9 @@ val: all
 
 full: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes ./${NAME}
+
+infile: all
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes  <infile ./${NAME}
 
 re: fclean all
 
