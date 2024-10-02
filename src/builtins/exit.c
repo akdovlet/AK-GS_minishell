@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:04:41 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 16:36:44 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:31:07 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static int	check_only_digit(char *str)
 // Fonction pour gérer les erreurs d'argument non numérique
 static int	handle_numeric_argument_error(char *arg, t_data *data)
 {
-	printf("exit\n");
+	if (!data->fork)
+		ft_dprintf(2, "exit\n");
 	ft_dprintf(2, "minishell: exit: %s: numeric argument required\n", arg);
 	return (clear_exit(data, 2), 2);
 }
@@ -45,7 +46,8 @@ static int	handle_numeric_argument_error(char *arg, t_data *data)
 // Fonction pour gérer le cas de trop d'arguments
 static int	handle_too_many_arguments(t_data *data)
 {
-	printf("exit\n");
+	if (!data->fork)
+		ft_dprintf(2, "exit\n");
 	ft_dprintf(2, "minishell: exit: too many arguments\n");
 	data->status = 127;
 	return (127);
@@ -59,7 +61,8 @@ static int	handle_exit_with_argument(char *arg, t_data *data)
 	if (check_only_digit(arg))
 		return (handle_numeric_argument_error(arg, data));
 	exit_code = (unsigned char)ft_atoi(arg);
-	printf("exit\n");
+	if (!data->fork)
+		ft_dprintf(2, "exit\n");
 	clear_exit(data, exit_code);
 	return (exit_code);
 }
@@ -75,7 +78,8 @@ int	ft_exit(char **tab, t_data *data)
 	}
 	if (tab[1])
 		return (handle_exit_with_argument(tab[1], data));
-	printf("exit\n");
+	if (!data->fork)
+		ft_dprintf(2, "exit\n");
 	clear_exit(data, data->status);
 	return (0);
 }

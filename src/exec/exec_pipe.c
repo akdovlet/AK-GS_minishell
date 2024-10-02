@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/02 16:28:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:28:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,16 @@ int	pipe_node(t_ast *ast, t_data *data)
 		fdlst_clear(&data->fdlst);
 		return (-1);
 	}
-	data->pipeline = true;
+	data->fork = true;
 	data->status = exec_recursion(ast->pipe_left, data);
 	if (right_pipe_setup(data, pipe_fd, backup_fd))
 	{
 		fdlst_clear(&data->fdlst);
-		data->pipeline = false;
+		data->fork = false;
 		return (-1);
 	}
 	data->status = exec_recursion(ast->pipe_right, data);
-	data->pipeline = false;
+	data->fork = false;
 	dup2(backup_fd[0], STDIN_FILENO);
 	close(backup_fd[0]);
 	fdlst_clear(&data->fdlst);

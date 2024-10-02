@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 19:34:32 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:28:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int ft_fork_builtins(t_ast *ast, t_data *data)
 
 int ft_builtins(t_ast *ast, t_data *data)
 {
-    if (data->pipeline == 0)
+    if (data->fork == 0)
         ft_exec_builtins(ast, data);
     else
         ft_fork_builtins(ast, data);
