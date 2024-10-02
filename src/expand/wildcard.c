@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/02 17:52:04 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:17:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	del_files_hidden(t_files **files)
 	t_files	*tmp;
 	t_files	*node;
 
-	tmp = *files;
 	node = *files;
 	while (*files && (*files)->name[0] == '.')
 	{

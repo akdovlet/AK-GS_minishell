@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/24 13:47:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:11:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*copy_value(char *str, int *i, bool (*f)(int))
 	int		j;
 	char	*dup;
 
-	j = 0;
 	dup = malloc(sizeof(char) * 3);
 	if (!dup)
 		return (NULL);

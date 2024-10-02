@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 20:22:08 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:13:28 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	interactive_shell(t_data *data)
 	int		err;
 
 	tk = NULL;
-	err = 0;
 	while (1)
 	{
 		line = readline(CYAN"minishell$> "RESET);

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/27 21:15:52 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:13:05 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	backup(t_type type)
 
 	if (type == OUT || type == APPEND)
 		backup = dup(STDOUT_FILENO);
-	if (type == IN || type == HERE_DOC)
+	else
 		backup = dup(STDIN_FILENO);
 	return (backup);
 }
