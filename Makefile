@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/10/02 17:30:02 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/10/03 17:20:39 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ SRC		:=	main.c							\
 			exec/command_node.c				\
 			exec/command_utils.c			\
 			exec/exec_cmd.c 				\
-			exec/exec_pipe.c 				\
+			exec/pipe_node.c 				\
 			exec/exec.c 					\
 			exec/operator.c 				\
 			exec/pidlst.c 					\

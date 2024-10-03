@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/03 12:09:31 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:19:34 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ add_history*/
 # include "libft.h"
 // lib for signals
 
-# define RED     "\x1b[31m"
-# define GREEN   "\x1b[32m"
-# define YELLOW  "\x1b[33m"
-# define BLUE    "\x1b[34m"
-# define MAGENTA "\x1b[35m"
+# define RED     "\001\x1b[31m\002"
+# define GREEN   "\001\x1b[32m\002"
+# define YELLOW  "\001\x1b[33m\002"
+# define BLUE    "\001\x1b[34m\002"
+# define MAGENTA "\001\x1b[35m\002"
 # define CYAN    "\001\x1b[36;1m\002"
 # define RESET   "\001\x1b[0m\002"
 

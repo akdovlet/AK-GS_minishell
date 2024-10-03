@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pipe.c                                        :+:      :+:    :+:   */
+/*   pipe_node.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/02 21:28:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/03 17:21:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	pipe_node(t_ast *ast, t_data *data)
 		data->fork = false;
 		return (-1);
 	}
+	data->fork = true;
 	data->status = exec_recursion(ast->pipe_right, data);
 	data->fork = false;
 	dup2(backup_fd[0], STDIN_FILENO);

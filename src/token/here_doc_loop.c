@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/01 17:34:13 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:32:14 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,18 +120,25 @@ int	here_doc(t_token *tk, t_env *env)
 	int		pipe_fd[2];
 	int		tty;
 	int		err;
+	pid_t	pid;
 
 	tty = open("/dev/tty", O_RDWR);
 	if (tty == -1)
 		return (ft_dprintf(2, "minishell: %s\n", strerror(errno), 0));
 	if (pipe(pipe_fd) == -1)
-		return (close(tty), 0);
+		return (close(tty), perror("minishell: here_doc"), 0);
 	tk->fd = pipe_fd[1];
-	*g_state = 69;
-	if (ft_strchr(tk->value, '\'') || ft_strchr(tk->value, '"'))
-		err = hd_no_expand(tk, tty);
-	else
-		err = hd_expand(tk, env, tty);
+	pid = fork();
+	if (!pid)
+	{
+		signal(SIGINT, SIG_DFL);
+		close(pipe_fd[0]);
+		if (ft_strchr(tk->value, '\'') || ft_strchr(tk->value, '"'))
+			err = hd_no_expand(tk, tty);
+		else
+			err = hd_expand(tk, env, tty);
+		
+	}
 	close(pipe_fd[1]);
 	close(tty);
 	tk->fd = pipe_fd[0];
