@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 21:28:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:09:31 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,23 @@ add_history*/
 # define RESET   "\001\x1b[0m\002"
 
 # define HARDPATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-# define SYNTAX_ERR "minishell: syntax error near unexpected token `%s'\n"
-# define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
-# define PARENTHESIS_ERR "minishell: unexpected newline while looking for closing `%c'\n"
+# define SYNTAX_ERR "minishell: syntax error near \
+unexpected token `%s'\n"
+# define NEWLINE_ERR "minishell: unexpected newline \
+while looking for matching `%c'\n"
+# define PARENTHESIS_ERR "minishell: unexpected newline while \
+looking for closing `%c'\n"
 
-extern int *g_state;
+extern int	*g_state;
 
 typedef struct s_env
 {
 	char			*key;
 	char			*value;
-	struct	s_env	*next;
+	struct s_env	*next;
 }	t_env;
 
-typedef	enum	e_node
+typedef enum e_node
 {
 	CMD,
 	OPERATOR,
@@ -79,7 +82,7 @@ typedef	enum	e_node
 	WAIT_NODE
 }	t_node;
 
-typedef enum	e_token
+typedef enum e_token
 {
 	PIPE = '|',
 	PARENTHESIS_L = '(',
@@ -96,16 +99,16 @@ typedef enum	e_token
 	HERE_DOC = 1004
 }	t_type;
 
-typedef	struct s_token
+typedef struct s_token
 {
 	int				type;
 	int				fd;
 	char			*value;
 	struct s_token	*next;
-	struct s_token	*prev; 
+	struct s_token	*prev;
 }	t_token;
 
-typedef	struct s_cmdlist
+typedef struct s_cmdlist
 {
 	t_type				type;
 	char				*str;
@@ -113,7 +116,7 @@ typedef	struct s_cmdlist
 	struct s_cmdlist	*next;
 }	t_cmdlst;
 
-typedef	struct	s_pidlst
+typedef struct s_pidlst
 {
 	pid_t			pid;
 	struct s_pidlst	*next;
@@ -128,7 +131,7 @@ typedef struct s_fdlst
 
 typedef struct s_ast
 {
-	t_node type;
+	t_node	type;
 	union
 	{
 		struct
@@ -146,7 +149,7 @@ typedef struct s_ast
 			t_type			redir_type;
 			char			*redir_filename;
 			int				redir_fd;
-			struct	s_ast	*redir_next;
+			struct s_ast	*redir_next;
 		};
 		struct
 		{

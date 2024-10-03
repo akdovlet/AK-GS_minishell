@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 21:13:28 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:30:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,25 @@ void	non_interactive_shell(t_data *data)
 			exec_recursion(data->ast_root, data);
 		ast_free(data->ast_root);
 	}
+}
+
+void	flag_c(char *line, t_data *data)
+{
+	t_token	*tk;
+	int		err;
+
+	tk = NULL;
+	err = tokenize(line, &tk, data->env);
+	if (err)
+	{
+		data->status = err;
+		return (token_clear(&tk));
+	}
+	data->ast_root = parse(&tk);
+	token_clear(&tk);
+	if (data->ast_root)
+		data->status = exec_recursion(data->ast_root, data);
+	ast_free(data->ast_root);
 }
 
 void	execution_loop(t_data *data)

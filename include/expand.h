@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/02 17:49:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:40:34 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPAND_H
 # define EXPAND_H
-
 # include "minishell.h"
+
 typedef struct s_files
 {
 	char			*name;
@@ -51,7 +51,6 @@ void				ft_free_lst_files(t_files **files);
 void				ft_free_lst_files_expand(t_files **files);
 t_files				*ft_recover_files(void);
 char				*write_files_expand(t_files *files);
-t_files *files_lstnew(char *str);
 int					creat_node_n_add_back_if_str(t_files **files, char *str);
 
 // lst_file_utils3.c
@@ -85,8 +84,8 @@ char				**strdup_tab(char **tab);
 char				**ft_wildcard_first_cmd(char **cmd);
 int					ft_find_chr_exec(char *str, char c);
 
-char	*exit_status_to_char(void);
-char	*expand_filename(char *str, t_env *env);
-void	files_clear(t_files **head);
+char				*exit_status_to_char(void);
+char				*expand_filename(char *str, t_env *env);
+void				files_clear(t_files **head);
 
 #endif

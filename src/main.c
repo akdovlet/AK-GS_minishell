@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 17:23:23 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:30:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@
 #include "setup.h"
 #include "exec.h"
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
-	(void)av;
 	t_data	data;
 
-	if (ac != 1)
-		return (1);
 	if (setup_shell(&data, env))
 		return (1);
+	if (ac > 2 && !ft_strcmp(av[1], "-c"))
+		return (flag_c(av[2], &data), data.status);
 	execution_loop(&data);
 	env_clear(&data.env);
 	env_clear(&data.export);
