@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/03 12:11:51 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/04 19:28:15 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		grammar_check(t_token *tk);
 #                                  here_doc_loop.c                            #
 #############################################################################*/
 
-int		here_doc(t_token *tk, t_env *env);
+int		here_doc(t_token *tk, t_data *data, int pipe_fd[2]);
 void	cpy_to_buffer(char *value, char *buffer, int *j);
 
 /*#############################################################################
@@ -57,7 +57,7 @@ int		hd_no_expand(t_token *tk, int tty);
 #                                  here_doc_manager.c                         #
 #############################################################################*/
 
-int		here_doc_manager(t_token *tk, t_env *env);
+int		here_doc_manager(t_token *tk, t_data *data);
 char	*remove_quotes(char *str);
 
 /*#############################################################################
@@ -112,7 +112,7 @@ void	token_clear(t_token **tk);
 #                                  tokenize.c                                 #
 #############################################################################*/
 
-int		tokenize(char *line, t_token **tk, t_env *env);
+int		tokenize(char *line, t_token **tk, t_data *data);
 
 /*#############################################################################
 #                                  type_manager.c                             #
@@ -130,6 +130,6 @@ int		quote_len(char *str, int *i, int symbol);
 int		quote_management(char *dup, int *j, char *str, int *i);
 int		word_len(char *str, int *i);
 char	*copy_word(char *str, int *i);
-int		word_management(char *line, int *i, t_token **tk, t_env *env);
+int		word_management(char *line, int *i, t_token **tk, t_data * data);
 
 #endif

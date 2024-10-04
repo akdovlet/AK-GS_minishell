@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:56:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/25 16:35:23 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/04 19:45:33 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,36 @@ char	*remove_quotes(char *str)
 	return (dup);
 }
 
-int	here_doc_manager(t_token *tk, t_env *env)
+int	here_doc_parent(pid_t pid)
 {
-	if (!here_doc(tk, env))
+	int	status;
+
+	status = 0;
+	signal(SIGINT, SIG_IGN);
+	waitpid(pid, status, NULL);
+	if (WIFSIGNALED(status))
+		return (1);
+	if (WIFEXITED(status))
+		return (0);
+}
+
+int	here_doc_manager(t_token *tk, t_data *data)
+{
+	int		status;
+	int		pipe_fd[2];
+	pid_t	pid;
+
+	if (pipe(pipe_fd) == -1)
+		return (perror("minishell: here document"), 0);
+	pid = fork();
+	if (!pid)
+	{
+		status = here_doc(tk, data, pipe_fd);
+		exit(status);
+	}
+	else
+		status = here_doc_parent(pid);
+	if (status)
 		return (0);
 	return (1);
 }

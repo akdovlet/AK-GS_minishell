@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_file_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:37:59 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 15:21:53 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:40:31 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	creat_node_n_add_back_if_str(t_files **files, char *tmp)
 
 	if (!tmp)
 		return (ft_free_lst_files_expand(files),
-			perror("minishell: ft_strndup"), 1);
+			perror("minishell: ft_strndup2"), 1);
 	if (tmp[0] == '\0')
 		return (free(tmp), 0);
 	new = ft_lstnew_files(tmp);

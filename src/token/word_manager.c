@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/01 12:17:50 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:01:55 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*copy_word(char *str, int *i)
 	return (dup);
 }
 
-int	word_management(char *line, int *i, t_token **tk, t_env *env)
+int	word_management(char *line, int *i, t_token **tk, t_data *data)
 {
 	t_token	*new;
 
@@ -121,7 +121,7 @@ int	word_management(char *line, int *i, t_token **tk, t_env *env)
 	if (!token_add_back_grammar(tk, new))
 		return (0);
 	if (new->prev && new->prev->type == HERE_DOC)
-		if (!here_doc_manager(new, env))
+		if (!here_doc_manager(new, data))
 			return (0);
 	return (1);
 }

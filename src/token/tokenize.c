@@ -6,14 +6,17 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:31:45 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 16:16:46 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:45:04 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
 
-int	dispatcher(char *line, int *i, t_token **tk, t_env *env)
+
+// echo salut && | pwd | grep home
+// WORD:echo->WORD:salut->OPERATOR:&&->OPERATOR:|
+int	dispatcher(char *line, int *i, t_token **tk, t_data *data)
 {
 	if (is_operator(line[*i]))
 		if (!operator_management(line, i, tk))
@@ -25,19 +28,19 @@ int	dispatcher(char *line, int *i, t_token **tk, t_env *env)
 		if (!parenthesis_management(line, i, tk))
 			return (0);
 	if (is_word(line[*i]))
-		if (!word_management(line, i, tk, env))
+		if (!word_management(line, i, tk, data))
 			return (0);
 	return (1);
 }
 
-int	tokenize(char *line, t_token **tk, t_env *env)
+int	tokenize(char *line, t_token **tk, t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		if (!dispatcher(line, &i, tk, env))
+		if (!dispatcher(line, &i, tk, data))
 			return (token_clear(tk), 2);
 		if (line[i] && is_blank(line[i]))
 			i++;

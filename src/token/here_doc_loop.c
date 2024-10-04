@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/03 18:32:14 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/04 19:45:12 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,10 @@ int	hd_expand(t_token *tk, t_env *env, int tty)
 	return (0);
 }
 
-int	here_doc(t_token *tk, t_env *env)
+int	here_doc(t_token *tk, t_data *data, int pipe_fd[2])
 {
-	int		pipe_fd[2];
 	int		tty;
 	int		err;
-	pid_t	pid;
 
 	tty = open("/dev/tty", O_RDWR);
 	if (tty == -1)
@@ -128,21 +126,13 @@ int	here_doc(t_token *tk, t_env *env)
 	if (pipe(pipe_fd) == -1)
 		return (close(tty), perror("minishell: here_doc"), 0);
 	tk->fd = pipe_fd[1];
-	pid = fork();
-	if (!pid)
-	{
-		signal(SIGINT, SIG_DFL);
-		close(pipe_fd[0]);
-		if (ft_strchr(tk->value, '\'') || ft_strchr(tk->value, '"'))
-			err = hd_no_expand(tk, tty);
-		else
-			err = hd_expand(tk, env, tty);
-		
-	}
+	close(pipe_fd[0]);
+	if (ft_strchr(tk->value, '\'') || ft_strchr(tk->value, '"'))
+		err = hd_no_expand(tk, tty);
+	else
+		err = hd_expand(tk, data->env, tty);
 	close(pipe_fd[1]);
 	close(tty);
 	tk->fd = pipe_fd[0];
-	if (err)
-		return (0);
-	return (1);
+	return (err);
 }

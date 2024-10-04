@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/03 18:19:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:59:55 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	interactive_shell(t_data *data)
 			break ;
 		}
 		add_history(line);
-		err = tokenize(line, &tk, data->env);
+		err = tokenize(line, &tk, data);
 		if (err)
 			data->status = err;
 		free(line);
@@ -56,7 +56,7 @@ void	non_interactive_shell(t_data *data)
 		line = readline(NULL);
 		if (!line)
 			break ;
-		if (tokenize(line, &tk, data->env) == 2)
+		if (tokenize(line, &tk, data) == 2)
 		{
 			data->status = 2;
 			ft_dprintf(2, "minishell: line %d: `%s'\n", line_count, line);
@@ -78,7 +78,7 @@ void	flag_c(char *line, t_data *data)
 	int		err;
 
 	tk = NULL;
-	err = tokenize(line, &tk, data->env);
+	err = tokenize(line, &tk, data);
 	if (err)
 	{
 		data->status = err;
