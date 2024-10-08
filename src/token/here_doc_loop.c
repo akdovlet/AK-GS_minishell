@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/04 19:45:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:18:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,29 +88,31 @@ char	*line_expand(char *line, t_env *env)
 	return (dup);
 }
 
-int	hd_expand(t_token *tk, t_env *env, int tty)
+int	hd_expand(t_token *tk, t_env *env)
 {
 	int		line_count;
 	char	*line;
 	char	*expansion;
 
 	line_count = 0;
-	expansion = NULL;
 	while (++line_count)
 	{
-		write(tty, "> ", 2);
-		line = get_next_line(tty);
-		if (!line && *g_state != 130)
-			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 1);
-		if (*g_state == 130)
-			return (free(line), 1);
-		if (hd_strcmp(tk->value, line))
+		line = readline("> ");
+		if (!line)
+			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 0);
+		if (!ft_strcmp(tk->value, line))
 			return (free(line), 0);
 		if (ft_strchr(line, '$'))
+		{
 			expansion = line_expand(line, env);
-		write(tk->fd, expansion, ft_strlen(expansion));
-		free(line);
-		free(expansion);
+			write(tk->fd, expansion, ft_strlen(expansion));
+			free(expansion);
+		}
+		else
+		{
+			write(tk->fd, line, ft_strlen(line));	
+			free(line);
+		}
 	}
 	return (0);
 }
@@ -122,17 +124,15 @@ int	here_doc(t_token *tk, t_data *data, int pipe_fd[2])
 
 	tty = open("/dev/tty", O_RDWR);
 	if (tty == -1)
-		return (ft_dprintf(2, "minishell: %s\n", strerror(errno), 0));
-	if (pipe(pipe_fd) == -1)
-		return (close(tty), perror("minishell: here_doc"), 0);
+		return (ft_dprintf(2, "minishell: %s\n", strerror(errno), 1));
 	tk->fd = pipe_fd[1];
 	close(pipe_fd[0]);
+	dup2(tty, STDIN_FILENO);
 	if (ft_strchr(tk->value, '\'') || ft_strchr(tk->value, '"'))
-		err = hd_no_expand(tk, tty);
+		err = hd_no_expand(tk);
 	else
-		err = hd_expand(tk, data->env, tty);
+		err = hd_expand(tk, data->env);
 	close(pipe_fd[1]);
 	close(tty);
-	tk->fd = pipe_fd[0];
 	return (err);
 }

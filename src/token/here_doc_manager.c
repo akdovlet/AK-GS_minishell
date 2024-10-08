@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:56:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/04 19:45:33 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:48:09 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,13 @@ int	here_doc_parent(pid_t pid)
 
 	status = 0;
 	signal(SIGINT, SIG_IGN);
-	waitpid(pid, status, NULL);
+	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
-		return (1);
-	if (WIFEXITED(status))
-		return (0);
+		return (128 + WTERMSIG(status));
+	return (0);
 }
 
-int	here_doc_manager(t_token *tk, t_data *data)
+int	here_doc_manager(t_token *tk, t_data *data, t_token **head)
 {
 	int		status;
 	int		pipe_fd[2];
@@ -110,12 +109,19 @@ int	here_doc_manager(t_token *tk, t_data *data)
 	pid = fork();
 	if (!pid)
 	{
+		signal(SIGINT, SIG_DFL);
+		close(pipe_fd[0]);
 		status = here_doc(tk, data, pipe_fd);
-		exit(status);
+		close(pipe_fd[1]);
+		token_clear(head);
+		clear_exit(data, status);
 	}
 	else
+	{
+		close(pipe_fd[1]);
 		status = here_doc_parent(pid);
-	if (status)
-		return (0);
-	return (1);
+		tk->fd = pipe_fd[0];
+		sigaction(SIGINT, &data->sa, NULL);
+	}
+	return (status);
 }

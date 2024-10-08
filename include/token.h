@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/04 19:28:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:19:24 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define TOKEN_H
 
 # include "minishell.h"
-# define HD_ERROR "\nminishell: warning: here-document at \
+# define HD_ERROR "minishell: warning: here-document at \
 line %d delimited by end-of-file (wanted `%s')\n"
 
 /*#############################################################################
@@ -51,13 +51,13 @@ void	cpy_to_buffer(char *value, char *buffer, int *j);
 #############################################################################*/
 
 bool	hd_strcmp(char *s1, char *s2);
-int		hd_no_expand(t_token *tk, int tty);
+int		hd_no_expand(t_token *tk);
 
 /*#############################################################################
 #                                  here_doc_manager.c                         #
 #############################################################################*/
 
-int		here_doc_manager(t_token *tk, t_data *data);
+int		here_doc_manager(t_token *tk, t_data *data, t_token **head);
 char	*remove_quotes(char *str);
 
 /*#############################################################################

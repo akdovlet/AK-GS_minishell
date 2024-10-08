@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/03 13:19:34 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:20:27 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ typedef struct s_token
 typedef struct s_cmdlist
 {
 	t_type				type;
-	char				*str;
 	int					fd;
+	char				*str;
 	struct s_cmdlist	*next;
 }	t_cmdlst;
 
