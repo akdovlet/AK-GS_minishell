@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/09 15:12:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:01:07 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	interactive_shell(t_data *data)
 			data->status = 130;
 			g_state = 0;
 		}
-		add_history(line);
+		if (line)
+			add_history(line);
 		err = tokenize(line, &tk, data);
 		if (err)
 			data->status = err;

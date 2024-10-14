@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/09 14:45:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:29:30 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,14 @@ int	hd_expand(t_token *tk, t_env *env)
 	line_count = 0;
 	while (++line_count)
 	{
+		if (g_state == 130)
+			return (130);
 		line = readline("> ");
+		if (g_state == 130)
+		{
+			free(line);
+			return (130);
+		}
 		if (!line)
 			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 0);
 		if (!ft_strcmp(tk->value, line))
@@ -113,18 +120,24 @@ int	here_doc(t_token *tk, t_data *data, int pipe_fd[2])
 {
 	int		tty;
 	int		err;
+	int		backup;
 
+	backup = dup(STDIN_FILENO);
 	tty = open("/dev/tty", O_RDWR);
 	if (tty == -1)
+	{
+		close(backup);
 		return (ft_dprintf(2, "minishell: %s\n", strerror(errno), 1));
+	}
 	tk->fd = pipe_fd[1];
-	close(pipe_fd[0]);
 	dup2(tty, STDIN_FILENO);
+	close(tty);
 	if (ft_strchr(tk->value, '\'') || ft_strchr(tk->value, '"'))
 		err = hd_no_expand(tk);
 	else
 		err = hd_expand(tk, data->env);
 	close(pipe_fd[1]);
-	close(tty);
+	dup2(backup, STDIN_FILENO);
+	close(backup);
 	return (err);
 }

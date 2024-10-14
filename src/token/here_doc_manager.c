@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:56:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/09 16:11:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:10:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,48 +88,35 @@ char	*remove_quotes(char *str)
 	return (dup);
 }
 
+int	exit_on_signal(void)
+{
+	g_state = 130;
+	write(STDERR_FILENO, "\n", 1);
+	rl_reset_after_signal();
+	return (130);
+}
+
 void	new_line(int sig)
 {
 	(void)sig;
-	write(1, "\nTEST", 5);
+	rl_on_new_line();
+	rl_replace_line("", 0);
 }
 
-int	here_doc_parent(pid_t pid)
-{
-	int	status;
 
-	status = 0;
-	signal(SIGINT, new_line);
-	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status))
-		return (128 + WTERMSIG(status));
-	return (0);
-}
-
-int	here_doc_manager(t_token *tk, t_data *data, t_token **head)
+int	here_doc_manager(t_token *tk, t_data *data)
 {
 	int		status;
 	int		pipe_fd[2];
-	pid_t	pid;
 
 	if (pipe(pipe_fd) == -1)
-		return (perror("minishell: here document"), 0);
-	pid = fork();
-	if (!pid)
-	{
-		signal(SIGINT, SIG_DFL);
-		close(pipe_fd[0]);
-		status = here_doc(tk, data, pipe_fd);
-		close(pipe_fd[1]);
-		token_clear(head);
-		clear_exit(data, status);
-	}
-	else
-	{
-		close(pipe_fd[1]);
-		status = here_doc_parent(pid);
-		tk->fd = pipe_fd[0];
-		sigaction(SIGINT, &data->sa, NULL);
-	}
+		return (perror("minishell: here document"), 1);
+	rl_catch_signals = 0;
+	signal(SIGINT, new_line);
+	rl_signal_event_hook = exit_on_signal;
+	status = here_doc(tk, data, pipe_fd);
+	close(pipe_fd[1]);
+	tk->fd = pipe_fd[0];
+	sigaction(SIGINT, &data->sa, NULL);
 	return (status);
 }

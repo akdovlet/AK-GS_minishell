@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/09 12:11:33 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:53:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	word_management(char *line, int *i, t_token **tk, t_data *data)
 		return (2);
 	if (new->prev && new->prev->type == HERE_DOC)
 	{
-		err = here_doc_manager(new, data, tk);
+		err = here_doc_manager(new, data);
 		if (err)
 			return (err);
 	}
