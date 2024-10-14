@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/08 12:05:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:11:33 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,26 +102,27 @@ char	*copy_word(char *str, int *i)
 
 int	word_management(char *line, int *i, t_token **tk, t_data *data)
 {
-	t_token	*new;
+	int		err;
+	t_token *new;
 
 	new = token_new(NULL);
 	if (!new)
 	{
 		ft_dprintf(STDERR_FILENO, \
 		"minishell: word_management: %s\n", strerror(errno));
-		return (0);
+		return (1);
 	}
 	new->type = WORD;
 	new->value = copy_word(line, i);
 	if (!new->value)
-	{
-		free(new);
-		return (0);
-	}
+		return (free(new), 1);
 	if (!token_add_back_grammar(tk, new))
-		return (0);
+		return (2);
 	if (new->prev && new->prev->type == HERE_DOC)
-		if (!here_doc_manager(new, data, tk))
-			return (0);
-	return (1);
+	{
+		err = here_doc_manager(new, data, tk);
+		if (err)
+			return (err);
+	}
+	return (0);
 }

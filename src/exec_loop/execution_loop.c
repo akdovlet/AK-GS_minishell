@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/08 14:55:39 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:12:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	interactive_shell(t_data *data)
 		{
 			ft_dprintf(STDERR_FILENO, "exit\n");
 			break ;
+		}
+		if (g_state == 130)
+		{
+			data->status = 130;
+			g_state = 0;
 		}
 		add_history(line);
 		err = tokenize(line, &tk, data);
@@ -56,7 +61,7 @@ void	non_interactive_shell(t_data *data)
 		line = readline(NULL);
 		if (!line)
 			break ;
-		if (tokenize(line, &tk, data) == 2)
+		if (tokenize(line, &tk, data))
 		{
 			data->status = 2;
 			ft_dprintf(2, "minishell: line %d: `%s'\n", line_count, line);
@@ -67,7 +72,7 @@ void	non_interactive_shell(t_data *data)
 		data->ast_root = parse(&tk);
 		token_clear(&tk);
 		if (data->ast_root)
-			exec_recursion(data->ast_root, data);
+			data->status = exec_recursion(data->ast_root, data);
 		ast_free(data->ast_root);
 	}
 }
@@ -78,6 +83,12 @@ void	flag_c(char *line, t_data *data)
 	int		err;
 
 	tk = NULL;
+	if (!line)
+	{
+		ft_dprintf(2, "minishell: -c: option requires arguments\n");
+		data->status = 2;
+		return ;
+	}
 	err = tokenize(line, &tk, data);
 	if (err)
 	{

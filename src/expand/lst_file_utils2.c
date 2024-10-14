@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:37:59 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/04 12:40:31 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:28:03 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ t_files	*ft_recover_files(void)
 		entry = readdir(dir);
 		if (!entry)
 			break ;
-		tmp = ft_lstnew_files_dup(entry->d_name);
+		tmp = files_new_dup(entry->d_name);
 		if (!tmp)
 		{
 			perror("minishell: ft_recover_files");
 			return (NULL);
 		}
-		ft_lst_add_back_files(&files, tmp);
+		files_add_back(&files, tmp);
 	}
 	closedir(dir);
 	return (files);
@@ -99,9 +99,9 @@ int	creat_node_n_add_back_if_str(t_files **files, char *tmp)
 			perror("minishell: ft_strndup2"), 1);
 	if (tmp[0] == '\0')
 		return (free(tmp), 0);
-	new = ft_lstnew_files(tmp);
+	new = files_new(tmp);
 	if (!new)
 		return (ft_free_lst_files_expand(files), 1);
-	ft_lst_add_back_files(files, new);
+	files_add_back(files, new);
 	return (0);
 }

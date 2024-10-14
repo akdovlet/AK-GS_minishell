@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:56:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/08 14:48:09 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:11:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ char	*remove_quotes(char *str)
 
 	j = 0;
 	i = 0;
+	if (!str)
+		return (NULL);
 	dup = malloc(sizeof(char) * (redir_len(str) + 1));
 	if (!dup)
 		return (NULL);
@@ -86,12 +88,18 @@ char	*remove_quotes(char *str)
 	return (dup);
 }
 
+void	new_line(int sig)
+{
+	(void)sig;
+	write(1, "\nTEST", 5);
+}
+
 int	here_doc_parent(pid_t pid)
 {
 	int	status;
 
 	status = 0;
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, new_line);
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 		return (128 + WTERMSIG(status));

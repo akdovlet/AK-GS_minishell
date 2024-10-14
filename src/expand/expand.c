@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/02 17:52:07 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:37:15 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	copy_squote(char *str, int *i, t_files **files)
 	while (str[j] && str[j] != '\'')
 		j++;
 	tmp = ft_strndup(str + *i + 1, j - *i - 1);
-	if (ft_new_lst_add_back_files(files, ft_lstnew_files(tmp)))
+	if (files_add_back_new(files, files_new(tmp)))
 		return (1);
 	*i = j + 1;
 	return (0);

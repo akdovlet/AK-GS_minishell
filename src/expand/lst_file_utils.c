@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst_file_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 15:19:55 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:37:15 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-int	ft_new_lst_add_back_files(t_files **alst, t_files *new)
+int	files_add_back_new(t_files **alst, t_files *new)
 {
 	t_files	*tmp;
 
@@ -30,7 +30,7 @@ int	ft_new_lst_add_back_files(t_files **alst, t_files *new)
 	return (0);
 }
 
-void	ft_lst_add_back_files(t_files **alst, t_files *new)
+void	files_add_back(t_files **alst, t_files *new)
 {
 	t_files	*tmp;
 
@@ -45,14 +45,14 @@ void	ft_lst_add_back_files(t_files **alst, t_files *new)
 	tmp->next = new;
 }
 
-t_files *ft_lstnew_files(char *str)
+t_files *files_new(char *str)
 {
     t_files *new;
 
     new = malloc(sizeof(t_files));
     if (!new)
     {
-        perror("minishell: ft_lstnew_files");
+        perror("minishell: files_new");
         return (NULL);
     }
     new->name = str;
@@ -60,20 +60,20 @@ t_files *ft_lstnew_files(char *str)
     return (new);
 }
 
-t_files *ft_lstnew_files_dup(char *str)
+t_files *files_new_dup(char *str)
 {
     t_files *new;
 
     new = malloc(sizeof(t_files));
     if (!new)
     {
-        perror("minishell: ft_lstnew_files_dup");
+        perror("minishell: files_new_dup");
         return (NULL);
     }
     new->name = ft_strdup(str);
     if (!new->name)
     {
-        perror("minishell: ft_lstnew_files_dup");
+        perror("minishell: files_new_dup");
         free(new);
         return (NULL);
     }

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/08 14:18:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:45:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ char	*find_var(char *line, int *i, t_env *env)
 	(*i)++;
 	index = *i;
 	j = 0;
-	if (line[*i] == '?')
-		return (exit_status_to_char());
 	while (line[index] && is_variable(line[index++]))
 		j++;
 	key = malloc(sizeof(char) * j + 1);
@@ -102,17 +100,11 @@ int	hd_expand(t_token *tk, t_env *env)
 			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 0);
 		if (!ft_strcmp(tk->value, line))
 			return (free(line), 0);
-		if (ft_strchr(line, '$'))
-		{
-			expansion = line_expand(line, env);
-			write(tk->fd, expansion, ft_strlen(expansion));
-			free(expansion);
-		}
-		else
-		{
-			write(tk->fd, line, ft_strlen(line));	
-			free(line);
-		}
+		expansion = line_expand(line, env);
+		write(tk->fd, expansion, ft_strlen(expansion));
+		write(tk->fd, "\n", 1);
+		free(expansion);
+		free(line);
 	}
 	return (0);
 }

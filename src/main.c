@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/08 12:03:55 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:10:14 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av, char **env)
 
 	if (setup_shell(&data, env))
 		return (1);
-	if (ac > 3 && !ft_strcmp(av[1], "-c"))
+	if (ac > 1 && !ft_strcmp(av[1], "-c"))
 		return (flag_c(av[2], &data), data.status);
 	execution_loop(&data);
 	env_clear(&data.env);

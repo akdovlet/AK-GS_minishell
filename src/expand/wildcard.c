@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/02 21:17:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:28:03 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_files	*sort_files(t_files *files, char *str)
 	ft_lstcomp_wildcard(&files, str);
 	if (!files)
 	{
-		tmp = ft_lstnew_files(str);
+		tmp = files_new(str);
 		if (!files)
 			return (NULL);
 		files = tmp;
@@ -81,11 +81,11 @@ t_files	*expand_wildcard(t_files **files, char *str)
 	files_tmp = sort_files(files_tmp, str);
 	if (!files_tmp)
 	{
-		files_tmp = ft_lstnew_files_dup(str);
+		files_tmp = files_new_dup(str);
 		if (!files_tmp)
 			return (ft_free_lst_files(files), NULL);
 	}
-	ft_lst_add_back_files(files, files_tmp);
+	files_add_back(files, files_tmp);
 	return (*files);
 }
 
@@ -103,10 +103,10 @@ char	**ft_wildcard(char **tab_cmd)
 			files = expand_wildcard(&files, tab_cmd[i]);
 		else
 		{
-			tmp = ft_lstnew_files_dup(tab_cmd[i]);
+			tmp = files_new_dup(tab_cmd[i]);
 			if (!tmp)
 				return (NULL);
-			ft_lst_add_back_files(&files, tmp);
+			files_add_back(&files, tmp);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 21:13:05 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:41:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,16 @@ int	redir_node(t_ast *ast, t_data *data)
 	int		backup_fd;
 	char	*expansion;
 
-	backup_fd = backup(ast->redir_type);
 	if (ast->redir_type != HERE_DOC)
 	{
-		expansion = expand_filename(ast->redir_filename, data->env);
+		expansion = expand_filename(ast->redir_filename, data);
+		expansion = remove_quotes(expansion);
 		if (!expansion)
 			return (ft_dprintf(2, "minishell: %s: ambiguous redirect\n", ast->redir_filename), 1);
 		free(ast->redir_filename);
 		ast->redir_filename = expansion;
 	}
+	backup_fd = backup(ast->redir_type);
 	fdlst_add_front(&data->fdlst, fdlst_new(backup_fd, true));
 	if (ast->redir_type == OUT || ast->redir_type == APPEND)
 		data->status = redir_out(ast);

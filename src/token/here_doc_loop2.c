@@ -6,23 +6,13 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:38:19 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/08 14:19:03 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:08:34 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
 #include "expand.h"
-
-char	*exit_status_to_char(void)
-{
-	char *str;
-	
-	str = ft_itoa(*g_state);
-	if (str)
-		return (NULL);
-	return (str);
-}
 
 bool	hd_strcmp(char *s1, char *s2)
 {
@@ -56,6 +46,7 @@ int	hd_no_expand(t_token *tk)
 			break ;
 		}
 		write(tk->fd, line, ft_strlen(line));
+		write(tk->fd, "\n", 1);
 		free(line);
 	}
 	return (0);

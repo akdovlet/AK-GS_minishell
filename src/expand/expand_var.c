@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/30 17:25:39 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:26:44 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	create_and_add_file(char *value, t_files **files)
 	new = ft_split_to_list(value);
 	if (!new)
 		return (1);
-	ft_lst_add_back_files(files, new);
+	files_add_back(files, new);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/03 11:40:34 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:37:15 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void				print_tab(char **tab);
 void				ft_print_lst_files(t_files *files);
 
 // lst_file_utils.c
-t_files				*ft_lstnew_files(char *str);
-t_files				*ft_lstnew_files_dup(char *str);
+t_files				*files_new(char *str);
+t_files				*files_new_dup(char *str);
 void				ft_lstdelone_files(t_files **files, t_files *to_delete);
-int					ft_new_lst_add_back_files(t_files **alst, t_files *new);
-void				ft_lst_add_back_files(t_files **alst, t_files *new);
+int					files_add_back_new(t_files **alst, t_files *new);
+void				files_add_back(t_files **alst, t_files *new);
 
 // lst_file_utils2.c
 void				ft_free_lst_files(t_files **files);
@@ -84,8 +84,12 @@ char				**strdup_tab(char **tab);
 char				**ft_wildcard_first_cmd(char **cmd);
 int					ft_find_chr_exec(char *str, char c);
 
-char				*exit_status_to_char(void);
-char				*expand_filename(char *str, t_env *env);
+// expand_files.c
+void				dq_copy(char *str, int *i, t_data *data, t_files **lst);
+char				*expand_filename(char *str, t_data *data);
 void				files_clear(t_files **head);
+char				*files_join(t_files **lst);
+void				var_copy(char *str, int *i, t_data *data, t_files **lst);
+void				status_copy(int *i, t_data *data, t_files **head);
 
 #endif
