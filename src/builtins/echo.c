@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/25 17:53:50 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:50:30 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,12 @@ int	flag_n(char *str)
 static int	ft_echo_n(char **args)
 {
 	int	i;
-	int	j;
 
 	i = 2;
-	j = 0;
+	while (!flag_n(args[i]))
+		i++;
 	while (args[i])
 	{
-		if (!flag_n(args[i]) && !j)
-			i++;
-		else
-			j++;
 		ft_putstr_fd(args[i], 1);
 		if (args[i + 1])
 			ft_putstr_fd(" ", 1);
