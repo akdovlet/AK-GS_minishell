@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:56:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/14 17:10:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:08:43 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,25 +84,8 @@ char	*remove_quotes(char *str)
 			dup[j++] = str[i++];
 	}
 	dup[j] = '\0';
-	free(str);
 	return (dup);
 }
-
-int	exit_on_signal(void)
-{
-	g_state = 130;
-	write(STDERR_FILENO, "\n", 1);
-	rl_reset_after_signal();
-	return (130);
-}
-
-void	new_line(int sig)
-{
-	(void)sig;
-	rl_on_new_line();
-	rl_replace_line("", 0);
-}
-
 
 int	here_doc_manager(t_token *tk, t_data *data)
 {
@@ -111,10 +94,7 @@ int	here_doc_manager(t_token *tk, t_data *data)
 
 	if (pipe(pipe_fd) == -1)
 		return (perror("minishell: here document"), 1);
-	rl_catch_signals = 0;
-	signal(SIGINT, new_line);
-	rl_signal_event_hook = exit_on_signal;
-	status = here_doc(tk, data, pipe_fd);
+	status = here_doc(tk, pipe_fd);
 	close(pipe_fd[1]);
 	tk->fd = pipe_fd[0];
 	sigaction(SIGINT, &data->sa, NULL);

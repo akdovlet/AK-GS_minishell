@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:13:00 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/14 15:13:47 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:49:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ char	*expand_filename(char *str, t_data *data)
 
 	i = 0;
 	lst = NULL;
+	if (!str)
+		return (NULL);
 	while (str[i])
 	{
 		fprintf(stderr, "str[%d] is: %c\n", i, str[i]);

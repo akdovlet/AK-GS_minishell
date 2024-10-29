@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/03 12:26:42 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:49:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			fdlst_add_front(t_fdlst	**lst, t_fdlst *new);
 void		fdlst_close_in_child(t_fdlst *lst);
 
 //	redir_hd.c
-int			redir_hd(t_ast *ast);
+int			redir_hd(t_ast *ast, t_data *data);
 
 //	redir.c
 int			redir_node(t_ast *ast, t_data *data);
@@ -76,5 +76,7 @@ int			redir_node(t_ast *ast, t_data *data);
 // execution_loop.c
 void		execution_loop(t_data *data);
 void		flag_c(char *line, t_data *data);
+
+int         redir_expand(t_ast *ast, t_data *data);
 
 #endif

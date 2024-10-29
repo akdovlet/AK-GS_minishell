@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/14 16:29:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:10:05 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ char	*line_expand(char *line, t_env *env)
 
 	i = 0;
 	j = 0;
+	if (!line)
+		return (NULL);
 	buffer = malloc(sizeof(char) * 4096);
 	while (line[i])
 	{
@@ -116,7 +118,7 @@ int	hd_expand(t_token *tk, t_env *env)
 	return (0);
 }
 
-int	here_doc(t_token *tk, t_data *data, int pipe_fd[2])
+int	here_doc(t_token *tk, int pipe_fd[2])
 {
 	int		tty;
 	int		err;
@@ -132,10 +134,7 @@ int	here_doc(t_token *tk, t_data *data, int pipe_fd[2])
 	tk->fd = pipe_fd[1];
 	dup2(tty, STDIN_FILENO);
 	close(tty);
-	if (ft_strchr(tk->value, '\'') || ft_strchr(tk->value, '"'))
-		err = hd_no_expand(tk);
-	else
-		err = hd_expand(tk, data->env);
+	err = hd_loop(tk);
 	close(pipe_fd[1]);
 	dup2(backup, STDIN_FILENO);
 	close(backup);

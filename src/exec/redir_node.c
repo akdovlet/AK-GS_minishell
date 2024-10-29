@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/09 16:41:13 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:49:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,9 @@ void	restore_backup(int backup_fd, t_type type)
 int	redir_node(t_ast *ast, t_data *data)
 {
 	int		backup_fd;
-	char	*expansion;
 
-	if (ast->redir_type != HERE_DOC)
-	{
-		expansion = expand_filename(ast->redir_filename, data);
-		expansion = remove_quotes(expansion);
-		if (!expansion)
-			return (ft_dprintf(2, "minishell: %s: ambiguous redirect\n", ast->redir_filename), 1);
-		free(ast->redir_filename);
-		ast->redir_filename = expansion;
-	}
+	if (ast->redir_type != HERE_DOC && redir_expand(ast, data))
+		return (1);
 	backup_fd = backup(ast->redir_type);
 	fdlst_add_front(&data->fdlst, fdlst_new(backup_fd, true));
 	if (ast->redir_type == OUT || ast->redir_type == APPEND)
@@ -93,7 +85,7 @@ int	redir_node(t_ast *ast, t_data *data)
 		if (ast->redir_type == IN)
 			data->status = redir_in(ast);
 		else 
-			data->status = redir_hd(ast);
+			data->status = redir_hd(ast, data);
 	}
 	if (data->status != 0)
 		return (data->status);

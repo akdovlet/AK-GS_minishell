@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/14 15:53:28 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:58:03 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		grammar_check(t_token *tk);
 #                                  here_doc_loop.c                            #
 #############################################################################*/
 
-int		here_doc(t_token *tk, t_data *data, int pipe_fd[2]);
+int		here_doc(t_token *tk, int pipe_fd[2]);
 void	cpy_to_buffer(char *value, char *buffer, int *j);
 
 /*#############################################################################
@@ -51,7 +51,7 @@ void	cpy_to_buffer(char *value, char *buffer, int *j);
 #############################################################################*/
 
 bool	hd_strcmp(char *s1, char *s2);
-int		hd_no_expand(t_token *tk);
+int		hd_loop(t_token *tk);
 
 /*#############################################################################
 #                                  here_doc_manager.c                         #

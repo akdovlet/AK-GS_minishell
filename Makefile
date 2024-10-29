@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/10/09 17:12:12 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/10/29 16:58:51 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,7 @@ SRC		:=	main.c								\
 			exec/redir_hd.c						\
 			exec/redir_lst_clear.c				\
 			exec/redir_lst.c					\
+			exec/redir_node_utils.c				\
 			exec/redir_node.c					\
 			exec/path_utils.c 					\
 			exec/wait_pid.c						\
