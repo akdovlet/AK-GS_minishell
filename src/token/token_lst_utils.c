@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:38:15 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/01 12:17:08 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:40:47 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	token_clear(t_token **tk)
 	while (*tk)
 	{
 		tmp = (*tk)->next;
-		// if ((*tk)->fd != -1)
-		// 	close ((*tk)->fd);
+		if ((*tk)->fd != -1)
+			close ((*tk)->fd);
 		free((*tk)->value);
 		free((*tk));
 		*tk = tmp;

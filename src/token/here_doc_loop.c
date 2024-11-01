@@ -6,137 +6,79 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/29 17:10:05 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:46:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
-#include "expand.h"
-#include "env.h"
 
-char	*find_var(char *line, int *i, t_env *env)
-{
-	int		index;
-	int		j;
-	char	*key;
-	char	*value;
-
-	(*i)++;
-	index = *i;
-	j = 0;
-	while (line[index] && is_variable(line[index++]))
-		j++;
-	key = malloc(sizeof(char) * j + 1);
-	if (!key)
-		return (NULL);
-	j = 0;
-	while (line[*i] && is_variable(line[*i]))
-	{
-		key[j] = line[*i];
-		j++;
-		(*i)++;
-	}
-	key[j] = '\0';
-	value = env_get_value(env, key);
-	free(key);
-	return (value);
-}
-
-void	cpy_to_buffer(char *value, char *buffer, int *j)
-{
-	int	i;
-
-	i = 0;
-	if (!value)
-		return ;
-	while (value[i])
-	{
-		buffer[*j] = value[i];
-		(*j)++;
-		i++;
-	}
-}
-
-// cna start with underscore
-char	*line_expand(char *line, t_env *env)
-{
-	int		i;
-	int		j;
-	char	*dup;
-	char	*value;
-	char	*buffer;
-
-	i = 0;
-	j = 0;
-	if (!line)
-		return (NULL);
-	buffer = malloc(sizeof(char) * 4096);
-	while (line[i])
-	{
-		if (line[i] == '$' && (is_variable(line[i + 1]) || line[i + 1] == '?'))
-		{
-			value = find_var(line, &i, env);
-			cpy_to_buffer(value, buffer, &j);
-		}
-		else if (line[i])
-			buffer[j++] = line[i++];
-	}
-	buffer[j] = '\0';
-	dup = ft_strdup(buffer);
-	free(buffer);
-	return (dup);
-}
-
-int	hd_expand(t_token *tk, t_env *env)
+int	hd_loop(t_token *tk)
 {
 	int		line_count;
+	char	*delimiter;
 	char	*line;
-	char	*expansion;
 
 	line_count = 0;
+	delimiter = remove_quotes(tk->value);
+	if (!delimiter)
+		return (perror("minishell: hd_loop"), 1);
 	while (++line_count)
 	{
-		if (g_state == 130)
-			return (130);
 		line = readline("> ");
-		if (g_state == 130)
+		if (g_state == SIGINT)
 		{
 			free(line);
+			free(delimiter);
 			return (130);
 		}
 		if (!line)
-			return (ft_dprintf(2, HD_ERROR, line_count, tk->value), 0);
-		if (!ft_strcmp(tk->value, line))
-			return (free(line), 0);
-		expansion = line_expand(line, env);
-		write(tk->fd, expansion, ft_strlen(expansion));
+			return (ft_dprintf(2, HD_ERROR, line_count, delimiter), 0);
+		if (!ft_strcmp(delimiter, line))
+		{
+			free(line);
+			break ;
+		}
+		write(tk->fd, line, ft_strlen(line));
 		write(tk->fd, "\n", 1);
-		free(expansion);
 		free(line);
 	}
+	free(delimiter);
 	return (0);
+}
+
+int	rl_exit(void)
+{
+	if (g_state == SIGINT)
+	{
+		rl_replace_line("", 0);
+		rl_done = 1;
+	}
+	return (130);
+}
+
+void	set_signal(int sig)
+{
+	g_state = sig;
 }
 
 int	here_doc(t_token *tk, int pipe_fd[2])
 {
 	int		tty;
 	int		err;
-	int		backup;
 
-	backup = dup(STDIN_FILENO);
+	close(pipe_fd[0]);
 	tty = open("/dev/tty", O_RDWR);
 	if (tty == -1)
-	{
-		close(backup);
 		return (ft_dprintf(2, "minishell: %s\n", strerror(errno), 1));
-	}
 	tk->fd = pipe_fd[1];
 	dup2(tty, STDIN_FILENO);
 	close(tty);
+	signal(SIGINT, set_signal);
+	rl_outstream = stderr;
+	rl_event_hook = rl_exit;
 	err = hd_loop(tk);
+	rl_signal_event_hook = NULL;
 	close(pipe_fd[1]);
-	dup2(backup, STDIN_FILENO);
-	close(backup);
 	return (err);
 }

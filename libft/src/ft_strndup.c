@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:05:40 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/04 12:41:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:47:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strndup(char *src, int len)
 	i = 0;
 	dest = malloc(sizeof(char) * (len + 1));
 	if (!dest)
-		return (perror("here bruh"), NULL);
+		return (NULL);
 	while (i < len)
 	{
 		dest[i] = src[i];

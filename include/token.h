@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/29 16:58:03 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/31 20:18:52 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		hd_loop(t_token *tk);
 #                                  here_doc_manager.c                         #
 #############################################################################*/
 
-int		here_doc_manager(t_token *tk, t_data *data);
+int		here_doc_manager(t_token **head, char *line, t_token *tk, t_data *data);
 char	*remove_quotes(char *str);
 
 /*#############################################################################

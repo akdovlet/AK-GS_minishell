@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:37:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/14 17:07:47 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:48:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	setup_shell(t_data	*data, char	**env)
 	g_state = 0;
 	if (env_setup(data, env))
 		return (1);
-	rl_catch_signals = 0;
 	rl_outstream = stderr;
 	setup_signals(data);
 	return (0);

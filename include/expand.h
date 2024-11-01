@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/29 16:49:20 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/31 20:03:34 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ void				files_clear(t_files **head);
 char				*files_join(t_files **lst);
 void				var_copy(char *str, int *i, t_data *data, t_files **lst);
 void				status_copy(int *i, t_data *data, t_files **head);
-char				*line_expand(char *line, t_env *env);
+void				regular_copy(char *str, int *i, t_files **lst);
+char				*expand_hd(char *str, t_data *data);
+
 #endif
