@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 21:11:18 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/01 19:16:54 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	operator_management(char *str, int *i, t_token **tk)
 		"minishell: operator_management: %s\n", strerror(errno));
 		return (0);
 	}
-	*new = (t_token){};
 	if (str[*i] == '&')
 		new->type = and_check(str, *i);
 	else if (str[*i] == '|')

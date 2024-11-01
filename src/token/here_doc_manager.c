@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:56:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/01 18:50:42 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/01 19:29:42 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ int	here_doc_manager(t_token **head, char *line, t_token *tk, t_data *data)
 	{
 		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
-		fprintf(stderr, "status is: %d\n", status);
-		if (WIFSIGNALED(status))
-			fprintf(stderr, "test\n");
+		status = WEXITSTATUS(status);
 	}
 	close(pipe_fd[1]);
 	tk->fd = pipe_fd[0];
