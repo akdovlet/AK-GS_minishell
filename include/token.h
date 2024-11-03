@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/31 20:18:52 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/03 11:54:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	cpy_to_buffer(char *value, char *buffer, int *j);
 #############################################################################*/
 
 bool	hd_strcmp(char *s1, char *s2);
-int		hd_loop(t_token *tk);
+int		hd_loop(char *delimiter, t_token *tk);
 
 /*#############################################################################
 #                                  here_doc_manager.c                         #

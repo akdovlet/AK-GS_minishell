@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:24:46 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/31 20:09:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/03 12:16:58 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int	redir_in(t_ast *ast)
 		return (1);
 	}
 	if (dup2(fd, STDIN_FILENO) == -1)
+	{
+		close(fd);
 		return (ft_dprintf(STDERR_FILENO, "minishell: %s\n", strerror(errno)), 1);
+	}
 	close(fd);
 	return (0);
 }
@@ -85,7 +88,11 @@ int	redir_node(t_ast *ast, t_data *data)
 	else
 		data->status = redir_hd(ast, data);
 	if (data->status != 0)
+	{
+		fdlst_delete_node(&data->fdlst, backup_fd);
+		close(backup_fd);
 		return (data->status);
+	}
 	if (ast->redir_next)
 		data->status = exec_recursion(ast->redir_next, data);
 	restore_backup(backup_fd, ast->redir_type);

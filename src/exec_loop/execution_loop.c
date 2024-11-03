@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/14 17:01:07 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/03 13:15:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	interactive_shell(t_data *data)
 			ft_dprintf(STDERR_FILENO, "exit\n");
 			break ;
 		}
-		if (g_state == 130)
+		if (g_state == SIGINT)
 		{
 			data->status = 130;
 			g_state = 0;
@@ -49,6 +49,7 @@ void	interactive_shell(t_data *data)
 	}
 }
 
+// <Makefile <Makefile <Makefile <Makefile <<EOF <<EOF2 <<EOF3 <<EOF4 <<EOF5 <<EOF6 <<EOF7 <<EOF8 cat
 void	non_interactive_shell(t_data *data)
 {
 	char	*line;
