@@ -6,12 +6,13 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:36:44 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/31 20:02:29 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:21:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "expand.h"
+#include "exec.h"
 
 void	expand_content_here_document(t_ast *ast, t_data *data)
 {
@@ -19,18 +20,25 @@ void	expand_content_here_document(t_ast *ast, t_data *data)
 	char	*expand;
 	int		tmp_pipe[2];
 
-	pipe(tmp_pipe);
+	if (pipe(tmp_pipe) == -1)
+		return (perror("minishell: expand_content_here_document"));
 	while (1)
 	{
 		line = get_next_line(ast->redir_fd);
 		if (!line)
 			break ;
 		expand = expand_hd(line, data);
+		if (!expand)
+		{
+			free(line);
+			break ;
+		}
 		write(tmp_pipe[1], expand, ft_strlen(expand));
 		free(line);
 		free(expand);
 	}
 	close(ast->redir_fd);
+	fdlst_delete_node(&data->fdlst, ast->redir_fd);
 	ast->redir_fd = tmp_pipe[0];
 	close(tmp_pipe[1]);
 }

@@ -6,12 +6,13 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/31 20:22:54 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:52:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "token.h"
+#include "exec.h"
 
 int	quote_len(char *str, int *i, int symbol)
 {
@@ -121,6 +122,7 @@ int	word_management(char *line, int *i, t_token **tk, t_data *data)
 	if (new->prev && new->prev->type == HERE_DOC)
 	{
 		err = here_doc_manager(tk, line, new, data);
+		fdlst_add_front(&data->fdlst, fdlst_new(new->fd, true));
 		if (err)
 			return (err);
 	}

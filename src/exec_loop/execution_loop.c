@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/03 13:15:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:26:22 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	interactive_shell(t_data *data)
 		if (data->ast_root)
 			data->status = exec_recursion(data->ast_root, data);
 		ast_free(data->ast_root);
+		fdlst_close_in_child(data->fdlst);
+		fdlst_clear(&data->fdlst);
 	}
 }
 
