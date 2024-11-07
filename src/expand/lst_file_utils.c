@@ -6,13 +6,13 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:06:38 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/14 12:37:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:14:22 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-int	files_add_back_new(t_files **alst, t_files *new)
+int	files_addback_new(t_files **alst, t_files *new)
 {
 	t_files	*tmp;
 
@@ -30,7 +30,7 @@ int	files_add_back_new(t_files **alst, t_files *new)
 	return (0);
 }
 
-void	files_add_back(t_files **alst, t_files *new)
+void	files_addback(t_files **alst, t_files *new)
 {
 	t_files	*tmp;
 

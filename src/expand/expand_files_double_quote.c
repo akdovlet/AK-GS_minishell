@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:01:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/14 13:17:56 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:13:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	dq_copy_tmp(char *str, int *i, t_files **tmp)
 		}
 	}
 	dup[j] = '\0';
-	files_add_back(tmp, files_new(dup));
+	files_addback(tmp, files_new(dup));
 }
 
 void	dq_copy(char *str, int *i, t_data *data, t_files **lst)
@@ -83,7 +83,7 @@ void	dq_copy(char *str, int *i, t_data *data, t_files **lst)
 	fusion = files_join(&tmp_lst);
 	if (!fusion)
 		return ;
-	files_add_back(lst, files_new(fusion));
+	files_addback(lst, files_new(fusion));
 	if (str[*i] == '"')
 		(*i)++;
 }

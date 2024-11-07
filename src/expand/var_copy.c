@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:45:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/14 12:28:03 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:13:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	status_copy(int *i, t_data *data, t_files **head)
 
 	str = ft_itoa(data->status);
 	*i = (*i) + 2;
-	files_add_back(head, files_new(str));
+	files_addback(head, files_new(str));
 }
 
 void	var_copy(char *str, int *i, t_data *data, t_files **lst)
@@ -49,5 +49,5 @@ void	var_copy(char *str, int *i, t_data *data, t_files **lst)
 	free(key);
 	if (!value)
 		return ;
-	files_add_back(lst, files_new_dup(value));
+	files_addback(lst, files_new_dup(value));
 }

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:36:44 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/06 19:25:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:01:22 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	expand_content_here_document(t_ast *ast, t_data *data)
 		return (perror("minishell: expand_content_here_document"));
 	while (1)
 	{
-		fprintf(stderr, "in loop\n");
 		line = get_next_line(ast->redir_fd);
 		if (!line)
 			break ;

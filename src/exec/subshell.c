@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:20:00 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/06 19:18:17 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:57:50 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ void	subshell_child(t_ast *ast, t_data *data)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	fdlst_close_in_child(data->fdlst);
+	// fdlst_close_in_child(data->fdlst);
 	data->status = exec_recursion(ast->subshell_next, data);
-	fprintf(stderr, "here\n");
 	clear_exit(data, data->status);
 }
 

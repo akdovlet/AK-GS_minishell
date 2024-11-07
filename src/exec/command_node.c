@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/05 14:07:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:00:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,12 @@ int	command_node(t_ast *ast, t_data *data)
 	ast->cmd = ft_wildcard(ast->cmd);
 	if (!ast->cmd)
 		return (1);
+	fprintf(stderr, "%s\n", ast->cmd[0]);
+	if (!ast->cmd[0])
+	{
+		ft_dprintf(2, "minishell: %s: command not found\n", ast->cmd);
+		return (127);
+	}
 	if (ft_is_builtins(ast->cmd[0]))
 		return (ft_builtins(ast, data));
 	else

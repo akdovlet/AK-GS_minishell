@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/31 20:03:34 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:15:25 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void				ft_print_lst_files(t_files *files);
 t_files				*files_new(char *str);
 t_files				*files_new_dup(char *str);
 void				ft_lstdelone_files(t_files **files, t_files *to_delete);
-int					files_add_back_new(t_files **alst, t_files *new);
-void				files_add_back(t_files **alst, t_files *new);
+int					files_addback_new(t_files **alst, t_files *new);
+void				files_addback(t_files **alst, t_files *new);
 
 // lst_file_utils2.c
 void				ft_free_lst_files(t_files **files);
@@ -93,5 +93,6 @@ void				var_copy(char *str, int *i, t_data *data, t_files **lst);
 void				status_copy(int *i, t_data *data, t_files **head);
 void				regular_copy(char *str, int *i, t_files **lst);
 char				*expand_hd(char *str, t_data *data);
+void				files_eat(t_files **node);
 
 #endif
