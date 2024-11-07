@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/07 17:15:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 19:59:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,16 @@ char				*expand_filename(char *str, t_data *data);
 void				files_clear(t_files **head);
 char				*files_join(t_files **lst);
 void				var_copy(char *str, int *i, t_data *data, t_files **lst);
+void				var_copy_redir(char *str, int *i, t_data *data, t_files **lst);
 void				status_copy(int *i, t_data *data, t_files **head);
+void				sq_copy(char *str, int *i, t_files **lst);
 void				regular_copy(char *str, int *i, t_files **lst);
+void				dq_copy(char *str, int *i, t_data *data, t_files **lst);
 char				*expand_hd(char *str, t_data *data);
 void				files_eat(t_files **node);
+char				**build_cmd_array(t_files **head);
+void				files_addback_lst(t_files **main, t_files **sub);
+char				**expand_cmd(char **strs, t_data *data);
+void				files_remove_quotes(t_files *lst);
 
 #endif

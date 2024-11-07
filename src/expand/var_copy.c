@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_copy.c                                         :+:      :+:    :+:   */
+/*   var_copy_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,7 +24,7 @@ void	status_copy(int *i, t_data *data, t_files **head)
 	files_addback(head, files_new(str));
 }
 
-void	var_copy(char *str, int *i, t_data *data, t_files **lst)
+void	var_copy_redir(char *str, int *i, t_data *data, t_files **lst)
 {
 	int		j;
 	int		len;

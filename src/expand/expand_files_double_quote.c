@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:01:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 17:13:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 20:04:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	dq_copy(char *str, int *i, t_data *data, t_files **lst)
 	t_files	*tmp_lst;
 
 	tmp_lst = NULL;
-	while (str[*i])
+	while (str[*i] && str[*i] != '"')
 	{
 		if (str[*i] == '$' && is_variable(str[(*i) + 1]))
-			var_copy(str, i, data, &tmp_lst);
+			var_copy_redir(str, i, data, &tmp_lst);
 		else if (str[*i] == '$' && str[(*i) + 1] == '?')
 			status_copy(i, data, &tmp_lst);
 		else

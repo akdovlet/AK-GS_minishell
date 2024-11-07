@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 19:39:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 17:13:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 19:00:30 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*expand_hd(char *str, t_data *data)
 	while (str[i])
 	{
 		if (str[i] == '$' && is_variable(str[i + 1]))
-			var_copy(str, &i, data, &lst);
+			var_copy_redir(str, &i, data, &lst);
 		else if (str[i] == '$' && str[i + 1] == '?')
 			status_copy(&i, data, &lst);
 		else

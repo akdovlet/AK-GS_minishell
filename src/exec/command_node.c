@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 16:00:18 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 19:44:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,10 @@ int	execute_prog(t_ast *ast, t_data *data)
 
 int	command_node(t_ast *ast, t_data *data)
 {
-	ast->cmd = expand_tab_of_cmd(ast->cmd, data);
+	ast->cmd = expand_cmd(ast->cmd, data);
 	if (!ast->cmd)
 		return (1);
-	ast->cmd = ft_wildcard(ast->cmd);
+	// ast->cmd = ft_wildcard(ast->cmd);
 	if (!ast->cmd)
 		return (1);
 	fprintf(stderr, "%s\n", ast->cmd[0]);
