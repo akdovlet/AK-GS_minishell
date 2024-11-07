@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:35:27 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/03 13:19:01 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:54:06 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "token.h"
 #include "expand.h"
 
-int redir_expand(t_ast *ast, t_data *data)
+int	redir_expand(t_ast *ast, t_data *data)
 {
 	char	*expansion;
 	char	*first_step;
@@ -24,7 +24,8 @@ int redir_expand(t_ast *ast, t_data *data)
 	expansion = remove_quotes(first_step);
 	free(first_step);
 	if (!expansion)
-		return (ft_dprintf(2, "minishell: %s: ambiguous redirect\n", ast->redir_filename), 1);
+		return (ft_dprintf(2, "minishell: %s: ambiguous redirect\n", \
+		ast->redir_filename), 1);
 	free(ast->redir_filename);
 	ast->redir_filename = expansion;
 	return (0);

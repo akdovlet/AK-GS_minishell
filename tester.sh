@@ -10,3 +10,4 @@ bash -c "echo $BOOM is BOOM"
 
 >out1 <Makefile cat >out2 <segfault_test.c >>out3 <<EOF <shell_script.sh <tester.sh >out5 >out6 >out7 <Makefile <<EOF2 && ls <<EOF3
 <<EOF cat && <<EOF2 cat && <<EOF3 cat || <<EOF4 cat
+<Makefile <Makefile <Makefile <Makefile <<EOF <<EOF2 <<EOF3 <<EOF4 <<EOF5 <<EOF6 <<EOF7 <<EOF8 cat

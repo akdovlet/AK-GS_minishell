@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/29 16:49:25 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:59:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			ft_wait_pid(t_ast *ast, t_data *data);
 int			ft_operator(t_ast *ast, t_data *data);
 
 // subshell.c
-int			ft_subshell(t_ast *ast, t_data *data);
+int			subshell_node(t_ast *ast, t_data *data);
 
 // path_utlis.c
 void		free_tab_2(char **tab);
@@ -59,6 +59,7 @@ char		*find_cmd(char **cmd, char **envp);
 
 //	redir_lst_clear.c
 void		fdlst_clear(t_fdlst **lst);
+void		fdlst_clear_leftovers(t_fdlst **lst);
 void		fdlst_eat(t_fdlst **node);
 void		fdlst_delete_node(t_fdlst **lst, int key);
 
@@ -76,6 +77,9 @@ int			redir_node(t_ast *ast, t_data *data);
 // execution_loop.c
 void		execution_loop(t_data *data);
 void		flag_c(char *line, t_data *data);
+
+// non_interctive.c
+void		non_interactive_shell(t_data *data);
 
 int         redir_expand(t_ast *ast, t_data *data);
 

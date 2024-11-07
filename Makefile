@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/10/31 20:37:06 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/11/06 18:44:54 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,8 @@ SRC		:=	main.c								\
 			exec/redir_node.c					\
 			exec/path_utils.c 					\
 			exec/wait_pid.c						\
-			exec_loop/execution_loop.c
+			exec_loop/execution_loop.c			\
+			exec_loop/non_interactive.c
 
 SRC_DIR	:=	src
 BUILD	:=	.build

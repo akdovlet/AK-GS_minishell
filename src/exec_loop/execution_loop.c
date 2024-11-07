@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/05 15:26:22 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:33:26 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,28 @@
 #include "AST.h"
 #include "exec.h"
 
-void	interactive_shell(t_data *data)
+void	process_input(t_data *data, char *line)
 {
-	char	*line;
-	t_token	*tk;
+	t_token *tk;
 	int		err;
 
 	tk = NULL;
+	err = tokenize(line, &tk, data);
+	if (err)
+		data->status = err;
+	free(line);
+	data->ast_root = parse(&tk);
+	token_clear(&tk);
+	if (data->ast_root)
+		data->status = exec_recursion(data->ast_root, data);
+	ast_free(data->ast_root);
+	fdlst_clear_leftovers(&data->fdlst);
+}
+
+void	interactive_shell(t_data *data)
+{
+	char	*line;
+
 	while (1)
 	{
 		line = readline(CYAN"minishell$> "RESET);
@@ -37,47 +52,7 @@ void	interactive_shell(t_data *data)
 		}
 		if (line)
 			add_history(line);
-		err = tokenize(line, &tk, data);
-		if (err)
-			data->status = err;
-		free(line);
-		data->ast_root = parse(&tk);
-		token_clear(&tk);
-		if (data->ast_root)
-			data->status = exec_recursion(data->ast_root, data);
-		ast_free(data->ast_root);
-		fdlst_close_in_child(data->fdlst);
-		fdlst_clear(&data->fdlst);
-	}
-}
-
-// <Makefile <Makefile <Makefile <Makefile <<EOF <<EOF2 <<EOF3 <<EOF4 <<EOF5 <<EOF6 <<EOF7 <<EOF8 cat
-void	non_interactive_shell(t_data *data)
-{
-	char	*line;
-	t_token	*tk;
-	size_t	line_count;
-
-	line_count = 0;
-	tk = NULL;
-	while (++line_count)
-	{
-		line = readline(NULL);
-		if (!line)
-			break ;
-		if (tokenize(line, &tk, data))
-		{
-			data->status = 2;
-			ft_dprintf(2, "minishell: line %d: `%s'\n", line_count, line);
-			free(line);
-			break ;
-		}
-		free(line);
-		data->ast_root = parse(&tk);
-		token_clear(&tk);
-		if (data->ast_root)
-			data->status = exec_recursion(data->ast_root, data);
-		ast_free(data->ast_root);
+		process_input(data, line);
 	}
 }
 

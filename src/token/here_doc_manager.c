@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:56:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/01 19:29:42 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:19:55 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	here_doc_exit(t_token **head, char *line, t_data *data, int code)
 	env_clear(&data->export);
 	free(data->hardpath);
 	rl_clear_history();
+	fprintf(stderr, "child here\n");
 	exit(code);
 }
 
