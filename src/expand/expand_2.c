@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 19:59:47 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/07 23:44:01 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,20 @@ void	split_on_ifs(char *str, t_files **lst)
 	ft_free(strs);
 }
 
+int	find_ifs(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\t' || str[i] == '\n' || str[i] == ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	var_copy(char *str, int *i, t_data *data, t_files **lst)
 {
 	int		j;
@@ -108,5 +122,8 @@ void	var_copy(char *str, int *i, t_data *data, t_files **lst)
 	free(key);
 	if (!value)
 		return ;
-	split_on_ifs(value, lst);
+	if (find_ifs(value))
+		split_on_ifs(value, lst);
+	else
+		files_addback(lst, files_new_dup(value));
 }
