@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 23:44:01 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/08 19:04:24 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 #include "token.h"
 #include "expand.h"
 #include "env.h"
+
+void	split_on_ifs(t_files **lst, t_files **sublst);
+
+int	is_ifs(char c)
+{
+	if (c == '\t' || c =='\n' || c == ' ')
+		return (1);
+	return (0);
+}
 
 void	expand_string(char *str, t_data *data, t_files **head)
 {
@@ -40,11 +49,14 @@ void	expand_string(char *str, t_data *data, t_files **head)
 void	expansion_routine(char *str, t_data *data, t_files **head)
 {
 	t_files	*sublst;
+	t_files	*sublst2;
 
 	sublst = NULL;
+	sublst2 = NULL;
 	expand_string(str, data, &sublst);
+	split_on_ifs(&sublst, &sublst2);
 	//wild_card(sublst)
-	files_remove_quotes(sublst);
+	files_remove_quotes(sublst2);
 	files_addback_lst(head, &sublst);
 }
 
@@ -66,21 +78,98 @@ char	**expand_cmd(char **strs, t_data *data)
 	return (cmd);
 }
 
-void	split_on_ifs(char *str, t_files **lst)
+void	split_on_ifs_dq(char *str, int *i, char *buffer, int *j)
 {
-	int			i;
-	char	**strs;
+	while (str[*i])
+	{
+		buffer[(*j)++] = str[(*i)++];
+		if (str[*i] == '"')
+		{
+			buffer[(*j)++] = str[(*i)++];
+			break ;
+		}
+	}
+}
+
+void	split_on_ifs_sq(char *str, int *i, char *buffer, int *j)
+{
+	while (str[*i])
+	{
+		buffer[(*j)++] = str[(*i)++];
+		if (str[*i] == '\'')
+		{
+			buffer[(*j)++] = str[(*i)++];
+			break ;
+		}
+	}
+}
+
+void	split_on_ifs_cpy(char *str, int *i, char *buffer, int *j)
+{
+	if (str[*i] && is_ifs(str[(*i)++]))
+	{
+		buffer[*j] = '\0';
+		*j = 0;
+		while (str[*i] && is_ifs(str[*i]))
+			(*i)++;	
+	}
+}
+
+void	check_if_content(char *str, t_files **lst, int j)
+{
+	int	i;
 
 	i = 0;
-	strs = ft_multi_split(str, "\t\n ");
-	if (!strs)
-		return ;
-	while (strs[i])
+	if (j != 0)
 	{
-		files_addback(lst, files_new_dup(strs[i]));
-		i++;
+		while (str[i])
+		{
+			if (!is_ifs(str[i]))
+			{
+				files_addback(lst, files_new_dup(str));
+				break ;
+			}
+			i++;
+		}		
 	}
-	ft_free(strs);
+}
+
+void	split_on_ifs(t_files **lst, t_files **sublst)
+{
+	int		len;
+	int		i;
+	int		j;
+	char	*buffer;
+
+	j = 0;
+	len = files_len(*lst);
+	buffer = malloc(sizeof(char) * (len + 1));
+	while (*lst)
+	{
+		i = 0;
+		while ((*lst)->name[i])
+		{
+			if ((*lst)->name[i] == '"')
+				split_on_ifs_dq((*lst)->name, &i, buffer, &j);
+			else if ((*lst)->name[i] == '\'')
+				split_on_ifs_sq((*lst)->name, &i, buffer, &j);
+			else if (!(*lst)->name[i] || is_ifs((*lst)->name[i]))
+			{
+				split_on_ifs_cpy((*lst)->name, &i, buffer, &j);
+				check_if_content(buffer, sublst, j);
+				break ;
+			}
+			else
+				buffer[j++] = (*lst)->name[i++];
+		}
+		files_eat(lst);
+	}
+	if (j != 0)
+	{
+		buffer[j] = '\0';
+		files_addback(lst, files_new_dup(buffer));
+	}
+	free(buffer);
 }
 
 int	find_ifs(char *str)
@@ -122,8 +211,5 @@ void	var_copy(char *str, int *i, t_data *data, t_files **lst)
 	free(key);
 	if (!value)
 		return ;
-	if (find_ifs(value))
-		split_on_ifs(value, lst);
-	else
-		files_addback(lst, files_new_dup(value));
+	files_addback(lst, files_new_dup(value));
 }
