@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/08 19:04:24 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/08 19:53:39 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ void	expand_string(char *str, t_data *data, t_files **head)
 	}
 }
 
+void	print_lst(t_files *lst)
+{
+	while (lst)
+	{
+		fprintf(stderr, "%s\n", lst->name);
+		lst = lst->next;
+	}
+}
+
 void	expansion_routine(char *str, t_data *data, t_files **head)
 {
 	t_files	*sublst;
@@ -55,9 +64,10 @@ void	expansion_routine(char *str, t_data *data, t_files **head)
 	sublst2 = NULL;
 	expand_string(str, data, &sublst);
 	split_on_ifs(&sublst, &sublst2);
+	print_lst(sublst2);
 	//wild_card(sublst)
 	files_remove_quotes(sublst2);
-	files_addback_lst(head, &sublst);
+	files_addback_lst(head, &sublst2);
 }
 
 char	**expand_cmd(char **strs, t_data *data)
@@ -153,21 +163,26 @@ void	split_on_ifs(t_files **lst, t_files **sublst)
 				split_on_ifs_dq((*lst)->name, &i, buffer, &j);
 			else if ((*lst)->name[i] == '\'')
 				split_on_ifs_sq((*lst)->name, &i, buffer, &j);
-			else if (!(*lst)->name[i] || is_ifs((*lst)->name[i]))
+			else if (is_ifs((*lst)->name[i]))
 			{
 				split_on_ifs_cpy((*lst)->name, &i, buffer, &j);
 				check_if_content(buffer, sublst, j);
-				break ;
 			}
 			else
-				buffer[j++] = (*lst)->name[i++];
+			{
+				buffer[j] = (*lst)->name[i];
+				fprintf(stderr, "(*lst)->name[%d]: %c\n", i, (*lst)->name[i]);
+				fprintf(stderr, "buffer[%d]: %c\n", j, buffer[j]);
+				j++;
+				i++;
+			}
 		}
 		files_eat(lst);
 	}
 	if (j != 0)
 	{
 		buffer[j] = '\0';
-		files_addback(lst, files_new_dup(buffer));
+		files_addback(sublst, files_new_dup(buffer));
 	}
 	free(buffer);
 }
