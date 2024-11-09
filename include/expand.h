@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/08 17:14:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:34:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 typedef struct s_files
 {
 	char			*name;
+	bool			join;
 	struct s_files	*next;
 }					t_files;
 
@@ -102,5 +103,7 @@ void				files_addback_lst(t_files **main, t_files **sub);
 char				**expand_cmd(char **strs, t_data *data);
 void				files_remove_quotes(t_files *lst);
 int					files_len(t_files *lst);
+int					ifs_countword(char *str);
+int					is_ifs(char c);
 
 #endif

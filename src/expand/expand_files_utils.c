@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:03:43 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/09 16:04:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:09:21 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ char	*files_join(t_files **lst)
 	i = 0;
 	len = files_len(*lst);
 	fusion = malloc(sizeof(char) * (len + 1));
+	if (!fusion)
+		return (NULL);
 	while (*lst)
 	{
 		if ((*lst)->name)

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:21:15 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/08 00:00:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:46:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ char	**build_cmd_array(t_files **head)
 	char	**strs;
 
 	i = 0;
+	if (!head || !*head)
+		return (NULL);
 	len = files_wordcount(*head);
 	if (!len)
 		return (NULL);
-	fprintf(stderr, "len is: %d\n", len);
 	strs = malloc(sizeof(char *) * (len + 1));
 	while (*head)
 	{
