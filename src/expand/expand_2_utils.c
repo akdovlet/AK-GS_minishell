@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:21:15 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/09 19:46:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:18:35 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ char	**build_cmd_array(t_files **head)
 	if (!len)
 		return (NULL);
 	strs = malloc(sizeof(char *) * (len + 1));
+	if (!strs)
+		return (files_clear(head), NULL);
 	while (*head)
 	{
 		strs[i] = ft_strdup((*head)->name);

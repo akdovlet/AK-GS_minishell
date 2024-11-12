@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 20:36:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 16:02:39 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:18:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	redir_quote_manager(char *dup, char *str, int *i, int *j)
 		(*i)++;
 		(*j)++;
 	}
-	(*i)++;
+	if (str[*i] == symbol)
+		(*i)++;
 }
 
 char	*remove_quotes(char *str)
