@@ -6,12 +6,22 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 19:34:42 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:57:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "setup.h"
+
+void	print_error(int status)
+{
+	if (WTERMSIG(status) == SIGINT)
+		write(2, "\n", 1);
+	if (WTERMSIG(status) == SIGQUIT)
+		write(2, "Quit\n", 5);
+	if (WTERMSIG(status) == SIGBUS)
+		write(2, "Bus error (core dumped)\n", 25);
+}
 
 static void	pip_wait_children(t_data *data)
 {
@@ -33,12 +43,7 @@ static void	pip_wait_children(t_data *data)
 		free(tmp);
 		tmp = NULL;
 	}
-	if (WTERMSIG(status) == SIGINT)
-		write(1, "\n", 1);
-	if (WTERMSIG(status) == SIGQUIT)
-		write(1, "Quit\n", 5);
-	if (WTERMSIG(status) == SIGBUS)
-		write(1, "Bus error (core dumped)\n", 25);
+	print_error(status);
 	data->pidlst = NULL;
 	sigaction(SIGINT, &data->sa, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 21:28:12 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:26:51 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,29 +47,32 @@ add_history*/
 # include "libft.h"
 // lib for signals
 
-# define RED     "\x1b[31m"
-# define GREEN   "\x1b[32m"
-# define YELLOW  "\x1b[33m"
-# define BLUE    "\x1b[34m"
-# define MAGENTA "\x1b[35m"
+# define RED     "\001\x1b[31m\002"
+# define GREEN   "\001\x1b[32m\002"
+# define YELLOW  "\001\x1b[33m\002"
+# define BLUE    "\001\x1b[34m\002"
+# define MAGENTA "\001\x1b[35m\002"
 # define CYAN    "\001\x1b[36;1m\002"
 # define RESET   "\001\x1b[0m\002"
 
 # define HARDPATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-# define SYNTAX_ERR "minishell: syntax error near unexpected token `%s'\n"
-# define NEWLINE_ERR "minishell: unexpected newline while looking for matching `%c'\n"
-# define PARENTHESIS_ERR "minishell: unexpected newline while looking for closing `%c'\n"
+# define SYNTAX_ERR "minishell: syntax error near \
+unexpected token `%s'\n"
+# define NEWLINE_ERR "minishell: unexpected newline \
+while looking for matching `%c'\n"
+# define PARENTHESIS_ERR "minishell: unexpected newline while \
+looking for closing `%c'\n"
 
-extern int *g_state;
+extern volatile sig_atomic_t	g_state;
 
 typedef struct s_env
 {
 	char			*key;
 	char			*value;
-	struct	s_env	*next;
+	struct s_env	*next;
 }	t_env;
 
-typedef	enum	e_node
+typedef enum e_node
 {
 	CMD,
 	OPERATOR,
@@ -79,7 +82,7 @@ typedef	enum	e_node
 	WAIT_NODE
 }	t_node;
 
-typedef enum	e_token
+typedef enum e_token
 {
 	PIPE = '|',
 	PARENTHESIS_L = '(',
@@ -96,24 +99,24 @@ typedef enum	e_token
 	HERE_DOC = 1004
 }	t_type;
 
-typedef	struct s_token
+typedef struct s_token
 {
 	int				type;
 	int				fd;
 	char			*value;
 	struct s_token	*next;
-	struct s_token	*prev; 
+	struct s_token	*prev;
 }	t_token;
 
-typedef	struct s_cmdlist
+typedef struct s_cmdlist
 {
 	t_type				type;
-	char				*str;
 	int					fd;
+	char				*str;
 	struct s_cmdlist	*next;
 }	t_cmdlst;
 
-typedef	struct	s_pidlst
+typedef struct s_pidlst
 {
 	pid_t			pid;
 	struct s_pidlst	*next;
@@ -128,7 +131,7 @@ typedef struct s_fdlst
 
 typedef struct s_ast
 {
-	t_node type;
+	t_node	type;
 	union
 	{
 		struct
@@ -146,7 +149,7 @@ typedef struct s_ast
 			t_type			redir_type;
 			char			*redir_filename;
 			int				redir_fd;
-			struct	s_ast	*redir_next;
+			struct s_ast	*redir_next;
 		};
 		struct
 		{
@@ -166,8 +169,8 @@ typedef struct s_ast
 
 typedef struct s_data
 {
-	int					status;
 	bool				fork;
+	int					status;
 	char				*hardpath;
 	t_ast				*ast_root;
 	t_pidlst			*pidlst;

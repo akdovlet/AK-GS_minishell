@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_first_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:47:44 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 13:38:09 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:22:43 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	**expand_first_cmd(char **cmd, t_data *data)
 		return (free_tab(cmd), NULL);
 	if (!files_first)
 	{
-		if (handle_expansion(cmd, data, &files_first)) //leak potentiel ici
+		if (handle_expansion(cmd, data, &files_first)) // leak potentiel ici
 			return (free_tab(cmd), NULL);
 	}
 	if (cmd[1])
@@ -82,7 +82,7 @@ char	**expand_first_cmd(char **cmd, t_data *data)
 		files_second = handle_file_list_expansion(cmd + 1);
 		if (!files_second)
 			return (NULL);
-		ft_lst_add_back_files(&files_first, files_second);
+		files_addback(&files_first, files_second);
 	}
 	free_tab(cmd);
 	cmd = ft_lst_to_tab(&files_first);

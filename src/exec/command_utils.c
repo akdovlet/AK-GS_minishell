@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:57:43 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/29 15:39:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:24:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,17 @@ char	*meet_in_the_middle(char *s1, char *s2, char c)
 
 int	hard_path_check(char *cmd)
 {
+	struct stat	statbuf;
+
 	if (!access(cmd, F_OK))
 	{
+		if (lstat(cmd, &statbuf) == -1)
+			perror("lstat");
+		if (S_ISDIR(statbuf.st_mode))
+		{
+			ft_dprintf(2, "minishell: %s: Is a directory\n", cmd);
+			return (126);
+		}
 		if (!access(cmd, X_OK))
 			return (0);
 		ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", cmd, strerror(errno));

@@ -6,10 +6,11 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/01 12:17:50 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:35:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "exec.h"
 #include "minishell.h"
 #include "token.h"
 
@@ -81,8 +82,8 @@ char	*copy_word(char *str, int *i)
 	dup = malloc(sizeof(char) * (j + 1));
 	if (!dup)
 	{
-		ft_dprintf(STDERR_FILENO, \
-		"minishell: word_management: %s\n", strerror(errno));
+		ft_dprintf(STDERR_FILENO, "minishell: word_management: %s\n",
+			strerror(errno));
 		return (NULL);
 	}
 	j = 0;
@@ -100,28 +101,30 @@ char	*copy_word(char *str, int *i)
 	return (dup);
 }
 
-int	word_management(char *line, int *i, t_token **tk, t_env *env)
+int	word_management(char *line, int *i, t_token **tk, t_data *data)
 {
+	int		err;
 	t_token	*new;
 
 	new = token_new(NULL);
 	if (!new)
 	{
-		ft_dprintf(STDERR_FILENO, \
-		"minishell: word_management: %s\n", strerror(errno));
-		return (0);
+		ft_dprintf(STDERR_FILENO, "minishell: word_management: %s\n",
+			strerror(errno));
+		return (1);
 	}
 	new->type = WORD;
 	new->value = copy_word(line, i);
 	if (!new->value)
-	{
-		free(new);
-		return (0);
-	}
+		return (free(new), 1);
 	if (!token_add_back_grammar(tk, new))
-		return (0);
+		return (2);
 	if (new->prev && new->prev->type == HERE_DOC)
-		if (!here_doc_manager(new, env))
-			return (0);
-	return (1);
+	{
+		err = here_doc_manager(tk, line, new, data);
+		fdlst_add_front(&data->fdlst, fdlst_new(new->fd, true));
+		if (err)
+			return (err);
+	}
+	return (0);
 }

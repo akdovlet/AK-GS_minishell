@@ -6,20 +6,20 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:37:29 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 19:56:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:28:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
 #include "minishell.h"
 #include "setup.h"
-#include "env.h"
 
-int	*g_state;
+volatile sig_atomic_t	g_state;
 
-int	setup_shell(t_data	*data, char	**env)
+int	setup_shell(t_data *data, char **env)
 {
 	*data = (t_data){};
-	g_state = &data->status;
+	g_state = 0;
 	if (env_setup(data, env))
 		return (1);
 	rl_outstream = stderr;

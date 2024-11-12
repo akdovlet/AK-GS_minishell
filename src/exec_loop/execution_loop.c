@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/02 21:13:28 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:39:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,28 @@
 #include "AST.h"
 #include "exec.h"
 
-void	interactive_shell(t_data *data)
+void	process_input(t_data *data, char *line)
 {
-	char	*line;
 	t_token	*tk;
 	int		err;
 
 	tk = NULL;
+	err = tokenize(line, &tk, data);
+	if (err)
+		data->status = err;
+	free(line);
+	data->ast_root = parse(&tk);
+	token_clear(&tk);
+	if (data->ast_root)
+		data->status = exec_recursion(data->ast_root, data);
+	ast_free(data->ast_root);
+	fdlst_clear_leftovers(&data->fdlst);
+}
+
+void	interactive_shell(t_data *data)
+{
+	char	*line;
+
 	while (1)
 	{
 		line = readline(CYAN"minishell$> "RESET);
@@ -30,46 +45,40 @@ void	interactive_shell(t_data *data)
 			ft_dprintf(STDERR_FILENO, "exit\n");
 			break ;
 		}
-		add_history(line);
-		err = tokenize(line, &tk, data->env);
-		if (err)
-			data->status = err;
-		free(line);
-		data->ast_root = parse(&tk);
-		token_clear(&tk);
-		if (data->ast_root)
-			data->status = exec_recursion(data->ast_root, data);
-		ast_free(data->ast_root);
+		if (g_state == SIGINT)
+		{
+			data->status = 130;
+			g_state = 0;
+		}
+		if (line)
+			add_history(line);
+		process_input(data, line);
 	}
 }
 
-void	non_interactive_shell(t_data *data)
+void	flag_c(char *line, t_data *data)
 {
-	char	*line;
 	t_token	*tk;
-	size_t	line_count;
+	int		err;
 
-	line_count = 0;
 	tk = NULL;
-	while (++line_count)
+	if (!line)
 	{
-		line = readline(NULL);
-		if (!line)
-			break ;
-		if (tokenize(line, &tk, data->env) == 2)
-		{
-			data->status = 2;
-			ft_dprintf(2, "minishell: line %d: `%s'\n", line_count, line);
-			free(line);
-			break ;
-		}
-		free(line);
-		data->ast_root = parse(&tk);
-		token_clear(&tk);
-		if (data->ast_root)
-			exec_recursion(data->ast_root, data);
-		ast_free(data->ast_root);
+		ft_dprintf(2, "minishell: -c: option requires arguments\n");
+		data->status = 2;
+		return ;
 	}
+	err = tokenize(line, &tk, data);
+	if (err)
+	{
+		data->status = err;
+		return (token_clear(&tk));
+	}
+	data->ast_root = parse(&tk);
+	token_clear(&tk);
+	if (data->ast_root)
+		data->status = exec_recursion(data->ast_root, data);
+	ast_free(data->ast_root);
 }
 
 void	execution_loop(t_data *data)

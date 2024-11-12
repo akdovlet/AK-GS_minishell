@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 11:27:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/21 14:54:55 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:34:38 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ int	fdlst_add_front(t_fdlst **lst, t_fdlst *new)
 		new->next = *lst;
 	*lst = new;
 	return (0);
+}
+
+void	fdlst_clear_leftovers(t_fdlst **lst)
+{
+	if (!(*lst))
+		return ;
+	while ((*lst))
+	{
+		if ((*lst)->close_in_child)
+			close((*lst)->fd);
+		fdlst_eat(lst);
+	}	
 }
 
 void	fdlst_close_in_child(t_fdlst *lst)
