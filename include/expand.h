@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/09 17:34:23 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:05:01 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,7 @@ void				files_remove_quotes(t_files *lst);
 int					files_len(t_files *lst);
 int					ifs_countword(char *str);
 int					is_ifs(char c);
+char				*ifs_copy(char *str);
+char				*expand_string(char *str, t_data *data, t_files **head);
 
 #endif

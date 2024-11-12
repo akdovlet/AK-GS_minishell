@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 16:51:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/09 19:53:13 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:07:36 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	ifs_len(char *str, int word_count)
 		else
 			i++;
 	}
-	fprintf(stderr, "ifs_len is: %d\n", len);
 	return (len);
 }
 

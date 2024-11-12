@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/11/09 16:57:15 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/11/12 17:05:20 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRC		:=	main.c								\
 			expand/expand_files_double_quote.c	\
 			expand/expand_files_utils.c			\
 			expand/expand_split.c				\
+			expand/expand_string.c				\
 			expand/expand_files.c				\
 			expand/expand_debugg.c				\
 			expand/expand_quotes_utils.c		\

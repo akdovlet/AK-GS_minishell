@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/09 19:57:13 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:07:34 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*get_key(char *str, int i)
 void	var_copy(char *str, int *i, t_data *data, t_files **lst)
 {
 	int		j;
-	int		len;
 	char	*key;
 	char	*value;
 
@@ -68,13 +67,11 @@ void expansion_routine(char *str, t_data *data, t_files **head)
 		files_clear(&sublst);
 		return ;
 	}
-	fprintf(stderr, "fusion is: %s\n", fusion);
 	// wild_card(sublst)
 	final = remove_quotes(fusion);
 	free(fusion);
 	if (!final)
 		return ;
-	fprintf(stderr, "final is: `%s'\n", final);
 	files_addback(head, files_new(final));
 	return ;
 }
