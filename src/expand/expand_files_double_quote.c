@@ -6,16 +6,16 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:01:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/08 00:09:07 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:28:14 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
+#include "expand.h"
 #include "minishell.h"
 #include "token.h"
-#include "expand.h"
-#include "env.h"
 
-int		dq_len(char *str)
+int	dq_len(char *str)
 {
 	int	i;
 	int	len;
@@ -24,8 +24,8 @@ int		dq_len(char *str)
 	len = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && (is_variable(str[(i) + 1]) ||\
-			(str[i] == '$' && str[i + 1] == '?')))
+		if (str[i] == '$' && (is_variable(str[(i) + 1]) || (str[i] == '$'
+					&& str[i + 1] == '?')))
 			break ;
 		len++;
 		i++;
@@ -51,8 +51,8 @@ void	dq_copy_tmp(char *str, int *i, t_files **tmp)
 		return ;
 	while (str[*i])
 	{
-		if ((str[*i] == '$' && is_variable(str[(*i) + 1])) ||\
-			(str[*i] == '$' && str[(*i) + 1] == '?'))
+		if ((str[*i] == '$' && is_variable(str[(*i) + 1])) || (str[*i] == '$'
+				&& str[(*i) + 1] == '?'))
 			break ;
 		dup[j++] = str[(*i)++];
 		if (str[*i] == '"')

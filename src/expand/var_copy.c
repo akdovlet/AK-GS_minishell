@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_copy_redir.c                                         :+:      :+:    :+:   */
+/*   var_copy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:45:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 17:13:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:09:01 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 
 void	status_copy(int *i, t_data *data, t_files **head)
 {
-	char *str;
+	char	*str;
 
 	str = ft_itoa(data->status);
 	*i = (*i) + 2;
+	if (!str)
+		return ;
 	files_addback(head, files_new(str));
 }
 

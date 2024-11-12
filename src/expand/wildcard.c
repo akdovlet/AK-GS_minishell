@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/07 17:13:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:17:10 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,5 @@ char	**ft_wildcard(char **tab_cmd)
 	tab_cmd = ft_lst_to_tab(&files);
 	if (!tab_cmd)
 		return (NULL);
-
 	return (tab_cmd);
 }

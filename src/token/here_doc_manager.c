@@ -6,14 +6,14 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:56:52 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 15:01:26 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:30:44 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "token.h"
 #include "env.h"
 #include "exec.h"
+#include "minishell.h"
+#include "token.h"
 
 void	here_doc_exit(t_token **head, char *line, t_data *data, int code)
 {
@@ -26,22 +26,25 @@ void	here_doc_exit(t_token **head, char *line, t_data *data, int code)
 	exit(code);
 }
 
+int	fork_protection(int pipe_fd[2])
+{
+	perror("minishell: here_doc_manager");
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	return (1);
+}
+
 int	here_doc_manager(t_token **head, char *line, t_token *tk, t_data *data)
 {
-	int		status;
-	int		pipe_fd[2];
-	int		pid;
+	int	status;
+	int	pipe_fd[2];
+	int	pid;
 
 	if (pipe(pipe_fd) == -1)
 		return (perror("minishell: here document"), 1);
 	pid = fork();
 	if (pid == -1)
-	{
-		perror("minishell: here_doc_manager");
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
-		return (1);
-	}
+		return (fork_protection(pipe_fd));
 	if (!pid)
 	{
 		status = here_doc(tk, pipe_fd);

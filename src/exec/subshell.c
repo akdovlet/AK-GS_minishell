@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:20:00 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/07 14:57:50 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:35:51 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ void	subshell_child(t_ast *ast, t_data *data)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	// fdlst_close_in_child(data->fdlst);
 	data->status = exec_recursion(ast->subshell_next, data);
 	clear_exit(data, data->status);
 }
 
-int subshell_node(t_ast *ast, t_data *data)
+int	subshell_node(t_ast *ast, t_data *data)
 {
 	int		status;
 	pid_t	pid;
@@ -30,7 +29,7 @@ int subshell_node(t_ast *ast, t_data *data)
 	pid = fork();
 	if (pid < 0)
 		return (perror("minishell: subshell_node"), 1);
-	if(!pid)
+	if (!pid)
 		subshell_child(ast, data);
 	else
 	{

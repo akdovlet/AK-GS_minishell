@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:47:44 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/07 17:13:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:22:43 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	**expand_first_cmd(char **cmd, t_data *data)
 		return (free_tab(cmd), NULL);
 	if (!files_first)
 	{
-		if (handle_expansion(cmd, data, &files_first)) //leak potentiel ici
+		if (handle_expansion(cmd, data, &files_first)) // leak potentiel ici
 			return (free_tab(cmd), NULL);
 	}
 	if (cmd[1])

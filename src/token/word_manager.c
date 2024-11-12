@@ -6,13 +6,13 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:04:34 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/05 14:52:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:35:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "exec.h"
 #include "minishell.h"
 #include "token.h"
-#include "exec.h"
 
 int	quote_len(char *str, int *i, int symbol)
 {
@@ -82,8 +82,8 @@ char	*copy_word(char *str, int *i)
 	dup = malloc(sizeof(char) * (j + 1));
 	if (!dup)
 	{
-		ft_dprintf(STDERR_FILENO, \
-		"minishell: word_management: %s\n", strerror(errno));
+		ft_dprintf(STDERR_FILENO, "minishell: word_management: %s\n",
+			strerror(errno));
 		return (NULL);
 	}
 	j = 0;
@@ -104,13 +104,13 @@ char	*copy_word(char *str, int *i)
 int	word_management(char *line, int *i, t_token **tk, t_data *data)
 {
 	int		err;
-	t_token *new;
+	t_token	*new;
 
 	new = token_new(NULL);
 	if (!new)
 	{
-		ft_dprintf(STDERR_FILENO, \
-		"minishell: word_management: %s\n", strerror(errno));
+		ft_dprintf(STDERR_FILENO, "minishell: word_management: %s\n",
+			strerror(errno));
 		return (1);
 	}
 	new->type = WORD;

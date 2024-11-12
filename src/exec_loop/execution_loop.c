@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/06 18:33:26 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:39:08 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	process_input(t_data *data, char *line)
 {
-	t_token *tk;
+	t_token	*tk;
 	int		err;
 
 	tk = NULL;

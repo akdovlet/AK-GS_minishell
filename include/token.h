@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 13:46:50 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/03 11:54:49 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:27:09 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,6 @@ int		quote_len(char *str, int *i, int symbol);
 int		quote_management(char *dup, int *j, char *str, int *i);
 int		word_len(char *str, int *i);
 char	*copy_word(char *str, int *i);
-int		word_management(char *line, int *i, t_token **tk, t_data * data);
+int		word_management(char *line, int *i, t_token **tk, t_data *data);
 
 #endif

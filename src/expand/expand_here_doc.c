@@ -6,21 +6,18 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 19:39:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 19:00:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:27:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "expand.h"
+#include "minishell.h"
 #include "token.h"
 
-void	regular_copy_hd(char *str, int *i, t_files **lst)
+static int	regular_copy_len(char *str, int j)
 {
-	int		j;
-	int		len;
-	char	*dup;
+	int	len;
 
-	j = *i;
 	len = 0;
 	while (str[j])
 	{
@@ -29,13 +26,24 @@ void	regular_copy_hd(char *str, int *i, t_files **lst)
 		len++;
 		j++;
 	}
+	return (len);
+}
+
+void	regular_copy_hd(char *str, int *i, t_files **lst)
+{
+	int		j;
+	int		len;
+	char	*dup;
+
+	len = regular_copy_len(str, *i);
 	dup = malloc(sizeof(char) * (len + 1));
 	if (!dup)
 		return ;
 	j = 0;
 	while (str[*i])
 	{
-		if (str[(*i)] == '$' && (is_variable(str[(*i) + 1]) || str[(*i) + 1] == '?'))
+		if (str[(*i)] == '$' && (is_variable(str[(*i) + 1])
+				|| str[(*i) + 1] == '?'))
 			break ;
 		dup[j++] = str[(*i)++];
 	}

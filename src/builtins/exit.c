@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:04:41 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/02 21:31:07 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:37:17 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_only_digit(char *str)
 {
 	int	i;
-	int n;
+	int	n;
 
 	i = 0;
 	n = 0;

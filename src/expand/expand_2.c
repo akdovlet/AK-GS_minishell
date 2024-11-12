@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/12 17:07:34 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:40:30 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	var_copy(char *str, int *i, t_data *data, t_files **lst)
 	files_addback(lst, files_new(value));
 }
 
-void expansion_routine(char *str, t_data *data, t_files **head)
+//	to do: add wildcard expansion after expand_string
+void	expansion_routine(char *str, t_data *data, t_files **head)
 {
 	t_files	*sublst;
 	char	*fusion;
@@ -67,7 +68,6 @@ void expansion_routine(char *str, t_data *data, t_files **head)
 		files_clear(&sublst);
 		return ;
 	}
-	// wild_card(sublst)
 	final = remove_quotes(fusion);
 	free(fusion);
 	if (!final)

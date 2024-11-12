@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 20:36:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/12 18:18:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:58:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	redir_quote_len(char *str, int *i, int symbol)
 		len++;
 		(*i)++;
 	}
-	(*i)++;
+	if (str[*i] == symbol)
+		(*i)++;
 	return (len);
 }
 

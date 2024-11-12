@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/31 19:42:11 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:26:51 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ while looking for matching `%c'\n"
 # define PARENTHESIS_ERR "minishell: unexpected newline while \
 looking for closing `%c'\n"
 
-extern volatile sig_atomic_t g_state;
+extern volatile sig_atomic_t	g_state;
 
 typedef struct s_env
 {

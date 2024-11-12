@@ -6,18 +6,18 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 16:51:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/12 17:07:36 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:15:27 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
+#include "expand.h"
 #include "minishell.h"
 #include "token.h"
-#include "expand.h"
-#include "env.h"
 
 int	is_ifs(char c)
 {
-	if (c == '\t' || c =='\n' || c == ' ')
+	if (c == '\t' || c == '\n' || c == ' ')
 		return (1);
 	return (0);
 }
@@ -71,21 +71,13 @@ int	ifs_len(char *str, int word_count)
 	return (len);
 }
 
-char	*ifs_copy(char *str)
+void	ifs_copy_loop(char *str, char *cpy, int word_count)
 {
-	int		i;
-	int		j;
-	int		word_count;
-	char	*cpy;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	word_count = ifs_countword(str);
-	if (!word_count)
-		return (NULL);
-	cpy = malloc(sizeof(char) * (ifs_len(str, word_count) + 1));
-	if (!cpy)
-		return (NULL);
 	while (str[i])
 	{
 		if (str[i] && !is_ifs(str[i]))
@@ -100,5 +92,19 @@ char	*ifs_copy(char *str)
 			i++;
 	}
 	cpy[j] = '\0';
-	return (cpy); 
+}
+
+char	*ifs_copy(char *str)
+{
+	int		word_count;
+	char	*cpy;
+
+	word_count = ifs_countword(str);
+	if (!word_count)
+		return (NULL);
+	cpy = malloc(sizeof(char) * (ifs_len(str, word_count) + 1));
+	if (!cpy)
+		return (NULL);
+	ifs_copy_loop(str, cpy, word_count);
+	return (cpy);
 }

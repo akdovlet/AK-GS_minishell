@@ -6,16 +6,16 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:13:00 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/07 19:00:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:27:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
+#include "expand.h"
 #include "minishell.h"
 #include "token.h"
-#include "expand.h"
-#include "env.h"
 
-int		sq_len(char *str)
+int	sq_len(char *str)
 {
 	int	i;
 	int	len;
@@ -57,13 +57,10 @@ void	sq_copy(char *str, int *i, t_files **lst)
 	files_addback(lst, files_new(dup));
 }
 
-void	regular_copy(char *str, int *i, t_files **lst)
+static int	regular_copy_len(char *str, int j)
 {
-	int		j;
-	int		len;
-	char	*dup;
+	int	len;
 
-	j = *i;
 	len = 0;
 	while (str[j] && str[j] != '"' && str[j] != '\'')
 	{
@@ -72,13 +69,24 @@ void	regular_copy(char *str, int *i, t_files **lst)
 		len++;
 		j++;
 	}
+	return (len);
+}
+
+void	regular_copy(char *str, int *i, t_files **lst)
+{
+	int		j;
+	int		len;
+	char	*dup;
+
+	len = regular_copy_len(str, *i);
 	dup = malloc(sizeof(char) * (len + 1));
 	if (!dup)
 		return ;
 	j = 0;
 	while (str[*i] && str[(*i)] != '"' && str[(*i)] != '\'')
 	{
-		if (str[(*i)] == '$' && (is_variable(str[(*i) + 1]) || str[(*i) + 1] == '?'))
+		if (str[(*i)] == '$' && (is_variable(str[(*i) + 1])
+				|| str[(*i) + 1] == '?'))
 			break ;
 		dup[j++] = str[(*i)++];
 	}

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/07 17:13:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:36:45 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,11 @@ int	copy_var(char *str, int *i, t_files **files, t_data *data)
 	if (!var_name)
 		return (1);
 	value = get_var_value(var_name, data);
-	// if (!value)
-	// {
-	// 	return (free(var_name), 2);
-	// }
 	result = create_and_add_file(value, files);
 	return (free(var_name), result);
 }
 
-int check_str_var(char *str)
+int	check_str_var(char *str)
 {
 	int	len1;
 	int	len2;

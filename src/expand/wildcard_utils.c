@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:32:23 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/30 17:27:57 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:16:57 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ int	ft_strcasecmp(char *s1, char *s2)
 	return (tolower(*s1) - tolower(*s2));
 }
 
-int ft_find_chr_exec(char *str, char c)
+int	ft_find_chr_exec(char *str, char c)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!str)
-        return (0);
-    while (str[i])
-    {
-        if (str[i] == c)
-            return (1);
-        i++;
-    }
-    return (-1);
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (-1);
 }

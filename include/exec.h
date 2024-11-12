@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/06 18:59:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:24:21 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void		flag_c(char *line, t_data *data);
 
 // non_interctive.c
 void		non_interactive_shell(t_data *data);
-
-int         redir_expand(t_ast *ast, t_data *data);
+int			redir_expand(t_ast *ast, t_data *data);
 
 #endif

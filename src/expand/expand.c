@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/07 17:14:22 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:23:23 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	copy_dquotes(char *str, int *i, t_files **files, t_data *data)
 	return (0);
 }
 
-int check_decla_var(char *str)
+int	check_decla_var(char *str)
 {
 	if (str[0] == '$' && (ft_isalpha(str[1]) || str[1] == '?'))
 		return (1);
