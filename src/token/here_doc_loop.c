@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:08:47 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/03 12:37:28 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/12 22:53:15 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	here_doc(t_token *tk, int pipe_fd[2])
 	signal(SIGINT, set_signal);
 	rl_event_hook = rl_exit;
 	err = hd_loop(delimiter, tk);
-	rl_event_hook = NULL;
+	tk->fd = -1;
 	close(pipe_fd[1]);
 	free(delimiter);
 	return (err);
