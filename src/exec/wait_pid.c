@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:15:06 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/06 18:57:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:22:30 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int	ft_wait_pid(t_ast *ast, t_data *data)
 	if (!data->pidlst)
 		return (data->status);
 	pip_wait_children(data);
+	fdlst_clear(&data->fdlst);
 	return (data->status);
 }

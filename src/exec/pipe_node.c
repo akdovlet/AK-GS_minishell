@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/03 17:21:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:22:03 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	right_pipe_setup(t_data *data, int pipe_fd[2], int backup_fd[2])
 	}
 	close(backup_fd[1]);
 	fdlst_delete_node(&data->fdlst, backup_fd[1]);
-	fdlst_delete_node(&data->fdlst, pipe_fd[0]);
 	backup_fd[0] = dup(STDIN_FILENO);
 	if (backup_fd[0] == -1)
 		return (close(pipe_fd[0]), perror("minishell: right_pipe_setup"), 1);
@@ -66,6 +65,7 @@ int	right_pipe_setup(t_data *data, int pipe_fd[2], int backup_fd[2])
 		close(pipe_fd[0]);
 		return (perror("minishell: right_pipe_setup"), 1);
 	}
+	fdlst_delete_node(&data->fdlst, pipe_fd[0]);
 	return (close(pipe_fd[0]), 0);
 }
 
@@ -92,6 +92,5 @@ int	pipe_node(t_ast *ast, t_data *data)
 	data->fork = false;
 	dup2(backup_fd[0], STDIN_FILENO);
 	close(backup_fd[0]);
-	fdlst_clear(&data->fdlst);
 	return (data->status);
 }
