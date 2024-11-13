@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:17:18 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/13 19:22:03 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/13 21:30:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ int	pipe_node(t_ast *ast, t_data *data)
 	data->fork = false;
 	dup2(backup_fd[0], STDIN_FILENO);
 	close(backup_fd[0]);
+	fdlst_delete_node(&data->fdlst, backup_fd[0]);
 	return (data->status);
 }

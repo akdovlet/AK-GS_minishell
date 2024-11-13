@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/11/12 17:05:20 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/11/13 21:38:55 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,7 @@ all: create_dirs $(NAME)
 create_dirs: $(BUILD)
 
 $(BUILD):
-	@if [ ! -d $(BUILD) ]; then mkdir $(BUILD); fi
+	@if [ ! -d $(BUILD) ]; then mkdir -p $(BUILD); fi
 
 $(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) -L/usr/local/lib -I/usr/local/include $(OBJ) $(LIBFT) -o $(NAME) -lreadline
@@ -143,7 +143,9 @@ full: all
 infile: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes  <infile ./${NAME}
 
-re: fclean all
+re:
+	@make --no-print-directory fclean
+	@make --no-print-directory all
 
 -include $(DEPS)
 

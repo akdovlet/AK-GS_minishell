@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 16:05:42 by akdovlet          #+#    #+#              #
-#    Updated: 2024/07/13 11:32:53 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/11/13 21:39:29 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,7 @@ all: create_dirs $(NAME)
 create_dirs: $(OBJDIR)
 
 $(OBJDIR):
-	@if [ ! -d "$(OBJDIR)" ]; then mkdir $(OBJDIR); fi
+	@if [ ! -d "$(OBJDIR)" ]; then mkdir -p $(OBJDIR); fi
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
@@ -109,8 +109,9 @@ clean:
 fclean: clean
 	@if [ -f "$(NAME)" ]; then $(RM) -rf $(NAME)  && echo "\033[1;31m\tDeleted: $(NAME)\033[0m"; fi
 
-re: fclean all
-
+re:
+	@make --no-print-directory fclean
+	@make --no-print-directory all
 
 -include $(DEPS)
 
