@@ -6,20 +6,21 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:30:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/10/01 12:13:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:20:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_dprintf.h"
 
-int	print_buffer(int fd, char *buffer, int *j)
+int	print_buffer(int fd, char *buffer, int *j, int *err)
 {
 	int	wrote;
 
 	wrote = *j;
 	if (*j == 0)
 		return (0);
-	write(fd, buffer, *j);
+	if (write(fd, buffer, *j) == -1)
+		*err = 1;
 	*j = 0;
 	return (wrote);
 }
@@ -34,7 +35,8 @@ int	string_tobuffer(char *str, t_print *data)
 	while (str[i])
 	{
 		if (data->j >= MAX_BUFFER)
-			data->wrote += print_buffer(data->fd, data->buffer, &data->j);
+			data->wrote += print_buffer(data->fd, data->buffer,
+					&data->j, &data->err);
 		data->buffer[data->j] = str[i];
 		data->j++;
 		i++;
@@ -45,7 +47,8 @@ int	string_tobuffer(char *str, t_print *data)
 int	char_tobuffer(int c, t_print *data)
 {
 	if (data->j >= MAX_BUFFER)
-		data->wrote += print_buffer(data->fd, data->buffer, &data->j);
+		data->wrote += print_buffer(data->fd, data->buffer,
+				&data->j, &data->err);
 	data->buffer[data->j] = c;
 	data->j++;
 	return (1);

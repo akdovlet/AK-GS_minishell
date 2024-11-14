@@ -6,77 +6,64 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/14 11:42:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:15:49 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	ft_whitespace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r')
-		return (1);
-	return (0);
-}
-
-int	flag_n(char *str)
+int	parse_flag(char *str, int *flag)
 {
 	int	i;
 
 	i = 0;
-	if (str[i] != '-')
-		return (1);
-	i++;
+	if (!(str[0] == '-' && str[1] == 'n'))
+		return (0);
+	else
+		i++;
 	while (str[i])
 	{
 		if (str[i] != 'n')
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	*flag = 1;
+	return (1);
 }
 
-static int	ft_echo_n(char **args)
+int	parse_nl(char **strs, int *i)
 {
-	int	i;
+	int flag;
 
-	i = 2;
-	while (args[i] && !flag_n(args[i]))
-		i++;
-	while (args[i])
+	flag = 0;
+	while (strs[*i])
 	{
-		ft_putstr_fd(args[i], 1);
-		if (args[i + 1])
-			ft_putstr_fd(" ", 1);
-		i++;
+		if (!parse_flag(strs[*i], &flag))
+			return (flag);
+		(*i)++;
 	}
-	return (0);
+	return (flag);
 }
 
-// correction maybe not good
-int	ft_echo(char **args, t_env *env)
+int	builtin_echo(char **strs)
 {
 	int	i;
+	int	err;
+	int	nl;
 
-	(void)env;
 	i = 1;
-	if (!args[1])
+	err = 0;
+	nl = parse_nl(strs, &i);
+	while (strs[i])
 	{
-		ft_putstr_fd("\n", 1);
-		return (0);
-	}
-	if (!flag_n(args[1]))
-		return (ft_echo_n(args));
-	while (args[i])
-	{
-		if (!args[i])
-			break ;
-		ft_putstr_fd(args[i], 1);
-		if (args[i + 1])
-			ft_putstr_fd(" ", 1);
+		err = ft_dprintf(STDOUT_FILENO, "%s", strs[i]);
+		if (strs[i + 1])
+			err = ft_dprintf(STDOUT_FILENO, " ");
 		i++;
 	}
-	ft_putstr_fd("\n", 1);
+	if (!nl)
+		err = ft_dprintf(STDOUT_FILENO, "\n");
+	if (err == -1)
+		return (perror("minishell: echo: write error"), 1);
 	return (0);
 }

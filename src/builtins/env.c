@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:18:24 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/26 14:46:48 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:04:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,20 @@
 int	ft_env(char **argv, t_env *env)
 {
 	if (argv[1])
-		ft_dprintf(STDERR_FILENO, "minishell: env: too many arguments\n");
+	{
+		ft_dprintf(STDERR_FILENO, 
+			"minishell: env: ‘%s’: No such file or directory\n", argv[1]);
+		return (127);
+	}
 	else
 	{
 		while (env)
 		{
-			printf("%s=%s\n", env->key, env->value);
+			if (ft_dprintf(STDOUT_FILENO, "%s=%s\n", env->key, env->value) < 0)
+			{
+				perror("minishell: env: write error");
+				return (125);
+			}
 			env = env->next;
 		}
 	}

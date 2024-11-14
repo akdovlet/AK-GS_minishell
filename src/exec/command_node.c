@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/12 18:35:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:20:20 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	forked_execution(t_ast *ast, t_data *data)
 	if (err)
 		clear_exit(data, err);
 	env = env_copy_to_char_arr(data->env);
-	if (!env)
-		clear_exit(data, 1);
 	execve(ast->cmd[0], ast->cmd, env);
 	ft_dprintf(2, "minishell: %s: %s\n", ast->cmd[0], strerror(errno));
 	ft_free(env);

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/12 19:39:57 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:34:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_is_builtins(char *cmd)
 int	ft_exec_builtins(t_ast *ast, t_data *data)
 {
 	if (!ft_strcmp(ast->cmd[0], "echo"))
-		data->status = ft_echo(ast->cmd, data->env);
+		data->status = builtin_echo(ast->cmd);
 	if (!ft_strcmp(ast->cmd[0], "cd"))
 		data->status = cd(ast->cmd, &data->env);
 	if (!ft_strcmp(ast->cmd[0], "pwd"))
@@ -50,7 +50,7 @@ int	ft_exec_builtins(t_ast *ast, t_data *data)
 		data->status = ft_env(ast->cmd, data->env);
 	if (!ft_strcmp(ast->cmd[0], "exit"))
 		data->status = ft_exit(ast->cmd, data);
-	return (0);
+	return (data->status);
 }
 
 int	ft_fork_builtins(t_ast *ast, t_data *data)
@@ -83,8 +83,7 @@ int	ft_fork_builtins(t_ast *ast, t_data *data)
 int	ft_builtins(t_ast *ast, t_data *data)
 {
 	if (data->fork == false)
-		ft_exec_builtins(ast, data);
+		return (ft_exec_builtins(ast, data));
 	else
-		ft_fork_builtins(ast, data);
-	return (0);
+		return (ft_fork_builtins(ast, data));
 }

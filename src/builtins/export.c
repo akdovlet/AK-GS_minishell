@@ -3,25 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 16:11:55 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:13:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static void	print_env_lst(t_env *lst)
+int	print_env_lst(t_env *lst)
 {
+	int	err;
+
+	err = 0;
 	while (lst)
 	{
 		if (lst->value)
-			printf("export %s=\"%s\"\n", lst->key, lst->value);
+			err = ft_dprintf(STDOUT_FILENO, 
+				"export %s=\"%s\"\n", lst->key, lst->value);
 		else
-			printf("export %s\n", lst->key);
+			err = ft_dprintf(STDOUT_FILENO, "export %s\n", lst->key);
 		lst = lst->next;
 	}
+	if (err == -1)
+		perror("minishell: export: write error");
+	return (err);
 }
 
 int	ft_export(char **args, t_data *data)
@@ -34,7 +41,7 @@ int	ft_export(char **args, t_data *data)
 	tmp = 0;
 	i = 1;
 	if (!args[i])
-		return (print_env_lst(data->export), 0);
+		return (print_env_lst(data->export));
 	while (args[i])
 	{
 		tmp = check_export(args[i], data);
