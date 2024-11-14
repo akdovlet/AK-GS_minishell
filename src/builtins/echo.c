@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:00:28 by gschwand          #+#    #+#             */
-/*   Updated: 2024/10/28 10:50:30 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/14 11:42:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_echo_n(char **args)
 	int	i;
 
 	i = 2;
-	while (!flag_n(args[i]))
+	while (args[i] && !flag_n(args[i]))
 		i++;
 	while (args[i])
 	{
