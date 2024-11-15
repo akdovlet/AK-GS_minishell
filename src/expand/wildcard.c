@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/15 16:41:48 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:15:19 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,31 +71,21 @@ void	del_files_hidden(t_files **files)
 	}
 }
 
+// fonction qui supprime tout les fichier qui ne commence pas par un '.'
 void del_files_not_hidden(t_files **files)
 {
-	t_files	*tmp;
 	t_files	*node;
+	t_files	*tmp;
 
 	node = *files;
-	while (*files && (*files)->name[0] != '.')
+	while (node && node->name[0] == '.')
 	{
-		*files = (*files)->next;
-		free(node->name);
-		free(node);
-		node = *files;
+		tmp = node;
+		node = node->next;
 	}
-	tmp = *files;
-	while (tmp)
-	{
-		if (tmp->next && tmp->next->name[0] != '.')
-		{
-			node = tmp->next;
-			tmp->next = tmp->next->next;
-			free(node->name);
-			free(node);
-		}
-		tmp = tmp->next;
-	}
+	tmp->next = NULL;
+	ft_free_lst_files_expand(&node);
+	
 }
 
 char *expand_wildcard_2(char *str)
@@ -105,6 +95,7 @@ char *expand_wildcard_2(char *str)
 
 	res = NULL;
 	(void)str;
+	files = NULL;
 	files = ft_recover_files();
 	ft_sort_alpha_files(&files);
 	if (str[0] != '.')
