@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/12 19:17:10 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:41:48 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "exec.h"
+
+
 
 void	free_tab(char **tab)
 {
@@ -68,6 +70,57 @@ void	del_files_hidden(t_files **files)
 		tmp = tmp->next;
 	}
 }
+
+void del_files_not_hidden(t_files **files)
+{
+	t_files	*tmp;
+	t_files	*node;
+
+	node = *files;
+	while (*files && (*files)->name[0] != '.')
+	{
+		*files = (*files)->next;
+		free(node->name);
+		free(node);
+		node = *files;
+	}
+	tmp = *files;
+	while (tmp)
+	{
+		if (tmp->next && tmp->next->name[0] != '.')
+		{
+			node = tmp->next;
+			tmp->next = tmp->next->next;
+			free(node->name);
+			free(node);
+		}
+		tmp = tmp->next;
+	}
+}
+
+char *expand_wildcard_2(char *str)
+{
+	char *res;
+	t_files *files;
+
+	res = NULL;
+	(void)str;
+	files = ft_recover_files();
+	ft_sort_alpha_files(&files);
+	if (str[0] != '.')
+		del_files_hidden(&files);
+	else
+		del_files_not_hidden(&files);
+	ft_print_lst_files(files);
+	return (res);
+}
+
+
+
+
+
+
+///////////////////////////////////////////////
 
 t_files	*expand_wildcard(t_files **files, char *str)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/12 18:40:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:25:03 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	expansion_routine(char *str, t_data *data, t_files **head)
 		files_clear(&sublst);
 		return ;
 	}
+	if (ft_find_chr_exec(fusion, '*') == 1)
+		fusion = expand_wildcard_2(fusion);
 	final = remove_quotes(fusion);
 	free(fusion);
 	if (!final)
