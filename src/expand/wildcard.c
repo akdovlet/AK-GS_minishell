@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:11:27 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/15 17:15:19 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:27:14 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,39 @@ void del_files_not_hidden(t_files **files)
 	
 }
 
+int lst_comp_file_str(char *file, char *str)
+{
+	(void)file;
+	if (str[0] == '*' && str[1] == '\0')
+		return (0);
+	return (1);
+}
+
+void sort_files_2(t_files *files, char *str)
+{
+	t_files	*tmp;
+
+	tmp = files;
+	while (tmp && lst_comp_file_str(tmp->name, str))
+	{
+		files = files->next;
+		free(tmp->name);
+		free(tmp);
+		tmp = files;
+	}
+	while (tmp->next)
+	{
+		if (lst_comp_file_str(tmp->next->name, str))
+		{
+			free(tmp->next->name);
+			free(tmp->next);
+			tmp->next = tmp->next->next;
+		}
+		else
+			tmp = tmp->next;
+	}
+}
+
 char *expand_wildcard_2(char *str)
 {
 	char *res;
@@ -102,7 +135,9 @@ char *expand_wildcard_2(char *str)
 		del_files_hidden(&files);
 	else
 		del_files_not_hidden(&files);
-	ft_print_lst_files(files);
+	sort_files_2(files, str);
+	res = write_files(files);
+	ft_free_lst_files_expand(&files);
 	return (res);
 }
 
