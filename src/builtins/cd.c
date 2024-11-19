@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:05:02 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/30 17:25:04 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:33:28 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,20 @@ static int	modif_oldpwd(t_env **env)
 	if (tmp == NULL)
 		return (0);
 	free(tmp->value);
-	tmp->value = getcwd(NULL, 0);
+	tmp->value = env_get_node(*env, "PWD")->value;
 	if (tmp->value == NULL)
 		return (1);
 	return (0);
 }
 
-static int	modif_pwd(t_env **env)
+static int	modif_pwd(char *path, t_env **env)
 {
 	t_env	*tmp;
 
 	tmp = env_get_node(*env, "PWD");
 	if (tmp == NULL)
 		return (0);
-	free(tmp->value);
-	tmp->value = getcwd(NULL, 0);
+	tmp->value = path;
 	if (tmp->value == NULL)
 		return (1);
 	return (0);
@@ -69,35 +68,41 @@ int	chg_dir(char *path, t_env **env)
 {
 	char	*pathn;
 
-	if (modif_oldpwd(env))
-		return (1);
 	pathn = add_slash(path);
+	if (pathn[0] != '/')
+		pathn = get_hard_path(pathn);
 	if (!pathn)
 		return (1);
 	if (chdir(pathn))
 	{
+		printf("pathn: %s\n", pathn);
 		if (access(pathn, F_OK))
 		{
-			ft_dprintf(2, "minishell: cd: %s: Not a directory\n", path);
+			ft_dprintf(2, "minishell123: cd: %s: Not a directory\n", path);
 			return (free(pathn), 1);
 		}
 		ft_dprintf(2, "minishell: cd: %s: No such file or directory\n", path);
 		return (free(pathn), 1);
 	}
-	if (modif_pwd(env))
+	if (modif_oldpwd(env))
 		return (free(pathn), 1);
-	return (free(pathn), 0);
+	if (modif_pwd(pathn, env))
+		return (free(pathn), 1);
+	return (0);
 }
 
 int	cd(char **args, t_env **env)
 {
+	char	*path;
+
 	if (!args[1] || !ft_strcmp(args[1], "~"))
 	{
-		if (modif_oldpwd(env))
-			return (1);
 		if (go_home(env))
 			return (1);
-		if (modif_pwd(env))
+		if (modif_oldpwd(env))
+			return (1);
+		path = get_hard_path(ft_strdup(args[1]));
+		if (modif_pwd(path, env))
 			return (1);
 	}
 	else if (args[1] && args[2])
