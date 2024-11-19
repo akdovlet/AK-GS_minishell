@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:22:33 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/24 16:15:38 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:23:55 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ void	ft_lstcomp_wildcard(t_files **files, char *str)
 
 void	ft_strlcat_files(char *dst, const char *src, size_t lenres)
 {
-	ft_strlcat(dst, "\'", lenres);
+	ft_strlcat(dst, "\n", lenres);
 	ft_strlcat(dst, src, lenres);
-	ft_strlcat(dst, "\'", lenres);
-	ft_strlcat(dst, " ", lenres);
+	ft_strlcat(dst, "\n", lenres);
 }

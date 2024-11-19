@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
+#    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/11/19 13:37:07 by gschwand         ###   ########.fr        #
+#    Updated: 2024/11/19 14:32:09 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ OBJ 	:=	$(patsubst $(SRC_DIR)/%.c, $(BUILD)/%.o, $(SRC))
 DEPS 	:=	$(OBJ:.o=.d)
 
 CC		:=	cc
-CFLAGS	:=	-Wall -Werror -Wextra -MMD -MP -Iinclude -Ilibft/include -g
+CFLAGS	:=	-Wall -Werror -Wextra -MMD -MP -Iinclude -Ilibft/include
 
 all: create_dirs $(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/19 10:03:53 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:30:38 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,24 @@ void	var_copy(char *str, int *i, t_data *data, t_files **lst)
 	files_addback(lst, files_new(value));
 }
 
+void	send_main_lst(char *str, t_files **head)
+{
+	int		i;
+	char	**strs;
+
+	strs = ft_split(str, '\n');
+	if (!strs)
+		return ;
+	i = 0;
+	while (strs[i])
+	{
+		files_addback(head, files_new(strs[i]));
+		i++;
+	}
+	free(str);
+	free(strs);
+}
+
 //	to do: add wildcard expansion after expand_string
 void	expansion_routine(char *str, t_data *data, t_files **head)
 {
@@ -64,12 +82,16 @@ void	expansion_routine(char *str, t_data *data, t_files **head)
 	sublst = NULL;
 	fusion = expand_string(str, data, &sublst);
 	if (!fusion)
-	{
-		files_clear(&sublst);
-		return ;
-	}
+		return (files_clear(&sublst));
 	if (ft_find_chr_exec(fusion, '*') == 1)
+	{
 		fusion = expand_wildcard(fusion);
+		if (ft_find_chr_exec(fusion, '\n'))
+		{
+			send_main_lst(fusion, head);
+			return ;
+		}
+	}
 	final = remove_quotes(fusion);
 	free(fusion);
 	if (!final)

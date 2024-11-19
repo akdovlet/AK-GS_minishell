@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/19 13:39:11 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:31:10 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		ft_find_chr_exec(char *str, char c);
 void	dq_copy(char *str, int *i, t_data *data, t_files **lst);
 char	*expand_filename(char *str, t_data *data);
 void	files_clear(t_files **head);
-int	check_decla_var(char *str);
+int		check_decla_var(char *str);
 char	*files_join(t_files **lst);
 void	var_copy(char *str, int *i, t_data *data, t_files **lst);
 void	var_copy_redir(char *str, int *i, t_data *data, t_files **lst);

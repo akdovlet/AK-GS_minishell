@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_file_utils3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:39:17 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/18 16:05:09 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:23:47 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*write_files(t_files *files)
 	lenres = 0;
 	while (tmp)
 	{
-		lenres += ft_strlen(tmp->name) + 3;
+		lenres += ft_strlen(tmp->name) + 2;
 		tmp = tmp->next;
 	}
 	res = ft_calloc(sizeof(char), lenres + 1);

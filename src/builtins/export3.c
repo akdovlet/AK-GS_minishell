@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 17:51:44 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/27 14:18:25 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:29:03 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_change_value(t_env *node, char *str)
 		if (!tmp)
 			return (1);
 		str = remove_quotes(tmp);
+		free(tmp);
 		if (!str)
 			return (1);
 		node->value = str;
