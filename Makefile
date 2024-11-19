@@ -6,7 +6,7 @@
 #    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/11/19 10:06:48 by gschwand         ###   ########.fr        #
+#    Updated: 2024/11/19 13:37:07 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC		:=	main.c								\
 			builtins/exit2.c					\
 			expand/expand_2.c					\
 			expand/expand_2_utils.c				\
+			expand/expand_utils_3.c				\
 			expand/expand.c						\
 			expand/ifs.c						\
 			expand/expand_files_double_quote.c	\

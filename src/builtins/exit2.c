@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:17:16 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/12 19:38:15 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:20:33 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_overflow(char *str, int n)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str);
 	if (len > 19)

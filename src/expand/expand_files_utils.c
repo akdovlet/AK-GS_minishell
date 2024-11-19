@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   expand_files_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:03:43 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/09 19:09:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:24:38 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "minishell.h"
+
+int	check_decla_var(char *str)
+{
+	if (str[0] == '$' && (ft_isalpha(str[1]) || str[1] == '?'))
+		return (1);
+	return (0);
+}
 
 void	files_eat(t_files **node)
 {

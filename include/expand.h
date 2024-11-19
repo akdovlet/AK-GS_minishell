@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/19 10:03:08 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:39:11 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int		ft_find_chr_exec(char *str, char c);
 void	dq_copy(char *str, int *i, t_data *data, t_files **lst);
 char	*expand_filename(char *str, t_data *data);
 void	files_clear(t_files **head);
+int	check_decla_var(char *str);
 char	*files_join(t_files **lst);
 void	var_copy(char *str, int *i, t_data *data, t_files **lst);
 void	var_copy_redir(char *str, int *i, t_data *data, t_files **lst);
@@ -107,5 +108,9 @@ int		ifs_countword(char *str);
 int		is_ifs(char c);
 char	*ifs_copy(char *str);
 char	*expand_string(char *str, t_data *data, t_files **head);
+char	*extract_var_name(char *str, int *i);
+void	del_files_not_hidden(t_files **files);
+void	del_files_hidden(t_files **files);
+void	free_tab(char **tab);
 
 #endif

@@ -3,33 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:37:13 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/12 19:36:45 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:28:19 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "expand.h"
-
-static char	*extract_var_name(char *str, int *i)
-{
-	int	j;
-	int	tmp;
-
-	j = *i + 1;
-	if (str[j] == '?')
-	{
-		*i = j + 1;
-		return (ft_strdup("?"));
-	}
-	while (str[j] && (ft_isalnum(str[j]) || str[j] == '_'))
-		j++;
-	tmp = *i;
-	*i = j;
-	return (ft_strndup(str + tmp + 1, j - tmp - 1));
-}
 
 static char	*get_var_value(char *var_name, t_data *data)
 {

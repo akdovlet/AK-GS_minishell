@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:10:20 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/12 19:23:23 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:24:47 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,6 @@ static int	copy_dquotes(char *str, int *i, t_files **files, t_data *data)
 	if (creat_node_n_add_back_if_str(files, tmp))
 		return (1);
 	*i = j + 1;
-	return (0);
-}
-
-int	check_decla_var(char *str)
-{
-	if (str[0] == '$' && (ft_isalpha(str[1]) || str[1] == '?'))
-		return (1);
 	return (0);
 }
 

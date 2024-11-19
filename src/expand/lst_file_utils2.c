@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:37:59 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/18 16:03:08 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:18:47 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_free_lst_files(t_files **files)
 void	ft_free_lst_files_expand(t_files **files)
 {
 	t_files	*tmp;
-	
+
 	while (*files)
 	{
 		tmp = (*files)->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:21:54 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/14 18:13:40 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:20:41 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	print_env_lst(t_env *lst)
 	while (lst)
 	{
 		if (lst->value)
-			err = ft_dprintf(STDOUT_FILENO, 
-				"export %s=\"%s\"\n", lst->key, lst->value);
+			err = ft_dprintf(STDOUT_FILENO, "export %s=\"%s\"\n", lst->key,
+					lst->value);
 		else
 			err = ft_dprintf(STDOUT_FILENO, "export %s\n", lst->key);
 		lst = lst->next;
