@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
+#    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/11/13 21:38:55 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/11/19 10:06:48 by gschwand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,6 @@ SRC		:=	main.c								\
 			expand/sort_files.c 				\
 			expand/wildcard.c					\
 			expand/var_copy.c					\
-			expand/wildcard_first_cmd.c			\
 			expand/wildcard_utils.c				\
 			exec/command_node.c					\
 			exec/command_utils.c				\

@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/15 16:25:03 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:03:53 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	expansion_routine(char *str, t_data *data, t_files **head)
 		return ;
 	}
 	if (ft_find_chr_exec(fusion, '*') == 1)
-		fusion = expand_wildcard_2(fusion);
+		fusion = expand_wildcard(fusion);
 	final = remove_quotes(fusion);
 	free(fusion);
 	if (!final)

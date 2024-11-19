@@ -6,7 +6,7 @@
 /*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:17:39 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/15 16:25:47 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:03:08 by gschwand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void	ft_strlcat_files(char *dst, const char *src, size_t lenres);
 
 // wildcard.c
 char	**ft_wildcard(char **tab_cmd);
-t_files	*expand_wildcard(t_files **files, char *str);
-char	*expand_wildcard_2(char *str);
+char	*expand_wildcard(char *str);
 void	free_tab(char **tab);
 
 // wildcard_utils.c
