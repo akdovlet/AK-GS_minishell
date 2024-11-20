@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:11 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/19 19:08:30 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:23:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int ac, char **av, char **env)
 {
 	t_data	data;
 
-	fprintf(stderr, "pid is: %d\n", getpid());
 	if (setup_shell(&data, env))
 		return (1);
 	if (ac > 1 && !ft_strcmp(av[1], "-c"))

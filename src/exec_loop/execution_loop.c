@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/19 16:56:55 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:30:57 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	process_input(t_data *data, char *line)
 	free(line);
 	data->ast_root = parse(&tk);
 	token_clear(&tk);
-	ast_print(data->ast_root);
 	if (data->ast_root)
 		data->status = exec_recursion(data->ast_root, data);
 	ast_free(data->ast_root);
@@ -80,6 +79,7 @@ void	flag_c(char *line, t_data *data)
 	if (data->ast_root)
 		data->status = exec_recursion(data->ast_root, data);
 	ast_free(data->ast_root);
+	fdlst_clear_leftovers(&data->fdlst);
 }
 
 void	execution_loop(t_data *data)

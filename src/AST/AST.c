@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:36:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/19 18:52:42 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:06:41 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ t_ast	*parse_pipe(t_token **tk)
 			return (NULL);
 		}
 	}
-	// if (find_subshell(new))
-		new = ast_newwait(new);
+	new = ast_newwait(new);
 	return (new);
 }
 
