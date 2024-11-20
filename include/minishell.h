@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:41:41 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/12 18:26:51 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:42:29 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ typedef struct s_ast
 typedef struct s_data
 {
 	bool				fork;
+	bool				subshell;
 	int					status;
 	char				*hardpath;
 	t_ast				*ast_root;

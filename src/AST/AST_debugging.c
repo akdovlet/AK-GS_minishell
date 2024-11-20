@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:26 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/06 18:51:05 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:54:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	print_arrayofchar(char **str, int level)
 // 		ast_print_recursive(root->pipe_left, level + 1);
 // 	print_indentation(level);
 // 	if (root->type == OPERATOR || 
-//	root->type == PIPE_NODE || 
+// 	root->type == PIPE_NODE || 
 // 	root->type == WAIT_NODE)
 // 	{
 // 		ft_printf("right\n");

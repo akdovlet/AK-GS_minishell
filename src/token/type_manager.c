@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:01:53 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/01 19:16:54 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:05:18 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	operator_management(char *str, int *i, t_token **tk)
 	return (1);
 }
 
-// build here document here
 int	redirect_management(char *str, int *i, t_token **tk)
 {
 	t_token	*new;

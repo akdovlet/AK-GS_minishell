@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:20:00 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/13 21:14:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:06:26 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	subshell_child(t_ast *ast, t_data *data)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	data->status = exec_recursion(ast->subshell_next, data);
 	fdlst_close_in_child(data->fdlst);
 	clear_exit(data, data->status);
@@ -23,8 +21,8 @@ void	subshell_child(t_ast *ast, t_data *data)
 
 int	subshell_node(t_ast *ast, t_data *data)
 {
-	int		status;
-	pid_t	pid;
+	pid_t		pid;
+	t_pidlst	*new;
 
 	data->fork = true;
 	pid = fork();
@@ -35,13 +33,11 @@ int	subshell_node(t_ast *ast, t_data *data)
 	else
 	{
 		signal(SIGINT, SIG_IGN);
-		waitpid(pid, &status, 0);
-		if (WIFSIGNALED(status))
-			data->status = 128 + WTERMSIG(status);
-		else
-			data->status = WEXITSTATUS(status);
+		new = ft_lstnew_pidlst(pid);
+		if (!new)
+			return (1);
+		ft_lstadd_back_pidlst(&data->pidlst, new);
 	}
-	sigaction(SIGINT, &data->sa, NULL);
 	data->fork = false;
 	return (data->status);
 }
