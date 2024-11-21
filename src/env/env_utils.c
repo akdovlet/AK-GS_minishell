@@ -6,16 +6,16 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:00:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/30 17:46:32 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:54:51 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "minishell.h"
 
-char	*env_get_value(t_env *env, char *key)
+char	*env_get_value(t_env *env, char *key, t_data *data)
 {
-	if (!env || !key)
+	if (!key)
 		return (NULL);
 	while (env)
 	{
@@ -23,6 +23,8 @@ char	*env_get_value(t_env *env, char *key)
 			return (env->value);
 		env = env->next;
 	}
+	if (!ft_strcmp(key, "PATH"))
+		return (data->hardpath);
 	return (NULL);
 }
 

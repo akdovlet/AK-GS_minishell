@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:45:10 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/12 19:09:01 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:50:10 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	var_copy_redir(char *str, int *i, t_data *data, t_files **lst)
 	while (str[*i] && is_variable(str[*i]))
 		key[j++] = str[(*i)++];
 	key[j] = '\0';
-	value = env_get_value(data->env, key);
+	value = env_get_value(data->env, key, data);
 	free(key);
 	if (!value)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 16:40:42 by gschwand          #+#    #+#             */
-/*   Updated: 2024/09/30 18:23:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:49:31 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	export_default_setup(t_data *data)
 
 	if (env_lstdup(&data->export, data->env))
 		return (1);
-	tmp = env_get_value(data->export, "OLDPWD");
+	tmp = env_get_value(data->export, "OLDPWD", data);
 	if (!tmp)
 	{
 		new = env_new_key(ft_strdup("OLDPWD"), NULL);

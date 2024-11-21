@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:53:21 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/19 18:04:35 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:49:50 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	resolve_path(char **cmd, t_data *data)
 	path = NULL;
 	if (ft_strchr(cmd[0], '/'))
 		return (hard_path_check(cmd[0]));
-	full_path = env_get_value(data->env, "PATH");
+	full_path = env_get_value(data->env, "PATH", data);
 	if (!full_path)
 	{
 		if (data->hardpath)

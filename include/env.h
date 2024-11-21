@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/09/30 17:22:21 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:49:26 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		env_export_copy(t_data *data, char **env);
 int		env_setup(t_data *data, char **env);
 
 // env_utils.c
-char	*env_get_value(t_env *env, char *key);
+char	*env_get_value(t_env *env, char *key, t_data *data);
 void	env_print(t_env *lst);
 void	env_clear(t_env **lst);
 t_env	*env_get_node(t_env *env, char *key);

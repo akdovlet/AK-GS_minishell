@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/21 10:46:32 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:49:56 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	var_copy(char *str, int *i, t_data *data, t_files **lst)
 	while (str[*i] && (is_variable(str[*i]) || ft_isalnum(str[*i])))
 		key[j++] = str[(*i)++];
 	key[j] = '\0';
-	value = env_get_value(data->env, key);
+	value = env_get_value(data->env, key, data);
 	free(key);
 	if (!value)
 		return ;
