@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:34:29 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/19 16:52:58 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:44:39 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int		unset(char **tab, t_data *data);
 int		ft_exit(char **tab, t_data *data);
 int		check_overflow(char *str, int n);
 char	*remove_quotes(char *str);
-char *get_hard_path(char *path);
+char	*get_hard_path(char *path);
 
 #endif

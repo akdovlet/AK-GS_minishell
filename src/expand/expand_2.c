@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:12:25 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/19 14:30:38 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/21 10:46:32 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	send_main_lst(char *str, t_files **head)
 	free(strs);
 }
 
-//	to do: add wildcard expansion after expand_string
 void	expansion_routine(char *str, t_data *data, t_files **head)
 {
 	t_files	*sublst;
