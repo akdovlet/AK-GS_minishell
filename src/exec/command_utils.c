@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:57:43 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/19 15:55:52 by gschwand         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:09:55 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ char	*meet_in_the_middle(char *s1, char *s2, char c)
 
 	i = -1;
 	j = -1;
-	if (!s1)
-		fprintf(stderr, "minishell: meet_in_the_middle\n");
 	if (!s2)
 		return (ft_strdup(s1));
 	fusion = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
