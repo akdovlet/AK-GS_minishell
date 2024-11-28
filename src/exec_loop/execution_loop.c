@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 18:31:58 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/20 17:30:57 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:22:34 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ void	interactive_shell(t_data *data)
 	while (1)
 	{
 		line = readline(CYAN"minishell$> "RESET);
-		if (!line)
-		{
-			ft_dprintf(STDERR_FILENO, "exit\n");
-			break ;
-		}
 		if (g_state == SIGINT)
 		{
 			data->status = 130;
 			g_state = 0;
+		}
+		if (!line)
+		{
+			ft_dprintf(STDERR_FILENO, "exit\n");
+			break ;
 		}
 		if (line)
 			add_history(line);

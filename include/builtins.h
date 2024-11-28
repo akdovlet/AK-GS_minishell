@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:34:29 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/21 10:44:39 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:50:00 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # define PWDERROR "minishell: pwd: error retrieving current directory: getcwd:\
  cannot access parent directories"
 
-int		ft_echo(char **args, t_env *env);
 int		builtin_echo(char **strs);
 int		check_export(char *arg, t_data *data);
 int		cd(char **args, t_env **env);

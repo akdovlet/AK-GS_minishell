@@ -6,12 +6,11 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:07:22 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/05/18 20:27:02 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:02:48 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static char	**ft_splitter(char *str, char *sep, int *tab, int word_count)
 {

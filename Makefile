@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gschwand <gschwand@student.42.fr>          +#+  +:+       +#+         #
+#    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/11/19 15:53:03 by gschwand         ###   ########.fr        #
+#    Updated: 2024/11/28 23:17:45 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,18 +61,14 @@ SRC		:=	main.c								\
 			expand/expand_2.c					\
 			expand/expand_2_utils.c				\
 			expand/expand_utils_3.c				\
-			expand/expand.c						\
 			expand/ifs.c						\
 			expand/expand_files_double_quote.c	\
 			expand/expand_files_utils.c			\
 			expand/expand_split.c				\
 			expand/expand_string.c				\
 			expand/expand_files.c				\
-			expand/expand_debugg.c				\
 			expand/expand_quotes_utils.c		\
 			expand/expand_var.c					\
-			expand/expand_first_cmd.c			\
-			expand/expand_first_cmd2.c			\
 			expand/expand_here_doc.c			\
 			expand/lst_file_utils.c				\
 			expand/lst_file_utils2.c			\
