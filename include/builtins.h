@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 12:34:29 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/28 23:50:00 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:37:40 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
  cannot access parent directories"
 
 int		builtin_echo(char **strs);
+int		builtin_cd(t_data *data, char **args, t_env **env);
 int		check_export(char *arg, t_data *data);
-int		cd(char **args, t_env **env);
 int		go_home(t_env **env);
 int		ft_pwd(char **args, t_env *env);
 int		ft_env(char **args, t_env *env);

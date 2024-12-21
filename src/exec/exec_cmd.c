@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:21:07 by gschwand          #+#    #+#             */
-/*   Updated: 2024/11/14 17:34:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/12/21 10:49:13 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_exec_builtins(t_ast *ast, t_data *data)
 	if (!ft_strcmp(ast->cmd[0], "echo"))
 		data->status = builtin_echo(ast->cmd);
 	if (!ft_strcmp(ast->cmd[0], "cd"))
-		data->status = cd(ast->cmd, &data->env);
+		data->status = builtin_cd(data, ast->cmd, &data->env);
 	if (!ft_strcmp(ast->cmd[0], "pwd"))
 		data->status = ft_pwd(ast->cmd, data->env);
 	if (!ft_strcmp(ast->cmd[0], "export"))

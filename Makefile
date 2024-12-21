@@ -6,7 +6,7 @@
 #    By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 11:38:49 by akdovlet          #+#    #+#              #
-#    Updated: 2024/11/28 23:17:45 by akdovlet         ###   ########.fr        #
+#    Updated: 2024/12/21 11:37:19 by akdovlet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,6 @@ SRC		:=	main.c								\
 			token/type_manager.c				\
 			token/word_manager.c				\
 			builtins/cd.c						\
-			builtins/cd2.c						\
 			builtins/pwd.c						\
 			builtins/echo.c						\
 			builtins/export.c					\

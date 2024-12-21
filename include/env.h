@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:52:23 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/11/21 10:49:26 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:51:11 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*copy_key(char *str);
 t_env	*env_new(char *var);
 
 // env_setup.c
-char	*env_join_keyvalue2(char *key, char *value);
 t_env	*env_new_key(char *key, char *value);
 int		env_default_setup(t_data *data);
 int		env_lstdup(t_env **dst, t_env *src);
@@ -42,9 +41,10 @@ int		env_setup(t_data *data, char **env);
 
 // env_utils.c
 char	*env_get_value(t_env *env, char *key, t_data *data);
+t_env	*env_get_node(t_env *env, char *key);
+t_env	*env_get_real_node(t_env **env, char *key);
 void	env_print(t_env *lst);
 void	env_clear(t_env **lst);
-t_env	*env_get_node(t_env *env, char *key);
 
 // debug.c
 void	print_lst_env(t_env *env);
