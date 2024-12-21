@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:23:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/12/21 14:56:59 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:02:36 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ int	builtin_cd(t_data *data, char **args, t_env **env)
 		if (!path)
 			return (ft_dprintf(2, "minishell: cd: HOME not set"), 1);
 	}
-	if (args[2])
+	else if (args[2])
 		return (ft_dprintf(2, "minishell: cd: too many arguments\n"), 1);
-	path = args[1];
+	else
+		path = args[1];
 	if (chdir(path))
 	{
 		ft_dprintf(2, "minishell: cd: %s: %s\n", path, strerror(errno));
