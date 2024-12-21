@@ -6,7 +6,7 @@
 /*   By: akdovlet <akdovlet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 10:23:14 by akdovlet          #+#    #+#             */
-/*   Updated: 2024/12/21 11:53:41 by akdovlet         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:56:59 by akdovlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,22 @@ void	change_pwd(t_env **env)
 		v2->value = getcwd(NULL, 0);
 }
 
-int	home(t_data *data, t_env **env)
-{
-	char	*str;
-
-	str = env_get_value(*env, "HOME", data);
-	if (!str)
-	{
-		ft_dprintf(2, "minishell: cd: HOME not set");
-		return (1);
-	}
-	if (chdir(str))
-	{
-		ft_dprintf(2, "minishell: cd: %s: %s\n", str, strerror(errno));
-		return (1);
-	}
-	change_pwd(env);
-	return (0);
-}
-
 int	builtin_cd(t_data *data, char **args, t_env **env)
 {
+	char	*path;
+
 	if (!args[1])
-		return (home(data, env));
+	{
+		path = env_get_value(*env, "HOME", data);
+		if (!path)
+			return (ft_dprintf(2, "minishell: cd: HOME not set"), 1);
+	}
 	if (args[2])
 		return (ft_dprintf(2, "minishell: cd: too many arguments\n"), 1);
-	if (chdir(args[1]))
+	path = args[1];
+	if (chdir(path))
 	{
-		ft_dprintf(2, "minishell: cd: %s: %s\n", args[1], strerror(errno));
+		ft_dprintf(2, "minishell: cd: %s: %s\n", path, strerror(errno));
 		return (1);
 	}
 	change_pwd(env);
