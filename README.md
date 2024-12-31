@@ -46,4 +46,8 @@ The goal of this project is to reproduce a functional shell, inspired by bash po
 - No leftover open file descriptors, every open FD should be closed when no longer in use, including in child processes
 - The program is not allowed to crash, every error should print a message similar to bash and exit (if fatal) or continue graciously
 - Only one global variable for the sole purpose of catching signals.
-- Coding on the master branch is forbidden, every feature has its own branch and is then merged with master 
+- Coding on the master branch is forbidden, every feature has its own branch and is then merged with master
+
+## To do
+
+- When syscall such as pipe() or fork() fails, terminate all the pipeline and return the correct exit code (128 or 126)
