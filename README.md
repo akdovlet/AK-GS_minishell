@@ -4,7 +4,7 @@
 
 Clone repositery
 ```
-https://github.com/akdovlet/AK-GS_minishell.git
+git clone https://github.com/akdovlet/AK-GS_minishell.git
 ```
 compile & run
 ```
